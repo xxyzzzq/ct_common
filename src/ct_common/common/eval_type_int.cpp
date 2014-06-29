@@ -1,0 +1,35 @@
+#include "eval_type_int.h"
+#include "eval_type_double.h"
+
+using namespace ct::common;
+
+EvalType_Int::EvalType_Int(void)
+  : EvalType(), value_(0) {
+}
+
+EvalType_Int::EvalType_Int(int value, bool is_valid)
+  : EvalType(is_valid), value_(value) {
+}
+
+EvalType_Int::EvalType_Int(const EvalType_Int &from)
+  : EvalType(from), value_(from.value_) {
+}
+
+EvalType_Int::EvalType_Int(const EvalType_Double &from)
+  : EvalType(from), value_((int)from.value_) {
+}
+
+EvalType_Int::~EvalType_Int(void) {
+}
+
+EvalType_Int &EvalType_Int::operator =(const EvalType_Int &right) {
+  EvalType::operator =(right);
+  this->value_ = right.value_;
+  return *this;
+}
+
+EvalType_Int &EvalType_Int::operator =(const EvalType_Double &right) {
+  EvalType::operator =(right);
+  this->value_ = (int)right.value_;
+  return *this;
+}

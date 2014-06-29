@@ -1,0 +1,9 @@
+noinst_PROGRAMS=example
+
+AM_CPPFLAGS = -I ../.. -DQUEX_OPTION_STRANGE_ISTREAM_IMPLEMENTATION -DQUEX_OPTION_ASSERTS_DISABLED
+AM_CXXFLAGS = -I ../.. -DQUEX_OPTION_STRANGE_ISTREAM_IMPLEMENTATION -DQUEX_OPTION_ASSERTS_DISABLED
+
+example_SOURCES=example.cpp
+
+example_LDADD = ../file_parse/libct_file_parse.a ../common/libct_common.a
+

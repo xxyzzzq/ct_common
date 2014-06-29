@@ -1,0 +1,85 @@
+header {
+#include <ct_common/file_parse/ct_parser.tab.hpp>
+#include <ct_common/common/utils.h>
+QUEX_NAMESPACE_MAIN_OPEN 
+class DLL_EXPORT ct_lexer;
+class DLL_EXPORT ct_lexer_Token;
+QUEX_NAMESPACE_MAIN_CLOSE
+}
+
+define {
+  P_WHITESPACE          [ \r\t\n]+
+  P_IDENTIFIER          [_a-zA-Z][_a-zA-Z0-9]*
+  P_NUMBER              [0-9]+
+  //
+  // String: 
+  //    Quote " followe by either \" or something different from " and then a final "
+  P_STRING              "\""(\\"\""|[^"])*"\""
+	
+  exponent_part         [eE][\-+]?[0-9]+
+  fractional_constant   ([0-9]*"."[0-9]+)|([0-9]+".")
+  floating_constant     (({fractional_constant}{exponent_part}?)|([0-9]+{exponent_part}))[FfLl]?
+
+  integer_constant      [0-9]+
+  
+  EXT_EQ                "=="("["{floating_constant}"]")?
+  EXT_NE                "!="("["{floating_constant}"]")?
+  EXT_LT                "<"("["{floating_constant}"]")?
+  EXT_LE                "<="("["{floating_constant}"]")?
+  EXT_GT                ">"("["{floating_constant}"]")?
+  EXT_GE                ">="("["{floating_constant}"]")?
+}
+
+
+mode NORMAL :
+<skip_range: "/*" "*/">
+<skip_range: "//" "\n">
+{
+  {P_WHITESPACE}          {}
+  <<EOF>>                 { self_send(QUEX_TKN_TERMINATION); RETURN; }
+  "__auto__"              { self_send(yy::ct_parser::token::TKN_PARAM_AUTO); RETURN; }
+  "__aux__"               { self_send(yy::ct_parser::token::TKN_PARAM_AUX); RETURN; }
+  "__starter__"           { self_send(yy::ct_parser::token::TKN_SEED_STARTER); RETURN; }
+  "int"|"double"|"string"|"bool" { self_send1(yy::ct_parser::token::TKN_TYPE, Lexeme); RETURN; }
+  "true"|"false"          { self_send1(yy::ct_parser::token::TKN_VAL_BOOL, Lexeme); RETURN; }
+  "default"               { self_send(yy::ct_parser::token::TKN_DEFAULT); RETURN; }
+  "##"                    { self_send(yy::ct_parser::token::TKN_INVALIDATION); RETURN; }
+  "#"                     { self_send(yy::ct_parser::token::TKN_INVALID); RETURN; }
+  {P_IDENTIFIER}          { self_send1(yy::ct_parser::token::TKN_IDENTIFIER, Lexeme); RETURN; }
+  {P_STRING}              { self_send1(yy::ct_parser::token::TKN_VAL_STRING, Lexeme); RETURN; }
+  {floating_constant}     { self_send1(yy::ct_parser::token::TKN_VAL_DOUBLE, Lexeme); RETURN; }
+  {integer_constant}      { self_send1(yy::ct_parser::token::TKN_VAL_INTEGER, Lexeme); RETURN; }
+  "("                     { self_send(yy::ct_parser::token::TKN_BRACKET_O); RETURN; }
+  ")"                     { self_send(yy::ct_parser::token::TKN_BRACKET_C); RETURN; }
+  "["                     { self_send(yy::ct_parser::token::TKN_CORNER_BRACKET_O); RETURN; }
+  "]"                     { self_send(yy::ct_parser::token::TKN_CORNER_BRACKET_C); RETURN; }
+  "{"                     { self_send(yy::ct_parser::token::TKN_CURLY_BRACKET_O); RETURN; }
+  "}"                     { self_send(yy::ct_parser::token::TKN_CURLY_BRACKET_C); RETURN; }
+  \C{"[OPTIONS]"}         { self_send(yy::ct_parser::token::TKN_OPTIONS_START); RETURN; }
+  \C{"[PARAMETERS]"}      { self_send(yy::ct_parser::token::TKN_PARAMETERS_START); RETURN; }
+  \C{"[STRENGTHS]"}       { self_send(yy::ct_parser::token::TKN_STRENGTHS_START); RETURN; }
+  \C{"[SEEDS]"}           { self_send(yy::ct_parser::token::TKN_SEEDS_START); RETURN; }
+  \C{"[CONSTRAINTS]"}     { self_send(yy::ct_parser::token::TKN_CONSTRAINTS_START); RETURN; }
+  "&&"                    { self_send(yy::ct_parser::token::TKN_AND); RETURN; }
+  "||"                    { self_send(yy::ct_parser::token::TKN_OR); RETURN; }
+  "->"                    { self_send(yy::ct_parser::token::TKN_IMPLY); RETURN; }
+  "<->"                   { self_send(yy::ct_parser::token::TKN_IFF); RETURN; }
+  "^^"                    { self_send(yy::ct_parser::token::TKN_XOR); RETURN; }
+  "!"                     { self_send(yy::ct_parser::token::TKN_NOT); RETURN; }
+  {EXT_EQ}                { self_send1(yy::ct_parser::token::TKN_EQ, Lexeme); RETURN; }
+  {EXT_NE}                { self_send1(yy::ct_parser::token::TKN_NE, Lexeme); RETURN; }
+  {EXT_GT}                { self_send1(yy::ct_parser::token::TKN_GT, Lexeme); RETURN; }
+  {EXT_GE}                { self_send1(yy::ct_parser::token::TKN_GE, Lexeme); RETURN; }
+  {EXT_LT}                { self_send1(yy::ct_parser::token::TKN_LT, Lexeme); RETURN; }
+  {EXT_LE}                { self_send1(yy::ct_parser::token::TKN_LE, Lexeme); RETURN; }
+  "+"                     { self_send(yy::ct_parser::token::TKN_ADD); RETURN; }
+  "-"                     { self_send(yy::ct_parser::token::TKN_SUB); RETURN; }
+  "*"                     { self_send(yy::ct_parser::token::TKN_MULT); RETURN; }
+  "/"                     { self_send(yy::ct_parser::token::TKN_DIV); RETURN; }
+  "%"                     { self_send(yy::ct_parser::token::TKN_MOD); RETURN; }
+  ","                     { self_send(yy::ct_parser::token::TKN_COMMA); RETURN; }
+  ":"                     { self_send(yy::ct_parser::token::TKN_COLON); RETURN; }
+  ";"                     { self_send(yy::ct_parser::token::TKN_SEMICOLON); RETURN; }
+  .                       { self_send1(QUEX_TKN_UNKNOWN, Lexeme); RETURN; }
+  on_failure              { self_send1(QUEX_TKN_FAILURE, Lexeme); RETURN; }
+}

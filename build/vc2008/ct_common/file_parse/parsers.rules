@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualStudioToolFile
+	Name="Parser Build Rules"
+	Version="8.00"
+	>
+	<Rules>
+		<CustomBuildRule
+			Name="Quex"
+			DisplayName="Quex"
+			CommandLine="cd &quot;$(InputDir)&quot;&#x0D;&#x0A;call quex -i $(InputFileName) [AllOptions] [AdditionalOptions] --source-package .&#x0D;&#x0A;xcopy quex\* ..\..\..\quex\ /s /e /y&#x0D;&#x0A;rmdir /s /q quex"
+			Outputs="$(InputDir)$(InputName).hpp"
+			FileExtensions="*.qx"
+			ExecutionDescription="$(InputFileName)"
+			>
+			<Properties>
+				<StringProperty
+					Name="AnalyzerClass"
+					DisplayName="Analyzer class"
+					Description="The name of the Analyzer class. (Option -o)"
+					Switch="-o [value]"
+					DefaultValue="$(InputName)"
+				/>
+				<StringProperty
+					Name="TokenIDFile"
+					DisplayName="Token-id File"
+					Description="Specifies the foreign token-id file"
+					Switch="--foreign-token-id-file [value]"
+				/>
+				<StringProperty
+					Name="FileExtensionScheme"
+					IsReadOnly="true"
+					DisplayName="File Extension Scheme"
+					Description="The file extension scheme"
+					Switch="--file-extension-scheme [value]"
+					DefaultValue="pp"
+				/>
+				<StringProperty
+					Name="TokenClass"
+					DisplayName="Token class"
+					Description="The name of the Token class. (Option --token-class)"
+					Switch="--token-class [value]"
+					DefaultValue="$(InputName)_Token"
+				/>
+			</Properties>
+		</CustomBuildRule>
+		<CustomBuildRule
+			Name="Bison"
+			DisplayName="Bison"
+			CommandLine="cd &quot;$(InputDir)&quot;&#x0D;&#x0A;bison -d $(InputFileName)"
+			Outputs="$(InputDir)$(InputName).tab.hpp"
+			FileExtensions="*.y;*.ypp"
+			ExecutionDescription="$(InputFileName)"
+			>
+			<Properties>
+			</Properties>
+		</CustomBuildRule>
+	</Rules>
+</VisualStudioToolFile>

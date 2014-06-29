@@ -1,0 +1,42 @@
+2014-04-23 Zhiqiang Zhang
+  * v0.5.1
+  * several bug fixes
+  * corrected rules and the mechanism for determining expression evaluabilities
+
+2014-04-16 Zhiqiang Zhang
+  * v0.5.0
+  * Many bug fixes (can't remember)
+  * Added support for auto parameters
+  * Added support for floating-pointer relation precision
+  * Better stage display message
+  * Rewritten the user manual
+  * New examples
+  
+2014-04-02 Zhiqiang Zhang
+	* v0.4.4
+	* Added support for constraint seeds and starter seeds
+	* WARNING: the seeding support is incompatible with previous
+	versions
+
+2013-09-18 Zhiqiang Zhang
+	* v0.4.3
+	* Added parameter invalidation support
+  
+2013-08-28 Zhiqiang Zhang
+	* v0.4.2
+	* renamed SUTSpecs to sutmodel
+	* parser now saves the original strength format (not the raw
+	strength format)
+
+2013-08-05 Zhiqiang Zhang
+	* v0.4.1
+	* Moved everything into namespace ct::common (except the parser
+	and lexer)
+
+2013-07-22  Zhiqiang Zhang
+	* fully use boost::shared_ptr
+
+Rev 132 [modified by ZZQ]:
+	* BUG fix: nonassoc "||" and "&&" operators become left
+	associative
+
