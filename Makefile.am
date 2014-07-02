@@ -1,6 +1,6 @@
 SUBDIRS = src doc
 
-EXTRA_DIST = build quex
+EXTRA_DIST = build quex doxygen/Doxyfile
 
 dist-hook:
 	rm -rf `find $(distdir) -name .svn`

@@ -1,3 +1,6 @@
+# Backup files
+*~
+
 # Compiled Object files
 *.slo
 *.lo
@@ -19,3 +22,34 @@
 *.exe
 *.out
 *.app
+src/ct_common/test/example
+
+# Packages
+*.tar.gz
+*.tgz
+
+# Makefiles
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache
+config.h
+config.h.in
+config.log
+config.status
+configure
+depcomp
+install-sh
+missing
+stamp-h1
+
+# Compiled files
+.deps
+ct_lexer*
+ct_parser*
+quex
+location.hh
+position.hh
+stack.hh
+doc
+doxygen
