@@ -31,7 +31,6 @@ nobase_pkginclude_HEADERS = \
   common/constraints.h \
   common/constraint_s_ne.h \
   common/defs.h \
-  common/err_logger.h \
   common/eval_type_bool.h \
   common/eval_type_double.h \
   common/eval_type.h \
@@ -82,6 +81,7 @@ nobase_pkginclude_HEADERS = \
   file_parse/ct_lexer-token_ids.h \
   file_parse/ct_lexer-token_ids.hpp \
   file_parse/ct_parser.tab.hpp \
+  file_parse/err_logger.h \
   file_parse/err_logger_cerr.h \
   file_parse/location.hh \
   file_parse/position.hh \
