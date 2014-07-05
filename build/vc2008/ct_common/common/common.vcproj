@@ -632,10 +632,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\ct_common\common\err_logger.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\src\ct_common\common\eval_type.cpp"
 				>
 			</File>
@@ -915,10 +911,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ct_common\common\defs.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\ct_common\common\err_logger.h"
 				>
 			</File>
 			<File
