@@ -606,6 +606,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\ct_common\file_parse\err_logger.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\ct_common\file_parse\err_logger_cerr.cpp"
 				>
 			</File>
@@ -641,6 +645,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ct_common\file_parse\ct_parser.tab.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ct_common\file_parse\err_logger.h"
 				>
 			</File>
 			<File
