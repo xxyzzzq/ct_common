@@ -9,5 +9,5 @@ programming_guide.pdf : programming_guide.tex
 	${PDFLATEX} $<
 
 clean-local:
-	rm *.pdf *.toc *.aux *.log
+	rm -rf *.pdf *.toc *.aux *.log
 endif
