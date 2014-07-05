@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.50])
-AC_INIT([CT_Common], m4_esyscmd([tr -d '\n' < VERSION]), [zhangzq@ios.ac.cn])
+AC_INIT([ct_common], m4_esyscmd([tr -d '\n' < VERSION]), [zhangzq@ios.ac.cn])
 AC_CONFIG_SRCDIR([src/ct_common/common/exp.h])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])

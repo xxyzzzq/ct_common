@@ -53,3 +53,4 @@ position.hh
 stack.hh
 doc
 doxygen
+src/ct_common/example/example
