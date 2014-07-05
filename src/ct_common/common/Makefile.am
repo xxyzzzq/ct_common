@@ -30,7 +30,6 @@ libct_common_a_SOURCES = \
   constraint_s.cpp \
   constraint_s_eq.cpp \
   constraint_s_ne.cpp \
-  err_logger.cpp \
   eval_type_bool.cpp \
   eval_type.cpp \
   eval_type_double.cpp \

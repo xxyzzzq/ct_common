@@ -10,7 +10,7 @@
 #include <ct_common/common/seed.h>
 #include <ct_common/common/exps.h>
 #include <ct_common/common/strength.h>
-#include <ct_common/common/err_logger.h>
+#include <ct_common/file_parse/err_logger.h>
 
 namespace ct {
 namespace common {

@@ -2,7 +2,7 @@
 #define CT_COMMON_EVAL_TYPE_STRING_H_
 
 #include <string>
-#include "eval_type.h"
+#include <ct_common/common/eval_type.h>
 
 namespace ct {
 namespace common {

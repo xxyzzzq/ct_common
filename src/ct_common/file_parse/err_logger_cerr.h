@@ -1,7 +1,7 @@
 #ifndef ERR_LOGGER_CERR_H_
 #define ERR_LOGGER_CERR_H_
 
-#include <ct_common/common/err_logger.h>
+#include <ct_common/file_parse/err_logger.h>
 
 namespace ct {
 namespace common {

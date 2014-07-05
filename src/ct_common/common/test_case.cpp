@@ -1,5 +1,5 @@
 #include <ct_common/common/defs.h>
-#include "test_case.h"
+#include <ct_common/common/test_case.h>
 
 using namespace ct::common;
 

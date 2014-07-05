@@ -1,7 +1,7 @@
 #ifndef CT_COMMON_EVAL_TYPE_DOUBLE_H_
 #define CT_COMMON_EVAL_TYPE_DOUBLE_H_
 
-#include "eval_type.h"
+#include <ct_common/common/eval_type.h>
 
 namespace ct {
 namespace common {

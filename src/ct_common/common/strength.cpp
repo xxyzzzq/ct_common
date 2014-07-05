@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <ct_common/common/utils.h>
-#include "strength.h"
+#include <ct_common/common/strength.h>
 
 using namespace ct::common;
 

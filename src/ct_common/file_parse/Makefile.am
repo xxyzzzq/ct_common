@@ -3,7 +3,7 @@ lib_LIBRARIES = libct_file_parse.a
 AM_CPPFLAGS = -I ../../.. -I ../.. -DQUEX_OPTION_STRANGE_ISTREAM_IMPLEMENTATION -DQUEX_OPTION_ASSERTS_DISABLED
 AM_CXXFLAGS = -I ../../.. -I ../.. -DQUEX_OPTION_STRANGE_ISTREAM_IMPLEMENTATION -DQUEX_OPTION_ASSERTS_DISABLED
 
-libct_file_parse_a_SOURCES=assembler.cpp ct_parser.tab.cpp ct_lexer.cpp err_logger_cerr.cpp
+libct_file_parse_a_SOURCES=assembler.cpp ct_parser.tab.cpp ct_lexer.cpp err_logger_cerr.cpp err_logger.cpp
 
 libct_file_parse_a_LIBADD=../common/libct_common.a
 
