@@ -1,4 +1,4 @@
-SUBDIRS = common file_parse test
+SUBDIRS = common file_parse example
 
 nobase_pkginclude_HEADERS = \
   common/arithmetic_utils.h \
