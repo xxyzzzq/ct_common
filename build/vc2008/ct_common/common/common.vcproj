@@ -520,10 +520,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\..\src\ct_common\common\arithmetic_utils.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\src\ct_common\common\assignment.cpp"
 				>
 			</File>
@@ -601,10 +597,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ct_common\common\constraint_l_param.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\ct_common\common\constraint_l_term.cpp"
 				>
 			</File>
 			<File
@@ -708,10 +700,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\ct_common\common\exp_a_term.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\src\ct_common\common\exp_a_unary.cpp"
 				>
 			</File>
@@ -725,10 +713,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ct_common\common\exp_s_param.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\ct_common\common\exp_s_term.cpp"
 				>
 			</File>
 			<File
@@ -878,10 +862,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\ct_common\common\constraint_l_term.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\src\ct_common\common\constraint_l_unary.h"
 				>
 			</File>
@@ -990,10 +970,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\ct_common\common\exp_a_term.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\src\ct_common\common\exp_a_unary.h"
 				>
 			</File>
@@ -1007,10 +983,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ct_common\common\exp_s_param.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\ct_common\common\exp_s_term.h"
 				>
 			</File>
 			<File
