@@ -24,23 +24,23 @@ namespace common {
  */
 class TuplePool {
 public:
-	TuplePool(void);
-	TuplePool(const TuplePool& from);
-	TuplePool& operator = (const TuplePool& right);
-	~TuplePool(void);
+  TuplePool(void);
+  TuplePool(const TuplePool& from);
+  TuplePool& operator = (const TuplePool& right);
+  ~TuplePool(void);
 
-	/** Whether the tuple is in the set */
-	bool query(const Tuple &tuple);
-	/** Add tuple */
-	void add(const Tuple &tuple);
-	/** Remove tuple */
-	void remove(const Tuple &tuple);
-	std::size_t size(void) const;
+  /** Whether the tuple is in the set */
+  bool query(const Tuple &tuple);
+  /** Add tuple */
+  void add(const Tuple &tuple);
+  /** Remove tuple */
+  void remove(const Tuple &tuple);
+  std::size_t size(void) const;
         
-	const std::set<Tuple> &getTuples(void) const;
+  const std::set<Tuple> &getTuples(void) const;
     
 private:
-	std::set<Tuple> tuple_set_;
+  std::set<Tuple> tuple_set_;
 };
 }  // namespace common
 }  // namespace ct

@@ -37,7 +37,7 @@ public:
 
 private:
   std::vector<int> int_values_;   /**< The integer values of the parameter.
-																	 * Should be consistent with string values */
+                                   * Should be consistent with string values */
 };
 }  // namespace common
 }  // namespace ct

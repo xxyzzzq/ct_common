@@ -30,11 +30,11 @@ public:
   Assignment &operator =(const Assignment &right);
   virtual ~Assignment(void) = 0;
 
-	/** whether the assignment contains a parameter */
+  /** whether the assignment contains a parameter */
   virtual bool IsContainParam(std::size_t pid) const = 0;
-	/** return the value for the given pid */
+  /** return the value for the given pid */
   virtual std::size_t GetValue(std::size_t pid) const = 0;
-	/** check the assignment is a sub-assignment of another one */
+  /** check the assignment is a sub-assignment of another one */
   virtual bool IsSubAssignmentOf(const Assignment &assignment) const = 0;
 };
 }  // namespace common

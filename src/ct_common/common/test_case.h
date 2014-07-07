@@ -37,10 +37,10 @@ public:
   virtual std::size_t GetValue(std::size_t pid) const;
   virtual bool IsSubAssignmentOf(const Assignment &assignment) const;
   
-	using std::vector<size_t>::assign;
-	using std::vector<size_t>::push_back;
+  using std::vector<size_t>::assign;
+  using std::vector<size_t>::push_back;
   using std::vector<size_t>::pop_back;
-	using std::vector<size_t>::resize;
+  using std::vector<size_t>::resize;
   using std::vector<size_t>::size;
   using std::vector<size_t>::empty;
   using std::vector<size_t>::operator [];

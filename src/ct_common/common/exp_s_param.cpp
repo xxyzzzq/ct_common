@@ -41,7 +41,7 @@ EvalType_String Exp_S_Param::Evaluate(const std::vector<boost::shared_ptr<ParamS
     CT_EXCEPTION("cannot evaluate string value of a non-string parameter");
     return tmp_return;
   }
-	// FIXME: need to reconsider the logic
+  // FIXME: need to reconsider the logic
   if (param_specs[this->pid_]->is_auto()) {
     for (std::size_t i = 0; i < param_specs[this->pid_]->get_auto_value_specs().size(); ++i) {
       boost::shared_ptr<Constraint> cond = boost::dynamic_pointer_cast<Constraint>(param_specs[this->pid_]->auto_value_specs()[i].first);

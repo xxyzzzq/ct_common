@@ -32,7 +32,7 @@ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
-	/** Get the corresponding string token */
+  /** Get the corresponding string token */
   virtual std::string get_op_token(void) const = 0;
 
   boost::shared_ptr<const Constraint> get_oprd(void) const { return boost::dynamic_pointer_cast<Constraint>(this->oprds_[0]); }

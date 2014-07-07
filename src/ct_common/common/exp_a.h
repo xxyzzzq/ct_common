@@ -65,12 +65,12 @@ public:
 public:
   /** Evaluate the double value of the expression. Checks whether the expression is of double type. */
   EvalType_Double EvaluateDouble(
-		const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
-		const Assignment &assignment) const;
-	/** Evaluate the int value of the expression. Checks whether the expression is of int type. */
+    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const Assignment &assignment) const;
+  /** Evaluate the int value of the expression. Checks whether the expression is of int type. */
   EvalType_Int EvaluateInt(
-		const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
-		const Assignment &assignment) const;
+    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const Assignment &assignment) const;
 
   eEXP_A_TYPE get_type(void) const { return this->type_; }
   void set_type(eEXP_A_TYPE type) { this->type_ = type; }

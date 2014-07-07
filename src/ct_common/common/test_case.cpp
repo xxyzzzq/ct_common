@@ -16,11 +16,11 @@
 using namespace ct::common;
 
 TestCase::TestCase(void)
-	: Assignment(), std::vector<std::size_t>() {
+  : Assignment(), std::vector<std::size_t>() {
 }
 
 TestCase::TestCase(const TestCase &from)
-	: Assignment(from), std::vector<std::size_t>() {
+  : Assignment(from), std::vector<std::size_t>() {
 }
 
 TestCase::~TestCase(void) {
@@ -28,7 +28,7 @@ TestCase::~TestCase(void) {
 
 TestCase &TestCase::operator =(const TestCase &right) {
   Assignment::operator =(right);
-	std::vector<std::size_t>::operator =(right);
+  std::vector<std::size_t>::operator =(right);
   return *this;
 }
 

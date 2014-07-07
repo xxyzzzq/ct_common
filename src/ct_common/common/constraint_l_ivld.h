@@ -34,8 +34,8 @@ public:
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
 
   virtual void inner_touch_leaf_pids(
-		const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
-		std::set<std::size_t> &pids_to_touch) const;
+    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    std::set<std::size_t> &pids_to_touch) const;
   
   void set_pid(std::size_t pid) { this->pid_ = pid; }
   std::size_t get_pid(void) const { return this->pid_; }
@@ -44,11 +44,11 @@ public:
                         const Assignment &assignment) const;
 
 private:
-	/** Called when some condition of an auto parameter is true, to get the corresponding value */
+  /** Called when some condition of an auto parameter is true, to get the corresponding value */
   boost::shared_ptr<EvalType> EvaluateAutoCaseExp(
-		const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
-		const Assignment &assignment,
-		const boost::shared_ptr<TreeNode> &exp) const;
+    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const Assignment &assignment,
+    const boost::shared_ptr<TreeNode> &exp) const;
 
 private:
   std::size_t pid_;  /**< parameter id */

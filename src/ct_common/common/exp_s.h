@@ -37,7 +37,7 @@ public:
   static std::string class_name(void);
 
 public:
-	/** Function for evaluating the expression */
+  /** Function for evaluating the expression */
   virtual EvalType_String Evaluate( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
                                     const Assignment &assignment) const = 0;
 };

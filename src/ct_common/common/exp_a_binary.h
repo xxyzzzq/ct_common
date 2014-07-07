@@ -33,8 +33,8 @@ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
-	/** Get the corresponding string token */
-	virtual std::string get_op_token(void) const = 0;
+  /** Get the corresponding string token */
+  virtual std::string get_op_token(void) const = 0;
 
 public:
   boost::shared_ptr<const Exp_A> get_loprd(void) const { return boost::dynamic_pointer_cast<Exp_A>(this->oprds_[0]); }
@@ -53,7 +53,7 @@ private:
 private:
   /** Inner functions to calculate the resulting value */
   virtual double evaluate_double(double val_1, double val_2) const = 0;
-	/** Inner functions to calculate the resulting value */
+  /** Inner functions to calculate the resulting value */
   virtual int evaluate_int(int val_1, int val_2) const = 0;
 };
 }  // namespace common

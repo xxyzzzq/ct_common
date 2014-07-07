@@ -37,7 +37,7 @@ public:
 
 private:
   std::vector<double> double_values_;  /**< The double values of the parameter.
-																				* Should be consistent with string values */
+                                        * Should be consistent with string values */
 };
 }  // namespace common
 }  // namespace ct

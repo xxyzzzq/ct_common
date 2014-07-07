@@ -30,9 +30,9 @@ public:
   virtual ~ParamSpec_Bool(void);
 
   /**
-	 * The string values is neglected.
+   * The string values is neglected.
    * Setting values as "false", "true", "#"
-	 */
+   */
   virtual void set_values(const std::vector<std::string> &string_values);
   const std::vector<bool> &get_bool_values(void) const { return this->bool_values_; }
 
@@ -43,7 +43,7 @@ private:
   std::vector<bool> bool_values_;  /**< The bool values of the parameter:
                                     * 0 for false, 1 for true, 2 for invalid.
                                     * should be consistent with string values
-																		*/
+                                    */
 };
 }  // namespace common
 }  // namespace ct

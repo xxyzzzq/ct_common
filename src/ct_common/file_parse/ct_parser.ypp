@@ -512,16 +512,16 @@ options_line: TKN_IDENTIFIER TKN_COLON value TKN_SEMICOLON { TRY_BEGIN assembler
 #include <iostream>
 yy::ct_parser::token_type
 yylex(yy::ct_parser::semantic_type *yylval, yy::ct_parser::location_type *yylloc, ct::lexer &qlex) {
-	ct::lexer_Token* token;
-	qlex.receive(&token);
-	if (token->get_text().length()>0)
-	{
-		yylval->str = new std::string((char *)token->get_text().c_str());
-		yylloc->step();
-		yylloc->end.line = token->line_number();
-		yylloc->end.column = token->column_number()+token->get_text().length();
-	}
-	return (yy::ct_parser::token_type)token->type_id();
+  ct::lexer_Token* token;
+  qlex.receive(&token);
+  if (token->get_text().length()>0)
+  {
+    yylval->str = new std::string((char *)token->get_text().c_str());
+    yylloc->step();
+    yylloc->end.line = token->line_number();
+    yylloc->end.column = token->column_number()+token->get_text().length();
+  }
+  return (yy::ct_parser::token_type)token->type_id();
 }
 
 void yy::ct_parser::error(const yy::ct_parser::location_type &loc, const std::string &s) {

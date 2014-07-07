@@ -32,7 +32,7 @@ public:
   bool operator < (const PVPair &right) const;
   bool operator == (const PVPair &right) const;
   bool operator != (const PVPair &right) const;
-	
+
 public:
   std::size_t pid_;  /**< parameter id */
   std::size_t vid_;  /**< value id */

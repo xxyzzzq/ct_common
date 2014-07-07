@@ -27,7 +27,7 @@ define {
   // String: 
   //    Quote " followe by either \" or something different from " and then a final "
   P_STRING              "\""(\\"\""|[^"])*"\""
-	
+  
   exponent_part         [eE][\-+]?[0-9]+
   fractional_constant   ([0-9]*"."[0-9]+)|([0-9]+".")
   floating_constant     (({fractional_constant}{exponent_part}?)|([0-9]+{exponent_part}))[FfLl]?

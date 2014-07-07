@@ -72,6 +72,6 @@ AC_CONFIG_FILES([Makefile
                  src/ct_common/common/Makefile
                  src/ct_common/file_parse/Makefile
                  src/ct_common/example/Makefile
-								 doc/Makefile])
+                 doc/Makefile])
 AC_OUTPUT
 

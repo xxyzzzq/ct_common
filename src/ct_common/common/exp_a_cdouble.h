@@ -34,15 +34,15 @@ public:
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
 
 public:
-	/** Setting the value */
+  /** Setting the value */
   virtual void set_value(int value);
-	/** Setting the value */
+  /** Setting the value */
   virtual void set_value(double value);
   void set_str_value(const std::string &str_value);
 
-	/** Getting the value */
+  /** Getting the value */
   double get_value(void) const { return this->value_; }
-	/** Getting the string value */
+  /** Getting the string value */
   virtual const std::string &get_str_value(void) const;
 
 private:

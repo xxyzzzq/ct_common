@@ -34,21 +34,21 @@ public:
   virtual ~Seed(void) = 0;
 
 public:
-	/** Whether a given assignment matches the seed */
+  /** Whether a given assignment matches the seed */
   virtual EvalType_Bool IsMatch(const Assignment &assignment, const std::vector<boost::shared_ptr<ParamSpec> > &paramspecs) = 0;
-	/** Getting the seed id */
+  /** Getting the seed id */
   std::size_t get_id(void) const { return this->id_; }
-	/** Setting the seed id */
+  /** Setting the seed id */
   void set_id(std::size_t id) { this->id_ = id; }
-	/** Whether the seed is a starter seed */
+  /** Whether the seed is a starter seed */
   bool get_is_starter(void) const { return this->is_starter_; }
-	/** Setting the starter flag */
+  /** Setting the starter flag */
   void set_is_starter(bool is_starter) { this->is_starter_ = is_starter; }
   
 private:
   std::size_t id_;  /**< seed id */
   bool is_starter_;  /**< Whether the seed is a starter (for extending covering arrays).
-											* During test generation, the starter seeds will be covered by the preceeding test cases */
+                      * During test generation, the starter seeds will be covered by the preceeding test cases */
 };
 }  // namespace common
 }  // namespace ct

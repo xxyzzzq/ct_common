@@ -40,6 +40,6 @@ std::string Constraint::class_name(void) {
 
 EvalType_Bool Constraint::Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
                           const Assignment &assignment) const {
-	// never called
+  // never called
   return EvalType_Bool(false, false);
 }

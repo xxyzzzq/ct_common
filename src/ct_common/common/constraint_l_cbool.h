@@ -34,7 +34,7 @@ public:
   void set_value(bool val) { this->value_ = val; }
   bool get_value(void) const { return this->value_; }
 
-	/** get the string value: true/false */
+  /** get the string value: true/false */
   virtual const std::string &get_str_value(void) const;
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
 

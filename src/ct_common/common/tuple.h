@@ -38,14 +38,14 @@ public:
   virtual std::size_t GetValue(std::size_t pid) const;
   virtual bool IsSubAssignmentOf(const Assignment &asignment) const;
 
-	/** Get the set of related pids */
+  /** Get the set of related pids */
   std::vector<std::size_t> get_rel_pids(void) const;
 
-	/** Sort the pvpairs */
+  /** Sort the pvpairs */
   void Sort(void);
 
-	/** Search for the PVPair for a given pid. The tuple need to be sorted in advance.
-	 * The returned pointer is weak and should not be deleted. */
+  /** Search for the PVPair for a given pid. The tuple need to be sorted in advance.
+   * The returned pointer is weak and should not be deleted. */
   const PVPair *Search(std::size_t pid) const;
 
   /** For iterating tuples. Go to the next tuple, returns false if overflows */
@@ -55,10 +55,10 @@ public:
   bool to_the_next_tuple_with_ivld(
       std::vector<boost::shared_ptr<ct::common::ParamSpec> > param_specs);
 
-	using std::vector<PVPair>::assign;
+  using std::vector<PVPair>::assign;
   using std::vector<PVPair>::push_back;
   using std::vector<PVPair>::pop_back;
-	using std::vector<PVPair>::resize;
+  using std::vector<PVPair>::resize;
   using std::vector<PVPair>::size;
   using std::vector<PVPair>::empty;
   using std::vector<PVPair>::operator [];

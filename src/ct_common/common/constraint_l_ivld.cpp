@@ -47,7 +47,7 @@ EvalType_Bool Constraint_L_IVLD::Evaluate( const std::vector<boost::shared_ptr<P
     CT_EXCEPTION("parameter not found in the test case");
     return EvalType_Bool(false, false);
   }
-	// FIXME: need to reconsider the logics here, typically auto parameters should not be invalidated
+  // FIXME: need to reconsider the logics here, typically auto parameters should not be invalidated
   if (param_specs[this->pid_]->is_auto()) {
     for (std::size_t i = 0; i < param_specs[this->pid_]->auto_value_specs().size(); ++i) {
       boost::shared_ptr<Constraint> cond = boost::dynamic_pointer_cast<Constraint>(param_specs[this->pid_]->auto_value_specs()[i].first);

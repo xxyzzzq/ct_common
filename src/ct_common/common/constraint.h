@@ -44,10 +44,10 @@ public:
   static std::string class_name(void);
 
 public:
-	/** Whether the constraint is satisfied */
+  /** Whether the constraint is satisfied */
   virtual EvalType_Bool Evaluate(
-		const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
-		const Assignment &assignment) const = 0;
+    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const Assignment &assignment) const = 0;
 
 };
 }  // namespace common

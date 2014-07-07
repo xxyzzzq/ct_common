@@ -33,7 +33,7 @@ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
-	/** Get the corresponding string token */
+  /** Get the corresponding string token */
   virtual std::string get_op_token(void) const = 0;
 
 public:
@@ -51,7 +51,7 @@ private:
 private:
   /** Inner function for determing the resulting value */
   virtual double evaluate_double(double val) const = 0;
-	/** Inner function for determing the resulting value */
+  /** Inner function for determing the resulting value */
   virtual int evaluate_int(int val) const = 0;
 };
 }  // namespace common
