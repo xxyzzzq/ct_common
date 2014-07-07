@@ -1,17 +1,29 @@
+//===----- ct_common/common/exp_a_cdouble.cpp -------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Exp_A_CDouble
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/exp_a_cdouble.h>
 
 using namespace ct::common;
 
 Exp_A_CDouble::Exp_A_CDouble(void)
-    : Exp_A_Term(), value_(0), str_value_() {
+    : Exp_A_Atom(), value_(0), str_value_() {
 }
 
 Exp_A_CDouble::Exp_A_CDouble(const Exp_A_CDouble &from)
-  : Exp_A_Term(from), value_(from.value_), str_value_(from.str_value_) {
+  : Exp_A_Atom(from), value_(from.value_), str_value_(from.str_value_) {
 }
 
 Exp_A_CDouble &Exp_A_CDouble::operator = (const Exp_A_CDouble &right) {
-  Exp_A_Term::operator=(right);
+  Exp_A_Atom::operator=(right);
   this->value_ = right.value_;
   this->str_value_ = right.str_value_;
   return *this;

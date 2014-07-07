@@ -1,3 +1,15 @@
+//===----- ct_common/common/exp_s_param.cpp ---------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Exp_S_Param
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/utils.h>
 #include <ct_common/common/exp_s_param.h>
 #include <ct_common/common/paramspec_string.h>
@@ -6,15 +18,15 @@
 using namespace ct::common;
 
 Exp_S_Param::Exp_S_Param(void)
-    : Exp_S_Term(), pid_(PID_BOUND) {
+    : Exp_S_Atom(), pid_(PID_BOUND) {
 }
 
 Exp_S_Param::Exp_S_Param(const Exp_S_Param &from)
-    : Exp_S_Term(from), pid_(from.pid_) {
+    : Exp_S_Atom(from), pid_(from.pid_) {
 }
 
 Exp_S_Param &Exp_S_Param::operator = (const Exp_S_Param &right) {
-  Exp_S_Term::operator=(right);
+  Exp_S_Atom::operator=(right);
   this->pid_ = right.pid_;
   return *this;
 }

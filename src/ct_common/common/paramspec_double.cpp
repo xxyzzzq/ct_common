@@ -1,3 +1,15 @@
+//===----- ct_common/common/paramspec_double.cpp ----------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class ParamSpec_Double
+//
+//===----------------------------------------------------------------------===//
+
 #include <cstdlib>
 #include <ct_common/common/paramspec_double.h>
 

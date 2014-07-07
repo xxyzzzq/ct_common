@@ -1,12 +1,24 @@
+//===----- ct_common/common/exp_a_cdouble.h ---------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for constant double expressions
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_EXP_A_CDOUBLE_H
 #define CT_COMMON_EXP_A_CDOUBLE_H
 
 #include <ct_common/common/utils.h>
-#include <ct_common/common/exp_a_term.h>
+#include <ct_common/common/exp_a_atom.h>
 
 namespace ct {
 namespace common {
-class DLL_EXPORT Exp_A_CDouble : public Exp_A_Term {
+class DLL_EXPORT Exp_A_CDouble : public Exp_A_Atom {
 public:
   Exp_A_CDouble(void);
   Exp_A_CDouble(const Exp_A_CDouble &from);

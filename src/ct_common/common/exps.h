@@ -1,3 +1,15 @@
+//===----- ct_common/common/exps.h ------------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file includes all expression classes
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_EXPS_H_
 #define CT_COMMON_EXPS_H_
 
@@ -16,12 +28,12 @@
 #include <ct_common/common/exp_a_neg.h>
 #include <ct_common/common/exp_a_param.h>
 #include <ct_common/common/exp_a_sub.h>
-#include <ct_common/common/exp_a_term.h>
+#include <ct_common/common/exp_a_atom.h>
 #include <ct_common/common/exp_a_unary.h>
 
 #include <ct_common/common/exp_s.h>
 #include <ct_common/common/exp_s_cstring.h>
 #include <ct_common/common/exp_s_param.h>
-#include <ct_common/common/exp_s_term.h>
+#include <ct_common/common/exp_s_atom.h>
 
 #endif  // EXPS_H_

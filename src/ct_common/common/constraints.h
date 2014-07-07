@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraints.h -----------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file includes the header files of all constraint classes 
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_CONSTRAINTS_H_
 #define CT_COMMON_CONSTRAINTS_H_
 
@@ -21,7 +33,7 @@
 #include <ct_common/common/constraint_l_not.h>
 #include <ct_common/common/constraint_l_or.h>
 #include <ct_common/common/constraint_l_param.h>
-#include <ct_common/common/constraint_l_term.h>
+#include <ct_common/common/constraint_l_atom.h>
 #include <ct_common/common/constraint_l_unary.h>
 #include <ct_common/common/constraint_l_xor.h>
 #include <ct_common/common/constraint_l_ivld.h>

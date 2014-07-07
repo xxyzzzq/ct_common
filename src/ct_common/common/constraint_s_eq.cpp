@@ -1,4 +1,15 @@
-#include <cstring>
+//===----- ct_common/common/constraint_s_eq.cpp -----------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Constraint_S_EQ
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/constraint_s_eq.h>
 
 using namespace ct::common;
@@ -29,7 +40,7 @@ std::string Constraint_S_EQ::class_name(void) {
 }
 
 bool Constraint_S_EQ::evaluate_func(const std::string &val_1, const std::string &val_2) const {
-  return strcmp(val_1.c_str(), val_2.c_str()) == 0;
+  return val_1 ==  val_2;
 }
 
 std::string Constraint_S_EQ::get_op_token(void) const {

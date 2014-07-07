@@ -1,3 +1,15 @@
+//===----- ct_common/common/exp_a_div.cpp -----------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Exp_A_Div
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/exp_a_div.h>
 #include <ct_common/common/arithmetic_utils.h>
 

@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_s_binary.cpp -------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Constraint_S_Binary
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/constraint_s_binary.h>
 #include <ct_common/common/arithmetic_utils.h>
 #include <ct_common/common/eval_type_string.h>

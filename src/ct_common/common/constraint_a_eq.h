@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_a_eq.h -------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for arithmetic constraint "=="
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_CONSTRAINT_A_EQ_H_
 #define CT_COMMON_CONSTRAINT_A_EQ_H_
 

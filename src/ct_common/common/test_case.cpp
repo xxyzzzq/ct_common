@@ -1,3 +1,15 @@
+//===----- ct_common/common/test_case.cpp -----------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class TestCase
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/defs.h>
 #include <ct_common/common/test_case.h>
 

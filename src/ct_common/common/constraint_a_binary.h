@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_a_binary.h ---------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the base class for binary arithmetic constraints
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_CONSTRAINT_A_BINARY_H_
 #define CT_COMMON_CONSTRAINT_A_BINARY_H_
 

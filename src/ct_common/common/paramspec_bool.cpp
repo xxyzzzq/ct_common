@@ -1,3 +1,15 @@
+//===----- ct_common/common/paramspec_bool.cpp ------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class ParamSpec_Bool
+//
+//===----------------------------------------------------------------------===//
+
 #include <cstdlib>
 #include <ct_common/common/paramspec_bool.h>
 

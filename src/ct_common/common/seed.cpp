@@ -1,3 +1,15 @@
+//===----- ct_common/common/seed.cpp ----------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Seed
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/seed.h>
 
 using namespace ct::common;

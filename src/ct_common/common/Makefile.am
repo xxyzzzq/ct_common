@@ -2,7 +2,6 @@ lib_LIBRARIES = libct_common.a
 
 AM_CXXFLAGS = -I ../..
 libct_common_a_SOURCES = \
-  arithmetic_utils.cpp \
   assignment.cpp \
   constraint_a_binary.cpp \
   constraint_a.cpp \
@@ -23,7 +22,7 @@ libct_common_a_SOURCES = \
   constraint_l_not.cpp \
   constraint_l_or.cpp \
   constraint_l_param.cpp \
-  constraint_l_term.cpp \
+  constraint_l_atom.cpp \
   constraint_l_unary.cpp \
   constraint_l_xor.cpp \
   constraint_s_binary.cpp \
@@ -48,13 +47,13 @@ libct_common_a_SOURCES = \
   exp_a_neg.cpp \
   exp_a_param.cpp \
   exp_a_sub.cpp \
-  exp_a_term.cpp \
+  exp_a_atom.cpp \
   exp_a_unary.cpp \
   exp.cpp \
   exp_s.cpp \
   exp_s_cstring.cpp \
   exp_s_param.cpp \
-  exp_s_term.cpp \
+  exp_s_atom.cpp \
   paramspec_bool.cpp \
   paramspec.cpp \
   paramspec_double.cpp \

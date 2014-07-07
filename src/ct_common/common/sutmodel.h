@@ -1,4 +1,15 @@
-//the class SUTSpecs declaration.
+//===----- ct_common/common/sutmodel.h --------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the struct for SUT models
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_SUTMODEL_H_
 #define CT_COMMON_SUTMODEL_H_
 

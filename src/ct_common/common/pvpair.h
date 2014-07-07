@@ -1,4 +1,15 @@
-// Parameter-value pair
+//===----- ct_common/common/pvpair.h ----------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for parameter-value pairs
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_PVPAIR_H_
 #define CT_COMMON_PVPAIR_H_
 

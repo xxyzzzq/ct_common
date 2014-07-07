@@ -1,3 +1,15 @@
+//===----- ct_common/common/exp_a_add.cpp -----------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Exp_A_Add
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/exp_a_add.h>
 
 using namespace ct::common;

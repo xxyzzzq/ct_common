@@ -1,3 +1,15 @@
+//===----- ct_common/common/utils.h -----------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains some utility definitions and classes
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_UTILS_H_
 #define CT_COMMON_UTILS_H_
 

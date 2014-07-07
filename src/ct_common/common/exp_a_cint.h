@@ -1,12 +1,24 @@
+//===----- ct_common/common/exp_a_cint.h ------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for constant int expressions
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_EXP_A_CINT_H
 #define CT_COMMON_EXP_A_CINT_H
 
 #include <ct_common/common/utils.h>
-#include <ct_common/common/exp_a_term.h>
+#include <ct_common/common/exp_a_atom.h>
 
 namespace ct {
 namespace common {
-class DLL_EXPORT Exp_A_CInt : public Exp_A_Term {
+class DLL_EXPORT Exp_A_CInt : public Exp_A_Atom {
 public:
   Exp_A_CInt(void);
   Exp_A_CInt(const Exp_A_CInt &from);

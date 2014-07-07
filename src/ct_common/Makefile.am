@@ -22,7 +22,7 @@ nobase_pkginclude_HEADERS = \
   common/constraint_l_not.h \
   common/constraint_l_or.h \
   common/constraint_l_param.h \
-  common/constraint_l_term.h \
+  common/constraint_l_atom.h \
   common/constraint_l_unary.h \
   common/constraint_l_xor.h \
   common/constraint_s_binary.h \
@@ -49,14 +49,14 @@ nobase_pkginclude_HEADERS = \
   common/exp_a_neg.h \
   common/exp_a_param.h \
   common/exp_a_sub.h \
-  common/exp_a_term.h \
+  common/exp_a_atom.h \
   common/exp_a_unary.h \
   common/exp.h \
   common/exp_s_cstring.h \
   common/exp_s.h \
   common/exps.h \
   common/exp_s_param.h \
-  common/exp_s_term.h \
+  common/exp_s_atom.h \
   common/paramspec_bool.h \
   common/paramspec_double.h \
   common/paramspec.h \

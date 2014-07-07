@@ -1,3 +1,15 @@
+//===----- ct_common/common/eval_type_string.h ------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for string evaluation type
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_EVAL_TYPE_STRING_H_
 #define CT_COMMON_EVAL_TYPE_STRING_H_
 

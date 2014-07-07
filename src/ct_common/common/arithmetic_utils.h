@@ -1,8 +1,21 @@
+//===----- ct_common/common/arithmetic_utils.h ------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains some basic arithmetic utility functions
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_ARITHMETIC_UTILS_H_
 #define CT_COMMON_ARITHMETIC_UTILS_H_
 
 #include <cmath>
 #include <vector>
+#include <algorithm>
 
 namespace ct {
 namespace common {
@@ -58,7 +71,13 @@ inline bool cmp_ne(double a, double b, double prec = 0) {
   return fabs(a - b) > prec;
 }
 
-std::vector<std::size_t> sort_and_uniquefy(const std::vector<std::size_t> &vec);
+inline std::vector<std::size_t> sort_and_uniquefy(const std::vector<std::size_t> &vec) {
+  std::vector<std::size_t> tmp_return = vec;
+	std::sort(tmp_return.begin(), tmp_return.end());
+	std::unique(tmp_return.begin(), tmp_return.end());
+	return tmp_return;
+}
+
 }  // namespace utils
 }  // namespace common
 }  // namespace ct

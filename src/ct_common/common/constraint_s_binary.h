@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_s_binary.h ---------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the base class for binary string constraints
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_CONSTRAINT_S_BINARY_H_
 #define CT_COMMON_CONSTRAINT_S_BINARY_H_
 

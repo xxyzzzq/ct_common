@@ -1,12 +1,25 @@
+//===----- ct_common/common/exp_a_param.h -----------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for arithmetic expressions w.r.t. a
+// parameter
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_EXP_A_PARAM_H
 #define CT_COMMON_EXP_A_PARAM_H
 
 #include <ct_common/common/utils.h>
-#include <ct_common/common/exp_a_term.h>
+#include <ct_common/common/exp_a_atom.h>
 
 namespace ct {
 namespace common {
-class DLL_EXPORT Exp_A_Param : public Exp_A_Term {
+class DLL_EXPORT Exp_A_Param : public Exp_A_Atom {
 public:
   Exp_A_Param(void);
   Exp_A_Param(const Exp_A_Param &from);

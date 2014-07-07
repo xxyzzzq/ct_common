@@ -1,3 +1,15 @@
+//===----- ct_common/common/paramspecs.h ------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file includes all classes of parameter specifications
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef PARAMSPECS_H_
 #define PARAMSPECS_H_
 

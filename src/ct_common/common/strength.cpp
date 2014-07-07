@@ -1,3 +1,15 @@
+//===----- ct_common/common/strength.cpp ------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the utility functions for Strength and RawStrength
+//
+//===----------------------------------------------------------------------===//
+
 #include <algorithm>
 #include <ct_common/common/utils.h>
 #include <ct_common/common/strength.h>

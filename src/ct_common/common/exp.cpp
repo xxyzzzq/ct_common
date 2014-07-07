@@ -1,3 +1,15 @@
+//===----- ct_common/common/exp.cpp -----------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Exp
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/exp.h>
 
 using namespace ct::common;

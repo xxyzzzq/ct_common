@@ -1,21 +1,33 @@
+//===----- ct_common/common/constraint_l_param.cpp --------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Constraint_L_Param
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/constraint_l_param.h>
 #include <ct_common/common/paramspec_bool.h>
 
 using namespace ct::common;
 
 Constraint_L_Param::Constraint_L_Param(void)
-    : Constraint_L_Term(), pid_(PID_BOUND) {
+    : Constraint_L_Atom(), pid_(PID_BOUND) {
 }
 
 Constraint_L_Param::Constraint_L_Param(const Constraint_L_Param &from)
-    : Constraint_L_Term(from), pid_(from.pid_) {
+    : Constraint_L_Atom(from), pid_(from.pid_) {
 }
 
 Constraint_L_Param::~Constraint_L_Param(void) {
 }
 
 Constraint_L_Param &Constraint_L_Param::operator = (const Constraint_L_Param &right) {
-  Constraint_L_Term::operator =(right);
+  Constraint_L_Atom::operator =(right);
   this->pid_ = right.pid_;
   return *this;
 }

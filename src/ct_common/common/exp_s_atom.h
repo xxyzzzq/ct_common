@@ -1,4 +1,4 @@
-//===----- ct_common/common/paramspec_string.h ------------------*- C++ -*-===//
+//===----- ct_common/common/exp_s_atom.h ------------------------*- C++ -*-===//
 //
 //                      The ct_common Library
 //
@@ -6,30 +6,32 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This header file contains the class for string parameter specifications
+// This header file contains the base class for atom string expressions
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef CT_COMMON_PARAMSPEC_STRING_H_
-#define CT_COMMON_PARAMSPEC_STRING_H_
+
+#ifndef CT_COMMON_EXP_S_ATOM_H_
+#define CT_COMMON_EXP_S_ATOM_H_
 
 #include <ct_common/common/utils.h>
+#include <ct_common/common/exp_s.h>
 #include <ct_common/common/paramspec.h>
 
 namespace ct {
 namespace common {
-class DLL_EXPORT ParamSpec_String: public ParamSpec
-{
+class DLL_EXPORT Exp_S_Atom : public Exp_S {
 public:
-  ParamSpec_String(void);
-  ParamSpec_String(const ParamSpec_String &from);
-  ParamSpec_String& operator =(const ParamSpec_String &right);
-  virtual ~ParamSpec_String(void);
+  Exp_S_Atom(void);
+  Exp_S_Atom(const Exp_S_Atom &from);
+  Exp_S_Atom &operator = (const Exp_S_Atom &right);
+  virtual ~Exp_S_Atom(void) = 0;
 
+public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
 };
 }  // namespace common
 }  // namespace ct
 
-#endif  // CT_COMMON_PARAMSPEC_STRING_H_
+#endif  // CT_COMMON_EXP_S_ATOM_H_

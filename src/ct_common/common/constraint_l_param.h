@@ -1,11 +1,24 @@
+//===----- ct_common/common/constraint_l_param.h ----------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for constraints w.r.t.
+// a boolean parameter
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_CONSTRAINT_L_PARAM_H_
 #define CT_COMMON_CONSTRAINT_L_PARAM_H_
 
-#include <ct_common/common/constraint_l_term.h>
+#include <ct_common/common/constraint_l_atom.h>
 
 namespace ct {
 namespace common {
-class Constraint_L_Param : public Constraint_L_Term {
+class Constraint_L_Param : public Constraint_L_Atom {
 public:
   Constraint_L_Param(void);
   Constraint_L_Param(const Constraint_L_Param &from);

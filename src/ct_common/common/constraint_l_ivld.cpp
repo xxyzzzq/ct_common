@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_l_ivld.cpp ---------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Constraint_L_IVLD
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/constraint_l_ivld.h>
 #include <ct_common/common/exp_a.h>
 #include <ct_common/common/exp_s.h>
@@ -5,18 +17,18 @@
 using namespace ct::common;
 
 Constraint_L_IVLD::Constraint_L_IVLD(void)
-    : Constraint_L(), pid_(PID_BOUND) {
+    : Constraint_L_Atom(), pid_(PID_BOUND) {
 }
 
 Constraint_L_IVLD::Constraint_L_IVLD(const Constraint_L_IVLD &from)
-    : Constraint_L(from), pid_(from.pid_) {
+    : Constraint_L_Atom(from), pid_(from.pid_) {
 }
 
 Constraint_L_IVLD::~Constraint_L_IVLD(void) {
 }
 
 Constraint_L_IVLD &Constraint_L_IVLD::operator = (const Constraint_L_IVLD &right) {
-  Constraint_L::operator =(right);
+  Constraint_L_Atom::operator =(right);
   this->pid_ = right.pid_;
   return *this;
 }

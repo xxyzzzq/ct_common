@@ -1,3 +1,15 @@
+//===----- ct_common/common/exp_a_sub.cpp -----------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Exp_A_Sub
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/exp_a_sub.h>
 
 using namespace ct::common;

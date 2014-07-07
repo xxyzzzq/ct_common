@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_s.cpp --------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Constraint_S
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/constraint_s.h>
 
 using namespace ct::common;

@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_l_binary.h ---------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the base class for binary logical constraints
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_CONSTRAINT_L_BINARY_H_
 #define CT_COMMON_CONSTRAINT_L_BINARY_H_
 

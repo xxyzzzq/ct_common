@@ -1,3 +1,15 @@
+//===----- ct_common/file_parse/ct_lexer.qx --------------------*- quex -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the lexer for translating input streams into tokens
+//
+//===----------------------------------------------------------------------===//
+
 header {
 #include <ct_common/file_parse/ct_parser.tab.hpp>
 #include <ct_common/common/utils.h>

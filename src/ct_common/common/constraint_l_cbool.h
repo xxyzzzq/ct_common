@@ -1,11 +1,23 @@
+//===----- ct_common/common/constraint_l_cbool.h ----------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for constant boolean values
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_CONSTRAINT_L_CBOOL_H_
 #define CT_COMMON_CONSTRAINT_L_CBOOL_H_
 
-#include <ct_common/common/constraint_l_term.h>
+#include <ct_common/common/constraint_l_atom.h>
 
 namespace ct {
 namespace common {
-class Constraint_L_CBool : public Constraint_L_Term {
+class Constraint_L_CBool : public Constraint_L_Atom {
 public:
   Constraint_L_CBool(void);
   Constraint_L_CBool(const Constraint_L_CBool &from);

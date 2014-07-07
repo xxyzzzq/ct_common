@@ -1,12 +1,24 @@
+//===----- ct_common/common/exp_a_constraintcast.h --------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for expressions casted from constraints
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_EXP_A_CONSTRAINTCAST_H_
 #define CT_COMMON_EXP_A_CONSTRAINTCAST_H_
 
 #include <ct_common/common/constraint.h>
-#include <ct_common/common/exp_a.h>
+#include <ct_common/common/exp_a_atom.h>
 
 namespace ct {
 namespace common {
-class DLL_EXPORT Exp_A_ConstraintCast : public Exp_A {
+class DLL_EXPORT Exp_A_ConstraintCast : public Exp_A_Atom {
 public:
   Exp_A_ConstraintCast(void);
   Exp_A_ConstraintCast(const Exp_A_ConstraintCast &from);

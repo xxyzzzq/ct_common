@@ -1,3 +1,15 @@
+//===----- ct_common/file_parse/assembler.h ---------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for assembling elements of the SUT model
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef ASSEMBLER_H_
 #define ASSEMBLER_H_
 

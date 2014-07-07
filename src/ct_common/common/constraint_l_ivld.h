@@ -1,16 +1,25 @@
+//===----- ct_common/common/constraint_l_ivld.h -----------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for parameter invalidation atom
+// constraints
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_CONSTRAINT_L_IVLD_H_
 #define CT_COMMON_CONSTRAINT_L_IVLD_H_
 
-/**************
- * constraint for invalid parameters
- **************/
-
 #include <ct_common/common/utils.h>
-#include <ct_common/common/constraint_l.h>
+#include <ct_common/common/constraint_l_atom.h>
 
 namespace ct {
 namespace common {
-class DLL_EXPORT Constraint_L_IVLD : public Constraint_L {
+class DLL_EXPORT Constraint_L_IVLD : public Constraint_L_Atom {
 public:
   Constraint_L_IVLD(void);
   Constraint_L_IVLD(const Constraint_L_IVLD &from);

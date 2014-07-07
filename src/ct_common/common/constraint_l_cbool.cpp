@@ -1,20 +1,32 @@
+//===----- ct_common/common/constraint_l_cbool.cpp -------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Constraint_L_CBool
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/constraint_l_cbool.h>
 
 using namespace ct::common;
 
 Constraint_L_CBool::Constraint_L_CBool(void)
-    : Constraint_L_Term(), value_(false) {
+    : Constraint_L_Atom(), value_(false) {
 }
 
 Constraint_L_CBool::Constraint_L_CBool(const Constraint_L_CBool &from)
-    : Constraint_L_Term(from), value_(from.value_) {
+    : Constraint_L_Atom(from), value_(from.value_) {
 }
 
 Constraint_L_CBool::~Constraint_L_CBool(void) {
 }
 
 Constraint_L_CBool &Constraint_L_CBool::operator = (const Constraint_L_CBool &right) {
-  Constraint_L_Term::operator =(right);
+  Constraint_L_Atom::operator =(right);
   this->value_ = right.value_;
   return *this;
 }

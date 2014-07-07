@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_l_xor.cpp ----------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Constraint_L_Xor
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/constraint_l_xor.h>
 
 using namespace ct::common;

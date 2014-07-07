@@ -1,3 +1,15 @@
+//===----- ct_common/common/seed_constraint.h -------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for constraint seeds
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_SEED_CONSTRAINT_H_
 #define CT_COMMON_SEED_CONSTRAINT_H_
 

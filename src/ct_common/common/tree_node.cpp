@@ -1,3 +1,15 @@
+//===----- ct_common/common/treenode.cpp ------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class TreeNode
+//
+//===----------------------------------------------------------------------===//
+
 #include <stack>
 #include <map>
 #include <ct_common/common/tree_node.h>

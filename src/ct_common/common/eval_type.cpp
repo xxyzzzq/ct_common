@@ -1,3 +1,15 @@
+//===----- ct_common/common/eval_type.cpp -----------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class EvalType
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/eval_type.h>
 
 using namespace ct::common;

@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_l_unary.h ----------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for unary logical constraints
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_CONSTRAINT_L_UNARY_H_
 #define CT_COMMON_CONSTRAINT_L_UNARY_H_
 

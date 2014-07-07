@@ -1,3 +1,15 @@
+//===----- ct_common/common/paramspec_bool.h --------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the class for boolean parameter specifications
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_PARAMSPEC_BOOL_H_
 #define CT_COMMON_PARAMSPEC_BOOL_H_
 

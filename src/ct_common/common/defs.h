@@ -1,3 +1,15 @@
+//===----- ct_common/common/defs.h ------------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains some basic definitions
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_DEFS_H_
 #define CT_COMMON_DEFS_H_
 

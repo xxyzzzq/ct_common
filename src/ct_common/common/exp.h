@@ -1,3 +1,15 @@
+//===----- ct_common/common/exp.h -------------------------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This header file contains the base class for expressions
+//
+//===----------------------------------------------------------------------===//
+
 #ifndef CT_COMMON_EXP_H_
 #define CT_COMMON_EXP_H_
 

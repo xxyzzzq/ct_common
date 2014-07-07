@@ -1,18 +1,30 @@
+//===----- ct_common/common/exp_a_constraintcast.cpp ------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Exp_A_ConstraintCast
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/exp_a_constraintcast.h>
 
 using namespace ct::common;
 
 Exp_A_ConstraintCast::Exp_A_ConstraintCast(void)
-    : Exp_A() {
+    : Exp_A_Atom() {
   oprds_.resize(1);
 }
 
 Exp_A_ConstraintCast::Exp_A_ConstraintCast(const Exp_A_ConstraintCast &from)
-    : Exp_A(from) {
+    : Exp_A_Atom(from) {
 }
 
 Exp_A_ConstraintCast &Exp_A_ConstraintCast::operator = (const Exp_A_ConstraintCast &right) {
-  Exp_A::operator = (right);
+  Exp_A_Atom::operator = (right);
   return *this;
 }
 

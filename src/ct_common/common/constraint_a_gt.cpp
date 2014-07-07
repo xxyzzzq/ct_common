@@ -1,3 +1,15 @@
+//===----- ct_common/common/constraint_a_gt.cpp -----------------*- C++ -*-===//
+//
+//                      The ct_common Library
+//
+// This file is distributed under the MIT license. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file contains the function definitions of class Constraint_A_GT
+//
+//===----------------------------------------------------------------------===//
+
 #include <ct_common/common/constraint_a_gt.h>
 #include <ct_common/common/arithmetic_utils.h>
 
