@@ -3,13 +3,13 @@
 
 AC_PREREQ([2.50])
 AC_INIT([ct_common], m4_esyscmd([tr -d '\n' < VERSION]), [zhangzq@ios.ac.cn])
+AM_INIT_AUTOMAKE([1.9 tar-pax])
 AC_CONFIG_SRCDIR([src/ct_common/common/exp.h])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 m4_ifndef([AM_SILENT_RULES], [m4_define([AM_SILENT_RULES],[])])
 AM_SILENT_RULES
 
-AM_INIT_AUTOMAKE([1.9 tar-pax])
 
 # Checks for programs.
 AC_PROG_CXX
