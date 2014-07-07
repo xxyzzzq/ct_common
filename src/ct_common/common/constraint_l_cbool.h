@@ -17,6 +17,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for constant boolean atom constraints
+ */
 class Constraint_L_CBool : public Constraint_L_Atom {
 public:
   Constraint_L_CBool(void);
@@ -30,7 +33,8 @@ public:
 
   void set_value(bool val) { this->value_ = val; }
   bool get_value(void) const { return this->value_; }
-  
+
+	/** get the string value: true/false */
   virtual const std::string &get_str_value(void) const;
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
 

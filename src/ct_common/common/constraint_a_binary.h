@@ -20,6 +20,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for binary arithmetic constraints
+ */
 class DLL_EXPORT Constraint_A_Binary : public Constraint_A {
 public:
   Constraint_A_Binary(void);
@@ -30,27 +33,32 @@ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
-  virtual std::string get_op_token(void) const = 0;
+	/** get the string token of the current constraint type */
+	virtual std::string get_op_token(void) const = 0;
 
   boost::shared_ptr<const Exp_A> get_loprd(void) const { return boost::dynamic_pointer_cast<Exp_A>(this->oprds_[0]); }
   boost::shared_ptr<const Exp_A> get_roprd(void) const { return boost::dynamic_pointer_cast<Exp_A>(this->oprds_[1]); }
 
   void set_loprd(const boost::shared_ptr<TreeNode> &loprd) { this->oprds_[0] = loprd; }
   void set_roprd(const boost::shared_ptr<TreeNode> &roprd) { this->oprds_[1] = roprd; }
-  
+
+	/** Set the floating-point precision (for comparison) */
   void set_precision(double precision) { this->precision_ = (precision>=0) ? precision : -precision; } // absolute value
+	/** Get the floating-point precision */
   double get_precision(void) const { return this->precision_; }
 
-  virtual EvalType_Bool Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
-                        const Assignment &assignment) const;
+  virtual EvalType_Bool Evaluate(
+		const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+		const Assignment &assignment) const;
 
 private:
-  // whether the result is valid is handled in the Evaluate function, since the result is invalid if any operand is invalid
+  /** Inner check function for int values */
   virtual bool evaluate_func_int(int val_1, int val_2) const = 0;
+	/** Inner check function for double values */
   virtual bool evaluate_func_double(double val_1, double val_2) const = 0;
 
 protected:
-  double precision_;
+  double precision_; /**< Precision for comparing floating-point operands */
 };
 }  // namespace common
 }  // namespace ct

@@ -41,13 +41,13 @@ std::string Constraint_L_IVLD::class_name(void) {
   return "Constraint_L_IVLD";
 }
 
-// ERROR HERE!!!!
 EvalType_Bool Constraint_L_IVLD::Evaluate( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
                                 const Assignment &assignment) const {
   if (!assignment.IsContainParam(this->pid_)) {
     CT_EXCEPTION("parameter not found in the test case");
     return EvalType_Bool(false, false);
   }
+	// FIXME: need to reconsider the logics here, typically auto parameters should not be invalidated
   if (param_specs[this->pid_]->is_auto()) {
     for (std::size_t i = 0; i < param_specs[this->pid_]->auto_value_specs().size(); ++i) {
       boost::shared_ptr<Constraint> cond = boost::dynamic_pointer_cast<Constraint>(param_specs[this->pid_]->auto_value_specs()[i].first);
@@ -67,7 +67,7 @@ EvalType_Bool Constraint_L_IVLD::Evaluate( const std::vector<boost::shared_ptr<P
         return EvalType_Bool(false, false);
       }
     }
-    // suppressing error
+    // FIXME: suppressing error
     //CT_EXCEPTION(std::string("Error: encountering unhandled auto value condition for parameter ")+ptr->get_param_name());
     return EvalType_Bool(true, true); // no conditions match
   }

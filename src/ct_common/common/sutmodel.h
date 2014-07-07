@@ -23,11 +23,14 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for SUT models
+ */
 struct SUTModel {
-  std::vector<boost::shared_ptr<ParamSpec> > param_specs_;
-  std::vector<Strength> strengths_;
-  std::vector<boost::shared_ptr<Seed> > seeds_;
-  std::vector<boost::shared_ptr<Constraint> > constraints_;
+  std::vector<boost::shared_ptr<ParamSpec> > param_specs_;  /**< The parameter specifications */
+  std::vector<Strength> strengths_;  /**< The strengths */
+  std::vector<boost::shared_ptr<Seed> > seeds_;  /**< The seeds */
+  std::vector<boost::shared_ptr<Constraint> > constraints_;  /**< The constraints */
 };
 }  // namespace common
 }  // namespace ct

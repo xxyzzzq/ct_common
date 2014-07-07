@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for string function "!="
+ */
 class DLL_EXPORT Constraint_S_NE : public Constraint_S_Binary {
 public:
   Constraint_S_NE(void);

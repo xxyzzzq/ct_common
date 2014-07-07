@@ -19,6 +19,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for atomic arithmetical expressions, i.e. no contained sub-expressions
+ */
 class DLL_EXPORT Exp_A_Atom : public Exp_A {
 public:
   Exp_A_Atom(void);

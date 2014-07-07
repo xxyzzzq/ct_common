@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for arithmetic expressions casted from constraints
+ */
 class DLL_EXPORT Exp_A_ConstraintCast : public Exp_A_Atom {
 public:
   Exp_A_ConstraintCast(void);

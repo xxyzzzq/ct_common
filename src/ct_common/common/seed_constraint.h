@@ -32,7 +32,7 @@ public:
   virtual EvalType_Bool IsMatch(const Assignment &assignment, const std::vector<boost::shared_ptr<ParamSpec> > &paramspecs);
   
 private:
-  boost::shared_ptr<Constraint> constraint_;
+  boost::shared_ptr<Constraint> constraint_;  /**< The inner constraint */
 };
 }  // namespace common
 }  // namespace ct

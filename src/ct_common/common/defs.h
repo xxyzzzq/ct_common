@@ -17,9 +17,8 @@
 
 namespace ct {
 namespace common {
-
-const std::size_t PID_BOUND = std::size_t(-1);  // also for not-found parameter id's
-const std::size_t VID_BOUND = std::size_t(-1);  // also for not-found value id's
+const std::size_t PID_BOUND = std::size_t(-1);  /**< Upper bound for parameter ids, also for not-found parameter id's */
+const std::size_t VID_BOUND = std::size_t(-1);  /**< Upper bound for value ids, also for not-found value id's */
 }
 }
 

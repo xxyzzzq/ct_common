@@ -19,6 +19,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The base class for unary expressions
+ */
 class DLL_EXPORT Exp_A_Unary : public Exp_A {
 public:
   Exp_A_Unary(void);
@@ -30,6 +33,7 @@ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
+	/** Get the corresponding string token */
   virtual std::string get_op_token(void) const = 0;
 
 public:
@@ -45,8 +49,9 @@ private:
                                 const Assignment &assignment) const;
 
 private:
-  // whether the result is valid is controlled by Evaluate functions
+  /** Inner function for determing the resulting value */
   virtual double evaluate_double(double val) const = 0;
+	/** Inner function for determing the resulting value */
   virtual int evaluate_int(int val) const = 0;
 };
 }  // namespace common

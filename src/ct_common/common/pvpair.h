@@ -18,22 +18,24 @@
 
 namespace ct {
 namespace common {
-
+/**
+ * The class for parameter-value pairs
+ */
 class DLL_EXPORT PVPair
 {
 public:
   PVPair(std::size_t pid = PID_BOUND, std::size_t vid = VID_BOUND);
   PVPair(const PVPair&);
   PVPair &operator = (const PVPair &right);
-  ~PVPair(void);  // non-virtual for performance
+  ~PVPair(void);
 
   bool operator < (const PVPair &right) const;
   bool operator == (const PVPair &right) const;
   bool operator != (const PVPair &right) const;
 	
 public:
-  std::size_t pid_;  // parameter index
-  std::size_t vid_;  // value index
+  std::size_t pid_;  /**< parameter id */
+  std::size_t vid_;  /**< value id */
 };
 }  // namespace common
 }  // namespace ct

@@ -49,5 +49,5 @@ bool Constraint_A_NE::evaluate_func_double(double loprd_val, double roprd_val) c
 }
 
 std::string Constraint_A_NE::get_op_token(void) const {
-  return ">=";
+  return "!=";
 }

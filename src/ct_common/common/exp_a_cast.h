@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for casting between int/double expressions
+ */
 class DLL_EXPORT Exp_A_Cast : public Exp_A_Unary {
 public:
   Exp_A_Cast(void);

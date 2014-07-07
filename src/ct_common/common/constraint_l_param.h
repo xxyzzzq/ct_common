@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for parameter logical constraints, which is atomic
+ */
 class Constraint_L_Param : public Constraint_L_Atom {
 public:
   Constraint_L_Param(void);
@@ -41,7 +44,7 @@ public:
                                   const Assignment &assignment) const;
 
 private:
-  std::size_t pid_;  
+  std::size_t pid_;  /**< parameter id */
 };
 }  // namespace common
 }  // namespace ct

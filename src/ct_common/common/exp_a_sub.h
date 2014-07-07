@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for arithematic expression "-" (binary)
+ */
 class DLL_EXPORT Exp_A_Sub : public Exp_A_Binary {
 public:
   Exp_A_Sub(void);

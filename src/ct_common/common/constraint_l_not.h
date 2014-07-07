@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for logical constraint "!"
+ */
 class DLL_EXPORT Constraint_L_Not : public Constraint_L_Unary {
 public:
   Constraint_L_Not(void);

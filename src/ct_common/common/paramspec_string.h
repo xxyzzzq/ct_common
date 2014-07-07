@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for string parameter specifications
+ */
 class DLL_EXPORT ParamSpec_String: public ParamSpec
 {
 public:

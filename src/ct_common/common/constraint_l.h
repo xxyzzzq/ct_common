@@ -19,6 +19,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for logical constraints
+ */
 class DLL_EXPORT Constraint_L : public Constraint {
 public:
   Constraint_L(void);

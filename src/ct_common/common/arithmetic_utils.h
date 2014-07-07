@@ -21,8 +21,6 @@ namespace ct {
 namespace common {
 namespace utils{
 
-const double EPSILON = 1e-6;
-
 inline bool cmp_eq(int a, int b) {
   return a == b;
 }

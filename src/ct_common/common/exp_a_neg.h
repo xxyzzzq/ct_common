@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for arithemetic expression "-" (unary)
+ */
 class DLL_EXPORT Exp_A_Neg : public Exp_A_Unary {
 public:
   Exp_A_Neg(void);

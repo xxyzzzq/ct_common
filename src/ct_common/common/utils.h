@@ -21,6 +21,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Exception class for ct_common
+ */
 class CT_Exception : public std::exception {
 public:
   CT_Exception(void) throw(): std::exception() {}

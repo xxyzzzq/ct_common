@@ -32,7 +32,7 @@ public:
   virtual EvalType_Bool IsMatch(const Assignment &assignment, const std::vector<boost::shared_ptr<ParamSpec> > &paramspecs);
   
 private:
-  Tuple tuple_;
+  Tuple tuple_;  /**< The inner tuple */
 };
 }  // namespace common
 }  // namespace ct

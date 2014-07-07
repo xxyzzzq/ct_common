@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for arithmectic expression "*"
+ */
 class DLL_EXPORT Exp_A_Mult : public Exp_A_Binary {
 public:
   Exp_A_Mult(void);

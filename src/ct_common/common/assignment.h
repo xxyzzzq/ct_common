@@ -21,7 +21,7 @@
 namespace ct {
 namespace common {
 
-// Base class for Tuple and TestCase
+/** Base class for parameter assignments */
 class DLL_EXPORT Assignment
 {
 public:
@@ -30,9 +30,12 @@ public:
   Assignment &operator =(const Assignment &right);
   virtual ~Assignment(void) = 0;
 
+	/** whether the assignment contains a parameter */
   virtual bool IsContainParam(std::size_t pid) const = 0;
+	/** return the value for the given pid */
   virtual std::size_t GetValue(std::size_t pid) const = 0;
-  virtual bool IsSubAssignmentOf(const Assignment &asignment) const = 0;
+	/** check the assignment is a sub-assignment of another one */
+  virtual bool IsSubAssignmentOf(const Assignment &assignment) const = 0;
 };
 }  // namespace common
 }  // namespace ct

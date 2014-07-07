@@ -22,8 +22,10 @@ namespace ct {
 namespace common {
 class ParamSpec;
 
-// class for TestCase
-class DLL_EXPORT TestCase : public Assignment
+/**
+ * The class for test cases
+ */
+class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t>
 {
 public:
   TestCase(void);
@@ -35,15 +37,13 @@ public:
   virtual std::size_t GetValue(std::size_t pid) const;
   virtual bool IsSubAssignmentOf(const Assignment &assignment) const;
   
-  const std::vector<std::size_t> &getValues(void) const { return this->values_; }
-  std::vector<std::size_t> &theValues(void) { return this->values_; }
-  
-  std::size_t size(void) const { return this->values_.size(); }
-  const std::size_t &operator [] (std::size_t index) const { return this->values_[index]; }
-  std::size_t &operator [] (std::size_t index) {return this->values_[index]; }
-  
-private:
-  std::vector<std::size_t> values_;
+	using std::vector<size_t>::assign;
+	using std::vector<size_t>::push_back;
+  using std::vector<size_t>::pop_back;
+	using std::vector<size_t>::resize;
+  using std::vector<size_t>::size;
+  using std::vector<size_t>::empty;
+  using std::vector<size_t>::operator [];
 };
 }  // namespace common
 }  // namespace ct

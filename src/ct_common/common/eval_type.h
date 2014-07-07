@@ -26,7 +26,7 @@ public:
   EvalType &operator = (const EvalType &right);
 
 public:
-  bool is_valid_;  
+  bool is_valid_; /**< Whether the value is valid */
 };
 }
 }

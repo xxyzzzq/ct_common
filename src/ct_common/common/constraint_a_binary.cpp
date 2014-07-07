@@ -47,18 +47,18 @@ EvalType_Bool Constraint_A_Binary::Evaluate( const std::vector<boost::shared_ptr
   EvalType_Bool tmp_return;
   if (this->get_loprd()->get_type() == EAT_INT &&
       this->get_roprd()->get_type() == EAT_INT) {
-    GET_EXP_VAL(EvalType_Int, loprd_val, this->get_loprd(), param_specs, assignment);
-    GET_EXP_VAL(EvalType_Int, roprd_val, this->get_roprd(), param_specs, assignment);
-    tmp_return.is_valid_ = loprd_val.is_valid_ && roprd_val.is_valid_;
+    GET_EXP_VAL(EvalType_Int, val_l, this->get_loprd(), param_specs, assignment);
+    GET_EXP_VAL(EvalType_Int, val_r, this->get_roprd(), param_specs, assignment);
+    tmp_return.is_valid_ = val_l.is_valid_ && val_r.is_valid_;
     if (tmp_return.is_valid_) {
-      tmp_return.value_ = this->evaluate_func_int(loprd_val.value_, roprd_val.value_);
+      tmp_return.value_ = this->evaluate_func_int(val_l.value_, val_r.value_);
     }
   } else {
-    GET_EXP_VAL(EvalType_Int, loprd_val, this->get_loprd(), param_specs, assignment);
-    GET_EXP_VAL(EvalType_Int, roprd_val, this->get_roprd(), param_specs, assignment);
-    tmp_return.is_valid_ = loprd_val.is_valid_ && roprd_val.is_valid_;
+    GET_EXP_VAL(EvalType_Int, val_l, this->get_loprd(), param_specs, assignment);
+    GET_EXP_VAL(EvalType_Int, val_r, this->get_roprd(), param_specs, assignment);
+    tmp_return.is_valid_ = val_l.is_valid_ && val_r.is_valid_;
     if (tmp_return.is_valid_) {
-      tmp_return.value_ = this->evaluate_func_int(loprd_val.value_, roprd_val.value_);
+      tmp_return.value_ = this->evaluate_func_int(val_l.value_, val_r.value_);
     }
   }
   return tmp_return;

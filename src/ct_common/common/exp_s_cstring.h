@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The base class for constant string expressions
+ */
 class DLL_EXPORT Exp_S_CString : public Exp_S_Atom {
 public:
   Exp_S_CString(void);
@@ -31,9 +34,12 @@ public:
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
 
 public:
+	/** Setting the value */
   void set_value(const std::string &value) { this->value_ = value; }
+	/** Setting the value */
   void set_value(const char *value) { this->value_ = value; }
-  
+
+	/** Getting the value */
   const std::string &get_value(void) const { return this->value_; }
   virtual const std::string &get_str_value(void) const;
 

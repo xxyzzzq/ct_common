@@ -19,6 +19,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for binary logical constraints
+ */
 class DLL_EXPORT Constraint_L_Binary : public Constraint_L {
 public:
   Constraint_L_Binary(void);
@@ -29,6 +32,7 @@ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
+	/** Get the corresponding string token */
   virtual std::string get_op_token(void) const = 0;
 
   boost::shared_ptr<const Constraint> get_loprd(void) const { return boost::dynamic_pointer_cast<Constraint>(this->oprds_[0]); }
@@ -41,6 +45,7 @@ public:
                         const Assignment &assignment) const;
 
 private:
+	/** Inner evaluation function */
   virtual EvalType_Bool evaluate_func(EvalType_Bool val_l, EvalType_Bool val_r) const = 0;
 };
 }  // namespace common

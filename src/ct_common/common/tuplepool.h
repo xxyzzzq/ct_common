@@ -19,23 +19,28 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for a set of tuples
+ */
 class TuplePool {
-  public:
-    TuplePool(void);
-    TuplePool(const TuplePool& from);
-    TuplePool& operator = (const TuplePool& right);
-    ~TuplePool(void);
-    
-    bool query(const Tuple &tuple);  // return true if the tuple is in the set
-    void add(const Tuple &tuple);  // add the tuple into the set
-    void remove(const Tuple &tuple);  // put tuple out the set
-    std::size_t size(void) const;
+public:
+	TuplePool(void);
+	TuplePool(const TuplePool& from);
+	TuplePool& operator = (const TuplePool& right);
+	~TuplePool(void);
+
+	/** Whether the tuple is in the set */
+	bool query(const Tuple &tuple);
+	/** Add tuple */
+	void add(const Tuple &tuple);
+	/** Remove tuple */
+	void remove(const Tuple &tuple);
+	std::size_t size(void) const;
         
-    const std::set<Tuple> &getTuples(void) const;
+	const std::set<Tuple> &getTuples(void) const;
     
-  private:
-    std::set<Tuple> tuple_set_;  // tuple in the set <-> tuple in the map
-                                      // the int value has no use
+private:
+	std::set<Tuple> tuple_set_;
 };
 }  // namespace common
 }  // namespace ct

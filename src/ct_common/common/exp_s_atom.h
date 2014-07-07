@@ -20,6 +20,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The base class for atomic string expressions
+ */
 class DLL_EXPORT Exp_S_Atom : public Exp_S {
 public:
   Exp_S_Atom(void);

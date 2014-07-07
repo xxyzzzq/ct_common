@@ -19,6 +19,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for arithemetic expressions w.r.t. a parameter
+ */
 class DLL_EXPORT Exp_A_Param : public Exp_A_Atom {
 public:
   Exp_A_Param(void);
@@ -46,7 +49,7 @@ private:
                                 const Assignment &assignment) const;
 
 private:
-  std::size_t pid_;
+  std::size_t pid_;  /**< The parameter id */
 };
 }  // namespace common
 }  // namespace ct

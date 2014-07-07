@@ -23,11 +23,18 @@
 
 namespace ct {
 namespace common {
+/**
+ * Arithmetic expression types
+ */
 enum eEXP_A_TYPE {
-  EAT_INT,
-  EAT_DOUBLE,
+  EAT_INT, /**< Integer type */
+  EAT_DOUBLE, /**< Floating-point type */
 };
 
+/**
+ * Utility macro for getting the resulting value of some arithmetic expression,
+ * which is converted into the given type
+ */
 #define GET_EXP_VAL(type, identifier, exp, param_specs, assignment) \
   type identifier; \
   switch (exp->get_type()) { \
@@ -41,7 +48,9 @@ enum eEXP_A_TYPE {
     CT_EXCEPTION("unrecognized expression type when evaluating"); \
   }
 
-
+/**
+ * Base class of arithmetic expressions
+ */
 class DLL_EXPORT Exp_A : public Exp {
 public:
   Exp_A(void);
@@ -54,25 +63,28 @@ public:
   static std::string class_name(void);
 
 public:
-  // type check is here!!!
-  EvalType_Double EvaluateDouble(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
-                        const Assignment &assignment) const;
-  EvalType_Int EvaluateInt(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
-                        const Assignment &assignment) const;
+  /** Evaluate the double value of the expression. Checks whether the expression is of double type. */
+  EvalType_Double EvaluateDouble(
+		const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+		const Assignment &assignment) const;
+	/** Evaluate the int value of the expression. Checks whether the expression is of int type. */
+  EvalType_Int EvaluateInt(
+		const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+		const Assignment &assignment) const;
 
   eEXP_A_TYPE get_type(void) const { return this->type_; }
   void set_type(eEXP_A_TYPE type) { this->type_ = type; }
   
 private:
-  // no type checking here, just return the desired value!!!
+  /** Inner evaluating the double value of the expression, no type checking here, just return the desired value. */
   virtual EvalType_Double EvaluateDouble_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
                                       const Assignment &assignment) const = 0;
-
+  /** Inner evaluating the int value of the expression, no type checking here, just return the desired value. */
   virtual EvalType_Int EvaluateInt_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
                                 const Assignment &assignment) const = 0;
 
 protected:
-  eEXP_A_TYPE type_;
+  eEXP_A_TYPE type_;  /**< whether the expression is int or double */
 };
 }  // namespace common
 }  // namespace ct

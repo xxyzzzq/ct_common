@@ -18,7 +18,9 @@
 
 namespace ct {
 namespace common {
-// specification class for integer parameters
+/**
+ * The class for int parameter specifications
+ */
 class DLL_EXPORT ParamSpec_Int : public ParamSpec
 {
 public:
@@ -34,8 +36,8 @@ public:
   static std::string class_name(void);
 
 private:
-  std::vector<int> int_values_;   // The integer values of the parameter
-                                  // should be consistent with string values
+  std::vector<int> int_values_;   /**< The integer values of the parameter.
+																	 * Should be consistent with string values */
 };
 }  // namespace common
 }  // namespace ct

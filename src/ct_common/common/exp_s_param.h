@@ -41,7 +41,7 @@ public:
                                 const Assignment &assignment) const;
 
 private:
-  std::size_t pid_;
+  std::size_t pid_;  /**< The parameter id */
 };
 }  // namespace common
 }  // namespace ct

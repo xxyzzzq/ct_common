@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for string constraint "=="
+ */
 class DLL_EXPORT Constraint_S_EQ : public Constraint_S_Binary {
 public:
   Constraint_S_EQ(void);

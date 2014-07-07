@@ -16,11 +16,11 @@
 using namespace ct::common;
 
 TestCase::TestCase(void)
-    : Assignment(), values_() {
+	: Assignment(), std::vector<std::size_t>() {
 }
 
 TestCase::TestCase(const TestCase &from)
-    : Assignment(from), values_(from.values_) {
+	: Assignment(from), std::vector<std::size_t>() {
 }
 
 TestCase::~TestCase(void) {
@@ -28,12 +28,12 @@ TestCase::~TestCase(void) {
 
 TestCase &TestCase::operator =(const TestCase &right) {
   Assignment::operator =(right);
-  this->values_ = right.values_;
+	std::vector<std::size_t>::operator =(right);
   return *this;
 }
 
 bool TestCase::IsContainParam(std::size_t pid) const {
-  return pid < this->values_.size();
+  return pid < this->size();
 }
 
 std::size_t TestCase::GetValue(std::size_t pid) const {
@@ -44,7 +44,7 @@ std::size_t TestCase::GetValue(std::size_t pid) const {
 }
 
 bool TestCase::IsSubAssignmentOf(const Assignment &assignment) const {
-  for (std::size_t i = 0; i < this->values_.size(); ++i) {
+  for (std::size_t i = 0; i < this->size(); ++i) {
     if (!assignment.IsContainParam(i) || assignment.GetValue(i) != (*this)[i]) {
       return false;
     }

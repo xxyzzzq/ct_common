@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for constraint "&&"
+ */
 class DLL_EXPORT Constraint_L_And : public Constraint_L_Binary {
 public:
   Constraint_L_And(void);

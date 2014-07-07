@@ -25,7 +25,12 @@
 
 namespace ct {
 namespace common {
-// Base constraint class
+/**
+ * Base constraint class
+ * Only for boolean expressions
+ * Actually, a constraint is a boolean-typed expression, but our design seperates
+ * constraints from other expressions to eliminate possible ambiguities
+ */
 class DLL_EXPORT Constraint : public TreeNode {
 public:
   Constraint(void);
@@ -39,8 +44,10 @@ public:
   static std::string class_name(void);
 
 public:
-  virtual EvalType_Bool Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
-                        const Assignment &assignment) const = 0;
+	/** Whether the constraint is satisfied */
+  virtual EvalType_Bool Evaluate(
+		const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+		const Assignment &assignment) const = 0;
 
 };
 }  // namespace common

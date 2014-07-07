@@ -18,7 +18,9 @@
 
 namespace ct {
 namespace common {
-// specification class for double parameters
+/**
+ * The class for double parameter specifications
+ */
 class DLL_EXPORT ParamSpec_Double : public ParamSpec
 {
 public:
@@ -34,8 +36,8 @@ public:
   static std::string class_name(void);
 
 private:
-  std::vector<double> double_values_;  // The double values of the parameter
-                                  // should be consistent with string values
+  std::vector<double> double_values_;  /**< The double values of the parameter.
+																				* Should be consistent with string values */
 };
 }  // namespace common
 }  // namespace ct

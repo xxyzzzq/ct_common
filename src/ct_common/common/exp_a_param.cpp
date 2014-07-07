@@ -39,6 +39,7 @@ Exp_A_Param::~Exp_A_Param(void) {
 EvalType_Double Exp_A_Param::EvaluateDouble_Impl(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
                                         const Assignment &assignment) const {
   EvalType_Double tmp_return;
+	// FIXME: need to reconsider the logic
   if (param_specs[this->pid_]->is_auto()) {
     if (!TYPE_CHECK(param_specs[this->pid_].get(), ParamSpec_Int*) &&
         !TYPE_CHECK(param_specs[this->pid_].get(), ParamSpec_Double*)) {
@@ -65,7 +66,7 @@ EvalType_Double Exp_A_Param::EvaluateDouble_Impl(const std::vector<boost::shared
         return tmp_return;
       }
     }
-    // suppressing error
+    // FIXME: suppressing error
     //CT_EXCEPTION(std::string("Error: encountering unhandled auto value condition for parameter ")+param_specs[this->pid_]->get_param_name());
     return tmp_return;
   }
@@ -89,6 +90,7 @@ EvalType_Double Exp_A_Param::EvaluateDouble_Impl(const std::vector<boost::shared
 EvalType_Int Exp_A_Param::EvaluateInt_Impl(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
                                   const Assignment &assignment) const {
   EvalType_Int tmp_return;
+	// FIXME: need to reconsider the logic
   if (param_specs[this->pid_]->is_auto()) {
     if (!TYPE_CHECK(param_specs[this->pid_].get(), ParamSpec_Int*) &&
         !TYPE_CHECK(param_specs[this->pid_].get(), ParamSpec_Double*)) {
@@ -115,7 +117,7 @@ EvalType_Int Exp_A_Param::EvaluateInt_Impl(const std::vector<boost::shared_ptr<P
         return tmp_return;
       }
     }
-    // suppressing error
+    // FIXME: suppressing error
     //CT_EXCEPTION(std::string("Error: encountering unhandled auto value condition for parameter ")+param_specs[this->pid_]->get_param_name());
     return tmp_return;
   }

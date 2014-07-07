@@ -47,6 +47,7 @@ EvalType_Bool Constraint_L_Param::Evaluate(const std::vector<boost::shared_ptr<P
     CT_EXCEPTION("Error: evaluating a boolean value from a non-boolean parameter!");
     return EvalType_Bool(false, false);
   }
+	// FIXME: need to reconsider the logic here
   if (ptr->is_auto()) {
     for (std::size_t i = 0; i < ptr->get_auto_value_specs().size(); ++i) {
       boost::shared_ptr<Constraint> cond = boost::dynamic_pointer_cast<Constraint>(ptr->auto_value_specs()[i].first);
@@ -68,7 +69,7 @@ EvalType_Bool Constraint_L_Param::Evaluate(const std::vector<boost::shared_ptr<P
         return EvalType_Bool(false, false);
       }
     }
-    // suppressing error
+    // FIXME: suppressing error
     //CT_EXCEPTION(std::string("Error: encountering unhandled auto value condition for parameter ")+ptr->get_param_name());
     return EvalType_Bool(false, false); // no conditions match
   }

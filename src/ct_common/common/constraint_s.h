@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for string constraints, i.e. constraints taking strings as operands
+ */
 class DLL_EXPORT Constraint_S : public Constraint {
 public:
   Constraint_S(void);

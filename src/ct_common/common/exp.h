@@ -22,12 +22,13 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for expression
+ * non-boolean expressions only
+ */
 class DLL_EXPORT Exp : public TreeNode {
 public:
   Exp(void);
-  // This class is not supposed to be copied and assigned
-  // Only reference is copied
-  // Except for terms, whose values are copied
   Exp(const Exp &from);
   Exp &operator = (const Exp &right);
   virtual ~Exp(void) = 0;

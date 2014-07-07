@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for logical constraing "->"
+ */
 class DLL_EXPORT Constraint_L_Imply : public Constraint_L_Binary {
 public:
   Constraint_L_Imply(void);

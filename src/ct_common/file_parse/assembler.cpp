@@ -621,6 +621,7 @@ Constraint *Assembler::asm_constraint_invalid(
     this->reportWarning(std::string("cannot find parameter ") + identifier + " when assembling parameter invalidation constraints, neglecting");
     return 0;
   }
+	// FIXME: the semantics for invalidating auto parameters are not defined
   //if (param_specs[pid]->is_auto()) {
   //  this->reportWarning(std::string("parameter ") + identifier + " cannot be invalidated since it is aux or auto");
   //  return 0;
@@ -648,6 +649,7 @@ std::vector<boost::shared_ptr<Constraint> > Assembler::dump_invalidations(const 
   std::vector<boost::shared_ptr<Constraint> > tmp_return;
   for (std::size_t i = 0; i < param_specs.size(); ++i) {
     std::size_t pid = i;
+		// FIXME: the semantics for invalidating auto parameters are not defined
     //if (param_specs[pid]->is_auto()) {
     //  // cannot proceed with auto parameters
     //  continue;

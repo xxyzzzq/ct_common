@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for logical constraint "||"
+ */
 class DLL_EXPORT Constraint_L_Or : public Constraint_L_Binary {
 public:
   Constraint_L_Or(void);

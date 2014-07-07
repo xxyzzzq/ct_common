@@ -19,6 +19,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for unary logical constraints
+ */
 class DLL_EXPORT Constraint_L_Unary : public Constraint_L {
 public:
   Constraint_L_Unary(void);
@@ -29,6 +32,7 @@ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
+	/** Get the corresponding string token */
   virtual std::string get_op_token(void) const = 0;
 
   boost::shared_ptr<const Constraint> get_oprd(void) const { return boost::dynamic_pointer_cast<Constraint>(this->oprds_[0]); }
@@ -38,7 +42,7 @@ public:
                         const Assignment &assignment) const;
 
 private:
-  // whether the result is valid is controled by the Evaluate funciton
+  /** Inner function for evaluating the value */
   virtual bool evaluate_func(bool val) const = 0;
 
 };

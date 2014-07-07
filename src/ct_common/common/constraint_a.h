@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for arithmetic constraints
+ */
 class DLL_EXPORT Constraint_A : public Constraint {
 public:
   Constraint_A(void);

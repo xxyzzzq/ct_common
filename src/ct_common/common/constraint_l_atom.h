@@ -21,6 +21,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for atom constraints (i.e. no sub-constraints or sub-expressions)
+ */
 class DLL_EXPORT Constraint_L_Atom : public Constraint_L {
 public:
   Constraint_L_Atom(void);

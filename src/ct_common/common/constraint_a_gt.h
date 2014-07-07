@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for constraint ">"
+ */
 class DLL_EXPORT Constraint_A_GT : public Constraint_A_Binary {
 public:
   Constraint_A_GT(void);

@@ -18,6 +18,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * The class for arithemtic expression "%"
+ */
 class DLL_EXPORT Exp_A_Mod : public Exp_A_Binary {
 public:
   Exp_A_Mod(void);

@@ -20,6 +20,9 @@
 
 namespace ct {
 namespace common {
+/**
+ * Base class for binary string constraints
+ */
 class DLL_EXPORT Constraint_S_Binary : public Constraint_S {
 public:
   Constraint_S_Binary(void);
@@ -30,6 +33,7 @@ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
+	/** Get the corresponding string token */
   virtual std::string get_op_token(void) const = 0;
 
   boost::shared_ptr<const Exp_S> get_loprd(void) const { return boost::dynamic_pointer_cast<Exp_S>(this->oprds_[0]); }
@@ -41,6 +45,7 @@ public:
   virtual EvalType_Bool Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
                         const Assignment &assignment) const;
 private:
+	/** Inner function for determining the return value */
   virtual bool evaluate_func(const std::string &val_1, const std::string &val_2) const = 0;
 };
 }  // namespace common
