@@ -568,6 +568,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\ct_common\common\constraint_l_atom.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\ct_common\common\constraint_l_binary.cpp"
 				>
 			</File>
@@ -656,6 +660,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\ct_common\common\exp_a_atom.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\ct_common\common\exp_a_binary.cpp"
 				>
 			</File>
@@ -705,6 +713,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ct_common\common\exp_s.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ct_common\common\exp_s_atom.cpp"
 				>
 			</File>
 			<File
@@ -830,6 +842,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\ct_common\common\constraint_l_atom.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\ct_common\common\constraint_l_binary.h"
 				>
 			</File>
@@ -926,6 +942,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\ct_common\common\exp_a_atom.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\ct_common\common\exp_a_binary.h"
 				>
 			</File>
@@ -975,6 +995,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ct_common\common\exp_s.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ct_common\common\exp_s_atom.h"
 				>
 			</File>
 			<File
