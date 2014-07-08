@@ -1,3 +1,7 @@
+2014-07-08 Zhiqiang Zhang
+	* v1.0.1
+	* Fixed a parser issue for boolean parameters. Now value list for
+	boolean parameters can be omited
 2014-07-07 Zhiqiang ZHang
 	* v1.0.0
 2014-07-07 Zhiqiang Zhang
