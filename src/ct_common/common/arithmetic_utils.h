@@ -72,7 +72,7 @@ inline bool cmp_ne(double a, double b, double prec = 0) {
 inline std::vector<std::size_t> sort_and_uniquefy(const std::vector<std::size_t> &vec) {
   std::vector<std::size_t> tmp_return = vec;
   std::sort(tmp_return.begin(), tmp_return.end());
-  std::unique(tmp_return.begin(), tmp_return.end());
+  tmp_return.erase(std::unique(tmp_return.begin(), tmp_return.end()), tmp_return.end());
   return tmp_return;
 }
 

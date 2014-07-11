@@ -1,8 +1,12 @@
+2014-07-11 Zhiqiang Zhang
+	* v1.0.2
+	* Fixed a bug in function sort_and_uniquefy, which does not resize
+	the resulting vector
 2014-07-08 Zhiqiang Zhang
 	* v1.0.1
 	* Fixed a parser issue for boolean parameters. Now value list for
 	boolean parameters can be omited
-2014-07-07 Zhiqiang ZHang
+2014-07-07 Zhiqiang Zhang
 	* v1.0.0
 2014-07-07 Zhiqiang Zhang
 	* v0.5.3
