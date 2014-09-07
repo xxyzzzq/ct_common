@@ -36,7 +36,9 @@ public:
   virtual bool IsContainParam(std::size_t pid) const;
   virtual std::size_t GetValue(std::size_t pid) const;
   virtual bool IsSubAssignmentOf(const Assignment &assignment) const;
-  
+
+  using std::vector<size_t>::iterator;
+  using std::vector<size_t>::const_iterator;
   using std::vector<size_t>::assign;
   using std::vector<size_t>::push_back;
   using std::vector<size_t>::pop_back;
