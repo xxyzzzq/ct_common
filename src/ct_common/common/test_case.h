@@ -39,6 +39,10 @@ public:
 
   using std::vector<size_t>::iterator;
   using std::vector<size_t>::const_iterator;
+  using std::vector<size_t>::begin;
+  using std::vector<size_t>::rbegin;
+  using std::vector<size_t>::end;
+  using std::vector<size_t>::rend;
   using std::vector<size_t>::assign;
   using std::vector<size_t>::push_back;
   using std::vector<size_t>::pop_back;
