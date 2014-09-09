@@ -27,6 +27,8 @@ class ParamSpec;
  */
 class DLL_EXPORT Tuple : public Assignment, private std::vector<PVPair>
 {
+private:
+  typedef std::vector<PVPair> impl_type;
 public:
   Tuple(void);
   Tuple(const Tuple &from);
@@ -55,13 +57,19 @@ public:
   bool to_the_next_tuple_with_ivld(
       std::vector<boost::shared_ptr<ct::common::ParamSpec> > param_specs);
 
-  using std::vector<PVPair>::assign;
-  using std::vector<PVPair>::push_back;
-  using std::vector<PVPair>::pop_back;
-  using std::vector<PVPair>::resize;
-  using std::vector<PVPair>::size;
-  using std::vector<PVPair>::empty;
-  using std::vector<PVPair>::operator [];
+  using impl_type::iterator;
+  using impl_type::const_iterator;
+  using impl_type::begin;
+  using impl_type::rbegin;
+  using impl_type::end;
+  using impl_type::rend;
+  using impl_type::assign;
+  using impl_type::push_back;
+  using impl_type::pop_back;
+  using impl_type::resize;
+  using impl_type::size;
+  using impl_type::empty;
+  using impl_type::operator [];
   bool operator == (const Tuple &right) const;
   bool operator <(const Tuple &right) const;
 };

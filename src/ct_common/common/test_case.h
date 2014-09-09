@@ -27,6 +27,8 @@ class ParamSpec;
  */
 class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t>
 {
+private:
+  typedef std::vector<size_t> impl_type;
 public:
   TestCase(void);
   TestCase(const TestCase &from);
@@ -37,19 +39,19 @@ public:
   virtual std::size_t GetValue(std::size_t pid) const;
   virtual bool IsSubAssignmentOf(const Assignment &assignment) const;
 
-  using std::vector<size_t>::iterator;
-  using std::vector<size_t>::const_iterator;
-  using std::vector<size_t>::begin;
-  using std::vector<size_t>::rbegin;
-  using std::vector<size_t>::end;
-  using std::vector<size_t>::rend;
-  using std::vector<size_t>::assign;
-  using std::vector<size_t>::push_back;
-  using std::vector<size_t>::pop_back;
-  using std::vector<size_t>::resize;
-  using std::vector<size_t>::size;
-  using std::vector<size_t>::empty;
-  using std::vector<size_t>::operator [];
+  using impl_type::iterator;
+  using impl_type::const_iterator;
+  using impl_type::begin;
+  using impl_type::rbegin;
+  using impl_type::end;
+  using impl_type::rend;
+  using impl_type::assign;
+  using impl_type::push_back;
+  using impl_type::pop_back;
+  using impl_type::resize;
+  using impl_type::size;
+  using impl_type::empty;
+  using impl_type::operator [];
 };
 }  // namespace common
 }  // namespace ct

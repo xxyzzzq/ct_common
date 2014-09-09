@@ -1,3 +1,7 @@
+2014-09-09 Zhiqiang Zhang
+	* v1.0.3
+	* Fixed the copy constructor of TestCase
+	* Added additional funcionalities to Tuple and TestCase
 2014-07-11 Zhiqiang Zhang
 	* v1.0.2
 	* Fixed a bug in function sort_and_uniquefy, which does not resize
