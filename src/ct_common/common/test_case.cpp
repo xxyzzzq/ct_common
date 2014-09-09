@@ -20,7 +20,7 @@ TestCase::TestCase(void)
 }
 
 TestCase::TestCase(const TestCase &from)
-  : Assignment(from), std::vector<std::size_t>() {
+  : Assignment(from), std::vector<std::size_t>(from) {
 }
 
 TestCase::~TestCase(void) {
