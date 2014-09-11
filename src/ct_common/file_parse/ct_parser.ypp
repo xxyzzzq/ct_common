@@ -198,6 +198,25 @@ parameters_line:
     }
     delete $1; delete $2; delete $4;
   }
+  | TKN_PARAM_AUX TKN_TYPE param_list TKN_SEMICOLON
+  {
+    $$ = new std::vector<boost::shared_ptr<ParamSpec> >();
+    for (std::size_t i = 0; i < $3->size(); ++i) {
+      TRY_BEGIN
+      if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
+        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("parameter redefinition of ") + (*$3)[i]).c_str()));
+        continue;
+      }
+      ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], std::vector<boost::shared_ptr<TreeNode> >());
+      if (param_spec == 0) {
+        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("cannot assemble parameter ") + (*$3)[i]).c_str()));
+        continue;
+      }
+      $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
+      TRY_END
+    }
+    delete $2; delete $3;
+  }
   | TKN_PARAM_AUX TKN_TYPE param_list TKN_COLON ps_set TKN_SEMICOLON
   {
     $$ = new std::vector<boost::shared_ptr<ParamSpec> >();

@@ -87,11 +87,11 @@ ParamSpec *Assembler::asm_paramspec(
   tmp_return->set_param_name(identifier);
   std::vector<std::string> str_vals;
   if (TYPE_CHECK(tmp_return, ParamSpec_Bool*)) {
-    if (vals.size() != 2 ||
+    if (vals.size() != 0 && (vals.size() != 2 ||
         !TYPE_CHECK(vals[0].get(), Constraint_L_CBool*) ||
         !TYPE_CHECK(vals[1].get(), Constraint_L_CBool*) ||
         dynamic_cast<Constraint_L_CBool*>(vals[0].get())->get_value() != true ||
-        dynamic_cast<Constraint_L_CBool*>(vals[1].get())->get_value() != false) {
+        dynamic_cast<Constraint_L_CBool*>(vals[1].get())->get_value() != false)) {
       this->reportWarning("values for boolean parameters are neglected, possible format is:");
       this->reportWarning("bool <param>;");
       this->reportWarning("bool <param>: true, false;");
