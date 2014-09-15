@@ -337,7 +337,7 @@ neg_value_d: TKN_SUB value_d {
     $$ = exp;
   };
 
-range: TKN_CORNER_BRACKET_O range_int_val TKN_COMMA range_int_val TKN_CORNER_BRACKET_C
+range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRACKET_C
   {
     TRY_BEGIN
     TYPE_ASSERT($2, Exp_A_CInt*);
@@ -359,15 +359,15 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COMMA range_int_val TKN_CORNER_BRA
     delete $2;
     delete $4;
   }
-  | TKN_CORNER_BRACKET_O range_int_val TKN_COMMA range_int_val TKN_COLON range_int_val TKN_CORNER_BRACKET_C
+  | TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_COLON range_int_val TKN_CORNER_BRACKET_C
   {
     TRY_BEGIN
     TYPE_ASSERT($2, Exp_A_CInt*);
     TYPE_ASSERT($4, Exp_A_CInt*);
     TYPE_ASSERT($6, Exp_A_CInt*);
     int val_begin = dynamic_cast<Exp_A_CInt*>($2)->get_value();
-    int val_end = dynamic_cast<Exp_A_CInt*>($4)->get_value();
-    int step = dynamic_cast<Exp_A_CInt*>($6)->get_value();
+    int val_end = dynamic_cast<Exp_A_CInt*>($6)->get_value();
+    int step = dynamic_cast<Exp_A_CInt*>($4)->get_value();
     $$ = new std::vector<boost::shared_ptr<TreeNode> >();
     int sign = (step > 0) ? 1 : -1;
     for (int val = val_begin; sign * (val - val_end) <= 0; val += step) {

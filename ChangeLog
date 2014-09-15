@@ -1,4 +1,7 @@
 2014-09-11 Zhiqiang Zhang
+	* v1.0.5
+	* Fixed a issue for specifying range values for int parameters
+2014-09-11 Zhiqiang Zhang
 	* v1.0.4
 	* Fixed a parser issue for auxiliaray bool parameters
 2014-09-09 Zhiqiang Zhang
