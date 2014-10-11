@@ -30,13 +30,17 @@ public:
   ~TuplePool(void);
 
   /** Whether the tuple is in the set */
-  bool query(const Tuple &tuple);
+  bool query(const Tuple &tuple) const;
   /** Add tuple */
   void add(const Tuple &tuple);
   /** Remove tuple */
   void remove(const Tuple &tuple);
   std::size_t size(void) const;
-        
+  /** Is empty */
+  bool empty(void) const { return tuple_set_.empty(); }
+  /** clear */
+  void clear(void) { tuple_set_.clear(); }
+  
   const std::set<Tuple> &getTuples(void) const;
     
 private:
