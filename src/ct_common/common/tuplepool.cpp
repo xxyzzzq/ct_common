@@ -31,8 +31,8 @@ TuplePool& TuplePool::operator = (const TuplePool& right) {
 TuplePool::~TuplePool(void) {
 }
 
-bool TuplePool::query(const Tuple &tuple) {
-  std::set<Tuple>::iterator iter = this->tuple_set_.find(tuple);
+bool TuplePool::query(const Tuple &tuple) const {
+  std::set<Tuple>::const_iterator iter = this->tuple_set_.find(tuple);
   if (iter == this->tuple_set_.end()) {
     return false;
   }
