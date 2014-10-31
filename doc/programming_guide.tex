@@ -206,7 +206,7 @@ int main(int argc, char* argv[]) {
       continue;
     }
     do {
-      tuple_pool.add(tuple);
+      tuple_pool.insert(tuple);
     } while (tuple.to_the_next_tuple(sut_model.param_specs_));
   }
   std::cout << "# target combinations: " << tuple_pool.size() << std::endl;
@@ -224,7 +224,7 @@ int main(int argc, char* argv[]) {
       EvalType_Bool result = sut_model.constraints_[i]->Evaluate(
                                     sut_model.param_specs_, tuple);
       if (!result.is_valid_ || !result.value_) {
-        forbidden_tuple_pool.add(tuple);
+        forbidden_tuple_pool.insert(tuple);
       }
     } while (tuple.to_the_next_tuple_with_ivld(sut_model.param_specs_));
   }
