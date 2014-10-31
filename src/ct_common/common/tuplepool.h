@@ -13,7 +13,7 @@
 #ifndef CT_COMMON_TUPLEPOOL_H_
 #define CT_COMMON_TUPLEPOOL_H_
 
-#include <set>
+#include <boost/unordered_set.hpp>
 #include <vector>
 #include <ct_common/common/tuple.h>
 
@@ -22,29 +22,29 @@ namespace common {
 /**
  * The class for a set of tuples
  */
-class TuplePool {
+struct TupleHasher : public std::unary_function<Tuple, std::size_t> {
+  std::size_t operator()(const Tuple &tuple) const;
+};
+
+class TuplePool : private boost::unordered_set<Tuple, TupleHasher> {
+private:
+  typedef boost::unordered_set<Tuple, TupleHasher> impl_type;
 public:
   TuplePool(void);
   TuplePool(const TuplePool& from);
   TuplePool& operator = (const TuplePool& right);
   ~TuplePool(void);
 
-  /** Whether the tuple is in the set */
-  bool query(const Tuple &tuple) const;
-  /** Add tuple */
-  void add(const Tuple &tuple);
-  /** Remove tuple */
-  void remove(const Tuple &tuple);
-  std::size_t size(void) const;
-  /** Is empty */
-  bool empty(void) const { return tuple_set_.empty(); }
-  /** clear */
-  void clear(void) { tuple_set_.clear(); }
-  
-  const std::set<Tuple> &getTuples(void) const;
-    
-private:
-  std::set<Tuple> tuple_set_;
+  using impl_type::begin;
+  using impl_type::end;
+  using impl_type::const_iterator;
+  using impl_type::iterator;
+  using impl_type::size;
+  using impl_type::empty;
+  using impl_type::clear;
+  using impl_type::count;
+  using impl_type::insert;
+  using impl_type::erase;
 };
 }  // namespace common
 }  // namespace ct

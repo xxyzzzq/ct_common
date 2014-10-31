@@ -67,6 +67,7 @@ public:
   using impl_type::push_back;
   using impl_type::pop_back;
   using impl_type::resize;
+  using impl_type::clear;
   using impl_type::size;
   using impl_type::empty;
   using impl_type::operator [];
