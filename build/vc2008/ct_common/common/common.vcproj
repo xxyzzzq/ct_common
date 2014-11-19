@@ -748,6 +748,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\ct_common\common\pretty_printer.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\ct_common\common\pvpair.cpp"
 				>
 			</File>
@@ -1035,6 +1039,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ct_common\common\paramspecs.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ct_common\common\pretty_printer.h"
 				>
 			</File>
 			<File

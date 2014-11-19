@@ -58,6 +58,9 @@ void ct::common::attach_2_raw_strength(const Strength &strength, std::vector<Raw
   if (unique_pid_list.size() < strength.second) {
     CT_EXCEPTION("the parameter list is smaller than the strength");
   }
+  if (strength.second == 0) {
+    return;
+  }
   std::vector<std::size_t> stack(strength.second, 0);
   gen_strengths_core(unique_pid_list, raw_strengths, stack , strength.second, 0);
 }
