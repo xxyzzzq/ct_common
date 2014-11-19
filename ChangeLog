@@ -1,3 +1,7 @@
+2014-11-19 Zhiqiang Zhang
+	* v1.1.1
+	* Fixed zero-check for converting Strength into RawStrength
+	* Added a pretty printer for PVPair, Tuple and TestCase
 2014-10-31 Zhiqiang Zhang
 	* v1.1.0
 	* Changed interface for Tuple and TuplePool

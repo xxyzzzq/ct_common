@@ -63,6 +63,7 @@ nobase_pkginclude_HEADERS = \
   common/paramspec_int.h \
   common/paramspecs.h \
   common/paramspec_string.h \
+	common/pretty_printer.h \
   common/pvpair.h \
   common/seed_constraint.h \
   common/seed.h \
