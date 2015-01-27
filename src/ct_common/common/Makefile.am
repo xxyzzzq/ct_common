@@ -59,6 +59,7 @@ libct_common_a_SOURCES = \
   paramspec_double.cpp \
   paramspec_int.cpp \
   paramspec_string.cpp \
+	pretty_printer.cpp \
   pvpair.cpp \
   seed_constraint.cpp \
   seed.cpp \
