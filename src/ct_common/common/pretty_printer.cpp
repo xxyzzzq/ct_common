@@ -6,7 +6,13 @@
 using namespace ct::common;
 
 std::ostream &operator << (std::ostream &os, const PVPair &pvpair) {
-  os << "<" << pvpair.pid_ << "," << pvpair.vid_ << ">";
+  os << "<" << pvpair.pid_ << ",";
+  if (pvpair.vid_ == VID_BOUND) {
+    os << "-";
+  } else {
+    os << pvpair.vid_;
+  }
+  os << ">";
   return os;
 }
 
@@ -25,7 +31,11 @@ std::ostream &operator << (std::ostream &os, const TestCase &test_case) {
     if (i != 0) {
       os << ",";
     }
-    os << test_case[i];
+    if (test_case[i] == VID_BOUND) {
+      os << "-";
+    } else {
+      os << test_case[i];
+    }
   }
   os << ")";
   return os;
