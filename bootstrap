@@ -1,5 +1,12 @@
-autoheader
-aclocal
-autoconf
-automake --add-missing --copy
+#!/usr/bin/env bash
 
+mkdir -p third_party
+
+if [ ! -d third_party/quex ]; then
+    git init third_party/quex
+    cd third_party/quex && git remote add origin https://github.com/xxyzzzq/quex.git
+    cd ../..
+fi
+
+cd third_party/quex && git fetch --tags origin && git checkout quex-0.64.8 && git clean -xdf
+cd ../..

@@ -28,29 +28,8 @@ src/ct_common/test/example
 *.tar.gz
 *.tgz
 
-# Makefiles
-Makefile
-Makefile.in
-aclocal.m4
-autom4te.cache
-config.h
-config.h.in
-config.log
-config.status
-configure
-depcomp
-install-sh
-missing
-stamp-h1
+# Third party
+third_party
 
-# Compiled files
-.deps
-ct_lexer*
-ct_parser*
-quex
-location.hh
-position.hh
-stack.hh
-doc
-doxygen
-src/ct_common/example/example
+# Build-generated files
+out

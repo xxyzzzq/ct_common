@@ -13,7 +13,7 @@
 header {
 #include <ct_common/file_parse/ct_parser.tab.hpp>
 #include <ct_common/common/utils.h>
-QUEX_NAMESPACE_MAIN_OPEN 
+QUEX_NAMESPACE_MAIN_OPEN
 class DLL_EXPORT ct_lexer;
 class DLL_EXPORT ct_lexer_Token;
 QUEX_NAMESPACE_MAIN_CLOSE
@@ -24,16 +24,16 @@ define {
   P_IDENTIFIER          [_a-zA-Z][_a-zA-Z0-9]*
   P_NUMBER              [0-9]+
   //
-  // String: 
+  // String:
   //    Quote " followe by either \" or something different from " and then a final "
   P_STRING              "\""(\\"\""|[^"])*"\""
-  
+
   exponent_part         [eE][\-+]?[0-9]+
   fractional_constant   ([0-9]*"."[0-9]+)|([0-9]+".")
   floating_constant     (({fractional_constant}{exponent_part}?)|([0-9]+{exponent_part}))[FfLl]?
 
   integer_constant      [0-9]+
-  
+
   EXT_EQ                "=="("["{floating_constant}"]")?
   EXT_NE                "!="("["{floating_constant}"]")?
   EXT_LT                "<"("["{floating_constant}"]")?
