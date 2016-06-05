@@ -56,14 +56,14 @@ using namespace ct::common;
 
 %code {
 #define TRY_BEGIN try {
-#define TRY_END } catch (std::exception &e) { error(yyloc, e.what()); }
+#define TRY_END(loc) } catch (std::exception &e) { error(loc, e.what()); }
 
 static yy::ct_parser::token_type
-  yylex(yy::ct_parser::semantic_type* yylval, 
-        yy::ct_parser::location_type* yylloc,
+  yylex(yy::ct_parser::semantic_type* yylval,
+        yy::ct_parser::location_type* loc,
         ct::lexer &qlex);
 
-static std::string gen_yylloc_str(const yy::ct_parser::location_type &loc, const std::string &s) {
+static std::string gen_loc_str(const yy::ct_parser::location_type &loc, const std::string &s) {
   std::stringstream ss;
   ss << loc.begin.line << ":" << loc.begin.column << "-" << loc.end.line << ":" << loc.end.column << ": " << s;
   return ss.str();
@@ -166,16 +166,16 @@ parameters_line:
     for (std::size_t i = 0; i < $2->size(); ++i) {
       TRY_BEGIN
       if (find_param_id(param_specs, (*$2)[i]) != PID_BOUND) {
-        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("parameter redefinition of ") + (*$2)[i]).c_str()));
+        assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$2)[i]).c_str()));
         continue;
       }
       ParamSpec *param_spec = assembler.asm_paramspec(*$1, (*$2)[i], std::vector<boost::shared_ptr<TreeNode> >());
       if (param_spec == 0) {
-        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("cannot assemble parameter ") + (*$2)[i]).c_str()));
+        assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$2)[i]).c_str()));
         continue;
       }
       $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
-      TRY_END
+      TRY_END(@$)
     }
     delete $1; delete $2;
   }
@@ -185,16 +185,16 @@ parameters_line:
     for (std::size_t i = 0; i < $2->size(); ++i) {
       TRY_BEGIN
       if (find_param_id(param_specs, (*$2)[i]) != PID_BOUND) {
-        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("parameter redefinition of ") + (*$2)[i]).c_str()));
+        assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$2)[i]).c_str()));
         continue;
       }
       ParamSpec *param_spec = assembler.asm_paramspec(*$1, (*$2)[i], *$4);
       if (param_spec == 0) {
-        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("cannot assemble parameter ") + (*$2)[i]).c_str()));
+        assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$2)[i]).c_str()));
         continue;
       }
       $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
-      TRY_END
+      TRY_END(@$)
     }
     delete $1; delete $2; delete $4;
   }
@@ -204,16 +204,16 @@ parameters_line:
     for (std::size_t i = 0; i < $3->size(); ++i) {
       TRY_BEGIN
       if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
-        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("parameter redefinition of ") + (*$3)[i]).c_str()));
+        assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$3)[i]).c_str()));
         continue;
       }
       ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], std::vector<boost::shared_ptr<TreeNode> >());
       if (param_spec == 0) {
-        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("cannot assemble parameter ") + (*$3)[i]).c_str()));
+        assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$3)[i]).c_str()));
         continue;
       }
       $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
-      TRY_END
+      TRY_END(@$)
     }
     delete $2; delete $3;
   }
@@ -223,17 +223,17 @@ parameters_line:
     for (std::size_t i = 0; i < $3->size(); ++i) {
       TRY_BEGIN
       if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
-        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("parameter redefinition of ") + (*$3)[i]).c_str()));
+        assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$3)[i]).c_str()));
         continue;
       }
       ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], *$5);
       if (param_spec == 0) {
-        assembler.reportWarning(gen_yylloc_str(yylloc, (std::string("cannot assemble parameter ") + (*$3)[i]).c_str()));
+        assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$3)[i]).c_str()));
         continue;
       }
       param_spec->set_aux(true);
       $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
-      TRY_END
+      TRY_END(@$)
     }
     delete $2; delete $3; delete $5;
   }
@@ -252,9 +252,9 @@ parameters_line:
       }
       ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], auto_value_cases);
       $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
-      TRY_END
+      TRY_END(@$)
     }
-    TRY_END
+    TRY_END(@$)
     delete $2; delete $3;
   }
   | TKN_PARAM_AUTO TKN_TYPE param_list TKN_COLON TKN_CURLY_BRACKET_O auto_value_cases TKN_CURLY_BRACKET_C TKN_SEMICOLON
@@ -268,9 +268,9 @@ parameters_line:
       }
       ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], *$6);
       $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
-      TRY_END
+      TRY_END(@$)
     }
-    TRY_END
+    TRY_END(@$)
     delete $2; delete $3; delete $6;
   };
 
@@ -296,14 +296,14 @@ auto_value_case: tree_obj TKN_COLON tree_obj {
     TRY_BEGIN
     // no type check, the second tree_obj can be Exp or Constraint
     $$ = new std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> >(boost::shared_ptr<TreeNode>($1), boost::shared_ptr<TreeNode>($3));
-    TRY_END
+    TRY_END(@$)
   }
   | TKN_DEFAULT TKN_COLON tree_obj {
     TRY_BEGIN
     boost::shared_ptr<Constraint_L_CBool> c_true(new Constraint_L_CBool());
     c_true->set_value(true);
     $$ = new std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> >(c_true, boost::shared_ptr<TreeNode>($3));
-    TRY_END
+    TRY_END(@$)
   }
 ;
 
@@ -355,7 +355,7 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
       exp->set_type(EAT_INT);
       $$->push_back(boost::shared_ptr<TreeNode>(exp));
     }
-    TRY_END
+    TRY_END(@$)
     delete $2;
     delete $4;
   }
@@ -379,7 +379,7 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
       exp->set_type(EAT_INT);
       $$->push_back(boost::shared_ptr<TreeNode>(exp));
     }
-    TRY_END
+    TRY_END(@$)
     delete $2;
     delete $4;
     delete $6;
@@ -423,7 +423,7 @@ value_i: TKN_VAL_INTEGER {
 value_b: TKN_VAL_BOOL {
     TRY_BEGIN
     $$ = assembler.asm_constraint_l_cbool(*$1);
-    TRY_END
+    TRY_END(@$)
     delete $1;
 };
 
@@ -433,11 +433,11 @@ strengths_section: TKN_STRENGTHS_START
 // no null-pointer checking
 strengths_line: param_list TKN_COLON TKN_VAL_INTEGER TKN_SEMICOLON
   {
-    TRY_BEGIN assembler.attach_strengths(param_specs, *$1, strengths, atoi($3->c_str())); TRY_END
+    TRY_BEGIN assembler.attach_strengths(param_specs, *$1, strengths, atoi($3->c_str())); TRY_END(@$)
     delete $1; delete $3;
   }
   | TKN_DEFAULT TKN_COLON TKN_VAL_INTEGER TKN_SEMICOLON {
-    TRY_BEGIN assembler.attach_default_strengths(param_specs, strengths, atoi($3->c_str())); TRY_END
+    TRY_BEGIN assembler.attach_default_strengths(param_specs, strengths, atoi($3->c_str())); TRY_END(@$)
     delete $3;
   };
 
@@ -475,14 +475,14 @@ seeds_line: tuple TKN_SEMICOLON {
     TYPE_ASSERT($1, Constraint*);
     Seed *seed = assembler.asm_seed(seeds.size(), (Constraint*)$1);  // $1 is stored in the seed, don't delete!!
     seeds.push_back(boost::shared_ptr<Seed>(seed));
-    TRY_END }
+    TRY_END(@$) }
   | TKN_SEED_STARTER tree_obj TKN_SEMICOLON {
     TRY_BEGIN
     TYPE_ASSERT($2, Constraint*);
     Seed *seed = assembler.asm_seed(seeds.size(), (Constraint*)$2);  // $2 is stored in the seed, don't delete!!
     seed->set_is_starter(true);
     seeds.push_back(boost::shared_ptr<Seed>(seed));
-    TRY_END };
+    TRY_END(@$) };
 
 tuple: tuple_item {
     $$ = new Tuple();
@@ -490,7 +490,7 @@ tuple: tuple_item {
       $$->push_back(*$1);
       delete $1;
     } else {
-      assembler.reportWarning(gen_yylloc_str(yylloc, "neglected bad pvpair"));
+      assembler.reportWarning(gen_loc_str(@$, "neglected bad pvpair"));
     }
   }
   | tuple TKN_COMMA tuple_item {
@@ -499,66 +499,66 @@ tuple: tuple_item {
       $$->push_back(*$3);
       delete $3;
     } else {
-      assembler.reportWarning(gen_yylloc_str(yylloc, "neglected null pvpair"));
+      assembler.reportWarning(gen_loc_str(@$, "neglected null pvpair"));
     }
   };
 
-tuple_item: TKN_IDENTIFIER TKN_COLON ps_value { $$ = 0; TRY_BEGIN $$ = assembler.asm_pvpair(param_specs, *$1, $3); TRY_END delete $1; delete $3; };
+tuple_item: TKN_IDENTIFIER TKN_COLON ps_value { $$ = 0; TRY_BEGIN $$ = assembler.asm_pvpair(param_specs, *$1, $3); TRY_END(@$) delete $1; delete $3; };
 
 constraints_section: TKN_CONSTRAINTS_START
   | constraints_section constraints_line;
 
-constraints_line: tree_obj TKN_SEMICOLON { TRY_BEGIN TYPE_ASSERT($1, Constraint*); Constraint *tmp = dynamic_cast<Constraint *>($1); constraints.push_back(boost::shared_ptr<Constraint>(tmp)); TRY_END }
-  | tree_obj TKN_INVALIDATION TKN_BRACKET_O param_list TKN_BRACKET_C TKN_SEMICOLON { TRY_BEGIN assembler.store_invalidation(param_specs, *$4, boost::shared_ptr<TreeNode>($1)); TRY_END } ;
+constraints_line: tree_obj TKN_SEMICOLON { TRY_BEGIN TYPE_ASSERT($1, Constraint*); Constraint *tmp = dynamic_cast<Constraint *>($1); constraints.push_back(boost::shared_ptr<Constraint>(tmp)); TRY_END(@$) }
+  | tree_obj TKN_INVALIDATION TKN_BRACKET_O param_list TKN_BRACKET_C TKN_SEMICOLON { TRY_BEGIN assembler.store_invalidation(param_specs, *$4, boost::shared_ptr<TreeNode>($1)); TRY_END(@$) } ;
 
 tree_obj:
   // arithmetic & string & boolean relations
-    tree_obj TKN_EQ tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_EQ, *$2); TRY_END delete $2; }
-  | tree_obj TKN_NE tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_NE, *$2); TRY_END delete $2; }
-  | tree_obj TKN_GT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_GT, *$2); TRY_END delete $2; }
-  | tree_obj TKN_GE tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_GE, *$2); TRY_END delete $2; }
-  | tree_obj TKN_LT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_LT, *$2); TRY_END delete $2; }
-  | tree_obj TKN_LE tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_LE, *$2); TRY_END delete $2; }
+    tree_obj TKN_EQ tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_EQ, *$2); TRY_END(@$) delete $2; }
+  | tree_obj TKN_NE tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_NE, *$2); TRY_END(@$) delete $2; }
+  | tree_obj TKN_GT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_GT, *$2); TRY_END(@$) delete $2; }
+  | tree_obj TKN_GE tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_GE, *$2); TRY_END(@$) delete $2; }
+  | tree_obj TKN_LT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_LT, *$2); TRY_END(@$) delete $2; }
+  | tree_obj TKN_LE tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_LE, *$2); TRY_END(@$) delete $2; }
   // logical relations
-  | tree_obj TKN_AND tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_AND); TRY_END }
-  | tree_obj TKN_OR tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_OR); TRY_END }
-  | tree_obj TKN_IMPLY tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_IMPLY); TRY_END }
-  | tree_obj TKN_IFF tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_IFF); TRY_END }
-  | tree_obj TKN_XOR tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_XOR); TRY_END }
-  | TKN_NOT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($2, OP_NOT); TRY_END }
+  | tree_obj TKN_AND tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_AND); TRY_END(@$) }
+  | tree_obj TKN_OR tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_OR); TRY_END(@$) }
+  | tree_obj TKN_IMPLY tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_IMPLY); TRY_END(@$) }
+  | tree_obj TKN_IFF tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_IFF); TRY_END(@$) }
+  | tree_obj TKN_XOR tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_XOR); TRY_END(@$) }
+  | TKN_NOT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($2, OP_NOT); TRY_END(@$) }
   // arithmetic & string operators
-  | tree_obj TKN_ADD tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_ADD); TRY_END }
-  | tree_obj TKN_SUB tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_SUB); TRY_END }
-  | tree_obj TKN_MULT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_MULT); TRY_END }
-  | tree_obj TKN_DIV tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_DIV); TRY_END }
-  | tree_obj TKN_MOD tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_MOD); TRY_END }
-  | TKN_SUB tree_obj %prec TKN_NEG { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($2, OP_NEG); TRY_END }
-  | TKN_ADD tree_obj %prec TKN_UPLUS { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($2, OP_UPLUS); TRY_END }
+  | tree_obj TKN_ADD tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_ADD); TRY_END(@$) }
+  | tree_obj TKN_SUB tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_SUB); TRY_END(@$) }
+  | tree_obj TKN_MULT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_MULT); TRY_END(@$) }
+  | tree_obj TKN_DIV tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_DIV); TRY_END(@$) }
+  | tree_obj TKN_MOD tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_MOD); TRY_END(@$) }
+  | TKN_SUB tree_obj %prec TKN_NEG { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($2, OP_NEG); TRY_END(@$) }
+  | TKN_ADD tree_obj %prec TKN_UPLUS { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($2, OP_UPLUS); TRY_END(@$) }
   // other rules
-  | TKN_IDENTIFIER { $$ = 0; TRY_BEGIN $$ = assembler.asm_param(param_specs, *$1); delete $1; TRY_END }
+  | TKN_IDENTIFIER { $$ = 0; TRY_BEGIN $$ = assembler.asm_param(param_specs, *$1); delete $1; TRY_END(@$) }
   | value { $$ = $1; }
-  | TKN_TYPE TKN_BRACKET_O tree_obj TKN_BRACKET_C { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a_cast($3, *$1); TRY_END delete $1; }
+  | TKN_TYPE TKN_BRACKET_O tree_obj TKN_BRACKET_C { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a_cast($3, *$1); TRY_END(@$) delete $1; }
   | TKN_BRACKET_O tree_obj TKN_BRACKET_C { $$ = $2; }
-  | TKN_INVALID TKN_BRACKET_O TKN_IDENTIFIER TKN_BRACKET_C { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_invalid(param_specs, *$3); TRY_END };
+  | TKN_INVALID TKN_BRACKET_O TKN_IDENTIFIER TKN_BRACKET_C { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_invalid(param_specs, *$3); TRY_END(@$) };
 
 options_section: TKN_OPTIONS_START
   | options_section options_line;
 
-options_line: TKN_IDENTIFIER TKN_COLON value TKN_SEMICOLON { TRY_BEGIN assembler.set_option(*$1,$3); TRY_END delete $1; delete $3; };
+options_line: TKN_IDENTIFIER TKN_COLON value TKN_SEMICOLON { TRY_BEGIN assembler.set_option(*$1,$3); TRY_END(@$) delete $1; delete $3; };
 
 %%
 
 #include <iostream>
 yy::ct_parser::token_type
-yylex(yy::ct_parser::semantic_type *yylval, yy::ct_parser::location_type *yylloc, ct::lexer &qlex) {
+yylex(yy::ct_parser::semantic_type *yylval, yy::ct_parser::location_type *loc, ct::lexer &qlex) {
   ct::lexer_Token* token;
   qlex.receive(&token);
   if (token->get_text().length()>0)
   {
     yylval->str = new std::string((char *)token->get_text().c_str());
-    yylloc->step();
-    yylloc->end.line = token->line_number();
-    yylloc->end.column = token->column_number()+token->get_text().length();
+    loc->step();
+    loc->end.line = token->line_number();
+    loc->end.column = token->column_number()+token->get_text().length();
   }
   return (yy::ct_parser::token_type)token->type_id();
 }
