@@ -6,22 +6,23 @@ function sync_third_party() {
     local name=$1
     local origin=$2
     local version=$3
+    local recursive=$4
 
+    echo "syncing $name"
     if [ ! -d third_party/$name ]; then
-	git init third_party/$name
+	git init -q third_party/$name
 	cd third_party/$name && git remote add origin $origin
 	cd ../..
     fi
 
-    cd third_party/$name && git fetch --tags origin && git checkout $version && git clean -xdf
+    cd third_party/$name && git fetch -q --tags origin && git checkout -q $version && git clean -xdf
     cd ../..
-}
 
-if [ ! -d third_party/quex ]; then
-    git init third_party/quex
-    cd third_party/quex && git remote add origin https://github.com/xxyzzzq/quex.git
-    cd ../..
-fi
+    if [ "$4" == "recursive_bootstrap" ]; then
+	cd third_party/$name && ./bootstrap
+	cd ../..
+    fi
+}
 
 while read line; do
     sync_third_party $line
