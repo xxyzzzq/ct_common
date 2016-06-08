@@ -19,7 +19,7 @@
 #include <map>
 #include <ct_common/common/utils.h>
 #include <ct_common/common/tree_node.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace ct {
 namespace common {
@@ -70,12 +70,12 @@ public:
   static std::string class_name(void);
 
   /** The specification for auto parameters */
-  std::vector<std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> > > &auto_value_specs(void) { return this->auto_value_specs_; }
+  std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > > &auto_value_specs(void) { return this->auto_value_specs_; }
   /** The constant reference for auto parameter specifications */
-  const std::vector<std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> > > &get_auto_value_specs(void) const { return this->auto_value_specs_; }
+  const std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > > &get_auto_value_specs(void) const { return this->auto_value_specs_; }
 
   /** Get the set of all related parameters */
-  void touch_pids(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  void touch_pids(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                   std::set<std::size_t> &pids_to_touch) const;
 
   /** Setting the aux flag */
@@ -103,7 +103,7 @@ private:
   std::string param_name_;  /**< The parameter name */
   std::vector<std::string> string_values_;  /**< The preserved string values */
   std::map<std::string, std::size_t> map_string_values_2_vid_;  /** The map from string values to vids */
-  std::vector<std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> > > auto_value_specs_;  /**< each element contain a condition and an expression,
+  std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > > auto_value_specs_;  /**< each element contain a condition and an expression,
                                                                                                             when some condition is true,
                                                                                                             the value takes the expresion value */
 
@@ -114,7 +114,7 @@ private:
 /**
  * Utility function for finding parameter id from a vector of paramspecs
  */
-std::size_t find_param_id(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+std::size_t find_param_id(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                   const std::string &param_name);
 }  // namespace common
 }  // namespace ct

@@ -15,7 +15,7 @@
 #define CT_COMMON_ASSIGNMENT_H_
 
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ct_common/common/utils.h>
 
 namespace ct {

@@ -30,7 +30,6 @@ TreeNode::~TreeNode(void) {
   s.push(std::pair<TreeNode*, std::size_t>(const_cast<TreeNode*>(this), 0));
   while (!s.empty()) {
     if (s.top().first == 0) {
-      CT_EXCEPTION("empty constraint encountered");      
       s.pop();
       ++s.top().second;
     }
@@ -65,7 +64,7 @@ const std::string &TreeNode::get_str_value(void) const {
   return empty_string;
 }
 
-void TreeNode::touch_pids( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+void TreeNode::touch_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                 std::set<std::size_t> &pids_to_touch) const {
   std::stack<std::pair<const TreeNode*, std::size_t> > s;
   s.push(std::pair<const TreeNode*, std::size_t>(this, 0));
@@ -88,6 +87,6 @@ void TreeNode::touch_pids( const std::vector<boost::shared_ptr<ParamSpec> > &par
   }                                
 }
 
-void TreeNode::inner_touch_leaf_pids( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+void TreeNode::inner_touch_leaf_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       std::set<std::size_t> &pids_to_touch) const {
 }

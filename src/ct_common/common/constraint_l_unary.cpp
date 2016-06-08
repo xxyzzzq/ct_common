@@ -39,14 +39,14 @@ std::string Constraint_L_Unary::class_name(void) {
   return "Constraint_L_Unary";
 }
 
-EvalType_Bool Constraint_L_Unary::Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Bool Constraint_L_Unary::Evaluate(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                   const Assignment &assignment) const {
   EvalType_Bool tmp_return = this->get_oprd()->Evaluate(param_specs, assignment);
   tmp_return.value_ = this->evaluate_func(tmp_return.value_);
   return tmp_return;
 }
 
-void Constraint_L_Unary::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Constraint_L_Unary::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << this->get_op_token();
   this->get_oprd()->dump(os, param_specs);
 }

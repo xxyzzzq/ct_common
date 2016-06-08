@@ -14,7 +14,7 @@
 #define CT_COMMON_TEST_CASE_H_
 
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ct_common/common/utils.h>
 #include <ct_common/common/assignment.h>
 

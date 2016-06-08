@@ -10,6 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include <algorithm>
 #include <ct_common/common/paramspec.h>
 #include <ct_common/common/pvpair.h>
 
@@ -85,7 +86,7 @@ std::size_t ParamSpec::get_width(void) const {
   return std::max(width + 2, std::size_t(5));
 }
 
-std::size_t ct::common::find_param_id(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+std::size_t ct::common::find_param_id(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const std::string &param_name) {
   for (std::size_t i = 0; i < param_specs.size(); ++i) {
     if (param_specs[i]->get_param_name() == param_name) {
@@ -95,7 +96,7 @@ std::size_t ct::common::find_param_id(const std::vector<boost::shared_ptr<ParamS
   return PID_BOUND;
 }
 
-void ParamSpec::touch_pids( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+void ParamSpec::touch_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                             std::set<std::size_t> &pids_to_touch) const {
   for (std::size_t i = 0; i < this->auto_value_specs_.size(); ++i) {
     if (!this->auto_value_specs_[i].first) {

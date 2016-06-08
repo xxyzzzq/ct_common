@@ -27,12 +27,12 @@ public:
   virtual ~Seed_Constraint(void);
   
 public:
-  const boost::shared_ptr<Constraint> &get_constraint(void) const { return this->constraint_; }
-  boost::shared_ptr<Constraint> &the_constraint(void) { return this->constraint_; }
-  virtual EvalType_Bool IsMatch(const Assignment &assignment, const std::vector<boost::shared_ptr<ParamSpec> > &paramspecs);
+  const std::shared_ptr<Constraint> &get_constraint(void) const { return this->constraint_; }
+  std::shared_ptr<Constraint> &the_constraint(void) { return this->constraint_; }
+  virtual EvalType_Bool IsMatch(const Assignment &assignment, const std::vector<std::shared_ptr<ParamSpec> > &paramspecs);
   
 private:
-  boost::shared_ptr<Constraint> constraint_;  /**< The inner constraint */
+  std::shared_ptr<Constraint> constraint_;  /**< The inner constraint */
 };
 }  // namespace common
 }  // namespace ct

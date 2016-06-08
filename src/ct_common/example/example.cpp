@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
   Assembler assembler;
   try {
     ct::lexer lexer(&infile);
-    assembler.setErrLogger(boost::shared_ptr<ErrLogger>(new ErrLogger_Cerr()));
+    assembler.setErrLogger(std::shared_ptr<ErrLogger>(new ErrLogger_Cerr()));
     yy::ct_parser parser(lexer,
                          sut_model.param_specs_,
                          sut_model.strengths_, 

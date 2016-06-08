@@ -70,7 +70,7 @@ std::size_t Assembler::numWarnings(void) const {
 ParamSpec *Assembler::asm_paramspec(
     const std::string &type,
     const std::string &identifier,
-    const std::vector<boost::shared_ptr<TreeNode> > &vals) {
+    const std::vector<std::shared_ptr<TreeNode> > &vals) {
   ParamSpec *tmp_return;
   if (type == "int") {
     tmp_return = new ParamSpec_Int();
@@ -138,7 +138,7 @@ ParamSpec *Assembler::asm_paramspec(
 ParamSpec *Assembler::asm_paramspec(
     const std::string &type,
     const std::string &identifier,
-    const std::vector<std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> > > &auto_value_specs) {
+    const std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > > &auto_value_specs) {
   ParamSpec *tmp_return;
   if (type == "int") {
     tmp_return = new ParamSpec_Int();
@@ -155,7 +155,7 @@ ParamSpec *Assembler::asm_paramspec(
   if (auto_value_specs.size() == 0) {
     this->reportWarning(std::string("the auto value specs for parameter ") + identifier + " is empty");
   } else {
-    boost::shared_ptr<Constraint_L_CBool> last_cond = boost::dynamic_pointer_cast<Constraint_L_CBool>(auto_value_specs.back().first);
+    std::shared_ptr<Constraint_L_CBool> last_cond = std::dynamic_pointer_cast<Constraint_L_CBool>(auto_value_specs.back().first);
     if (!last_cond || last_cond->get_value() != true) {
       this->reportWarning(std::string("the last condition for auto parameter ") + identifier + " is not a constant true. This may cause errors if the specified conditions do not cover all the cases. Consider using a \"default\" or \"true\".");
     }
@@ -193,7 +193,7 @@ void attach_strengths_core(
 }
 
 void Assembler::attach_default_strengths(
-    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     std::vector<ct::common::Strength> &strengths,
     std::size_t strength) {
   // compute the parameter id list
@@ -221,7 +221,7 @@ void Assembler::attach_default_strengths(
 }
 
 void Assembler::attach_strengths(
-    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const std::vector<std::string> &identifiers,
     std::vector<ct::common::Strength> &strengths,
     std::size_t strength) {
@@ -266,7 +266,7 @@ void Assembler::attach_strengths(
 }
 
 PVPair *Assembler::asm_pvpair(
-    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const std::string &identifier,
     const TreeNode *value_exp) {
   if (value_exp == NULL) {
@@ -296,7 +296,7 @@ PVPair *Assembler::asm_pvpair(
   return tmp_return;
 }
 
-TreeNode *Assembler::asm_param(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs, const std::string &identifier) {
+TreeNode *Assembler::asm_param(const std::vector<std::shared_ptr<ParamSpec> > &param_specs, const std::string &identifier) {
   std::size_t pid = find_param_id(param_specs, identifier);
   if (pid == PID_BOUND) {
     CT_EXCEPTION((std::string("parameter ") + identifier + " not found").c_str());
@@ -357,8 +357,8 @@ Constraint_A *Assembler::asm_constraint_a(Exp_A *oprd1, Exp_A *oprd2, eOPERATOR 
     return 0;
     break;
   }
-  boost::shared_ptr<Exp_A> tmp_oprd1(oprd1);
-  boost::shared_ptr<Exp_A> tmp_oprd2(oprd2);
+  std::shared_ptr<Exp_A> tmp_oprd1(oprd1);
+  std::shared_ptr<Exp_A> tmp_oprd2(oprd2);
   tmp_return->set_loprd(tmp_oprd1);
   tmp_return->set_roprd(tmp_oprd2);
   tmp_return->set_precision(precision);
@@ -383,8 +383,8 @@ Constraint_S *Assembler::asm_constraint_s(Exp_S *oprd1, Exp_S *oprd2, eOPERATOR 
     return 0;
     break;
   }
-  boost::shared_ptr<Exp_S> tmp_oprd1(oprd1);
-  boost::shared_ptr<Exp_S> tmp_oprd2(oprd2);
+  std::shared_ptr<Exp_S> tmp_oprd1(oprd1);
+  std::shared_ptr<Exp_S> tmp_oprd2(oprd2);
   tmp_return->set_loprd(tmp_oprd1);
   tmp_return->set_roprd(tmp_oprd2);
   return tmp_return;
@@ -464,8 +464,8 @@ Constraint_L *Assembler::asm_constraint_l(TreeNode *oprd1, TreeNode *oprd2, eOPE
   }
   Constraint *constr1 = dynamic_cast<Constraint *>(oprd1);
   Constraint *constr2 = dynamic_cast<Constraint *>(oprd2);
-  tmp_return->set_loprd(boost::shared_ptr<Constraint>(constr1));
-  tmp_return->set_roprd(boost::shared_ptr<Constraint>(constr2));
+  tmp_return->set_loprd(std::shared_ptr<Constraint>(constr1));
+  tmp_return->set_roprd(std::shared_ptr<Constraint>(constr2));
   return tmp_return;
 }
 
@@ -486,7 +486,7 @@ Constraint_L *Assembler::asm_constraint_l(TreeNode *oprd, eOPERATOR op) {
     break;
   }
   Constraint *constr = dynamic_cast<Constraint *>(oprd);
-  tmp_return->set_oprd(boost::shared_ptr<Constraint>(constr));
+  tmp_return->set_oprd(std::shared_ptr<Constraint>(constr));
   return tmp_return;
 }
 
@@ -537,8 +537,8 @@ Exp_A *Assembler::asm_exp_a(TreeNode *oprd1, TreeNode *oprd2, eOPERATOR op) {
     return 0;
     break;
   }
-  tmp_return->set_loprd(boost::shared_ptr<TreeNode>(c_oprd1));
-  tmp_return->set_roprd(boost::shared_ptr<TreeNode>(c_oprd2));
+  tmp_return->set_loprd(std::shared_ptr<TreeNode>(c_oprd1));
+  tmp_return->set_roprd(std::shared_ptr<TreeNode>(c_oprd2));
   if (c_oprd1->get_type() == EAT_INT &&
       c_oprd2->get_type() == EAT_INT) {
     tmp_return->set_type(EAT_INT);
@@ -562,7 +562,7 @@ Exp_A *Assembler::asm_exp_a(TreeNode *oprd, eOPERATOR op) {
   case OP_NEG: {
     Exp_A_Unary *tmp_return = 0;
     tmp_return = new Exp_A_Neg();
-    tmp_return->set_oprd(boost::shared_ptr<TreeNode>(c_oprd));
+    tmp_return->set_oprd(std::shared_ptr<TreeNode>(c_oprd));
     tmp_return->set_type(c_oprd->get_type());
     return tmp_return;
     break;
@@ -593,7 +593,7 @@ Exp_A *Assembler::asm_exp_a_cast(TreeNode *oprd, const std::string &type) {
       CT_EXCEPTION((std::string("cannot cast to type ") + type).c_str());
       return 0;
     }
-    tmp_return->set_oprd(boost::shared_ptr<TreeNode>(exp));
+    tmp_return->set_oprd(std::shared_ptr<TreeNode>(exp));
     return tmp_return;
   } else if (TYPE_CHECK(oprd, Constraint*)) {
     Constraint *constr = dynamic_cast<Constraint *>(oprd);
@@ -606,7 +606,7 @@ Exp_A *Assembler::asm_exp_a_cast(TreeNode *oprd, const std::string &type) {
       CT_EXCEPTION((std::string("cannot cast to type ") + type).c_str());
       return 0;
     }
-    tmp_return->set_oprd(boost::shared_ptr<TreeNode>(constr));
+    tmp_return->set_oprd(std::shared_ptr<TreeNode>(constr));
     return tmp_return;    
   }
   CT_EXCEPTION((std::string("cannot cast from ") + oprd->get_class_name()).c_str());
@@ -614,7 +614,7 @@ Exp_A *Assembler::asm_exp_a_cast(TreeNode *oprd, const std::string &type) {
 }
 
 Constraint *Assembler::asm_constraint_invalid(
-    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const std::string &identifier) {
   std::size_t pid = find_param_id(param_specs, identifier);
   if (pid == PID_BOUND) {
@@ -632,9 +632,9 @@ Constraint *Assembler::asm_constraint_invalid(
 }
 
 void Assembler::store_invalidation(
-    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const std::vector<std::string> &identifiers,
-    const boost::shared_ptr<TreeNode> &precond) {
+    const std::shared_ptr<TreeNode> &precond) {
   for (std::size_t i = 0; i < identifiers.size(); ++i) {
     std::size_t pid = find_param_id(param_specs, identifiers[i]);
     if (pid == PID_BOUND) {
@@ -645,8 +645,8 @@ void Assembler::store_invalidation(
   }
 }
 
-std::vector<boost::shared_ptr<Constraint> > Assembler::dump_invalidations(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) {
-  std::vector<boost::shared_ptr<Constraint> > tmp_return;
+std::vector<std::shared_ptr<Constraint> > Assembler::dump_invalidations(const std::vector<std::shared_ptr<ParamSpec> > &param_specs) {
+  std::vector<std::shared_ptr<Constraint> > tmp_return;
   for (std::size_t i = 0; i < param_specs.size(); ++i) {
     std::size_t pid = i;
     // FIXME: the semantics for invalidating auto parameters are not defined
@@ -654,18 +654,18 @@ std::vector<boost::shared_ptr<Constraint> > Assembler::dump_invalidations(const 
     //  // cannot proceed with auto parameters
     //  continue;
     //}
-    const std::vector<boost::shared_ptr<TreeNode> > &constrs = this->stored_invalidations_[pid];
-    boost::shared_ptr<Constraint_L_IVLD> constr_ivld(new Constraint_L_IVLD());
+    const std::vector<std::shared_ptr<TreeNode> > &constrs = this->stored_invalidations_[pid];
+    std::shared_ptr<Constraint_L_IVLD> constr_ivld(new Constraint_L_IVLD());
     constr_ivld->set_pid(pid);
     {
       if (constrs.size() == 0) {
-        boost::shared_ptr<Constraint_L_Not> constr_nivld(new Constraint_L_Not());
+        std::shared_ptr<Constraint_L_Not> constr_nivld(new Constraint_L_Not());
         constr_nivld->set_oprd(constr_ivld);
         tmp_return.push_back(constr_nivld);
       } else {
-        boost::shared_ptr<Constraint> constr_conjunction;
+        std::shared_ptr<Constraint> constr_conjunction;
         for (std::size_t i = 0; i < constrs.size(); ++i) {
-          boost::shared_ptr<Constraint> this_constr = boost::dynamic_pointer_cast<Constraint>(constrs[i]);
+          std::shared_ptr<Constraint> this_constr = std::dynamic_pointer_cast<Constraint>(constrs[i]);
           if (!constrs[i]) {
             std::stringstream ss;
             ss << "condition #" << i+1 << " for invalidating parameter " << param_specs[pid]->get_param_name() << " is not a condition";
@@ -675,13 +675,13 @@ std::vector<boost::shared_ptr<Constraint> > Assembler::dump_invalidations(const 
           if (i == 0) {
             constr_conjunction = this_constr;
           } else {
-            boost::shared_ptr<Constraint_L_Or> constr_or(new Constraint_L_Or());
+            std::shared_ptr<Constraint_L_Or> constr_or(new Constraint_L_Or());
             constr_or->set_loprd(constr_conjunction);
             constr_or->set_roprd(this_constr);
             constr_conjunction = constr_or;
           }
         }
-        boost::shared_ptr<Constraint_L_Iff> constr_to_add(new Constraint_L_Iff());
+        std::shared_ptr<Constraint_L_Iff> constr_to_add(new Constraint_L_Iff());
         constr_to_add->set_loprd(constr_conjunction);
         constr_to_add->set_roprd(constr_ivld);
         tmp_return.push_back(constr_to_add);

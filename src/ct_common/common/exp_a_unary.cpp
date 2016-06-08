@@ -39,7 +39,7 @@ std::string Exp_A_Unary::class_name(void) {
   return "Exp_A_Unary";
 }
 
-EvalType_Double Exp_A_Unary::EvaluateDouble_Impl(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Double Exp_A_Unary::EvaluateDouble_Impl(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       const Assignment &assignment) const {
   GET_EXP_VAL(EvalType_Double, oprd_val, this->get_oprd(), param_specs, assignment);
   if (oprd_val.is_valid_) {
@@ -48,7 +48,7 @@ EvalType_Double Exp_A_Unary::EvaluateDouble_Impl(const std::vector<boost::shared
   return oprd_val;
 }
 
-EvalType_Int Exp_A_Unary::EvaluateInt_Impl(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Int Exp_A_Unary::EvaluateInt_Impl(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                 const Assignment &assignment) const {
   GET_EXP_VAL(EvalType_Int, oprd_val, this->get_oprd(), param_specs, assignment);
   if (oprd_val.is_valid_) {
@@ -57,7 +57,7 @@ EvalType_Int Exp_A_Unary::EvaluateInt_Impl(const std::vector<boost::shared_ptr<P
   return oprd_val;
 }
 
-void Exp_A_Unary::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Exp_A_Unary::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << this->get_op_token();
   this->get_oprd()->dump(os, param_specs);
 }

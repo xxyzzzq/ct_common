@@ -48,11 +48,11 @@ const std::string &Constraint_L_CBool::get_str_value(void) const {
   return str_false;
 }
 
-EvalType_Bool Constraint_L_CBool::Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Bool Constraint_L_CBool::Evaluate(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                   const Assignment &assignment) const {
   return EvalType_Bool(this->value_, true);
 }
 
-void Constraint_L_CBool::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Constraint_L_CBool::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << this->get_str_value();
 }

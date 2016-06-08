@@ -17,7 +17,7 @@
 #include <ct_common/common/utils.h>
 #include <ct_common/common/exp.h>
 #include <ct_common/common/paramspec.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ct_common/common/eval_type_string.h>
 
 namespace ct {
@@ -38,7 +38,7 @@ public:
 
 public:
   /** Function for evaluating the expression */
-  virtual EvalType_String Evaluate( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_String Evaluate( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                     const Assignment &assignment) const = 0;
 };
 }  // namespace common

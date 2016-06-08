@@ -15,16 +15,25 @@
 
 using namespace ct::common;
 
+namespace {
+  template <class T>
+  inline void hash_combine(std::size_t& seed, const T& v)
+  {
+    std::hash<T> hasher;
+    seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+  }
+}
+
 TuplePool::TuplePool(void)
-    : boost::unordered_set<Tuple, TupleHasher>() {
+    : std::unordered_set<Tuple, TupleHasher>() {
 }
 
 TuplePool::TuplePool(const TuplePool& from)
-    : boost::unordered_set<Tuple, TupleHasher>(from) {
+    : std::unordered_set<Tuple, TupleHasher>(from) {
 }
 
 TuplePool& TuplePool::operator = (const TuplePool& right) {
-  boost::unordered_set<Tuple, TupleHasher>::operator = (right);
+  std::unordered_set<Tuple, TupleHasher>::operator = (right);
   return *this;
 }
 
@@ -34,8 +43,8 @@ TuplePool::~TuplePool(void) {
 std::size_t TupleHasher::operator ()(const ct::common::Tuple &tuple) const {
   std::size_t result = 0;
   for (Tuple::const_iterator it = tuple.begin(), ie = tuple.end(); it != ie; ++it) {
-    boost::hash_combine(result, it->pid_);
-    boost::hash_combine(result, it->vid_);
+    hash_combine(result, it->pid_);
+    hash_combine(result, it->vid_);
   }
   return result;
 }

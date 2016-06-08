@@ -40,9 +40,9 @@ std::string Constraint_L_Param::class_name(void) {
   return "Constraint_L_Param";
 }
 
-EvalType_Bool Constraint_L_Param::Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Bool Constraint_L_Param::Evaluate(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                   const Assignment &assignment) const {
-  boost::shared_ptr<ParamSpec_Bool> ptr = boost::dynamic_pointer_cast<ParamSpec_Bool>(param_specs[this->pid_]);
+  std::shared_ptr<ParamSpec_Bool> ptr = std::dynamic_pointer_cast<ParamSpec_Bool>(param_specs[this->pid_]);
   if (!ptr.get()) {
     CT_EXCEPTION("Error: evaluating a boolean value from a non-boolean parameter!");
     return EvalType_Bool(false, false);
@@ -50,13 +50,13 @@ EvalType_Bool Constraint_L_Param::Evaluate(const std::vector<boost::shared_ptr<P
   // FIXME: need to reconsider the logic here
   if (ptr->is_auto()) {
     for (std::size_t i = 0; i < ptr->get_auto_value_specs().size(); ++i) {
-      boost::shared_ptr<Constraint> cond = boost::dynamic_pointer_cast<Constraint>(ptr->auto_value_specs()[i].first);
+      std::shared_ptr<Constraint> cond = std::dynamic_pointer_cast<Constraint>(ptr->auto_value_specs()[i].first);
       if (cond) {
         EvalType_Bool cond_value;
         cond_value = cond->Evaluate(param_specs, assignment);
         if (cond_value.is_valid_ && cond_value.value_) {
           // condition met, taking the value
-          boost::shared_ptr<Constraint> val_exp = boost::dynamic_pointer_cast<Constraint>(ptr->auto_value_specs()[i].second);
+          std::shared_ptr<Constraint> val_exp = std::dynamic_pointer_cast<Constraint>(ptr->auto_value_specs()[i].second);
           if (val_exp) {
             return val_exp->Evaluate(param_specs, assignment);
           } else {
@@ -82,7 +82,7 @@ EvalType_Bool Constraint_L_Param::Evaluate(const std::vector<boost::shared_ptr<P
   return tmp_return;
 }
 
-void Constraint_L_Param::inner_touch_leaf_pids( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+void Constraint_L_Param::inner_touch_leaf_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                                 std::set<std::size_t> &pids_to_touch) const {
   if (!param_specs[this->pid_]) {
     CT_EXCEPTION("encountered invalid parameter spec");
@@ -95,6 +95,6 @@ void Constraint_L_Param::inner_touch_leaf_pids( const std::vector<boost::shared_
   }
 }
 
-void Constraint_L_Param::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Constraint_L_Param::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << param_specs[this->pid_]->get_param_name();
 }

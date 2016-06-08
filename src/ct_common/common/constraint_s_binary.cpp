@@ -42,7 +42,7 @@ std::string Constraint_S_Binary::class_name(void) {
   return "Constraint_S_Binary";
 }
 
-EvalType_Bool Constraint_S_Binary::Evaluate( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Bool Constraint_S_Binary::Evaluate( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                 const Assignment &assignment) const {
   EvalType_Bool tmp_return;
   EvalType_String val_l = this->get_loprd()->Evaluate(param_specs, assignment);
@@ -54,7 +54,7 @@ EvalType_Bool Constraint_S_Binary::Evaluate( const std::vector<boost::shared_ptr
   return tmp_return;
 }
 
-void Constraint_S_Binary::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Constraint_S_Binary::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << "(";
   this->get_loprd()->dump(os, param_specs);
   os << this->get_op_token();

@@ -36,10 +36,10 @@ public:
 
   /** get the string value: true/false */
   virtual const std::string &get_str_value(void) const;
-  virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
 
 public:
-  virtual EvalType_Bool Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_Bool Evaluate(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                         const Assignment &assignment) const;
 
 private:

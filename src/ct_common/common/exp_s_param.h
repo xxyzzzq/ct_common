@@ -28,16 +28,16 @@ public:
 public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
-  virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
 
-  virtual void inner_touch_leaf_pids( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual void inner_touch_leaf_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       std::set<std::size_t> &pids_to_touch) const;
 
 public:
   void set_pid(std::size_t pid) { this->pid_ = pid; }
   std::size_t get_pid(void) const { return this->pid_; }
 
-  virtual EvalType_String Evaluate( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_String Evaluate( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                 const Assignment &assignment) const;
 
 private:

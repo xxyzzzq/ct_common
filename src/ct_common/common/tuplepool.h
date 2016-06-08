@@ -14,7 +14,7 @@
 #define CT_COMMON_TUPLEPOOL_H_
 
 #include <vector>
-#include <boost/unordered_set.hpp>
+#include <unordered_set>
 #include <ct_common/common/utils.h>
 #include <ct_common/common/tuple.h>
 
@@ -27,9 +27,9 @@ struct DLL_EXPORT TupleHasher : public std::unary_function<Tuple, std::size_t> {
   std::size_t operator()(const Tuple &tuple) const;
 };
 
-class DLL_EXPORT TuplePool : private boost::unordered_set<Tuple, TupleHasher> {
+class DLL_EXPORT TuplePool : private std::unordered_set<Tuple, TupleHasher> {
 private:
-  typedef boost::unordered_set<Tuple, TupleHasher> impl_type;
+  typedef std::unordered_set<Tuple, TupleHasher> impl_type;
 public:
   TuplePool(void);
   TuplePool(const TuplePool& from);

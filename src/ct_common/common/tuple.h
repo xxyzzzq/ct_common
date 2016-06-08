@@ -14,7 +14,7 @@
 #define CT_COMMON_TUPLE_H_
 
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ct_common/common/utils.h>
 #include <ct_common/common/pvpair.h>
 #include <ct_common/common/assignment.h>
@@ -52,10 +52,10 @@ public:
 
   /** For iterating tuples. Go to the next tuple, returns false if overflows */
   bool to_the_next_tuple(
-      std::vector<boost::shared_ptr<ct::common::ParamSpec> > param_specs);
+      std::vector<std::shared_ptr<ct::common::ParamSpec> > param_specs);
   /** For iterating tuples. Go to the next tuple (considering invalid values), returns false if overflows */
   bool to_the_next_tuple_with_ivld(
-      std::vector<boost::shared_ptr<ct::common::ParamSpec> > param_specs);
+      std::vector<std::shared_ptr<ct::common::ParamSpec> > param_specs);
 
   using impl_type::iterator;
   using impl_type::const_iterator;
