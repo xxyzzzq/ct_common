@@ -30,6 +30,6 @@ Seed_Constraint &Seed_Constraint::operator =(const ct::common::Seed_Constraint &
   return *this;
 }
 
-EvalType_Bool Seed_Constraint::IsMatch(const Assignment &assignment, const std::vector<boost::shared_ptr<ParamSpec> > &paramspecs) {
+EvalType_Bool Seed_Constraint::IsMatch(const Assignment &assignment, const std::vector<std::shared_ptr<ParamSpec> > &paramspecs) {
   return this->constraint_->Evaluate(paramspecs, assignment);
 }

@@ -16,7 +16,7 @@
 #include <ct_common/common/utils.h>
 #include <ct_common/common/exp.h>
 #include <ct_common/common/paramspec.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ct_common/common/eval_type_int.h>
 #include <ct_common/common/eval_type_double.h>
 #include <ct_common/common/assignment.h>
@@ -65,11 +65,11 @@ public:
 public:
   /** Evaluate the double value of the expression. Checks whether the expression is of double type. */
   EvalType_Double EvaluateDouble(
-    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const Assignment &assignment) const;
   /** Evaluate the int value of the expression. Checks whether the expression is of int type. */
   EvalType_Int EvaluateInt(
-    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const Assignment &assignment) const;
 
   eEXP_A_TYPE get_type(void) const { return this->type_; }
@@ -77,10 +77,10 @@ public:
   
 private:
   /** Inner evaluating the double value of the expression, no type checking here, just return the desired value. */
-  virtual EvalType_Double EvaluateDouble_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_Double EvaluateDouble_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       const Assignment &assignment) const = 0;
   /** Inner evaluating the int value of the expression, no type checking here, just return the desired value. */
-  virtual EvalType_Int EvaluateInt_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_Int EvaluateInt_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                 const Assignment &assignment) const = 0;
 
 protected:

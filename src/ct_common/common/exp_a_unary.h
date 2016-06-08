@@ -13,7 +13,7 @@
 #ifndef CT_COMMON_EXP_A_UNARY_H_
 #define CT_COMMON_EXP_A_UNARY_H_
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ct_common/common/utils.h>
 #include <ct_common/common/exp_a.h>
 
@@ -32,20 +32,20 @@ public:
 public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
-  virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
   /** Get the corresponding string token */
   virtual std::string get_op_token(void) const = 0;
 
 public:
-  boost::shared_ptr<const Exp_A> get_oprd(void) const { return boost::dynamic_pointer_cast<Exp_A>(this->oprds_[0]); }
+  std::shared_ptr<const Exp_A> get_oprd(void) const { return std::dynamic_pointer_cast<Exp_A>(this->oprds_[0]); }
 
-  void set_oprd(const boost::shared_ptr<TreeNode> &oprd) { this->oprds_[0] = oprd; }
+  void set_oprd(const std::shared_ptr<TreeNode> &oprd) { this->oprds_[0] = oprd; }
 
 private:
-  virtual EvalType_Double EvaluateDouble_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_Double EvaluateDouble_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       const Assignment &assignment) const;
 
-  virtual EvalType_Int EvaluateInt_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_Int EvaluateInt_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                 const Assignment &assignment) const;
 
 private:

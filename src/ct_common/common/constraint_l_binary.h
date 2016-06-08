@@ -13,7 +13,7 @@
 #ifndef CT_COMMON_CONSTRAINT_L_BINARY_H_
 #define CT_COMMON_CONSTRAINT_L_BINARY_H_
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ct_common/common/utils.h>
 #include <ct_common/common/constraint_l.h>
 
@@ -31,17 +31,17 @@ public:
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
-  virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
   /** Get the corresponding string token */
   virtual std::string get_op_token(void) const = 0;
 
-  boost::shared_ptr<const Constraint> get_loprd(void) const { return boost::dynamic_pointer_cast<Constraint>(this->oprds_[0]); }
-  boost::shared_ptr<const Constraint> get_roprd(void) const { return boost::dynamic_pointer_cast<Constraint>(this->oprds_[1]); }
+  std::shared_ptr<const Constraint> get_loprd(void) const { return std::dynamic_pointer_cast<Constraint>(this->oprds_[0]); }
+  std::shared_ptr<const Constraint> get_roprd(void) const { return std::dynamic_pointer_cast<Constraint>(this->oprds_[1]); }
 
-  void set_loprd(const boost::shared_ptr<TreeNode> &loprd) { this->oprds_[0] = loprd; }
-  void set_roprd(const boost::shared_ptr<TreeNode> &roprd) { this->oprds_[1] = roprd; }
+  void set_loprd(const std::shared_ptr<TreeNode> &loprd) { this->oprds_[0] = loprd; }
+  void set_roprd(const std::shared_ptr<TreeNode> &roprd) { this->oprds_[1] = roprd; }
 
-  virtual EvalType_Bool Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_Bool Evaluate(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                         const Assignment &assignment) const;
 
 private:

@@ -42,7 +42,7 @@ std::string Constraint_A_Binary::class_name(void) {
   return "Constraint_A_Binary";
 }
 
-EvalType_Bool Constraint_A_Binary::Evaluate( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Bool Constraint_A_Binary::Evaluate( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                 const Assignment &assignment) const {
   EvalType_Bool tmp_return;
   if (this->get_loprd()->get_type() == EAT_INT &&
@@ -64,7 +64,7 @@ EvalType_Bool Constraint_A_Binary::Evaluate( const std::vector<boost::shared_ptr
   return tmp_return;
 }
 
-void Constraint_A_Binary::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Constraint_A_Binary::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << "(";
   this->get_loprd()->dump(os, param_specs);
   os << this->get_op_token();

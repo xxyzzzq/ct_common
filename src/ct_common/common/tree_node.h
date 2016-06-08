@@ -16,7 +16,7 @@
 #include <vector>
 #include <set>
 #include <iostream>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ct_common/common/utils.h>
 
 namespace ct {
@@ -46,24 +46,24 @@ public:
    * Get all related parameters EXCEPT for auto parameters
    * param_specs are used to determine related pids of auto parameters
    */
-  void touch_pids(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  void touch_pids(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                   std::set<std::size_t> &pids_to_touch) const;
 
   /** Inner function to get all related parameters */ 
-  virtual void inner_touch_leaf_pids( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual void inner_touch_leaf_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       std::set<std::size_t> &pids_to_touch) const;
 
   /** Get the operands */
-  const std::vector<boost::shared_ptr<TreeNode> > &get_oprds() const { return this->oprds_; }
+  const std::vector<std::shared_ptr<TreeNode> > &get_oprds() const { return this->oprds_; }
 
   /** Setting the string value (preserve a copy of the original string representation) */
   virtual const std::string &get_str_value(void) const;
 
   /** Print the tree node to a given output stream */
-  virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const = 0;
+  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const = 0;
 
 protected:
-  std::vector<boost::shared_ptr<TreeNode> > oprds_;  /**< The operands */
+  std::vector<std::shared_ptr<TreeNode> > oprds_;  /**< The operands */
 };
 }  // namespace common
 }  // namespace ct

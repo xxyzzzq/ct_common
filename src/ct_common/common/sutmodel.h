@@ -19,7 +19,7 @@
 #include <ct_common/common/seed.h>
 #include <ct_common/common/constraint.h>
 #include <ct_common/common/strength.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace ct {
 namespace common {
@@ -27,10 +27,10 @@ namespace common {
  * The class for SUT models
  */
 struct SUTModel {
-  std::vector<boost::shared_ptr<ParamSpec> > param_specs_;  /**< The parameter specifications */
+  std::vector<std::shared_ptr<ParamSpec> > param_specs_;  /**< The parameter specifications */
   std::vector<Strength> strengths_;  /**< The strengths */
-  std::vector<boost::shared_ptr<Seed> > seeds_;  /**< The seeds */
-  std::vector<boost::shared_ptr<Constraint> > constraints_;  /**< The constraints */
+  std::vector<std::shared_ptr<Seed> > seeds_;  /**< The seeds */
+  std::vector<std::shared_ptr<Constraint> > constraints_;  /**< The constraints */
 };
 }  // namespace common
 }  // namespace ct

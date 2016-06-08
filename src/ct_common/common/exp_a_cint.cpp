@@ -40,12 +40,12 @@ void Exp_A_CInt::set_value(double value) {
   this->value_ = (int)value;
 }
 
-EvalType_Double Exp_A_CInt::EvaluateDouble_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Double Exp_A_CInt::EvaluateDouble_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                         const Assignment &assignment) const {
   return EvalType_Double(this->value_, true);
 }
 
-EvalType_Int Exp_A_CInt::EvaluateInt_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Int Exp_A_CInt::EvaluateInt_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                   const Assignment &assignment) const {
   return EvalType_Int(this->value_, true);
 }
@@ -66,6 +66,6 @@ const std::string &Exp_A_CInt::get_str_value(void) const {
   return this->str_value_;
 }
 
-void Exp_A_CInt::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Exp_A_CInt::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << this->get_str_value();
 }

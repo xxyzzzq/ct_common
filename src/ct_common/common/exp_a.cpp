@@ -39,7 +39,7 @@ std::string Exp_A::class_name(void) {
   return "Exp_A";
 }
 
-EvalType_Double Exp_A::EvaluateDouble( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Double Exp_A::EvaluateDouble( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                               const Assignment &assignment) const {
   if (this->type_ != EAT_DOUBLE) {
     CT_EXCEPTION("warning: implicit casting non-double to double");
@@ -47,7 +47,7 @@ EvalType_Double Exp_A::EvaluateDouble( const std::vector<boost::shared_ptr<Param
   return this->EvaluateDouble_Impl(param_specs, assignment);
 }
 
-EvalType_Int Exp_A::EvaluateInt( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Int Exp_A::EvaluateInt( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                         const Assignment &assignment) const {
   if (this->type_ != EAT_INT) {
     CT_EXCEPTION("warning: implicit casting non-int to int");

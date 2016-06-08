@@ -35,7 +35,7 @@ public:
 
 public:
   /** Whether a given assignment matches the seed */
-  virtual EvalType_Bool IsMatch(const Assignment &assignment, const std::vector<boost::shared_ptr<ParamSpec> > &paramspecs) = 0;
+  virtual EvalType_Bool IsMatch(const Assignment &assignment, const std::vector<std::shared_ptr<ParamSpec> > &paramspecs) = 0;
   /** Getting the seed id */
   std::size_t get_id(void) const { return this->id_; }
   /** Setting the seed id */

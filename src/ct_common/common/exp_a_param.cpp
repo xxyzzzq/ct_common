@@ -36,7 +36,7 @@ Exp_A_Param &Exp_A_Param::operator = (const Exp_A_Param &right) {
 Exp_A_Param::~Exp_A_Param(void) {
 }
 
-EvalType_Double Exp_A_Param::EvaluateDouble_Impl(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Double Exp_A_Param::EvaluateDouble_Impl(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                         const Assignment &assignment) const {
   EvalType_Double tmp_return;
   // FIXME: need to reconsider the logic
@@ -47,13 +47,13 @@ EvalType_Double Exp_A_Param::EvaluateDouble_Impl(const std::vector<boost::shared
       return tmp_return;
     }
     for (std::size_t i = 0; i < param_specs[this->pid_]->get_auto_value_specs().size(); ++i) {
-      boost::shared_ptr<Constraint> cond = boost::dynamic_pointer_cast<Constraint>(param_specs[this->pid_]->auto_value_specs()[i].first);
+      std::shared_ptr<Constraint> cond = std::dynamic_pointer_cast<Constraint>(param_specs[this->pid_]->auto_value_specs()[i].first);
       if (cond) {
         EvalType_Bool cond_value;
         cond_value = cond->Evaluate(param_specs, assignment);
         if (cond_value.is_valid_ && cond_value.value_) {
           // condition met, taking the value
-          boost::shared_ptr<Exp_A> val_exp = boost::dynamic_pointer_cast<Exp_A>(param_specs[this->pid_]->auto_value_specs()[i].second);
+          std::shared_ptr<Exp_A> val_exp = std::dynamic_pointer_cast<Exp_A>(param_specs[this->pid_]->auto_value_specs()[i].second);
           if (val_exp) {
             return val_exp->EvaluateDouble(param_specs, assignment);
           } else {
@@ -87,7 +87,7 @@ EvalType_Double Exp_A_Param::EvaluateDouble_Impl(const std::vector<boost::shared
   return tmp_return;
 }
 
-EvalType_Int Exp_A_Param::EvaluateInt_Impl(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_Int Exp_A_Param::EvaluateInt_Impl(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                   const Assignment &assignment) const {
   EvalType_Int tmp_return;
   // FIXME: need to reconsider the logic
@@ -98,13 +98,13 @@ EvalType_Int Exp_A_Param::EvaluateInt_Impl(const std::vector<boost::shared_ptr<P
       return tmp_return;
     }
     for (std::size_t i = 0; i < param_specs[this->pid_]->get_auto_value_specs().size(); ++i) {
-      boost::shared_ptr<Constraint> cond = boost::dynamic_pointer_cast<Constraint>(param_specs[this->pid_]->auto_value_specs()[i].first);
+      std::shared_ptr<Constraint> cond = std::dynamic_pointer_cast<Constraint>(param_specs[this->pid_]->auto_value_specs()[i].first);
       if (cond) {
         EvalType_Bool cond_value;
         cond_value = cond->Evaluate(param_specs, assignment);
         if (cond_value.is_valid_ && cond_value.value_) {
           // condition met, taking the value
-          boost::shared_ptr<Exp_A> val_exp = boost::dynamic_pointer_cast<Exp_A>(param_specs[this->pid_]->auto_value_specs()[i].second);
+          std::shared_ptr<Exp_A> val_exp = std::dynamic_pointer_cast<Exp_A>(param_specs[this->pid_]->auto_value_specs()[i].second);
           if (val_exp) {
             return val_exp->EvaluateInt(param_specs, assignment);
           } else {
@@ -146,7 +146,7 @@ std::string Exp_A_Param::class_name(void) {
   return "Exp_A_Param";
 }
 
-void Exp_A_Param::inner_touch_leaf_pids(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+void Exp_A_Param::inner_touch_leaf_pids(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                   std::set<std::size_t> &pids_to_touch) const {
   if (!param_specs[this->pid_]) {
     CT_EXCEPTION("encountered invalid parameter spec");
@@ -159,6 +159,6 @@ void Exp_A_Param::inner_touch_leaf_pids(const std::vector<boost::shared_ptr<Para
   }
 }
 
-void Exp_A_Param::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Exp_A_Param::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << param_specs[this->pid_]->get_param_name();
 }

@@ -29,7 +29,7 @@ public:
 public:
   const Tuple &get_tuple(void) const { return this->tuple_; }
   Tuple &the_tuple(void) { return this->tuple_; }
-  virtual EvalType_Bool IsMatch(const Assignment &assignment, const std::vector<boost::shared_ptr<ParamSpec> > &paramspecs);
+  virtual EvalType_Bool IsMatch(const Assignment &assignment, const std::vector<std::shared_ptr<ParamSpec> > &paramspecs);
   
 private:
   Tuple tuple_;  /**< The inner tuple */

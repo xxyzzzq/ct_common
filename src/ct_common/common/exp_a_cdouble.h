@@ -31,7 +31,7 @@ public:
 public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
-  virtual void dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
 
 public:
   /** Setting the value */
@@ -46,10 +46,10 @@ public:
   virtual const std::string &get_str_value(void) const;
 
 private:
-  virtual EvalType_Double EvaluateDouble_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_Double EvaluateDouble_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       const Assignment &assignment) const;
 
-  virtual EvalType_Int EvaluateInt_Impl( const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+  virtual EvalType_Int EvaluateInt_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                 const Assignment &assignment) const;
 
 private:

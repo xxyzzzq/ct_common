@@ -17,7 +17,7 @@
 #include <ct_common/common/utils.h>
 #include <ct_common/common/constraint_l.h>
 #include <ct_common/common/paramspec.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace ct {
 namespace common {

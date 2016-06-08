@@ -18,10 +18,10 @@
 %define parser_class_name "ct_parser"
 %lex-param {ct::lexer  &qlex}
 %parse-param {ct::lexer  &qlex}
-%parse-param {std::vector<boost::shared_ptr<ct::common::ParamSpec> > &param_specs}
+%parse-param {std::vector<std::shared_ptr<ct::common::ParamSpec> > &param_specs}
 %parse-param {std::vector<ct::common::Strength> &strengths}
-%parse-param {std::vector<boost::shared_ptr<ct::common::Seed> > &seeds}
-%parse-param {std::vector<boost::shared_ptr<ct::common::Constraint> > &constraints}
+%parse-param {std::vector<std::shared_ptr<ct::common::Seed> > &seeds}
+%parse-param {std::vector<std::shared_ptr<ct::common::Constraint> > &constraints}
 %parse-param {ct::common::Assembler &assembler}
 
 %code top {
@@ -45,11 +45,11 @@ using namespace ct::common;
 %union {
   ct::common::TreeNode *tree_node;
   std::string *str;
-  std::vector<boost::shared_ptr<ct::common::ParamSpec> > *vec_param_spec;
+  std::vector<std::shared_ptr<ct::common::ParamSpec> > *vec_param_spec;
   std::vector<std::string> *vec_str;
-  std::vector<boost::shared_ptr<ct::common::TreeNode> > *vec_exp;
-  std::vector<std::pair<boost::shared_ptr<ct::common::TreeNode>, boost::shared_ptr<ct::common::TreeNode> > > *vec_auto_value_cases;
-  std::pair<boost::shared_ptr<ct::common::TreeNode>, boost::shared_ptr<ct::common::TreeNode> > *auto_value_case;
+  std::vector<std::shared_ptr<ct::common::TreeNode> > *vec_exp;
+  std::vector<std::pair<std::shared_ptr<ct::common::TreeNode>, std::shared_ptr<ct::common::TreeNode> > > *vec_auto_value_cases;
+  std::pair<std::shared_ptr<ct::common::TreeNode>, std::shared_ptr<ct::common::TreeNode> > *auto_value_case;
   ct::common::PVPair *pvpair;
   ct::common::Tuple *tuple;
 }
@@ -139,7 +139,7 @@ static std::string gen_loc_str(const yy::ct_parser::location_type &loc, const st
 %% /* Grammar rules and actions follow. */
 
 input: sections {
-  std::vector<boost::shared_ptr<Constraint> > ivld_constrs = assembler.dump_invalidations(param_specs);
+  std::vector<std::shared_ptr<Constraint> > ivld_constrs = assembler.dump_invalidations(param_specs);
   constraints.insert(constraints.end(), ivld_constrs.begin(), ivld_constrs.end());
 };
 
@@ -162,26 +162,26 @@ parameters_section: TKN_PARAMETERS_START
 parameters_line:
   TKN_TYPE param_list TKN_SEMICOLON
   {
-    $$ = new std::vector<boost::shared_ptr<ParamSpec> >();
+    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
     for (std::size_t i = 0; i < $2->size(); ++i) {
       TRY_BEGIN
       if (find_param_id(param_specs, (*$2)[i]) != PID_BOUND) {
         assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$2)[i]).c_str()));
         continue;
       }
-      ParamSpec *param_spec = assembler.asm_paramspec(*$1, (*$2)[i], std::vector<boost::shared_ptr<TreeNode> >());
+      ParamSpec *param_spec = assembler.asm_paramspec(*$1, (*$2)[i], std::vector<std::shared_ptr<TreeNode> >());
       if (param_spec == 0) {
         assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$2)[i]).c_str()));
         continue;
       }
-      $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
+      $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
       TRY_END(@$)
     }
     delete $1; delete $2;
   }
   | TKN_TYPE param_list TKN_COLON ps_set TKN_SEMICOLON
   {
-    $$ = new std::vector<boost::shared_ptr<ParamSpec> >();
+    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
     for (std::size_t i = 0; i < $2->size(); ++i) {
       TRY_BEGIN
       if (find_param_id(param_specs, (*$2)[i]) != PID_BOUND) {
@@ -193,33 +193,33 @@ parameters_line:
         assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$2)[i]).c_str()));
         continue;
       }
-      $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
+      $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
       TRY_END(@$)
     }
     delete $1; delete $2; delete $4;
   }
   | TKN_PARAM_AUX TKN_TYPE param_list TKN_SEMICOLON
   {
-    $$ = new std::vector<boost::shared_ptr<ParamSpec> >();
+    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
     for (std::size_t i = 0; i < $3->size(); ++i) {
       TRY_BEGIN
       if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
         assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$3)[i]).c_str()));
         continue;
       }
-      ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], std::vector<boost::shared_ptr<TreeNode> >());
+      ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], std::vector<std::shared_ptr<TreeNode> >());
       if (param_spec == 0) {
         assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$3)[i]).c_str()));
         continue;
       }
-      $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
+      $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
       TRY_END(@$)
     }
     delete $2; delete $3;
   }
   | TKN_PARAM_AUX TKN_TYPE param_list TKN_COLON ps_set TKN_SEMICOLON
   {
-    $$ = new std::vector<boost::shared_ptr<ParamSpec> >();
+    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
     for (std::size_t i = 0; i < $3->size(); ++i) {
       TRY_BEGIN
       if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
@@ -232,26 +232,26 @@ parameters_line:
         continue;
       }
       param_spec->set_aux(true);
-      $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
+      $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
       TRY_END(@$)
     }
     delete $2; delete $3; delete $5;
   }
   | TKN_PARAM_AUTO TKN_TYPE param_list TKN_COLON tree_obj TKN_SEMICOLON
   {
-    $$ = new std::vector<boost::shared_ptr<ParamSpec> >();
+    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
     TRY_BEGIN
-    std::vector<std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> > > auto_value_cases;
+    std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > > auto_value_cases;
     Constraint_L_CBool *ctrue = new Constraint_L_CBool();
     ctrue->set_value(true);
-    auto_value_cases.push_back(std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> >(boost::shared_ptr<TreeNode>(ctrue), boost::shared_ptr<TreeNode>($5)));
+    auto_value_cases.push_back(std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> >(std::shared_ptr<TreeNode>(ctrue), std::shared_ptr<TreeNode>($5)));
     for (std::size_t i = 0; i < $3->size(); ++i) {
       TRY_BEGIN
       if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
         CT_EXCEPTION((std::string("parameter redefinition of ") + (*$3)[i]).c_str());
       }
       ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], auto_value_cases);
-      $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
+      $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
       TRY_END(@$)
     }
     TRY_END(@$)
@@ -259,7 +259,7 @@ parameters_line:
   }
   | TKN_PARAM_AUTO TKN_TYPE param_list TKN_COLON TKN_CURLY_BRACKET_O auto_value_cases TKN_CURLY_BRACKET_C TKN_SEMICOLON
   {
-    $$ = new std::vector<boost::shared_ptr<ParamSpec> >();
+    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
     TRY_BEGIN
     for (std::size_t i = 0; i < $3->size(); ++i) {
       TRY_BEGIN
@@ -267,7 +267,7 @@ parameters_line:
         CT_EXCEPTION((std::string("parameter redefinition of ") + (*$3)[i]).c_str());
       }
       ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], *$6);
-      $$->push_back(boost::shared_ptr<ParamSpec>(param_spec));
+      $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
       TRY_END(@$)
     }
     TRY_END(@$)
@@ -276,7 +276,7 @@ parameters_line:
 
 auto_value_cases: auto_value_case
   {
-    $$ = new std::vector<std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> > >();
+    $$ = new std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > >();
     if ($1) {
       $$->push_back(*$1);
     }
@@ -295,14 +295,14 @@ auto_value_case: tree_obj TKN_COLON tree_obj {
     $$ = 0;
     TRY_BEGIN
     // no type check, the second tree_obj can be Exp or Constraint
-    $$ = new std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> >(boost::shared_ptr<TreeNode>($1), boost::shared_ptr<TreeNode>($3));
+    $$ = new std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> >(std::shared_ptr<TreeNode>($1), std::shared_ptr<TreeNode>($3));
     TRY_END(@$)
   }
   | TKN_DEFAULT TKN_COLON tree_obj {
     TRY_BEGIN
-    boost::shared_ptr<Constraint_L_CBool> c_true(new Constraint_L_CBool());
+    std::shared_ptr<Constraint_L_CBool> c_true(new Constraint_L_CBool());
     c_true->set_value(true);
-    $$ = new std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> >(c_true, boost::shared_ptr<TreeNode>($3));
+    $$ = new std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> >(c_true, std::shared_ptr<TreeNode>($3));
     TRY_END(@$)
   }
 ;
@@ -312,7 +312,7 @@ ps_set: ps_values { $$ = $1; }
   | ps_set TKN_COMMA ps_values { $$ = $1; if ($3) { $$->insert($$->end(), $3->begin(), $3->end()); delete $3; } };
 
 ps_values: range { $$ = $1; }
-  | ps_value { $$ = new std::vector<boost::shared_ptr<TreeNode> >(); if ($1) { $$->push_back(boost::shared_ptr<TreeNode>($1)); } };
+  | ps_value { $$ = new std::vector<std::shared_ptr<TreeNode> >(); if ($1) { $$->push_back(std::shared_ptr<TreeNode>($1)); } };
 
 ps_value: value_s { $$ = $1; }
   | value_i { $$ = $1; }
@@ -345,7 +345,7 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
     int val_begin = dynamic_cast<Exp_A_CInt*>($2)->get_value();
     int val_end = dynamic_cast<Exp_A_CInt*>($4)->get_value();
     int step = (val_begin <= val_end) ? 1 : -1;
-    $$ = new std::vector<boost::shared_ptr<TreeNode> >();
+    $$ = new std::vector<std::shared_ptr<TreeNode> >();
     for (int val = val_begin; val <= val_end; val += step) {
       Exp_A_CInt *exp = new Exp_A_CInt();
       exp->set_value(val);
@@ -353,7 +353,7 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
       ss << val;
       exp->set_str_value(ss.str());
       exp->set_type(EAT_INT);
-      $$->push_back(boost::shared_ptr<TreeNode>(exp));
+      $$->push_back(std::shared_ptr<TreeNode>(exp));
     }
     TRY_END(@$)
     delete $2;
@@ -368,7 +368,7 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
     int val_begin = dynamic_cast<Exp_A_CInt*>($2)->get_value();
     int val_end = dynamic_cast<Exp_A_CInt*>($6)->get_value();
     int step = dynamic_cast<Exp_A_CInt*>($4)->get_value();
-    $$ = new std::vector<boost::shared_ptr<TreeNode> >();
+    $$ = new std::vector<std::shared_ptr<TreeNode> >();
     int sign = (step > 0) ? 1 : -1;
     for (int val = val_begin; sign * (val - val_end) <= 0; val += step) {
       Exp_A_CInt *exp = new Exp_A_CInt();
@@ -377,7 +377,7 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
       ss << val;
       exp->set_str_value(ss.str());
       exp->set_type(EAT_INT);
-      $$->push_back(boost::shared_ptr<TreeNode>(exp));
+      $$->push_back(std::shared_ptr<TreeNode>(exp));
     }
     TRY_END(@$)
     delete $2;
@@ -463,25 +463,25 @@ seeds_section: TKN_SEEDS_START
 // no null-pointer checking
 seeds_line: tuple TKN_SEMICOLON {
     Seed *seed = assembler.asm_seed(seeds.size(), *$1);
-    seeds.push_back(boost::shared_ptr<Seed>(seed));
+    seeds.push_back(std::shared_ptr<Seed>(seed));
     delete $1; }
   | TKN_SEED_STARTER tuple TKN_SEMICOLON {
     Seed *seed = assembler.asm_seed(seeds.size(), *$2);
     seed->set_is_starter(true);
-    seeds.push_back(boost::shared_ptr<Seed>(seed));
+    seeds.push_back(std::shared_ptr<Seed>(seed));
     delete $2; }
   | tree_obj TKN_SEMICOLON {
     TRY_BEGIN
     TYPE_ASSERT($1, Constraint*);
     Seed *seed = assembler.asm_seed(seeds.size(), (Constraint*)$1);  // $1 is stored in the seed, don't delete!!
-    seeds.push_back(boost::shared_ptr<Seed>(seed));
+    seeds.push_back(std::shared_ptr<Seed>(seed));
     TRY_END(@$) }
   | TKN_SEED_STARTER tree_obj TKN_SEMICOLON {
     TRY_BEGIN
     TYPE_ASSERT($2, Constraint*);
     Seed *seed = assembler.asm_seed(seeds.size(), (Constraint*)$2);  // $2 is stored in the seed, don't delete!!
     seed->set_is_starter(true);
-    seeds.push_back(boost::shared_ptr<Seed>(seed));
+    seeds.push_back(std::shared_ptr<Seed>(seed));
     TRY_END(@$) };
 
 tuple: tuple_item {
@@ -508,8 +508,8 @@ tuple_item: TKN_IDENTIFIER TKN_COLON ps_value { $$ = 0; TRY_BEGIN $$ = assembler
 constraints_section: TKN_CONSTRAINTS_START
   | constraints_section constraints_line;
 
-constraints_line: tree_obj TKN_SEMICOLON { TRY_BEGIN TYPE_ASSERT($1, Constraint*); Constraint *tmp = dynamic_cast<Constraint *>($1); constraints.push_back(boost::shared_ptr<Constraint>(tmp)); TRY_END(@$) }
-  | tree_obj TKN_INVALIDATION TKN_BRACKET_O param_list TKN_BRACKET_C TKN_SEMICOLON { TRY_BEGIN assembler.store_invalidation(param_specs, *$4, boost::shared_ptr<TreeNode>($1)); TRY_END(@$) } ;
+constraints_line: tree_obj TKN_SEMICOLON { TRY_BEGIN TYPE_ASSERT($1, Constraint*); Constraint *tmp = dynamic_cast<Constraint *>($1); constraints.push_back(std::shared_ptr<Constraint>(tmp)); TRY_END(@$) }
+  | tree_obj TKN_INVALIDATION TKN_BRACKET_O param_list TKN_BRACKET_C TKN_SEMICOLON { TRY_BEGIN assembler.store_invalidation(param_specs, *$4, std::shared_ptr<TreeNode>($1)); TRY_END(@$) } ;
 
 tree_obj:
   // arithmetic & string & boolean relations

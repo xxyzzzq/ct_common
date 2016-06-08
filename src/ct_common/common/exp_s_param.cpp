@@ -34,7 +34,7 @@ Exp_S_Param &Exp_S_Param::operator = (const Exp_S_Param &right) {
 Exp_S_Param::~Exp_S_Param(void) {
 }
 
-EvalType_String Exp_S_Param::Evaluate(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+EvalType_String Exp_S_Param::Evaluate(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                   const Assignment &assignment) const {
   EvalType_String tmp_return;
   if (!TYPE_CHECK(param_specs[this->pid_].get(), ParamSpec_String*)) {
@@ -44,12 +44,12 @@ EvalType_String Exp_S_Param::Evaluate(const std::vector<boost::shared_ptr<ParamS
   // FIXME: need to reconsider the logic
   if (param_specs[this->pid_]->is_auto()) {
     for (std::size_t i = 0; i < param_specs[this->pid_]->get_auto_value_specs().size(); ++i) {
-      boost::shared_ptr<Constraint> cond = boost::dynamic_pointer_cast<Constraint>(param_specs[this->pid_]->auto_value_specs()[i].first);
+      std::shared_ptr<Constraint> cond = std::dynamic_pointer_cast<Constraint>(param_specs[this->pid_]->auto_value_specs()[i].first);
       if (cond) {
         EvalType_Bool cond_value = cond->Evaluate(param_specs, assignment);
         if (cond_value.is_valid_ && cond_value.value_) {
           // condition met, taking the value
-          boost::shared_ptr<Exp_S> val_exp = boost::dynamic_pointer_cast<Exp_S>(param_specs[this->pid_]->auto_value_specs()[i].second);
+          std::shared_ptr<Exp_S> val_exp = std::dynamic_pointer_cast<Exp_S>(param_specs[this->pid_]->auto_value_specs()[i].second);
           if (val_exp) {
             return val_exp->Evaluate(param_specs, assignment);
           } else {
@@ -83,7 +83,7 @@ std::string Exp_S_Param::class_name(void) {
   return "Exp_S_Param";
 }
 
-void Exp_S_Param::inner_touch_leaf_pids(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+void Exp_S_Param::inner_touch_leaf_pids(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                   std::set<std::size_t> &pids_to_touch) const {
   if (!param_specs[this->pid_]) {
     CT_EXCEPTION("encountered invalid parameter spec");
@@ -96,6 +96,6 @@ void Exp_S_Param::inner_touch_leaf_pids(const std::vector<boost::shared_ptr<Para
   }
 }
 
-void Exp_S_Param::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Exp_S_Param::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << param_specs[this->pid_]->get_param_name();
 }

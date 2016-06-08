@@ -40,20 +40,20 @@ std::string Exp_A_ConstraintCast::class_name(void) {
 }
 
 EvalType_Double Exp_A_ConstraintCast::EvaluateDouble_Impl(
-                      const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+                      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                       const Assignment &assignment) const {
   EvalType_Bool val = this->get_oprd()->Evaluate(param_specs, assignment);
   return EvalType_Double(val.value_ ? 1.0 : 0.0, val.is_valid_);
 }
 
 EvalType_Int Exp_A_ConstraintCast::EvaluateInt_Impl(
-                      const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+                      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                       const Assignment &assignment) const {
   EvalType_Bool val = this->get_oprd()->Evaluate(param_specs, assignment);
   return EvalType_Int(val.value_ ? 1 : 0, val.is_valid_);
 }
 
-void Exp_A_ConstraintCast::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Exp_A_ConstraintCast::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   switch (this->type_) {
   case EAT_INT:
     os << "int";

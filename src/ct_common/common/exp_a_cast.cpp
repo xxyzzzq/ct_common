@@ -62,7 +62,7 @@ std::string Exp_A_Cast::get_op_token(void) const {
 }
 
 
-void Exp_A_Cast::dump(std::ostream &os, const std::vector<boost::shared_ptr<ParamSpec> > &param_specs) const {
+void Exp_A_Cast::dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
   os << this->get_op_token();
   os << "(";
   this->get_oprd()->dump(os, param_specs);

@@ -112,7 +112,7 @@ const PVPair *Tuple::Search(std::size_t pid) const {
 }
 
 bool Tuple::to_the_next_tuple(
-    std::vector<boost::shared_ptr<ParamSpec> > param_specs) {
+    std::vector<std::shared_ptr<ParamSpec> > param_specs) {
   if (this->size() == 0) {
     return false;
   }
@@ -133,7 +133,7 @@ bool Tuple::to_the_next_tuple(
 }
 
 bool Tuple::to_the_next_tuple_with_ivld(
-    std::vector<boost::shared_ptr<ParamSpec> > param_specs) {
+    std::vector<std::shared_ptr<ParamSpec> > param_specs) {
   if (this->size() == 0) {
     return false;
   }

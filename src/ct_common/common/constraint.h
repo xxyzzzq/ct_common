@@ -19,7 +19,7 @@
 #include <ct_common/common/pvpair.h>
 #include <ct_common/common/assignment.h>
 #include <ct_common/common/paramspec.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ct_common/common/tree_node.h>
 #include <ct_common/common/eval_type_bool.h>
 
@@ -46,7 +46,7 @@ public:
 public:
   /** Whether the constraint is satisfied */
   virtual EvalType_Bool Evaluate(
-    const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const Assignment &assignment) const = 0;
 
 };

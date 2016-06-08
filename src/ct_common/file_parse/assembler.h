@@ -62,9 +62,9 @@ public:
   const Assembler &operator = (const Assembler &right);
 
   /** Setting the error logger */
-  void setErrLogger(const boost::shared_ptr<ErrLogger> &err_logger) { this->err_logger_ = err_logger; }
+  void setErrLogger(const std::shared_ptr<ErrLogger> &err_logger) { this->err_logger_ = err_logger; }
   /** Getting the error logger */
-  const boost::shared_ptr<ErrLogger> &get_err_logger(void) { return this->err_logger_; }
+  const std::shared_ptr<ErrLogger> &get_err_logger(void) { return this->err_logger_; }
 
   /** Report an error */
   void reportError(const std::string &str);
@@ -80,30 +80,30 @@ public:
   ParamSpec *asm_paramspec(
       const std::string &type,
       const std::string &identifier,
-      const std::vector<boost::shared_ptr<TreeNode> > &vals);
+      const std::vector<std::shared_ptr<TreeNode> > &vals);
 
   /** Assemble an automatic parameter specification */
   ParamSpec *asm_paramspec(
       const std::string &type,
       const std::string &identifier,
-      const std::vector<std::pair<boost::shared_ptr<TreeNode>, boost::shared_ptr<TreeNode> > > &auto_value_specs);
+      const std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > > &auto_value_specs);
 
   /** Assemble a covering strength */
   void attach_strengths(
-      const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
       const std::vector<std::string> &identifiers,
       std::vector<Strength> &strengths,
       std::size_t strength);
 
   /** Assemble a universal covering strength */
   void attach_default_strengths(
-      const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
       std::vector<Strength> &strengths,
       std::size_t strength);
 
   /** Assemble a pvpair */
   PVPair *asm_pvpair(
-      const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
       const std::string &identifier,
       const TreeNode *value_exp);
 
@@ -120,9 +120,9 @@ public:
   /** Assemble a constant Boolean constraint */
   Constraint_L_CBool *asm_constraint_l_cbool(const std::string &val);
   /** Assemble a parameter invalidation atomic constraint (in the post-processing stage) */
-  Constraint *asm_constraint_invalid(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs, const std::string &identifier);
+  Constraint *asm_constraint_invalid(const std::vector<std::shared_ptr<ParamSpec> > &param_specs, const std::string &identifier);
   /** Assemble a parameter constraint/expression */
-  TreeNode *asm_param(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs, const std::string &identifier);
+  TreeNode *asm_param(const std::vector<std::shared_ptr<ParamSpec> > &param_specs, const std::string &identifier);
 
   /** Assemble a binary expression */
   Exp_A *asm_exp_a(TreeNode *oprd1, TreeNode *oprd2, eOPERATOR op);
@@ -133,11 +133,11 @@ public:
 
   /** Store the parameter invalidation constraint for later post-processing */
   void store_invalidation(
-      const std::vector<boost::shared_ptr<ParamSpec> > &param_specs,
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
       const std::vector<std::string> &identifiers,
-      const boost::shared_ptr<TreeNode> &precond);
+      const std::shared_ptr<TreeNode> &precond);
   /** Post-processing parameter invalidation constraints */
-  std::vector<boost::shared_ptr<Constraint> > dump_invalidations(const std::vector<boost::shared_ptr<ParamSpec> > &param_specs);
+  std::vector<std::shared_ptr<Constraint> > dump_invalidations(const std::vector<std::shared_ptr<ParamSpec> > &param_specs);
 
   /** Assemble a tuple seed */
   ct::common::Seed *asm_seed(std::size_t id, const ct::common::Tuple &tuple);
@@ -149,11 +149,11 @@ public:
 
 private:
   /** Geting the conjunction of a set of constraints */
-  Constraint *conjunction(const std::vector<boost::shared_ptr<TreeNode> > &constrs);
+  Constraint *conjunction(const std::vector<std::shared_ptr<TreeNode> > &constrs);
 
 private:
-  boost::shared_ptr<ErrLogger> err_logger_;  /**< The error logger */
-  std::map<std::size_t, std::vector<boost::shared_ptr<TreeNode> > > stored_invalidations_;  /**< Stored parameter invalidation constraint */
+  std::shared_ptr<ErrLogger> err_logger_;  /**< The error logger */
+  std::map<std::size_t, std::vector<std::shared_ptr<TreeNode> > > stored_invalidations_;  /**< Stored parameter invalidation constraint */
   double default_precision_;  /**< The default floating-point precision */
 };
 }  // namepsace common

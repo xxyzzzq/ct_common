@@ -31,6 +31,6 @@ Seed &Seed::operator = (const Seed &right) {
   return (*this);
 }
 
-EvalType_Bool Seed::IsMatch(const Assignment &assignment, const std::vector<boost::shared_ptr<ParamSpec> > &paramspecs) {
+EvalType_Bool Seed::IsMatch(const Assignment &assignment, const std::vector<std::shared_ptr<ParamSpec> > &paramspecs) {
   return EvalType_Bool(false, false);
 }
