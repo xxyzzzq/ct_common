@@ -10,20 +10,21 @@ function sync_third_party() {
 
     echo "syncing $name"
     if [ ! -d third_party/$name ]; then
-	git init -q third_party/$name
-	cd third_party/$name && git remote add origin $origin
-	cd ../..
+        git init -q third_party/$name
+        cd third_party/$name && git remote add origin $origin
+        cd ../..
     fi
 
     cd third_party/$name && git fetch -q --tags origin && git checkout -q $version && git clean -xdf
     cd ../..
 
     if [ "$4" == "recursive_bootstrap" ]; then
-	cd third_party/$name && ./bootstrap
-	cd ../..
+        cd third_party/$name && ./bootstrap
+        cd ../..
     fi
 }
 
 while read line; do
+    line=`echo $line | tr -d '\r'`
     sync_third_party $line
 done < third_party/versions.txt
