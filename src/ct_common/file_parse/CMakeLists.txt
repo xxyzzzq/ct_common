@@ -17,7 +17,7 @@ set_source_files_properties(
 add_custom_command(
   OUTPUT ct_lexer.cpp ct_lexer.hpp ct_lexer-token.hpp ct_lexer-configuration.hpp
   COMMAND
-  QUEX_PATH=${QUEX_PATH} ${QUEX} -i ${CMAKE_CURRENT_SOURCE_DIR}/ct_lexer.qx -o ct::lexer --token-class ct::lexer_Token --foreign-token-id-file ${CMAKE_CURRENT_SOURCE_DIR}/ct_lexer-token_ids.h --source-package . --file-extension-scheme pp --suppress 0
+  ${QUEX} -i ${CMAKE_CURRENT_SOURCE_DIR}/ct_lexer.qx -o ct::lexer --token-class ct::lexer_Token --foreign-token-id-file ${CMAKE_CURRENT_SOURCE_DIR}/ct_lexer-token_ids.h --source-package . --file-extension-scheme pp --suppress 0
   DEPENDS ct_lexer.qx ct_parser.tab.hpp
   )
 

@@ -13,9 +13,6 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/src)
 include_directories(third_party/quex)
 
 set(QUEX
-  python ${CMAKE_CURRENT_SOURCE_DIR}/third_party/quex/quex-exe.py)
-
-set(QUEX_PATH
-  ${CMAKE_CURRENT_SOURCE_DIR}/third_party/quex)
+  python ${CMAKE_CURRENT_SOURCE_DIR}/tools/quex_wrapper.py)
 
 add_subdirectory(src/ct_common)
