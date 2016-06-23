@@ -31,5 +31,3 @@ try:
     subprocess.call(['python', markdown_bin_path] + parsed_args.OTHER_ARG, stdout=f)
 except Exception as error:
     print error
-finally:
-    f.close()
