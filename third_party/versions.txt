@@ -1,1 +1,2 @@
 quex http://github.com/xxyzzzq/quex.git quex-0.65.11
+markdown2 https://github.com/trentm/python-markdown2.git 2.3.1
