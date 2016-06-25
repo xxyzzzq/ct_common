@@ -20,6 +20,8 @@ parser.add_argument('OTHER_ARG', nargs='*',
                     help='Other argument passed to markdown2')
 parsed_args = parser.parse_args()
 
+markdown_args = ['-x', 'fenced-code-blocks']
+
 if parsed_args.help:
     parser.print_help()
     print "\n* Usage for markdown2 *"
@@ -28,6 +30,7 @@ if parsed_args.help:
 
 try:
     f = open(parsed_args.OUTPUT_FILE[0], 'w')
-    subprocess.call(['python', markdown_bin_path] + parsed_args.OTHER_ARG, stdout=f)
+    subprocess.call(['python', markdown_bin_path] + markdown_args +
+                    parsed_args.OTHER_ARG, stdout=f)
 except Exception as error:
     print error
