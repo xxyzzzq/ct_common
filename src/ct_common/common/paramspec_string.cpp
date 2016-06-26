@@ -10,7 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/paramspec_string.h>
+#include "ct_common/common/paramspec_string.h"
 
 using namespace ct::common;
 

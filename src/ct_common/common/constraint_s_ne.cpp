@@ -10,8 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cstring>
-#include <ct_common/common/constraint_s_ne.h>
+#include "ct_common/common/constraint_s_ne.h"
 
 using namespace ct::common;
 

@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_PVPAIR_H_
 #define CT_COMMON_PVPAIR_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/defs.h>
+#include "ct_common/base/defs.h"
+#include "ct_common/base/utils.h"
 
 namespace ct {
 namespace common {

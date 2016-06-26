@@ -10,8 +10,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/exp_a_div.h>
-#include <ct_common/common/arithmetic_utils.h>
+#include "ct_common/common/exp_a_div.h"
+
+#include "ct_common/base/arithmetic_utils.h"
 
 using namespace ct::common;
 

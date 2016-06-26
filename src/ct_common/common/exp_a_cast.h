@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_EXP_A_CAST_H_
 #define CT_COMMON_EXP_A_CAST_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/exp_a_unary.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/exp_a_unary.h"
 
 namespace ct {
 namespace common {

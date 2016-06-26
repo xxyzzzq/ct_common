@@ -14,9 +14,10 @@
 #define CT_COMMON_CONSTRAINT_S_BINARY_H_
 
 #include <memory>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/constraint_s.h>
-#include <ct_common/common/exp_s.h>
+
+#include "ct_common/base/utils.h"
+#include "ct_common/common/constraint_s.h"
+#include "ct_common/common/exp_s.h"
 
 namespace ct {
 namespace common {

@@ -10,20 +10,16 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/assignment.h>
+#include "ct_common/common/assignment.h"
 
 using namespace ct::common;
 
-Assignment::Assignment(void) {
-}
+Assignment::Assignment(void) = default;
 
-Assignment::Assignment(const Assignment &from) {
-}
+Assignment::Assignment(const Assignment &from) = default;
 
-Assignment::~Assignment(void) {
-}
+Assignment::~Assignment(void) = default;
 
 Assignment &Assignment::operator = (const Assignment &right) {
   return *this;
 }
-

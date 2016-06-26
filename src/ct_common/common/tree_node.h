@@ -17,7 +17,8 @@
 #include <set>
 #include <iostream>
 #include <memory>
-#include <ct_common/common/utils.h>
+
+#include "ct_common/base/utils.h"
 
 namespace ct {
 namespace common {
@@ -49,7 +50,7 @@ public:
   void touch_pids(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                   std::set<std::size_t> &pids_to_touch) const;
 
-  /** Inner function to get all related parameters */ 
+  /** Inner function to get all related parameters */
   virtual void inner_touch_leaf_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       std::set<std::size_t> &pids_to_touch) const;
 

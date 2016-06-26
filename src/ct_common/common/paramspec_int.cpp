@@ -11,7 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include <cstdlib>
-#include <ct_common/common/paramspec_int.h>
+#include "ct_common/common/paramspec_int.h"
 
 using namespace ct::common;
 

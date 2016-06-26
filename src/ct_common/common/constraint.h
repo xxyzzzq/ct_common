@@ -13,15 +13,16 @@
 #ifndef CT_COMMON_CONSTRAINT_H_
 #define CT_COMMON_CONSTRAINT_H_
 
-#include <ct_common/common/utils.h>
-#include <vector>
-#include <string>
-#include <ct_common/common/pvpair.h>
-#include <ct_common/common/assignment.h>
-#include <ct_common/common/paramspec.h>
 #include <memory>
-#include <ct_common/common/tree_node.h>
-#include <ct_common/common/eval_type_bool.h>
+#include <string>
+#include <vector>
+
+#include "ct_common/base/utils.h"
+#include "ct_common/common/assignment.h"
+#include "ct_common/common/eval_type_bool.h"
+#include "ct_common/common/paramspec.h"
+#include "ct_common/common/pvpair.h"
+#include "ct_common/common/tree_node.h"
 
 namespace ct {
 namespace common {
@@ -39,7 +40,7 @@ public:
   Constraint(const Constraint &from);
   Constraint &operator = (const Constraint &right);
   virtual ~Constraint(void) = 0;
-  
+
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
 

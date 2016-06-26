@@ -14,8 +14,8 @@
 #ifndef CT_COMMON_EXP_A_PARAM_H
 #define CT_COMMON_EXP_A_PARAM_H
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/exp_a_atom.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/exp_a_atom.h"
 
 namespace ct {
 namespace common {

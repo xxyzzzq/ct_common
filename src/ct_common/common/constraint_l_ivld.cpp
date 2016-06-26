@@ -10,9 +10,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/constraint_l_ivld.h>
-#include <ct_common/common/exp_a.h>
-#include <ct_common/common/exp_s.h>
+#include "ct_common/common/constraint_l_ivld.h"
+#include "ct_common/common/exp_a.h"
+#include "ct_common/common/exp_s.h"
 
 using namespace ct::common;
 
@@ -97,7 +97,7 @@ std::shared_ptr<EvalType> Constraint_L_IVLD::EvaluateAutoCaseExp(
   } else {
     CT_EXCEPTION("unknown expression type");
     return std::shared_ptr<EvalType>(new EvalType_Bool(false, false));
-  }  
+  }
 }
 
 void Constraint_L_IVLD::inner_touch_leaf_pids(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,

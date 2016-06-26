@@ -2,12 +2,12 @@
 #include <fstream>
 #include <map>
 
-#include <ct_common/file_parse/ct_lexer.hpp>
-#include <ct_common/file_parse/ct_parser.tab.hpp>
-#include <ct_common/file_parse/assembler.h>
-#include <ct_common/file_parse/err_logger_cerr.h>
-#include <ct_common/common/sutmodel.h>
-#include <ct_common/common/tuplepool.h>
+#include "ct_common/file_parse/ct_lexer.hpp"
+#include "ct_common/file_parse/ct_parser.tab.hpp"
+#include "ct_common/file_parse/assembler.h"
+#include "ct_common/file_parse/err_logger_cerr.h"
+#include "ct_common/common/sutmodel.h"
+#include "ct_common/common/tuplepool.h"
 
 using namespace ct;
 using namespace ct::common;
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
     assembler.setErrLogger(std::shared_ptr<ErrLogger>(new ErrLogger_Cerr()));
     yy::ct_parser parser(lexer,
                          sut_model.param_specs_,
-                         sut_model.strengths_, 
+                         sut_model.strengths_,
                          sut_model.seeds_,
                          sut_model.constraints_,
                          assembler);
@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
   std::cout << "# strengths:   " << sut_model.strengths_.size() << std::endl;
   std::cout << "# seeds:       " << sut_model.seeds_.size() << std::endl;
   std::cout << "# constraints: " << sut_model.constraints_.size() << std::endl;
-  
+
   std::vector<RawStrength> raw_strengths;
   TuplePool tuple_pool;
   for (std::size_t i = 0; i < sut_model.strengths_.size(); ++i) {
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
     } while (tuple.to_the_next_tuple(sut_model.param_specs_));
   }
   std::cout << "# target combinations: " << tuple_pool.size() << std::endl;
-  
+
   TuplePool forbidden_tuple_pool;
   for (std::size_t i = 0; i < sut_model.constraints_.size(); ++i) {
     std::set<std::size_t> rel_pids;

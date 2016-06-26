@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_CONSTRAINT_S_NE_H_
 #define CT_COMMON_CONSTRAINT_S_NE_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/constraint_s_binary.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/constraint_s_binary.h"
 
 namespace ct {
 namespace common {

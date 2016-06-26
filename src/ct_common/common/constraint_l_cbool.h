@@ -13,7 +13,7 @@
 #ifndef CT_COMMON_CONSTRAINT_L_CBOOL_H_
 #define CT_COMMON_CONSTRAINT_L_CBOOL_H_
 
-#include <ct_common/common/constraint_l_atom.h>
+#include "ct_common/common/constraint_l_atom.h"
 
 namespace ct {
 namespace common {
@@ -26,7 +26,7 @@ public:
   Constraint_L_CBool(const Constraint_L_CBool &from);
   virtual ~Constraint_L_CBool(void);
   Constraint_L_CBool &operator = (const Constraint_L_CBool &right);
-  
+
 public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);

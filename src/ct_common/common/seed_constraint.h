@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_SEED_CONSTRAINT_H_
 #define CT_COMMON_SEED_CONSTRAINT_H_
 
-#include <ct_common/common/seed.h>
-#include <ct_common/common/constraint.h>
+#include "ct_common/common/seed.h"
+#include "ct_common/common/constraint.h"
 
 namespace ct {
 namespace common {

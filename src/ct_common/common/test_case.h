@@ -15,8 +15,9 @@
 
 #include <vector>
 #include <memory>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/assignment.h>
+
+#include "ct_common/base/utils.h"
+#include "ct_common/common/assignment.h"
 
 namespace ct {
 namespace common {

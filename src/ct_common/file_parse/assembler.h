@@ -16,13 +16,14 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
-#include <ct_common/common/paramspecs.h>
-#include <ct_common/common/constraints.h>
-#include <ct_common/common/pvpair.h>
-#include <ct_common/common/seed.h>
-#include <ct_common/common/exps.h>
-#include <ct_common/common/strength.h>
-#include <ct_common/file_parse/err_logger.h>
+
+#include "ct_common/common/paramspecs.h"
+#include "ct_common/common/constraints.h"
+#include "ct_common/common/pvpair.h"
+#include "ct_common/common/seed.h"
+#include "ct_common/common/exps.h"
+#include "ct_common/common/strength.h"
+#include "ct_common/file_parse/err_logger.h"
 
 namespace ct {
 namespace common {
@@ -74,7 +75,7 @@ public:
   std::size_t numErrs(void) const;
   /** Get the total number of warnings */
   std::size_t numWarnings(void) const;
-  
+
 public:
   /** Assemble a parameter specification */
   ParamSpec *asm_paramspec(

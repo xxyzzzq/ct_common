@@ -10,7 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/constraint_s_eq.h>
+#include "ct_common/common/constraint_s_eq.h"
 
 using namespace ct::common;
 

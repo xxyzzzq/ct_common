@@ -10,10 +10,12 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include "ct_common/common/tree_node.h"
+
 #include <stack>
 #include <map>
-#include <ct_common/common/tree_node.h>
-#include <ct_common/common/arithmetic_utils.h>
+
+#include "ct_common/base/arithmetic_utils.h"
 
 using namespace ct::common;
 
@@ -70,7 +72,7 @@ void TreeNode::touch_pids( const std::vector<std::shared_ptr<ParamSpec> > &param
   s.push(std::pair<const TreeNode*, std::size_t>(this, 0));
   while (!s.empty()) {
     if (s.top().first == 0) {
-      CT_EXCEPTION("empty constraint encountered");      
+      CT_EXCEPTION("empty constraint encountered");
       s.pop();
       ++s.top().second;
     }
@@ -84,7 +86,7 @@ void TreeNode::touch_pids( const std::vector<std::shared_ptr<ParamSpec> > &param
     }
     const TreeNode *next = s.top().first->oprds_[s.top().second].get();
     s.push(std::pair<const TreeNode*, std::size_t>(next, 0));
-  }                                
+  }
 }
 
 void TreeNode::inner_touch_leaf_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,

@@ -11,8 +11,8 @@
 //===----------------------------------------------------------------------===//
 
 #include <algorithm>
-#include <ct_common/common/tuple.h>
-#include <ct_common/common/paramspec.h>
+#include "ct_common/common/tuple.h"
+#include "ct_common/common/paramspec.h"
 
 using namespace ct::common;
 

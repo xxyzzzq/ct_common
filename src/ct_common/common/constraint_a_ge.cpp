@@ -10,8 +10,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/constraint_a_ge.h>
-#include <ct_common/common/arithmetic_utils.h>
+#include "ct_common/common/constraint_a_ge.h"
+
+#include "ct_common/base/arithmetic_utils.h"
 
 using namespace ct::common;
 

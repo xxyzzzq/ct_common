@@ -17,8 +17,8 @@
 #include <string>
 #include <set>
 #include <map>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/tree_node.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/tree_node.h"
 #include <memory>
 
 namespace ct {
@@ -29,7 +29,7 @@ namespace common {
 class DLL_EXPORT ParamSpec
 {
 public:
-  ParamSpec(void);  
+  ParamSpec(void);
   ParamSpec(const ParamSpec &from);
   ParamSpec &operator = (const ParamSpec &right);
   virtual ~ParamSpec(void) = 0;

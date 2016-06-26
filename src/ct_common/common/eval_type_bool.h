@@ -6,14 +6,14 @@
 //
 //===----------------------------------------------------------------------===//
 //
-// This header file contains the class for boolean evaluation type 
+// This header file contains the class for boolean evaluation type
 //
 //===----------------------------------------------------------------------===//
 
 #ifndef CT_COMMON_EVAL_TYPE_BOOL_H_
 #define CT_COMMON_EVAL_TYPE_BOOL_H_
 
-#include <ct_common/common/eval_type.h>
+#include "ct_common/common/eval_type.h"
 
 namespace ct {
 namespace common {

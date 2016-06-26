@@ -13,12 +13,13 @@
 #ifndef CT_COMMON_EXP_S_H_
 #define CT_COMMON_EXP_S_H_
 
-#include <string>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/exp.h>
-#include <ct_common/common/paramspec.h>
 #include <memory>
-#include <ct_common/common/eval_type_string.h>
+#include <string>
+
+#include "ct_common/base/utils.h"
+#include "ct_common/common/exp.h"
+#include "ct_common/common/paramspec.h"
+#include "ct_common/common/eval_type_string.h"
 
 namespace ct {
 namespace common {

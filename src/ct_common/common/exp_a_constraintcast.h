@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_EXP_A_CONSTRAINTCAST_H_
 #define CT_COMMON_EXP_A_CONSTRAINTCAST_H_
 
-#include <ct_common/common/constraint.h>
-#include <ct_common/common/exp_a_atom.h>
+#include "ct_common/common/constraint.h"
+#include "ct_common/common/exp_a_atom.h"
 
 namespace ct {
 namespace common {
@@ -35,7 +35,7 @@ public:
 
   std::shared_ptr<Constraint> get_oprd(void) const { return std::dynamic_pointer_cast<Constraint>(this->oprds_[0]); }
   void set_oprd(const std::shared_ptr<TreeNode> &oprd) { this->oprds_[0] = oprd; }
-  
+
 private:
   virtual EvalType_Double EvaluateDouble_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       const Assignment &assignment) const;

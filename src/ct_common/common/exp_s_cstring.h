@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_EXP_S_CSTRING_H
 #define CT_COMMON_EXP_S_CSTRING_H
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/exp_s_atom.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/exp_s_atom.h"
 
 namespace ct {
 namespace common {

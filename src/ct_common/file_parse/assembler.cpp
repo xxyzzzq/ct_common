@@ -15,9 +15,10 @@
 #include <cstdlib>
 #include <sstream>
 #include <cmath>
-#include <ct_common/file_parse/assembler.h>
-#include <ct_common/common/seed_tuple.h>
-#include <ct_common/common/seed_constraint.h>
+
+#include "ct_common/file_parse/assembler.h"
+#include "ct_common/common/seed_tuple.h"
+#include "ct_common/common/seed_constraint.h"
 
 using namespace ct::common;
 
@@ -160,7 +161,7 @@ ParamSpec *Assembler::asm_paramspec(
       this->reportWarning(std::string("the last condition for auto parameter ") + identifier + " is not a constant true. This may cause errors if the specified conditions do not cover all the cases. Consider using a \"default\" or \"true\".");
     }
   }
-  
+
   tmp_return->set_auto(true);
   tmp_return->set_param_name(identifier);
   tmp_return->auto_value_specs() = auto_value_specs;
@@ -607,7 +608,7 @@ Exp_A *Assembler::asm_exp_a_cast(TreeNode *oprd, const std::string &type) {
       return 0;
     }
     tmp_return->set_oprd(std::shared_ptr<TreeNode>(constr));
-    return tmp_return;    
+    return tmp_return;
   }
   CT_EXCEPTION((std::string("cannot cast from ") + oprd->get_class_name()).c_str());
   return 0;

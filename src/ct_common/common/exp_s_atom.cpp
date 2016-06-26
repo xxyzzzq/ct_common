@@ -10,7 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/exp_s_atom.h>
+#include "ct_common/common/exp_s_atom.h"
 
 using namespace ct::common;
 

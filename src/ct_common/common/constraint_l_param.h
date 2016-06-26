@@ -14,7 +14,7 @@
 #ifndef CT_COMMON_CONSTRAINT_L_PARAM_H_
 #define CT_COMMON_CONSTRAINT_L_PARAM_H_
 
-#include <ct_common/common/constraint_l_atom.h>
+#include "ct_common/common/constraint_l_atom.h"
 
 namespace ct {
 namespace common {
@@ -27,7 +27,7 @@ public:
   Constraint_L_Param(const Constraint_L_Param &from);
   virtual ~Constraint_L_Param(void);
   Constraint_L_Param &operator = (const Constraint_L_Param &right);
-  
+
 public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
@@ -35,7 +35,7 @@ public:
 
   void set_pid(std::size_t pid) { this->pid_ = pid; }
   std::size_t get_pid(void) const { return this->pid_; }
-  
+
   virtual void inner_touch_leaf_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
                                       std::set<std::size_t> &pids_to_touch) const;
 

@@ -14,8 +14,9 @@
 #define CT_COMMON_CONSTRAINT_L_BINARY_H_
 
 #include <memory>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/constraint_l.h>
+
+#include "ct_common/base/utils.h"
+#include "ct_common/common/constraint_l.h"
 
 namespace ct {
 namespace common {

@@ -13,9 +13,9 @@
 #ifndef CT_COMMON_ARITHMETIC_UTILS_H_
 #define CT_COMMON_ARITHMETIC_UTILS_H_
 
+#include <algorithm>
 #include <cmath>
 #include <vector>
-#include <algorithm>
 
 namespace ct {
 namespace common {

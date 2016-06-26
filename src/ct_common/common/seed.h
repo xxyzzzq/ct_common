@@ -13,10 +13,10 @@
 #ifndef CT_COMMON_SEED_H_
 #define CT_COMMON_SEED_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/paramspec.h>
-#include <ct_common/common/assignment.h>
-#include <ct_common/common/eval_type_bool.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/paramspec.h"
+#include "ct_common/common/assignment.h"
+#include "ct_common/common/eval_type_bool.h"
 
 namespace ct {
 namespace common {

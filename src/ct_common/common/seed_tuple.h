@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_SEED_TUPLE_H_
 #define CT_COMMON_SEED_TUPLE_H_
 
-#include <ct_common/common/seed.h>
-#include <ct_common/common/tuple.h>
+#include "ct_common/common/seed.h"
+#include "ct_common/common/tuple.h"
 
 namespace ct {
 namespace common {

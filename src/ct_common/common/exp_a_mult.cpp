@@ -10,7 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/exp_a_mult.h>
+#include "ct_common/common/exp_a_mult.h"
 
 using namespace ct::common;
 

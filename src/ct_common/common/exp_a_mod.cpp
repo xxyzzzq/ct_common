@@ -10,7 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/exp_a_mod.h>
+#include "ct_common/common/exp_a_mod.h"
 
 using namespace ct::common;
 

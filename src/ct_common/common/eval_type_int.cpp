@@ -10,8 +10,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/eval_type_int.h>
-#include <ct_common/common/eval_type_double.h>
+#include "ct_common/common/eval_type_int.h"
+#include "ct_common/common/eval_type_double.h"
 
 using namespace ct::common;
 

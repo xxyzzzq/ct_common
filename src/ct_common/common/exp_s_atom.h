@@ -14,9 +14,9 @@
 #ifndef CT_COMMON_EXP_S_ATOM_H_
 #define CT_COMMON_EXP_S_ATOM_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/exp_s.h>
-#include <ct_common/common/paramspec.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/exp_s.h"
+#include "ct_common/common/paramspec.h"
 
 namespace ct {
 namespace common {

@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_EXP_A_CINT_H
 #define CT_COMMON_EXP_A_CINT_H
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/exp_a_atom.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/exp_a_atom.h"
 
 namespace ct {
 namespace common {
@@ -40,7 +40,7 @@ public:
   virtual void set_value(double value);
   /** Setting the string value (preserve a copy of the original string representation) */
   void set_str_value(const std::string &str_value);
-  
+
   /** Getting the value */
   int get_value(void) const { return this->value_; }
   virtual const std::string &get_str_value(void) const;

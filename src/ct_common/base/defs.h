@@ -13,7 +13,7 @@
 #ifndef CT_COMMON_DEFS_H_
 #define CT_COMMON_DEFS_H_
 
-#include <cstddef>
+#include <cstdlib>
 
 namespace ct {
 namespace common {

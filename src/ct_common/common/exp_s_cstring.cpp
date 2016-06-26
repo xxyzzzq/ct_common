@@ -10,7 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/exp_s_cstring.h>
+#include "ct_common/common/exp_s_cstring.h"
 
 using namespace ct::common;
 

@@ -11,8 +11,8 @@
 //===----------------------------------------------------------------------===//
 
 #include <algorithm>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/strength.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/strength.h"
 
 using namespace ct::common;
 

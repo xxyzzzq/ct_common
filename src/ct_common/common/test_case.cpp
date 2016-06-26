@@ -10,8 +10,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/defs.h>
-#include <ct_common/common/test_case.h>
+#include "ct_common/common/test_case.h"
+
+#include "ct_common/base/defs.h"
 
 using namespace ct::common;
 

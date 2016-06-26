@@ -10,9 +10,10 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/constraint_s_binary.h>
-#include <ct_common/common/arithmetic_utils.h>
-#include <ct_common/common/eval_type_string.h>
+#include "ct_common/common/constraint_s_binary.h"
+
+#include "ct_common/base/arithmetic_utils.h"
+#include "ct_common/common/eval_type_string.h"
 
 using namespace ct::common;
 

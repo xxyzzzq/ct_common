@@ -10,8 +10,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/constraint_l_param.h>
-#include <ct_common/common/paramspec_bool.h>
+#include "ct_common/common/constraint_l_param.h"
+#include "ct_common/common/paramspec_bool.h"
 
 using namespace ct::common;
 

@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_CONSTRAINT_A_H_
 #define CT_COMMON_CONSTRAINT_A_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/constraint.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/constraint.h"
 
 namespace ct {
 namespace common {

@@ -13,12 +13,12 @@
 #ifndef CT_COMMON_SUTMODEL_H_
 #define CT_COMMON_SUTMODEL_H_
 
-#include <ct_common/common/paramspec.h>
-#include <ct_common/common/pvpair.h>
-#include <ct_common/common/tuple.h>
-#include <ct_common/common/seed.h>
-#include <ct_common/common/constraint.h>
-#include <ct_common/common/strength.h>
+#include "ct_common/common/paramspec.h"
+#include "ct_common/common/pvpair.h"
+#include "ct_common/common/tuple.h"
+#include "ct_common/common/seed.h"
+#include "ct_common/common/constraint.h"
+#include "ct_common/common/strength.h"
 #include <memory>
 
 namespace ct {

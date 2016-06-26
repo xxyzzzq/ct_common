@@ -10,7 +10,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/constraint_l_xor.h>
+#include "ct_common/common/constraint_l_xor.h"
 
 using namespace ct::common;
 

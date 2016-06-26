@@ -11,7 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include <cstdlib>
-#include <ct_common/common/paramspec_double.h>
+#include "ct_common/common/paramspec_double.h"
 
 using namespace ct::common;
 

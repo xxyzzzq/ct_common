@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_PARAMSPEC_INT_H_
 #define CT_COMMON_PARAMSPEC_INT_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/paramspec.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/paramspec.h"
 
 namespace ct {
 namespace common {

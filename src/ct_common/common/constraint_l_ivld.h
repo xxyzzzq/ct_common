@@ -14,8 +14,8 @@
 #ifndef CT_COMMON_CONSTRAINT_L_IVLD_H_
 #define CT_COMMON_CONSTRAINT_L_IVLD_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/constraint_l_atom.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/constraint_l_atom.h"
 
 namespace ct {
 namespace common {
@@ -36,7 +36,7 @@ public:
   virtual void inner_touch_leaf_pids(
     const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     std::set<std::size_t> &pids_to_touch) const;
-  
+
   void set_pid(std::size_t pid) { this->pid_ = pid; }
   std::size_t get_pid(void) const { return this->pid_; }
 
