@@ -17,5 +17,8 @@ include_directories(third_party/quex)
 
 set(QUEX
   python ${CMAKE_CURRENT_SOURCE_DIR}/tools/quex_wrapper.py)
+set(MARKDOWN
+  python ${CMAKE_CURRENT_SOURCE_DIR}/tools/markdown_wrapper.py)
 
 add_subdirectory(src/ct_common)
+add_subdirectory(doc)
