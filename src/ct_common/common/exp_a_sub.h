@@ -22,18 +22,18 @@ namespace common {
  * The class for arithematic expression "-" (binary)
  */
 class DLL_EXPORT Exp_A_Sub : public Exp_A_Binary {
-public:
+ public:
   Exp_A_Sub(void);
   Exp_A_Sub(const Exp_A_Sub &from);
-  Exp_A_Sub &operator = (const Exp_A_Sub &right);
+  Exp_A_Sub &operator=(const Exp_A_Sub &right);
   virtual ~Exp_A_Sub(void);
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual std::string get_op_token(void) const;
 
-private:
+ private:
   virtual double evaluate_double(double val_1, double val_2) const;
   virtual int evaluate_int(int val_1, int val_2) const;
 };

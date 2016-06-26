@@ -14,32 +14,26 @@
 
 using namespace ct::common;
 
-Constraint::Constraint(void)
-    : TreeNode() {
-}
+Constraint::Constraint(void) : TreeNode() {}
 
-Constraint::Constraint(const Constraint &from)
-    : TreeNode(from) {
-}
+Constraint::Constraint(const Constraint &from) : TreeNode(from) {}
 
-Constraint &Constraint::operator = (const Constraint &right) {
-  TreeNode::operator = (right);
+Constraint &Constraint::operator=(const Constraint &right) {
+  TreeNode::operator=(right);
   return *this;
 }
 
-Constraint::~Constraint(void) {
-}
+Constraint::~Constraint(void) {}
 
 std::string Constraint::get_class_name(void) const {
   return Constraint::class_name();
 }
 
-std::string Constraint::class_name(void) {
-  return "Constraint";
-}
+std::string Constraint::class_name(void) { return "Constraint"; }
 
-EvalType_Bool Constraint::Evaluate(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                          const Assignment &assignment) const {
+EvalType_Bool Constraint::Evaluate(
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+    const Assignment &assignment) const {
   // never called
   return EvalType_Bool(false, false);
 }

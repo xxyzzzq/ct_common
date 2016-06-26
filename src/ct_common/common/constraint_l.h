@@ -23,10 +23,10 @@ namespace common {
  * Base class for logical constraints
  */
 class DLL_EXPORT Constraint_L : public Constraint {
-public:
+ public:
   Constraint_L(void);
   Constraint_L(const Constraint_L &from);
-  Constraint_L &operator = (const Constraint_L &right);
+  Constraint_L &operator=(const Constraint_L &right);
   virtual ~Constraint_L(void);
 
   virtual std::string get_class_name(void) const;

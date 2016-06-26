@@ -18,14 +18,14 @@ namespace ct {
 namespace common {
 // Base class for TreeNode evaluation return type
 class EvalType {
-public:
+ public:
   EvalType(void);
   EvalType(bool is_valid);
   EvalType(const EvalType &from);
   virtual ~EvalType(void) = 0;
-  EvalType &operator = (const EvalType &right);
+  EvalType &operator=(const EvalType &right);
 
-public:
+ public:
   bool is_valid_; /**< Whether the value is valid */
 };
 }

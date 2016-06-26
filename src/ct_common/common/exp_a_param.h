@@ -23,33 +23,38 @@ namespace common {
  * The class for arithemetic expressions w.r.t. a parameter
  */
 class DLL_EXPORT Exp_A_Param : public Exp_A_Atom {
-public:
+ public:
   Exp_A_Param(void);
   Exp_A_Param(const Exp_A_Param &from);
-  Exp_A_Param &operator = (const Exp_A_Param &right);
+  Exp_A_Param &operator=(const Exp_A_Param &right);
   virtual ~Exp_A_Param(void);
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
-  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(
+      std::ostream &os,
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
 
-  virtual void inner_touch_leaf_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                                      std::set<std::size_t> &pids_to_touch) const;
+  virtual void inner_touch_leaf_pids(
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      std::set<std::size_t> &pids_to_touch) const;
 
-public:
+ public:
   void set_pid(std::size_t pid) { this->pid_ = pid; }
   std::size_t get_pid(void) const { return this->pid_; }
 
-private:
-  virtual EvalType_Double EvaluateDouble_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                                      const Assignment &assignment) const;
+ private:
+  virtual EvalType_Double EvaluateDouble_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      const Assignment &assignment) const;
 
-  virtual EvalType_Int EvaluateInt_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                                const Assignment &assignment) const;
+  virtual EvalType_Int EvaluateInt_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      const Assignment &assignment) const;
 
-private:
-  std::size_t pid_;  /**< The parameter id */
+ private:
+  std::size_t pid_; /**< The parameter id */
 };
 }  // namespace common
 }  // namespace ct

@@ -13,12 +13,12 @@
 #ifndef CT_COMMON_TUPLE_H_
 #define CT_COMMON_TUPLE_H_
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include "ct_common/base/utils.h"
-#include "ct_common/common/pvpair.h"
 #include "ct_common/common/assignment.h"
+#include "ct_common/common/pvpair.h"
 
 namespace ct {
 namespace common {
@@ -26,15 +26,15 @@ class ParamSpec;
 /**
  * The class for tuples
  */
-class DLL_EXPORT Tuple : public Assignment, private std::vector<PVPair>
-{
-private:
+class DLL_EXPORT Tuple : public Assignment, private std::vector<PVPair> {
+ private:
   typedef std::vector<PVPair> impl_type;
-public:
+
+ public:
   Tuple(void);
   Tuple(const Tuple &from);
   explicit Tuple(const std::vector<PVPair> &from);
-  Tuple &operator =(const Tuple &right);
+  Tuple &operator=(const Tuple &right);
   ~Tuple(void);
 
   virtual bool IsContainParam(std::size_t pid) const;
@@ -47,14 +47,16 @@ public:
   /** Sort the pvpairs */
   void Sort(void);
 
-  /** Search for the PVPair for a given pid. The tuple need to be sorted in advance.
+  /** Search for the PVPair for a given pid. The tuple need to be sorted in
+   * advance.
    * The returned pointer is weak and should not be deleted. */
   const PVPair *Search(std::size_t pid) const;
 
   /** For iterating tuples. Go to the next tuple, returns false if overflows */
   bool to_the_next_tuple(
       std::vector<std::shared_ptr<ct::common::ParamSpec> > param_specs);
-  /** For iterating tuples. Go to the next tuple (considering invalid values), returns false if overflows */
+  /** For iterating tuples. Go to the next tuple (considering invalid values),
+   * returns false if overflows */
   bool to_the_next_tuple_with_ivld(
       std::vector<std::shared_ptr<ct::common::ParamSpec> > param_specs);
 
@@ -71,9 +73,9 @@ public:
   using impl_type::clear;
   using impl_type::size;
   using impl_type::empty;
-  using impl_type::operator [];
-  bool operator == (const Tuple &right) const;
-  bool operator <(const Tuple &right) const;
+  using impl_type::operator[];
+  bool operator==(const Tuple &right) const;
+  bool operator<(const Tuple &right) const;
 };
 }  // namespace common
 }  // namespace ct

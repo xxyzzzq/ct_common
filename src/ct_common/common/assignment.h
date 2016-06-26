@@ -14,8 +14,8 @@
 #ifndef CT_COMMON_ASSIGNMENT_H_
 #define CT_COMMON_ASSIGNMENT_H_
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 
@@ -23,12 +23,11 @@ namespace ct {
 namespace common {
 
 /** Base class for parameter assignments */
-class DLL_EXPORT Assignment
-{
-public:
+class DLL_EXPORT Assignment {
+ public:
   Assignment(void);
   Assignment(const Assignment &from);
-  Assignment &operator =(const Assignment &right);
+  Assignment &operator=(const Assignment &right);
   virtual ~Assignment(void) = 0;
 
   /** whether the assignment contains a parameter */

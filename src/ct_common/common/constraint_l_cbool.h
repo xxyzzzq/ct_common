@@ -21,13 +21,13 @@ namespace common {
  * The class for constant boolean atom constraints
  */
 class Constraint_L_CBool : public Constraint_L_Atom {
-public:
+ public:
   Constraint_L_CBool(void);
   Constraint_L_CBool(const Constraint_L_CBool &from);
   virtual ~Constraint_L_CBool(void);
-  Constraint_L_CBool &operator = (const Constraint_L_CBool &right);
+  Constraint_L_CBool &operator=(const Constraint_L_CBool &right);
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
 
@@ -36,13 +36,16 @@ public:
 
   /** get the string value: true/false */
   virtual const std::string &get_str_value(void) const;
-  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(
+      std::ostream &os,
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
 
-public:
-  virtual EvalType_Bool Evaluate(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                        const Assignment &assignment) const;
+ public:
+  virtual EvalType_Bool Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      const Assignment &assignment) const;
 
-private:
+ private:
   bool value_;
 };
 }  // namespace common

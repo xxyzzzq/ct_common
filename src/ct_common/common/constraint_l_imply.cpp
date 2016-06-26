@@ -14,22 +14,18 @@
 
 using namespace ct::common;
 
-Constraint_L_Imply::Constraint_L_Imply(void)
-  : Constraint_L_Binary() {
-}
+Constraint_L_Imply::Constraint_L_Imply(void) : Constraint_L_Binary() {}
 
 Constraint_L_Imply::Constraint_L_Imply(const Constraint_L_Imply &from)
-  : Constraint_L_Binary(from) {
-}
+    : Constraint_L_Binary(from) {}
 
-Constraint_L_Imply &Constraint_L_Imply::operator = (
+Constraint_L_Imply &Constraint_L_Imply::operator=(
     const Constraint_L_Imply &right) {
   Constraint_L_Binary::operator=(right);
   return *this;
 }
 
-Constraint_L_Imply::~Constraint_L_Imply(void) {
-}
+Constraint_L_Imply::~Constraint_L_Imply(void) {}
 
 std::string Constraint_L_Imply::get_class_name(void) const {
   return Constraint_L_Imply::class_name();
@@ -39,7 +35,8 @@ std::string Constraint_L_Imply::class_name(void) {
   return "Constraint_L_Imply";
 }
 
-EvalType_Bool Constraint_L_Imply::evaluate_func(EvalType_Bool val_l, EvalType_Bool val_r) const {
+EvalType_Bool Constraint_L_Imply::evaluate_func(EvalType_Bool val_l,
+                                                EvalType_Bool val_r) const {
   EvalType_Bool tmp_return;
   if (!val_l.is_valid_ || !val_l.value_) {
     tmp_return.value_ = true;
@@ -51,6 +48,4 @@ EvalType_Bool Constraint_L_Imply::evaluate_func(EvalType_Bool val_l, EvalType_Bo
   return tmp_return;
 }
 
-std::string Constraint_L_Imply::get_op_token(void) const {
-  return "->";
-}
+std::string Constraint_L_Imply::get_op_token(void) const { return "->"; }

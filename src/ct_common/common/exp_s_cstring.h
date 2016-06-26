@@ -22,18 +22,20 @@ namespace common {
  * The base class for constant string expressions
  */
 class DLL_EXPORT Exp_S_CString : public Exp_S_Atom {
-public:
+ public:
   Exp_S_CString(void);
   Exp_S_CString(const Exp_S_CString &from);
-  Exp_S_CString &operator = (const Exp_S_CString &right);
+  Exp_S_CString &operator=(const Exp_S_CString &right);
   virtual ~Exp_S_CString(void);
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
-  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(
+      std::ostream &os,
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
 
-public:
+ public:
   /** Setting the value */
   void set_value(const std::string &value) { this->value_ = value; }
   /** Setting the value */
@@ -43,10 +45,11 @@ public:
   const std::string &get_value(void) const { return this->value_; }
   virtual const std::string &get_str_value(void) const;
 
-  virtual EvalType_String Evaluate( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                                const Assignment &assignment) const;
+  virtual EvalType_String Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      const Assignment &assignment) const;
 
-private:
+ private:
   std::string value_;
 };
 }  // namespace common

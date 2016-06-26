@@ -22,17 +22,17 @@ namespace common {
  * The class for constraint "=="
  */
 class DLL_EXPORT Constraint_A_EQ : public Constraint_A_Binary {
-public:
+ public:
   Constraint_A_EQ(void);
   Constraint_A_EQ(const Constraint_A_EQ &from);
-  Constraint_A_EQ &operator = (const Constraint_A_EQ &right);
+  Constraint_A_EQ &operator=(const Constraint_A_EQ &right);
   ~Constraint_A_EQ(void);
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual std::string get_op_token(void) const;
 
-private:
+ private:
   virtual bool evaluate_func_int(int loprd_val, int roprd_val) const;
   virtual bool evaluate_func_double(double loprd_val, double roprd_val) const;
 };

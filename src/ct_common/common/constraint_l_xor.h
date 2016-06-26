@@ -22,18 +22,19 @@ namespace common {
  * The class for logical constraint "^^"(XOR)
  */
 class DLL_EXPORT Constraint_L_Xor : public Constraint_L_Binary {
-public:
+ public:
   Constraint_L_Xor(void);
   Constraint_L_Xor(const Constraint_L_Xor &from);
-  Constraint_L_Xor &operator = (const Constraint_L_Xor &right);
+  Constraint_L_Xor &operator=(const Constraint_L_Xor &right);
   virtual ~Constraint_L_Xor(void);
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual std::string get_op_token(void) const;
 
-private:
-  virtual EvalType_Bool evaluate_func(EvalType_Bool val_l, EvalType_Bool val_r) const;
+ private:
+  virtual EvalType_Bool evaluate_func(EvalType_Bool val_l,
+                                      EvalType_Bool val_r) const;
 };
 }  // namespace common
 }  // namespace ct

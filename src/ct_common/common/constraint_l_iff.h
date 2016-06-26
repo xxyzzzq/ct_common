@@ -22,18 +22,19 @@ namespace common {
  * The class for logical constraing "<->"
  */
 class DLL_EXPORT Constraint_L_Iff : public Constraint_L_Binary {
-public:
+ public:
   Constraint_L_Iff(void);
   Constraint_L_Iff(const Constraint_L_Iff &from);
-  Constraint_L_Iff &operator = (const Constraint_L_Iff &right);
+  Constraint_L_Iff &operator=(const Constraint_L_Iff &right);
   virtual ~Constraint_L_Iff(void);
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual std::string get_op_token(void) const;
 
-private:
-  virtual EvalType_Bool evaluate_func(EvalType_Bool val_l, EvalType_Bool val_r) const;
+ private:
+  virtual EvalType_Bool evaluate_func(EvalType_Bool val_l,
+                                      EvalType_Bool val_r) const;
 };
 }  // namespace common
 }  // namespace ct

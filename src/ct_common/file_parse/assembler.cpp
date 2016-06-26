@@ -11,20 +11,18 @@
 //===----------------------------------------------------------------------===//
 
 #include <algorithm>
-#include <exception>
-#include <cstdlib>
-#include <sstream>
 #include <cmath>
+#include <cstdlib>
+#include <exception>
+#include <sstream>
 
-#include "ct_common/file_parse/assembler.h"
-#include "ct_common/common/seed_tuple.h"
 #include "ct_common/common/seed_constraint.h"
+#include "ct_common/common/seed_tuple.h"
+#include "ct_common/file_parse/assembler.h"
 
 using namespace ct::common;
 
-Assembler::Assembler(void) {
-  this->default_precision_ = 0;
-}
+Assembler::Assembler(void) { this->default_precision_ = 0; }
 
 Assembler::Assembler(const Assembler &from) {
   this->default_precision_ = from.default_precision_;
@@ -32,10 +30,9 @@ Assembler::Assembler(const Assembler &from) {
   this->stored_invalidations_ = from.stored_invalidations_;
 }
 
-Assembler::~Assembler(void) {
-}
+Assembler::~Assembler(void) {}
 
-const Assembler &Assembler::operator =(const Assembler &right) {
+const Assembler &Assembler::operator=(const Assembler &right) {
   this->default_precision_ = right.default_precision_;
   this->err_logger_ = right.err_logger_;
   this->stored_invalidations_ = right.stored_invalidations_;
@@ -69,8 +66,7 @@ std::size_t Assembler::numWarnings(void) const {
 }
 
 ParamSpec *Assembler::asm_paramspec(
-    const std::string &type,
-    const std::string &identifier,
+    const std::string &type, const std::string &identifier,
     const std::vector<std::shared_ptr<TreeNode> > &vals) {
   ParamSpec *tmp_return;
   if (type == "int") {
@@ -87,47 +83,55 @@ ParamSpec *Assembler::asm_paramspec(
   }
   tmp_return->set_param_name(identifier);
   std::vector<std::string> str_vals;
-  if (TYPE_CHECK(tmp_return, ParamSpec_Bool*)) {
-    if (vals.size() != 0 && (vals.size() != 2 ||
-        !TYPE_CHECK(vals[0].get(), Constraint_L_CBool*) ||
-        !TYPE_CHECK(vals[1].get(), Constraint_L_CBool*) ||
-        dynamic_cast<Constraint_L_CBool*>(vals[0].get())->get_value() != true ||
-        dynamic_cast<Constraint_L_CBool*>(vals[1].get())->get_value() != false)) {
-      this->reportWarning("values for boolean parameters are neglected, possible format is:");
+  if (TYPE_CHECK(tmp_return, ParamSpec_Bool *)) {
+    if (vals.size() != 0 &&
+        (vals.size() != 2 || !TYPE_CHECK(vals[0].get(), Constraint_L_CBool *) ||
+         !TYPE_CHECK(vals[1].get(), Constraint_L_CBool *) ||
+         dynamic_cast<Constraint_L_CBool *>(vals[0].get())->get_value() !=
+             true ||
+         dynamic_cast<Constraint_L_CBool *>(vals[1].get())->get_value() !=
+             false)) {
+      this->reportWarning(
+          "values for boolean parameters are neglected, possible format is:");
       this->reportWarning("bool <param>;");
       this->reportWarning("bool <param>: true, false;");
     }
   } else {
     for (std::size_t i = 0; i < vals.size(); ++i) {
-      if (TYPE_CHECK(tmp_return, ParamSpec_Int*) &&
-          TYPE_CHECK(vals[i].get(), Exp_S_CString*)) {
-        this->reportWarning(
-            std::string("warning: forcing string value ") + vals[i]->get_str_value()
-            + " as integer for parameter " + tmp_return->get_param_name());
+      if (TYPE_CHECK(tmp_return, ParamSpec_Int *) &&
+          TYPE_CHECK(vals[i].get(), Exp_S_CString *)) {
+        this->reportWarning(std::string("warning: forcing string value ") +
+                            vals[i]->get_str_value() +
+                            " as integer for parameter " +
+                            tmp_return->get_param_name());
       }
-      if (TYPE_CHECK(tmp_return, ParamSpec_Int*) &&
-          TYPE_CHECK(vals[i].get(), Exp_A_CDouble*)) {
-        this->reportWarning(
-            std::string("warning: forcing double value ") + vals[i]->get_str_value()
-            + " as integer for parameter " + tmp_return->get_param_name());
+      if (TYPE_CHECK(tmp_return, ParamSpec_Int *) &&
+          TYPE_CHECK(vals[i].get(), Exp_A_CDouble *)) {
+        this->reportWarning(std::string("warning: forcing double value ") +
+                            vals[i]->get_str_value() +
+                            " as integer for parameter " +
+                            tmp_return->get_param_name());
       }
-      if (TYPE_CHECK(tmp_return, ParamSpec_Double*) &&
-          TYPE_CHECK(vals[i].get(), Exp_S_CString*)) {
-        this->reportWarning(
-            std::string("warning: forcing string value ") + vals[i]->get_str_value()
-            + " as double for parameter " + tmp_return->get_param_name());
+      if (TYPE_CHECK(tmp_return, ParamSpec_Double *) &&
+          TYPE_CHECK(vals[i].get(), Exp_S_CString *)) {
+        this->reportWarning(std::string("warning: forcing string value ") +
+                            vals[i]->get_str_value() +
+                            " as double for parameter " +
+                            tmp_return->get_param_name());
       }
-      if (TYPE_CHECK(tmp_return, ParamSpec_String*) &&
-          TYPE_CHECK(vals[i].get(), Exp_A_CInt*)) {
-        this->reportWarning(
-            std::string("warning: forcing integer value ") + vals[i]->get_str_value()
-            + " as string for parameter " + tmp_return->get_param_name());
+      if (TYPE_CHECK(tmp_return, ParamSpec_String *) &&
+          TYPE_CHECK(vals[i].get(), Exp_A_CInt *)) {
+        this->reportWarning(std::string("warning: forcing integer value ") +
+                            vals[i]->get_str_value() +
+                            " as string for parameter " +
+                            tmp_return->get_param_name());
       }
-      if (TYPE_CHECK(tmp_return, ParamSpec_String*) &&
-          TYPE_CHECK(vals[i].get(), Exp_A_CDouble*)) {
-        this->reportWarning(
-            std::string("warning: forcing double value ") + vals[i]->get_str_value()
-            + " as string for parameter " + tmp_return->get_param_name());
+      if (TYPE_CHECK(tmp_return, ParamSpec_String *) &&
+          TYPE_CHECK(vals[i].get(), Exp_A_CDouble *)) {
+        this->reportWarning(std::string("warning: forcing double value ") +
+                            vals[i]->get_str_value() +
+                            " as string for parameter " +
+                            tmp_return->get_param_name());
       }
       str_vals.push_back(vals[i]->get_str_value());
     }
@@ -137,9 +141,10 @@ ParamSpec *Assembler::asm_paramspec(
 }
 
 ParamSpec *Assembler::asm_paramspec(
-    const std::string &type,
-    const std::string &identifier,
-    const std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > > &auto_value_specs) {
+    const std::string &type, const std::string &identifier,
+    const std::vector<
+        std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > >
+        &auto_value_specs) {
   ParamSpec *tmp_return;
   if (type == "int") {
     tmp_return = new ParamSpec_Int();
@@ -154,11 +159,18 @@ ParamSpec *Assembler::asm_paramspec(
     return 0;
   }
   if (auto_value_specs.size() == 0) {
-    this->reportWarning(std::string("the auto value specs for parameter ") + identifier + " is empty");
+    this->reportWarning(std::string("the auto value specs for parameter ") +
+                        identifier + " is empty");
   } else {
-    std::shared_ptr<Constraint_L_CBool> last_cond = std::dynamic_pointer_cast<Constraint_L_CBool>(auto_value_specs.back().first);
+    std::shared_ptr<Constraint_L_CBool> last_cond =
+        std::dynamic_pointer_cast<Constraint_L_CBool>(
+            auto_value_specs.back().first);
     if (!last_cond || last_cond->get_value() != true) {
-      this->reportWarning(std::string("the last condition for auto parameter ") + identifier + " is not a constant true. This may cause errors if the specified conditions do not cover all the cases. Consider using a \"default\" or \"true\".");
+      this->reportWarning(
+          std::string("the last condition for auto parameter ") + identifier +
+          " is not a constant true. This may cause errors if the specified "
+          "conditions do not cover all the cases. Consider using a \"default\" "
+          "or \"true\".");
     }
   }
 
@@ -168,13 +180,10 @@ ParamSpec *Assembler::asm_paramspec(
   return tmp_return;
 }
 
-
-void attach_strengths_core(
-    const std::vector<std::size_t> &pid_list,
-    std::vector<std::vector<std::size_t> > &strengths,
-    std::vector<std::size_t> &stack,
-    std::size_t strength,
-    std::size_t depth) {
+void attach_strengths_core(const std::vector<std::size_t> &pid_list,
+                           std::vector<std::vector<std::size_t> > &strengths,
+                           std::vector<std::size_t> &stack,
+                           std::size_t strength, std::size_t depth) {
   if (depth == strength) {
     std::vector<std::size_t> new_strength;
     for (std::size_t i = 0; i < stack.size(); ++i) {
@@ -185,18 +194,17 @@ void attach_strengths_core(
   }
   std::size_t start_point = 0;
   if (depth > 0) {
-    start_point = stack[depth-1]+1;
+    start_point = stack[depth - 1] + 1;
   }
   for (std::size_t i = start_point; i < pid_list.size(); ++i) {
     stack[depth] = i;
-    attach_strengths_core(pid_list, strengths, stack, strength, depth+1);
+    attach_strengths_core(pid_list, strengths, stack, strength, depth + 1);
   }
 }
 
 void Assembler::attach_default_strengths(
     const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-    std::vector<ct::common::Strength> &strengths,
-    std::size_t strength) {
+    std::vector<ct::common::Strength> &strengths, std::size_t strength) {
   // compute the parameter id list
   std::vector<std::size_t> pid_list;
   for (std::size_t i = 0; i < param_specs.size(); ++i) {
@@ -207,7 +215,8 @@ void Assembler::attach_default_strengths(
   // generate the strengths
   for (std::size_t i = 0; i < pid_list.size(); ++i) {
     if (param_specs[pid_list[i]]->is_auto()) {
-      CT_EXCEPTION("auto parameters should never be included in any covering strength");
+      CT_EXCEPTION(
+          "auto parameters should never be included in any covering strength");
       return;
     }
   }
@@ -224,14 +233,13 @@ void Assembler::attach_default_strengths(
 void Assembler::attach_strengths(
     const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const std::vector<std::string> &identifiers,
-    std::vector<ct::common::Strength> &strengths,
-    std::size_t strength) {
+    std::vector<ct::common::Strength> &strengths, std::size_t strength) {
   // compute the parameter id list
   std::vector<std::size_t> pid_list;
   for (std::size_t i = 0; i < identifiers.size(); ++i) {
     if (identifiers[i] == "default") {
       for (std::size_t j = 0; j < param_specs.size(); ++j) {
-        if (!param_specs[j]->is_aux() && !param_specs[j]->is_auto()){
+        if (!param_specs[j]->is_aux() && !param_specs[j]->is_auto()) {
           pid_list.push_back(j);
         }
       }
@@ -239,11 +247,13 @@ void Assembler::attach_strengths(
     }
     std::size_t id = find_param_id(param_specs, identifiers[i]);
     if (id == PID_BOUND) {
-      CT_EXCEPTION((std::string("parameter ") + identifiers[i] + " not found").c_str());
+      CT_EXCEPTION(
+          (std::string("parameter ") + identifiers[i] + " not found").c_str());
     }
     if (param_specs[id]->is_auto()) {
       CT_EXCEPTION((std::string("parameter ") + identifiers[i] +
-                    " is a auto parameter, and cannot be added to a strength").c_str());
+                    " is a auto parameter, and cannot be added to a strength")
+                       .c_str());
     }
     pid_list.push_back(id);
   }
@@ -251,8 +261,7 @@ void Assembler::attach_strengths(
   std::sort(pid_list.begin(), pid_list.end());
   std::vector<std::size_t> unique_pid_list;
   for (std::size_t i = 0; i < pid_list.size(); i++) {
-    if (unique_pid_list.size() == 0 ||
-        pid_list[i] > unique_pid_list.back()) {
+    if (unique_pid_list.size() == 0 || pid_list[i] > unique_pid_list.back()) {
       unique_pid_list.push_back(pid_list[i]);
     }
   }
@@ -268,8 +277,7 @@ void Assembler::attach_strengths(
 
 PVPair *Assembler::asm_pvpair(
     const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-    const std::string &identifier,
-    const TreeNode *value_exp) {
+    const std::string &identifier, const TreeNode *value_exp) {
   if (value_exp == NULL) {
     CT_EXCEPTION("encountered null value expression");
     return 0;
@@ -281,15 +289,21 @@ PVPair *Assembler::asm_pvpair(
   PVPair *tmp_return = new PVPair();
   std::size_t pid = find_param_id(param_specs, identifier);
   if (pid == PID_BOUND) {
-    // CT_EXCEPTION((std::string("parameter ") + identifier + " not found").c_str()); // no exception now
+    // CT_EXCEPTION((std::string("parameter ") + identifier + " not
+    // found").c_str()); // no exception now
     return 0;
   }
   if (param_specs[pid]->is_auto()) {
-    CT_EXCEPTION((std::string("cannot assemble pvpair for auto parameter") + identifier).c_str());
+    CT_EXCEPTION(
+        (std::string("cannot assemble pvpair for auto parameter") + identifier)
+            .c_str());
   }
-  std::size_t vid = param_specs[pid]->query_value_id(value_exp->get_str_value());
+  std::size_t vid =
+      param_specs[pid]->query_value_id(value_exp->get_str_value());
   if (vid == VID_BOUND) {
-    CT_EXCEPTION((std::string("value not found:<")+identifier+","+value_exp->get_str_value()+">").c_str());
+    CT_EXCEPTION((std::string("value not found:<") + identifier + "," +
+                  value_exp->get_str_value() + ">")
+                     .c_str());
     return 0;
   }
   tmp_return->pid_ = pid;
@@ -297,28 +311,31 @@ PVPair *Assembler::asm_pvpair(
   return tmp_return;
 }
 
-TreeNode *Assembler::asm_param(const std::vector<std::shared_ptr<ParamSpec> > &param_specs, const std::string &identifier) {
+TreeNode *Assembler::asm_param(
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+    const std::string &identifier) {
   std::size_t pid = find_param_id(param_specs, identifier);
   if (pid == PID_BOUND) {
-    CT_EXCEPTION((std::string("parameter ") + identifier + " not found").c_str());
+    CT_EXCEPTION(
+        (std::string("parameter ") + identifier + " not found").c_str());
     return 0;
   }
   TreeNode *tmp_return = 0;
-  if (TYPE_CHECK(param_specs[pid].get(), ParamSpec_String*)) {
+  if (TYPE_CHECK(param_specs[pid].get(), ParamSpec_String *)) {
     Exp_S_Param *exp = new Exp_S_Param();
     exp->set_pid(pid);
     tmp_return = exp;
-  } else if (TYPE_CHECK(param_specs[pid].get(), ParamSpec_Int*)) {
+  } else if (TYPE_CHECK(param_specs[pid].get(), ParamSpec_Int *)) {
     Exp_A_Param *exp = new Exp_A_Param();
     exp->set_pid(pid);
     exp->set_type(EAT_INT);
     tmp_return = exp;
-  } else if (TYPE_CHECK(param_specs[pid].get(), ParamSpec_Double*)) {
+  } else if (TYPE_CHECK(param_specs[pid].get(), ParamSpec_Double *)) {
     Exp_A_Param *exp = new Exp_A_Param();
     exp->set_pid(pid);
     exp->set_type(EAT_DOUBLE);
     tmp_return = exp;
-  } else if (TYPE_CHECK(param_specs[pid].get(), ParamSpec_Bool*)) {
+  } else if (TYPE_CHECK(param_specs[pid].get(), ParamSpec_Bool *)) {
     Constraint_L_Param *constr = new Constraint_L_Param();
     constr->set_pid(pid);
     tmp_return = constr;
@@ -328,35 +345,36 @@ TreeNode *Assembler::asm_param(const std::vector<std::shared_ptr<ParamSpec> > &p
   return tmp_return;
 }
 
-Constraint_A *Assembler::asm_constraint_a(Exp_A *oprd1, Exp_A *oprd2, eOPERATOR op, double precision) {
+Constraint_A *Assembler::asm_constraint_a(Exp_A *oprd1, Exp_A *oprd2,
+                                          eOPERATOR op, double precision) {
   if (oprd1 == NULL || oprd2 == NULL) {
     CT_EXCEPTION("encountered null oprands");
     return 0;
   }
   Constraint_A_Binary *tmp_return = 0;
   switch (op) {
-  case OP_EQ:
-    tmp_return = new Constraint_A_EQ();
-    break;
-  case OP_NE:
-    tmp_return = new Constraint_A_NE();
-    break;
-  case OP_GT:
-    tmp_return = new Constraint_A_GT();
-    break;
-  case OP_GE:
-    tmp_return = new Constraint_A_GE();
-    break;
-  case OP_LT:
-    tmp_return = new Constraint_A_LT();
-    break;
-  case OP_LE:
-    tmp_return = new Constraint_A_LE();
-    break;
-  default:
-    CT_EXCEPTION("unexpected arithmetic constraint type");
-    return 0;
-    break;
+    case OP_EQ:
+      tmp_return = new Constraint_A_EQ();
+      break;
+    case OP_NE:
+      tmp_return = new Constraint_A_NE();
+      break;
+    case OP_GT:
+      tmp_return = new Constraint_A_GT();
+      break;
+    case OP_GE:
+      tmp_return = new Constraint_A_GE();
+      break;
+    case OP_LT:
+      tmp_return = new Constraint_A_LT();
+      break;
+    case OP_LE:
+      tmp_return = new Constraint_A_LE();
+      break;
+    default:
+      CT_EXCEPTION("unexpected arithmetic constraint type");
+      return 0;
+      break;
   }
   std::shared_ptr<Exp_A> tmp_oprd1(oprd1);
   std::shared_ptr<Exp_A> tmp_oprd2(oprd2);
@@ -366,23 +384,24 @@ Constraint_A *Assembler::asm_constraint_a(Exp_A *oprd1, Exp_A *oprd2, eOPERATOR 
   return tmp_return;
 }
 
-Constraint_S *Assembler::asm_constraint_s(Exp_S *oprd1, Exp_S *oprd2, eOPERATOR op) {
+Constraint_S *Assembler::asm_constraint_s(Exp_S *oprd1, Exp_S *oprd2,
+                                          eOPERATOR op) {
   if (oprd1 == NULL || oprd2 == NULL) {
     CT_EXCEPTION("encountered null oprands");
     return 0;
   }
   Constraint_S_Binary *tmp_return = 0;
   switch (op) {
-  case OP_EQ:
-    tmp_return = new Constraint_S_EQ();
-    break;
-  case OP_NE:
-    tmp_return = new Constraint_S_NE();
-    break;
-  default:
-    CT_EXCEPTION("unexpected string constraint type");
-    return 0;
-    break;
+    case OP_EQ:
+      tmp_return = new Constraint_S_EQ();
+      break;
+    case OP_NE:
+      tmp_return = new Constraint_S_NE();
+      break;
+    default:
+      CT_EXCEPTION("unexpected string constraint type");
+      return 0;
+      break;
   }
   std::shared_ptr<Exp_S> tmp_oprd1(oprd1);
   std::shared_ptr<Exp_S> tmp_oprd2(oprd2);
@@ -391,7 +410,9 @@ Constraint_S *Assembler::asm_constraint_s(Exp_S *oprd1, Exp_S *oprd2, eOPERATOR 
   return tmp_return;
 }
 
-Constraint *Assembler::asm_constraint_asb(TreeNode *oprd1, TreeNode *oprd2, eOPERATOR op, const std::string &str) {
+Constraint *Assembler::asm_constraint_asb(TreeNode *oprd1, TreeNode *oprd2,
+                                          eOPERATOR op,
+                                          const std::string &str) {
   if (oprd1 == NULL || oprd2 == NULL) {
     CT_EXCEPTION("encountered null oprands");
     return 0;
@@ -400,19 +421,21 @@ Constraint *Assembler::asm_constraint_asb(TreeNode *oprd1, TreeNode *oprd2, eOPE
   bool is_precision_set = false;
   std::size_t pos_lbracket = str.find('[');
   std::size_t pos_rbracket = str.find(']');
-  if (pos_lbracket != std::string::npos && pos_rbracket != std::string::npos && pos_rbracket > pos_lbracket+1) {
+  if (pos_lbracket != std::string::npos && pos_rbracket != std::string::npos &&
+      pos_rbracket > pos_lbracket + 1) {
     is_precision_set = true;
-    std::string str_precision = str.substr(pos_lbracket+1, pos_rbracket-pos_lbracket-1);
+    std::string str_precision =
+        str.substr(pos_lbracket + 1, pos_rbracket - pos_lbracket - 1);
     std::stringstream ss(str_precision);
     ss >> precision;
     precision = fabs(precision);
   }
-  if (TYPE_CHECK(oprd1, Exp_A*) && TYPE_CHECK(oprd2, Exp_A*)) {
+  if (TYPE_CHECK(oprd1, Exp_A *) && TYPE_CHECK(oprd2, Exp_A *)) {
     Exp_A *exp1 = dynamic_cast<Exp_A *>(oprd1);
     Exp_A *exp2 = dynamic_cast<Exp_A *>(oprd2);
     return this->asm_constraint_a(exp1, exp2, op, precision);
   }
-  if (TYPE_CHECK(oprd1, Exp_S*) && TYPE_CHECK(oprd2, Exp_S*)) {
+  if (TYPE_CHECK(oprd1, Exp_S *) && TYPE_CHECK(oprd2, Exp_S *)) {
     if (is_precision_set) {
       this->reportWarning("ignoring precision for string relation");
     }
@@ -420,7 +443,7 @@ Constraint *Assembler::asm_constraint_asb(TreeNode *oprd1, TreeNode *oprd2, eOPE
     Exp_S *exp2 = dynamic_cast<Exp_S *>(oprd2);
     return this->asm_constraint_s(exp1, exp2, op);
   }
-  if (TYPE_CHECK(oprd1, Constraint*) && TYPE_CHECK(oprd2, Constraint*)) {
+  if (TYPE_CHECK(oprd1, Constraint *) && TYPE_CHECK(oprd2, Constraint *)) {
     if (is_precision_set) {
       this->reportWarning("ignoring precision for bool relation");
     }
@@ -428,40 +451,43 @@ Constraint *Assembler::asm_constraint_asb(TreeNode *oprd1, TreeNode *oprd2, eOPE
     Constraint *constr2 = dynamic_cast<Constraint *>(oprd2);
     return this->asm_constraint_l(constr1, constr2, op);
   }
-  CT_EXCEPTION((std::string("operands mismatch: ")+oprd1->get_class_name()+ " " + oprd2->get_class_name()).c_str());
+  CT_EXCEPTION((std::string("operands mismatch: ") + oprd1->get_class_name() +
+                " " + oprd2->get_class_name())
+                   .c_str());
   return 0;
 }
 
-Constraint_L *Assembler::asm_constraint_l(TreeNode *oprd1, TreeNode *oprd2, eOPERATOR op) {
+Constraint_L *Assembler::asm_constraint_l(TreeNode *oprd1, TreeNode *oprd2,
+                                          eOPERATOR op) {
   if (oprd1 == NULL || oprd2 == NULL) {
     CT_EXCEPTION("encountered null oprands");
     return 0;
   }
-  TYPE_ASSERT(oprd1, Constraint*);
-  TYPE_ASSERT(oprd2, Constraint*);
+  TYPE_ASSERT(oprd1, Constraint *);
+  TYPE_ASSERT(oprd2, Constraint *);
   Constraint_L_Binary *tmp_return = 0;
   switch (op) {
-  case OP_AND:
-    tmp_return = new Constraint_L_And();
-    break;
-  case OP_OR:
-    tmp_return = new Constraint_L_Or();
-    break;
-  case OP_XOR:
-  case OP_NE:
-    tmp_return = new Constraint_L_Xor();
-    break;
-  case OP_IMPLY:
-    tmp_return = new Constraint_L_Imply();
-    break;
-  case OP_IFF:
-  case OP_EQ:
-    tmp_return = new Constraint_L_Iff();
-    break;
-  default:
-    CT_EXCEPTION("unhandled l constraint");
-    return 0;
-    break;
+    case OP_AND:
+      tmp_return = new Constraint_L_And();
+      break;
+    case OP_OR:
+      tmp_return = new Constraint_L_Or();
+      break;
+    case OP_XOR:
+    case OP_NE:
+      tmp_return = new Constraint_L_Xor();
+      break;
+    case OP_IMPLY:
+      tmp_return = new Constraint_L_Imply();
+      break;
+    case OP_IFF:
+    case OP_EQ:
+      tmp_return = new Constraint_L_Iff();
+      break;
+    default:
+      CT_EXCEPTION("unhandled l constraint");
+      return 0;
+      break;
   }
   Constraint *constr1 = dynamic_cast<Constraint *>(oprd1);
   Constraint *constr2 = dynamic_cast<Constraint *>(oprd2);
@@ -475,16 +501,16 @@ Constraint_L *Assembler::asm_constraint_l(TreeNode *oprd, eOPERATOR op) {
     CT_EXCEPTION("encountered null oprand");
     return 0;
   }
-  TYPE_ASSERT(oprd, Constraint*);
+  TYPE_ASSERT(oprd, Constraint *);
   Constraint_L_Unary *tmp_return = 0;
   switch (op) {
-  case OP_NOT:
-    tmp_return = new Constraint_L_Not();
-    break;
-  default:
-    CT_EXCEPTION("unhandled l constraint");
-    return 0;
-    break;
+    case OP_NOT:
+      tmp_return = new Constraint_L_Not();
+      break;
+    default:
+      CT_EXCEPTION("unhandled l constraint");
+      return 0;
+      break;
   }
   Constraint *constr = dynamic_cast<Constraint *>(oprd);
   tmp_return->set_oprd(std::shared_ptr<Constraint>(constr));
@@ -508,43 +534,41 @@ Exp_A *Assembler::asm_exp_a(TreeNode *oprd1, TreeNode *oprd2, eOPERATOR op) {
     CT_EXCEPTION("encountered null oprands");
     return 0;
   }
-  TYPE_ASSERT(oprd1, Exp_A*);
-  TYPE_ASSERT(oprd2, Exp_A*);
+  TYPE_ASSERT(oprd1, Exp_A *);
+  TYPE_ASSERT(oprd2, Exp_A *);
   Exp_A *c_oprd1 = dynamic_cast<Exp_A *>(oprd1);
   Exp_A *c_oprd2 = dynamic_cast<Exp_A *>(oprd2);
   Exp_A_Binary *tmp_return = 0;
   switch (op) {
-  case OP_ADD:
-    tmp_return = new Exp_A_Add();
-    break;
-  case OP_DIV:
-    tmp_return = new Exp_A_Div();
-    break;
-  case OP_MOD:
-    if (c_oprd1->get_type() != EAT_INT ||
-        c_oprd2->get_type() != EAT_INT) {
-      CT_EXCEPTION("the operands of \'%\' must be integers");
-    }
-    tmp_return = new Exp_A_Mod();
-    break;
-  case OP_MULT:
-    tmp_return = new Exp_A_Mult();
-    break;
-  case OP_SUB:
-    tmp_return = new Exp_A_Sub();
-    break;
-  default:
-    CT_EXCEPTION("unhandled exp type");
-    return 0;
-    break;
+    case OP_ADD:
+      tmp_return = new Exp_A_Add();
+      break;
+    case OP_DIV:
+      tmp_return = new Exp_A_Div();
+      break;
+    case OP_MOD:
+      if (c_oprd1->get_type() != EAT_INT || c_oprd2->get_type() != EAT_INT) {
+        CT_EXCEPTION("the operands of \'%\' must be integers");
+      }
+      tmp_return = new Exp_A_Mod();
+      break;
+    case OP_MULT:
+      tmp_return = new Exp_A_Mult();
+      break;
+    case OP_SUB:
+      tmp_return = new Exp_A_Sub();
+      break;
+    default:
+      CT_EXCEPTION("unhandled exp type");
+      return 0;
+      break;
   }
   tmp_return->set_loprd(std::shared_ptr<TreeNode>(c_oprd1));
   tmp_return->set_roprd(std::shared_ptr<TreeNode>(c_oprd2));
-  if (c_oprd1->get_type() == EAT_INT &&
-      c_oprd2->get_type() == EAT_INT) {
+  if (c_oprd1->get_type() == EAT_INT && c_oprd2->get_type() == EAT_INT) {
     tmp_return->set_type(EAT_INT);
   } else if (c_oprd1->get_type() == EAT_DOUBLE ||
-      c_oprd2->get_type() == EAT_DOUBLE) {
+             c_oprd2->get_type() == EAT_DOUBLE) {
     tmp_return->set_type(EAT_DOUBLE);
   } else {
     CT_EXCEPTION("cannot determine the parent expression type");
@@ -557,24 +581,24 @@ Exp_A *Assembler::asm_exp_a(TreeNode *oprd, eOPERATOR op) {
     CT_EXCEPTION("encountered null oprand");
     return 0;
   }
-  TYPE_ASSERT(oprd, Exp_A*);
-  Exp_A *c_oprd = dynamic_cast<Exp_A*>(oprd);
+  TYPE_ASSERT(oprd, Exp_A *);
+  Exp_A *c_oprd = dynamic_cast<Exp_A *>(oprd);
   switch (op) {
-  case OP_NEG: {
-    Exp_A_Unary *tmp_return = 0;
-    tmp_return = new Exp_A_Neg();
-    tmp_return->set_oprd(std::shared_ptr<TreeNode>(c_oprd));
-    tmp_return->set_type(c_oprd->get_type());
-    return tmp_return;
-    break;
-  }
-  case OP_UPLUS:
-    return c_oprd;
-    break;
-  default:
-    CT_EXCEPTION("unhandled exp type");
-    return 0;
-    break;
+    case OP_NEG: {
+      Exp_A_Unary *tmp_return = 0;
+      tmp_return = new Exp_A_Neg();
+      tmp_return->set_oprd(std::shared_ptr<TreeNode>(c_oprd));
+      tmp_return->set_type(c_oprd->get_type());
+      return tmp_return;
+      break;
+    }
+    case OP_UPLUS:
+      return c_oprd;
+      break;
+    default:
+      CT_EXCEPTION("unhandled exp type");
+      return 0;
+      break;
   }
 }
 
@@ -583,7 +607,7 @@ Exp_A *Assembler::asm_exp_a_cast(TreeNode *oprd, const std::string &type) {
     CT_EXCEPTION("encountered null oprand");
     return 0;
   }
-  if (TYPE_CHECK(oprd, Exp_A*)) {
+  if (TYPE_CHECK(oprd, Exp_A *)) {
     Exp_A *exp = dynamic_cast<Exp_A *>(oprd);
     Exp_A_Cast *tmp_return = new Exp_A_Cast();
     if (type == "int") {
@@ -596,7 +620,7 @@ Exp_A *Assembler::asm_exp_a_cast(TreeNode *oprd, const std::string &type) {
     }
     tmp_return->set_oprd(std::shared_ptr<TreeNode>(exp));
     return tmp_return;
-  } else if (TYPE_CHECK(oprd, Constraint*)) {
+  } else if (TYPE_CHECK(oprd, Constraint *)) {
     Constraint *constr = dynamic_cast<Constraint *>(oprd);
     Exp_A_ConstraintCast *tmp_return = new Exp_A_ConstraintCast();
     if (type == "int") {
@@ -610,7 +634,8 @@ Exp_A *Assembler::asm_exp_a_cast(TreeNode *oprd, const std::string &type) {
     tmp_return->set_oprd(std::shared_ptr<TreeNode>(constr));
     return tmp_return;
   }
-  CT_EXCEPTION((std::string("cannot cast from ") + oprd->get_class_name()).c_str());
+  CT_EXCEPTION(
+      (std::string("cannot cast from ") + oprd->get_class_name()).c_str());
   return 0;
 }
 
@@ -619,12 +644,15 @@ Constraint *Assembler::asm_constraint_invalid(
     const std::string &identifier) {
   std::size_t pid = find_param_id(param_specs, identifier);
   if (pid == PID_BOUND) {
-    this->reportWarning(std::string("cannot find parameter ") + identifier + " when assembling parameter invalidation constraints, neglecting");
+    this->reportWarning(
+        std::string("cannot find parameter ") + identifier +
+        " when assembling parameter invalidation constraints, neglecting");
     return 0;
   }
   // FIXME: the semantics for invalidating auto parameters are not defined
-  //if (param_specs[pid]->is_auto()) {
-  //  this->reportWarning(std::string("parameter ") + identifier + " cannot be invalidated since it is aux or auto");
+  // if (param_specs[pid]->is_auto()) {
+  //  this->reportWarning(std::string("parameter ") + identifier + " cannot be
+  //  invalidated since it is aux or auto");
   //  return 0;
   //}
   Constraint_L_IVLD *constr = new Constraint_L_IVLD();
@@ -639,23 +667,27 @@ void Assembler::store_invalidation(
   for (std::size_t i = 0; i < identifiers.size(); ++i) {
     std::size_t pid = find_param_id(param_specs, identifiers[i]);
     if (pid == PID_BOUND) {
-      this->reportWarning(std::string("cannot find parameter ") + identifiers[i] + " when assembling parameter invalidation constraints, neglecting");
+      this->reportWarning(
+          std::string("cannot find parameter ") + identifiers[i] +
+          " when assembling parameter invalidation constraints, neglecting");
       continue;
     }
     this->stored_invalidations_[pid].push_back(precond);
   }
 }
 
-std::vector<std::shared_ptr<Constraint> > Assembler::dump_invalidations(const std::vector<std::shared_ptr<ParamSpec> > &param_specs) {
+std::vector<std::shared_ptr<Constraint> > Assembler::dump_invalidations(
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs) {
   std::vector<std::shared_ptr<Constraint> > tmp_return;
   for (std::size_t i = 0; i < param_specs.size(); ++i) {
     std::size_t pid = i;
     // FIXME: the semantics for invalidating auto parameters are not defined
-    //if (param_specs[pid]->is_auto()) {
+    // if (param_specs[pid]->is_auto()) {
     //  // cannot proceed with auto parameters
     //  continue;
     //}
-    const std::vector<std::shared_ptr<TreeNode> > &constrs = this->stored_invalidations_[pid];
+    const std::vector<std::shared_ptr<TreeNode> > &constrs =
+        this->stored_invalidations_[pid];
     std::shared_ptr<Constraint_L_IVLD> constr_ivld(new Constraint_L_IVLD());
     constr_ivld->set_pid(pid);
     {
@@ -666,10 +698,12 @@ std::vector<std::shared_ptr<Constraint> > Assembler::dump_invalidations(const st
       } else {
         std::shared_ptr<Constraint> constr_conjunction;
         for (std::size_t i = 0; i < constrs.size(); ++i) {
-          std::shared_ptr<Constraint> this_constr = std::dynamic_pointer_cast<Constraint>(constrs[i]);
+          std::shared_ptr<Constraint> this_constr =
+              std::dynamic_pointer_cast<Constraint>(constrs[i]);
           if (!constrs[i]) {
             std::stringstream ss;
-            ss << "condition #" << i+1 << " for invalidating parameter " << param_specs[pid]->get_param_name() << " is not a condition";
+            ss << "condition #" << i + 1 << " for invalidating parameter "
+               << param_specs[pid]->get_param_name() << " is not a condition";
             this->reportError(ss.str());
             return tmp_return;
           }
@@ -706,14 +740,17 @@ Seed *Assembler::asm_seed(std::size_t id, Constraint *constr) {
   return seed;
 }
 
-void Assembler::set_option(const std::string &identifier, const ct::common::TreeNode *value) {
+void Assembler::set_option(const std::string &identifier,
+                           const ct::common::TreeNode *value) {
   if (identifier == "default_precision") {
-    if (dynamic_cast<const Exp_A_CInt*>(value)) {
-      this->default_precision_ = dynamic_cast<const Exp_A_CInt*>(value)->get_value();
-    } else if (dynamic_cast<const Exp_A_CDouble*>(value)) {
-      this->default_precision_ = dynamic_cast<const Exp_A_CDouble*>(value)->get_value();
+    if (dynamic_cast<const Exp_A_CInt *>(value)) {
+      this->default_precision_ =
+          dynamic_cast<const Exp_A_CInt *>(value)->get_value();
+    } else if (dynamic_cast<const Exp_A_CDouble *>(value)) {
+      this->default_precision_ =
+          dynamic_cast<const Exp_A_CDouble *>(value)->get_value();
     } else {
-      CT_EXCEPTION(std::string("invalid value for option ")+identifier);
+      CT_EXCEPTION(std::string("invalid value for option ") + identifier);
     }
   } else {
     CT_EXCEPTION("unhandled option");

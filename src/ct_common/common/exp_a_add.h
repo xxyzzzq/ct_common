@@ -22,18 +22,18 @@ namespace common {
  * The class for arithmetic expression "+"
  */
 class DLL_EXPORT Exp_A_Add : public Exp_A_Binary {
-public:
+ public:
   Exp_A_Add(void);
   Exp_A_Add(const Exp_A_Add &from);
-  Exp_A_Add &operator = (const Exp_A_Add &right);
+  Exp_A_Add &operator=(const Exp_A_Add &right);
   virtual ~Exp_A_Add(void);
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual std::string get_op_token(void) const;
 
-private:
+ private:
   virtual double evaluate_double(double val_1, double val_2) const;
   virtual int evaluate_int(int val_1, int val_2) const;
 };

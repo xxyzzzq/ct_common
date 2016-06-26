@@ -10,7 +10,6 @@
 //
 //===----------------------------------------------------------------------===//
 
-
 #ifndef CT_COMMON_EXP_S_ATOM_H_
 #define CT_COMMON_EXP_S_ATOM_H_
 
@@ -24,13 +23,13 @@ namespace common {
  * The base class for atomic string expressions
  */
 class DLL_EXPORT Exp_S_Atom : public Exp_S {
-public:
+ public:
   Exp_S_Atom(void);
   Exp_S_Atom(const Exp_S_Atom &from);
-  Exp_S_Atom &operator = (const Exp_S_Atom &right);
+  Exp_S_Atom &operator=(const Exp_S_Atom &right);
   virtual ~Exp_S_Atom(void) = 0;
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
 };

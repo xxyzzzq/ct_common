@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_TEST_CASE_H_
 #define CT_COMMON_TEST_CASE_H_
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/assignment.h"
@@ -26,14 +26,14 @@ class ParamSpec;
 /**
  * The class for test cases
  */
-class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t>
-{
-private:
+class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t> {
+ private:
   typedef std::vector<size_t> impl_type;
-public:
+
+ public:
   TestCase(void);
   TestCase(const TestCase &from);
-  TestCase &operator =(const TestCase &right);
+  TestCase &operator=(const TestCase &right);
   virtual ~TestCase(void);
 
   virtual bool IsContainParam(std::size_t pid) const;
@@ -52,7 +52,7 @@ public:
   using impl_type::resize;
   using impl_type::size;
   using impl_type::empty;
-  using impl_type::operator [];
+  using impl_type::operator[];
 };
 }  // namespace common
 }  // namespace ct

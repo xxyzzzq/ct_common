@@ -14,19 +14,16 @@
 
 using namespace ct::common;
 
-Constraint_L_Atom::Constraint_L_Atom(void)
-    : Constraint_L() {
-}
+Constraint_L_Atom::Constraint_L_Atom(void) : Constraint_L() {}
 
 Constraint_L_Atom::Constraint_L_Atom(const Constraint_L_Atom &from)
-    : Constraint_L(from) {
-}
+    : Constraint_L(from) {}
 
-Constraint_L_Atom::~Constraint_L_Atom(void) {
-}
+Constraint_L_Atom::~Constraint_L_Atom(void) {}
 
-Constraint_L_Atom &Constraint_L_Atom::operator = (const Constraint_L_Atom &right) {
-  Constraint_L::operator =(right);
+Constraint_L_Atom &Constraint_L_Atom::operator=(
+    const Constraint_L_Atom &right) {
+  Constraint_L::operator=(right);
   return *this;
 }
 
@@ -34,6 +31,4 @@ std::string Constraint_L_Atom::get_class_name(void) const {
   return Constraint_L_Atom::class_name();
 }
 
-std::string Constraint_L_Atom::class_name(void) {
-  return "Constraint_L_Atom";
-}
+std::string Constraint_L_Atom::class_name(void) { return "Constraint_L_Atom"; }

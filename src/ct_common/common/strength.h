@@ -17,11 +17,13 @@
 
 namespace ct {
 namespace common {
-typedef std::vector<std::size_t> RawStrength;  /** Decomposed strengths */
-typedef std::pair<std::vector<std::size_t>, std::size_t> Strength;  /** Original form of strengths */
+typedef std::vector<std::size_t> RawStrength; /** Decomposed strengths */
+typedef std::pair<std::vector<std::size_t>, std::size_t>
+    Strength; /** Original form of strengths */
 
 /** Decomposing strengths to raw strengths */
-void attach_2_raw_strength(const Strength &strength, std::vector<RawStrength> &raw_strengths);
+void attach_2_raw_strength(const Strength &strength,
+                           std::vector<RawStrength> &raw_strengths);
 }
 }  // namespace ct
 

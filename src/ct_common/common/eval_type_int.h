@@ -20,17 +20,17 @@ namespace common {
 class EvalType_Double;
 
 class EvalType_Int : public EvalType {
-public:
+ public:
   EvalType_Int(void);
   EvalType_Int(int value, bool is_valid);
   EvalType_Int(const EvalType_Int &from);
   EvalType_Int(const EvalType_Double &from);
 
   virtual ~EvalType_Int(void);
-  EvalType_Int &operator = (const EvalType_Int &right);
-  EvalType_Int &operator = (const EvalType_Double &right);
+  EvalType_Int &operator=(const EvalType_Int &right);
+  EvalType_Int &operator=(const EvalType_Double &right);
 
-public:
+ public:
   int value_;
 };
 }

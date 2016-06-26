@@ -10,21 +10,17 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <algorithm>
 #include "ct_common/common/paramspec.h"
+#include <algorithm>
 #include "ct_common/common/pvpair.h"
 
 using namespace ct::common;
 
-ParamSpec::ParamSpec(void)
-    : is_aux_(false), is_auto_(false) {
-}
+ParamSpec::ParamSpec(void) : is_aux_(false), is_auto_(false) {}
 
-ParamSpec::ParamSpec(const ParamSpec &from) {
-  this->init(from);
-}
+ParamSpec::ParamSpec(const ParamSpec &from) { this->init(from); }
 
-ParamSpec &ParamSpec::operator = (const ParamSpec &right) {
+ParamSpec &ParamSpec::operator=(const ParamSpec &right) {
   this->init(right);
   return *this;
 }
@@ -37,8 +33,7 @@ void ParamSpec::init(const ParamSpec &from) {
   this->is_auto_ = from.is_auto_;
 }
 
-ParamSpec::~ParamSpec(void) {
-}
+ParamSpec::~ParamSpec(void) {}
 
 void ParamSpec::set_values(const std::vector<std::string> &values) {
   if (values.size() == 0) {
@@ -53,9 +48,11 @@ void ParamSpec::set_values(const std::vector<std::string> &values) {
     }
     if (this->map_string_values_2_vid_.find(values[i]) !=
         this->map_string_values_2_vid_.end()) {
-      CT_EXCEPTION(std::string("value ") + values[i] + " is already registered for " + this->get_param_name());
+      CT_EXCEPTION(std::string("value ") + values[i] +
+                   " is already registered for " + this->get_param_name());
     }
-    map_string_values_2_vid_.insert(std::pair<std::string, std::size_t>(values[i], i));
+    map_string_values_2_vid_.insert(
+        std::pair<std::string, std::size_t>(values[i], i));
   }
 }
 
@@ -63,9 +60,7 @@ std::string ParamSpec::get_class_name(void) const {
   return ParamSpec::class_name();
 }
 
-std::string ParamSpec::class_name(void) {
-  return "ParamSpec";
-}
+std::string ParamSpec::class_name(void) { return "ParamSpec"; }
 
 std::size_t ParamSpec::query_value_id(const std::string &str) const {
   std::map<std::string, std::size_t>::const_iterator iter =
@@ -86,7 +81,8 @@ std::size_t ParamSpec::get_width(void) const {
   return std::max(width + 2, std::size_t(5));
 }
 
-std::size_t ct::common::find_param_id(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+std::size_t ct::common::find_param_id(
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const std::string &param_name) {
   for (std::size_t i = 0; i < param_specs.size(); ++i) {
     if (param_specs[i]->get_param_name() == param_name) {
@@ -96,8 +92,9 @@ std::size_t ct::common::find_param_id(const std::vector<std::shared_ptr<ParamSpe
   return PID_BOUND;
 }
 
-void ParamSpec::touch_pids( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                            std::set<std::size_t> &pids_to_touch) const {
+void ParamSpec::touch_pids(
+    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+    std::set<std::size_t> &pids_to_touch) const {
   for (std::size_t i = 0; i < this->auto_value_specs_.size(); ++i) {
     if (!this->auto_value_specs_[i].first) {
       CT_EXCEPTION("encountered invalid auto value condition");
@@ -108,6 +105,6 @@ void ParamSpec::touch_pids( const std::vector<std::shared_ptr<ParamSpec> > &para
       return;
     }
     this->auto_value_specs_[i].first->touch_pids(param_specs, pids_to_touch);
-    this->auto_value_specs_[i].second->touch_pids(param_specs, pids_to_touch);        
+    this->auto_value_specs_[i].second->touch_pids(param_specs, pids_to_touch);
   }
 }

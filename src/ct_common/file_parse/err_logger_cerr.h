@@ -6,13 +6,13 @@
 namespace ct {
 namespace common {
 class ErrLogger_Cerr : public ErrLogger {
-public:
+ public:
   ErrLogger_Cerr(void);
   ErrLogger_Cerr(const ErrLogger_Cerr &from);
   virtual ~ErrLogger_Cerr(void);
-  const ErrLogger_Cerr &operator = (const ErrLogger_Cerr &right);
+  const ErrLogger_Cerr &operator=(const ErrLogger_Cerr &right);
 
-public:
+ public:
   virtual void innerReportError(const std::string &str);
   virtual void innerReportWarning(const std::string &str);
 };

@@ -13,13 +13,13 @@
 #ifndef CT_COMMON_SUTMODEL_H_
 #define CT_COMMON_SUTMODEL_H_
 
+#include <memory>
+#include "ct_common/common/constraint.h"
 #include "ct_common/common/paramspec.h"
 #include "ct_common/common/pvpair.h"
-#include "ct_common/common/tuple.h"
 #include "ct_common/common/seed.h"
-#include "ct_common/common/constraint.h"
 #include "ct_common/common/strength.h"
-#include <memory>
+#include "ct_common/common/tuple.h"
 
 namespace ct {
 namespace common {
@@ -27,10 +27,12 @@ namespace common {
  * The class for SUT models
  */
 struct SUTModel {
-  std::vector<std::shared_ptr<ParamSpec> > param_specs_;  /**< The parameter specifications */
-  std::vector<Strength> strengths_;  /**< The strengths */
-  std::vector<std::shared_ptr<Seed> > seeds_;  /**< The seeds */
-  std::vector<std::shared_ptr<Constraint> > constraints_;  /**< The constraints */
+  std::vector<std::shared_ptr<ParamSpec> >
+      param_specs_;                 /**< The parameter specifications */
+  std::vector<Strength> strengths_; /**< The strengths */
+  std::vector<std::shared_ptr<Seed> > seeds_; /**< The seeds */
+  std::vector<std::shared_ptr<Constraint> >
+      constraints_; /**< The constraints */
 };
 }  // namespace common
 }  // namespace ct

@@ -22,18 +22,19 @@ namespace common {
  * The class for constraint "&&"
  */
 class DLL_EXPORT Constraint_L_And : public Constraint_L_Binary {
-public:
+ public:
   Constraint_L_And(void);
   Constraint_L_And(const Constraint_L_And &from);
-  Constraint_L_And &operator = (const Constraint_L_And &right);
+  Constraint_L_And &operator=(const Constraint_L_And &right);
   virtual ~Constraint_L_And(void);
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual std::string get_op_token(void) const;
 
-private:
-  virtual EvalType_Bool evaluate_func(EvalType_Bool l_val, EvalType_Bool r_val) const;
+ private:
+  virtual EvalType_Bool evaluate_func(EvalType_Bool l_val,
+                                      EvalType_Bool r_val) const;
 };
 }  // namespace common
 }  // namespace ct

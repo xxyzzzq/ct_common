@@ -21,12 +21,11 @@ namespace common {
 /**
  * The class for string parameter specifications
  */
-class DLL_EXPORT ParamSpec_String: public ParamSpec
-{
-public:
+class DLL_EXPORT ParamSpec_String : public ParamSpec {
+ public:
   ParamSpec_String(void);
   ParamSpec_String(const ParamSpec_String &from);
-  ParamSpec_String& operator =(const ParamSpec_String &right);
+  ParamSpec_String &operator=(const ParamSpec_String &right);
   virtual ~ParamSpec_String(void);
 
   virtual std::string get_class_name(void) const;

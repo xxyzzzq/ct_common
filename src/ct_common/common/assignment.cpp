@@ -20,6 +20,4 @@ Assignment::Assignment(const Assignment &from) = default;
 
 Assignment::~Assignment(void) = default;
 
-Assignment &Assignment::operator = (const Assignment &right) {
-  return *this;
-}
+Assignment &Assignment::operator=(const Assignment &right) { return *this; }

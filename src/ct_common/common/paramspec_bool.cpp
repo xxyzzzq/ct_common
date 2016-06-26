@@ -10,36 +10,29 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cstdlib>
 #include "ct_common/common/paramspec_bool.h"
+#include <cstdlib>
 
 using namespace ct::common;
 
-ParamSpec_Bool::ParamSpec_Bool(void)
-  : ParamSpec(), bool_values_() {
-}
+ParamSpec_Bool::ParamSpec_Bool(void) : ParamSpec(), bool_values_() {}
 
-ParamSpec_Bool::ParamSpec_Bool(const ParamSpec_Bool& from)
-  : ParamSpec(from), bool_values_(from.bool_values_) {
-}
+ParamSpec_Bool::ParamSpec_Bool(const ParamSpec_Bool &from)
+    : ParamSpec(from), bool_values_(from.bool_values_) {}
 
-ParamSpec_Bool &ParamSpec_Bool::operator = (
-    const ParamSpec_Bool &right) {
+ParamSpec_Bool &ParamSpec_Bool::operator=(const ParamSpec_Bool &right) {
   ParamSpec::operator=(right);
   this->bool_values_ = right.bool_values_;
   return *this;
 }
 
-ParamSpec_Bool::~ParamSpec_Bool(void) {
-}
+ParamSpec_Bool::~ParamSpec_Bool(void) {}
 
 std::string ParamSpec_Bool::get_class_name(void) const {
   return ParamSpec_Bool::class_name();
 }
 
-std::string ParamSpec_Bool::class_name(void) {
-  return "ParamSpec_Bool";
-}
+std::string ParamSpec_Bool::class_name(void) { return "ParamSpec_Bool"; }
 
 void ParamSpec_Bool::set_values(const std::vector<std::string> &string_values) {
   std::vector<std::string> str_values;

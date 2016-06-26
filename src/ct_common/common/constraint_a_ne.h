@@ -22,17 +22,17 @@ namespace common {
  * The class for constraint "!="
  */
 class DLL_EXPORT Constraint_A_NE : public Constraint_A_Binary {
-public:
+ public:
   Constraint_A_NE(void);
   Constraint_A_NE(const Constraint_A_NE &from);
-  Constraint_A_NE &operator = (const Constraint_A_NE &right);
+  Constraint_A_NE &operator=(const Constraint_A_NE &right);
   ~Constraint_A_NE(void);
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual std::string get_op_token(void) const;
 
-private:
+ private:
   virtual bool evaluate_func_int(int loprd_val, int roprd_val) const;
   virtual bool evaluate_func_double(double loprd_val, double roprd_val) const;
 };

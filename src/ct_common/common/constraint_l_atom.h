@@ -26,16 +26,15 @@ namespace common {
  * Base class for atom constraints (i.e. no sub-constraints or sub-expressions)
  */
 class DLL_EXPORT Constraint_L_Atom : public Constraint_L {
-public:
+ public:
   Constraint_L_Atom(void);
   Constraint_L_Atom(const Constraint_L_Atom &from);
-  Constraint_L_Atom &operator = (const Constraint_L_Atom &right);
+  Constraint_L_Atom &operator=(const Constraint_L_Atom &right);
   virtual ~Constraint_L_Atom(void) = 0;
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
-
 };
 }  // namespace common
 }  // namespace ct

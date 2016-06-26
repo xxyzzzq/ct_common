@@ -22,18 +22,19 @@ namespace common {
  * The class for string function "!="
  */
 class DLL_EXPORT Constraint_S_NE : public Constraint_S_Binary {
-public:
+ public:
   Constraint_S_NE(void);
   Constraint_S_NE(const Constraint_S_NE &from);
-  Constraint_S_NE &operator = (const Constraint_S_NE &right);
+  Constraint_S_NE &operator=(const Constraint_S_NE &right);
   ~Constraint_S_NE(void);
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual std::string get_op_token(void) const;
 
-private:
-  virtual bool evaluate_func(const std::string &val_1, const std::string &val_2) const;
+ private:
+  virtual bool evaluate_func(const std::string &val_1,
+                             const std::string &val_2) const;
 };
 }  // namespace common
 }  // namespace ct

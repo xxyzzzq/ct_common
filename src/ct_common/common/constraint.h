@@ -29,27 +29,27 @@ namespace common {
 /**
  * Base constraint class
  * Only for boolean expressions
- * Actually, a constraint is a boolean-typed expression, but our design seperates
+ * Actually, a constraint is a boolean-typed expression, but our design
+ * seperates
  * constraints from other expressions to eliminate possible ambiguities
  */
 class DLL_EXPORT Constraint : public TreeNode {
-public:
+ public:
   Constraint(void);
   // This class is not supposed to be copied and assigned
   // only the reference is copied
   Constraint(const Constraint &from);
-  Constraint &operator = (const Constraint &right);
+  Constraint &operator=(const Constraint &right);
   virtual ~Constraint(void) = 0;
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
 
-public:
+ public:
   /** Whether the constraint is satisfied */
   virtual EvalType_Bool Evaluate(
-    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-    const Assignment &assignment) const = 0;
-
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      const Assignment &assignment) const = 0;
 };
 }  // namespace common
 }  // namespace ct

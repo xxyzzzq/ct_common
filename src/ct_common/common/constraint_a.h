@@ -22,10 +22,10 @@ namespace common {
  * Base class for arithmetic constraints
  */
 class DLL_EXPORT Constraint_A : public Constraint {
-public:
+ public:
   Constraint_A(void);
   Constraint_A(const Constraint_A &from);
-  Constraint_A &operator = (const Constraint_A &right);
+  Constraint_A &operator=(const Constraint_A &right);
   virtual ~Constraint_A(void);
 
   virtual std::string get_class_name(void) const;
