@@ -13,29 +13,28 @@
 #ifndef CT_COMMON_PVPAIR_H_
 #define CT_COMMON_PVPAIR_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/defs.h>
+#include "ct_common/base/defs.h"
+#include "ct_common/base/utils.h"
 
 namespace ct {
 namespace common {
 /**
  * The class for parameter-value pairs
  */
-class DLL_EXPORT PVPair
-{
-public:
+class DLL_EXPORT PVPair {
+ public:
   PVPair(std::size_t pid = PID_BOUND, std::size_t vid = VID_BOUND);
-  PVPair(const PVPair&);
-  PVPair &operator = (const PVPair &right);
+  PVPair(const PVPair &);
+  PVPair &operator=(const PVPair &right);
   ~PVPair(void);
 
-  bool operator < (const PVPair &right) const;
-  bool operator == (const PVPair &right) const;
-  bool operator != (const PVPair &right) const;
+  bool operator<(const PVPair &right) const;
+  bool operator==(const PVPair &right) const;
+  bool operator!=(const PVPair &right) const;
 
-public:
-  std::size_t pid_;  /**< parameter id */
-  std::size_t vid_;  /**< value id */
+ public:
+  std::size_t pid_; /**< parameter id */
+  std::size_t vid_; /**< value id */
 };
 }  // namespace common
 }  // namespace ct

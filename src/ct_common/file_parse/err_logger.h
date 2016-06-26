@@ -6,24 +6,24 @@
 namespace ct {
 namespace common {
 class ErrLogger {
-public:
+ public:
   ErrLogger(void);
   ErrLogger(const ErrLogger &from);
   virtual ~ErrLogger(void);
-  ErrLogger &operator = (const ErrLogger &right);
+  ErrLogger &operator=(const ErrLogger &right);
 
-public:
+ public:
   void reportError(const std::string &str);
   void reportWarning(const std::string &str);
-  
+
   std::size_t numErrs(void) const { return this->num_errs_; }
   std::size_t numWarnings(void) const { return this->num_warnings_; }
 
-private:
+ private:
   virtual void innerReportError(const std::string &str) = 0;
   virtual void innerReportWarning(const std::string &str) = 0;
-  
-private:
+
+ private:
   std::size_t num_errs_;
   std::size_t num_warnings_;
 };

@@ -29,17 +29,17 @@
 #include <sstream>
 #include <vector>
 #include <cstdlib>
-#include <ct_common/file_parse/ct_lexer.hpp>
+#include "ct_common/file_parse/ct_lexer.hpp"
 using namespace ct::common;
 }
 
 %code requires {
-#include <ct_common/common/constraints.h>
-#include <ct_common/common/exps.h>
-#include <ct_common/common/paramspecs.h>
-#include <ct_common/common/seed.h>
-#include <ct_common/common/tuple.h>
-#include <ct_common/file_parse/assembler.h>
+#include "ct_common/common/constraints.h"
+#include "ct_common/common/exps.h"
+#include "ct_common/common/paramspecs.h"
+#include "ct_common/common/seed.h"
+#include "ct_common/common/tuple.h"
+#include "ct_common/file_parse/assembler.h"
 }
 
 %union {

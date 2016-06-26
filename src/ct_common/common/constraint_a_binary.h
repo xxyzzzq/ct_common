@@ -14,9 +14,10 @@
 #define CT_COMMON_CONSTRAINT_A_BINARY_H_
 
 #include <memory>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/constraint_a.h>
-#include <ct_common/common/exp_a.h>
+
+#include "ct_common/base/utils.h"
+#include "ct_common/common/constraint_a.h"
+#include "ct_common/common/exp_a.h"
 
 namespace ct {
 namespace common {
@@ -24,40 +25,52 @@ namespace common {
  * Base class for binary arithmetic constraints
  */
 class DLL_EXPORT Constraint_A_Binary : public Constraint_A {
-public:
+ public:
   Constraint_A_Binary(void);
   Constraint_A_Binary(const Constraint_A_Binary &from);
-  Constraint_A_Binary &operator = (const Constraint_A_Binary &right);
+  Constraint_A_Binary &operator=(const Constraint_A_Binary &right);
   virtual ~Constraint_A_Binary(void);
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
-  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(
+      std::ostream &os,
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
   /** get the string token of the current constraint type */
   virtual std::string get_op_token(void) const = 0;
 
-  std::shared_ptr<const Exp_A> get_loprd(void) const { return std::dynamic_pointer_cast<Exp_A>(this->oprds_[0]); }
-  std::shared_ptr<const Exp_A> get_roprd(void) const { return std::dynamic_pointer_cast<Exp_A>(this->oprds_[1]); }
+  std::shared_ptr<const Exp_A> get_loprd(void) const {
+    return std::dynamic_pointer_cast<Exp_A>(this->oprds_[0]);
+  }
+  std::shared_ptr<const Exp_A> get_roprd(void) const {
+    return std::dynamic_pointer_cast<Exp_A>(this->oprds_[1]);
+  }
 
-  void set_loprd(const std::shared_ptr<TreeNode> &loprd) { this->oprds_[0] = loprd; }
-  void set_roprd(const std::shared_ptr<TreeNode> &roprd) { this->oprds_[1] = roprd; }
+  void set_loprd(const std::shared_ptr<TreeNode> &loprd) {
+    this->oprds_[0] = loprd;
+  }
+  void set_roprd(const std::shared_ptr<TreeNode> &roprd) {
+    this->oprds_[1] = roprd;
+  }
 
   /** Set the floating-point precision (for comparison) */
-  void set_precision(double precision) { this->precision_ = (precision>=0) ? precision : -precision; } // absolute value
+  void set_precision(double precision) {
+    this->precision_ = (precision >= 0) ? precision : -precision;
+  }  // absolute value
   /** Get the floating-point precision */
   double get_precision(void) const { return this->precision_; }
 
   virtual EvalType_Bool Evaluate(
-    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-    const Assignment &assignment) const;
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      const Assignment &assignment) const;
 
-private:
+ private:
   /** Inner check function for int values */
   virtual bool evaluate_func_int(int val_1, int val_2) const = 0;
   /** Inner check function for double values */
   virtual bool evaluate_func_double(double val_1, double val_2) const = 0;
 
-protected:
+ protected:
   double precision_; /**< Precision for comparing floating-point operands */
 };
 }  // namespace common

@@ -13,10 +13,10 @@
 #ifndef CT_COMMON_TUPLEPOOL_H_
 #define CT_COMMON_TUPLEPOOL_H_
 
-#include <vector>
 #include <unordered_set>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/tuple.h>
+#include <vector>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/tuple.h"
 
 namespace ct {
 namespace common {
@@ -24,16 +24,17 @@ namespace common {
  * The class for a set of tuples
  */
 struct DLL_EXPORT TupleHasher : public std::unary_function<Tuple, std::size_t> {
-  std::size_t operator()(const Tuple &tuple) const;
+  std::size_t operator()(const Tuple& tuple) const;
 };
 
 class DLL_EXPORT TuplePool : private std::unordered_set<Tuple, TupleHasher> {
-private:
+ private:
   typedef std::unordered_set<Tuple, TupleHasher> impl_type;
-public:
+
+ public:
   TuplePool(void);
   TuplePool(const TuplePool& from);
-  TuplePool& operator = (const TuplePool& right);
+  TuplePool& operator=(const TuplePool& right);
   ~TuplePool(void);
 
   using impl_type::begin;

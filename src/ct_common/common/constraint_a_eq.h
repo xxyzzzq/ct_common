@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_CONSTRAINT_A_EQ_H_
 #define CT_COMMON_CONSTRAINT_A_EQ_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/constraint_a_binary.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/constraint_a_binary.h"
 
 namespace ct {
 namespace common {
@@ -22,17 +22,17 @@ namespace common {
  * The class for constraint "=="
  */
 class DLL_EXPORT Constraint_A_EQ : public Constraint_A_Binary {
-public:
+ public:
   Constraint_A_EQ(void);
   Constraint_A_EQ(const Constraint_A_EQ &from);
-  Constraint_A_EQ &operator = (const Constraint_A_EQ &right);
+  Constraint_A_EQ &operator=(const Constraint_A_EQ &right);
   ~Constraint_A_EQ(void);
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
   virtual std::string get_op_token(void) const;
 
-private:
+ private:
   virtual bool evaluate_func_int(int loprd_val, int roprd_val) const;
   virtual bool evaluate_func_double(double loprd_val, double roprd_val) const;
 };

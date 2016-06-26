@@ -1,7 +1,7 @@
 #ifndef CT_LEXER_TOKEN_IDS_H_
 #define CT_LEXER_TOKEN_IDS_H_
 
-#include <ct_common/file_parse/ct_parser.tab.hpp>
+#include "ct_common/file_parse/ct_parser.tab.hpp"
 
 namespace ct {
 const int QUEX_TKN_TERMINATION = ::yy::ct_parser::token::TKN_END;

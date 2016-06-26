@@ -10,32 +10,26 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include "ct_common/common/tuple.h"
 #include <algorithm>
-#include <ct_common/common/tuple.h>
-#include <ct_common/common/paramspec.h>
+#include "ct_common/common/paramspec.h"
 
 using namespace ct::common;
 
-Tuple::Tuple(void)
-    : Assignment(), std::vector<PVPair>() {
-}
+Tuple::Tuple(void) : Assignment(), std::vector<PVPair>() {}
 
-Tuple::Tuple(const Tuple &from)
-    : Assignment(from), std::vector<PVPair>(from) {
-}
+Tuple::Tuple(const Tuple &from) : Assignment(from), std::vector<PVPair>(from) {}
 
 Tuple::Tuple(const std::vector<PVPair> &from)
-    : Assignment(), std::vector<PVPair>(from) {
-}
+    : Assignment(), std::vector<PVPair>(from) {}
 
-Tuple &Tuple::operator = (const Tuple &right) {
-  Assignment::operator =(right);
-  std::vector<PVPair>::operator =(right);
+Tuple &Tuple::operator=(const Tuple &right) {
+  Assignment::operator=(right);
+  std::vector<PVPair>::operator=(right);
   return *this;
 }
 
-Tuple::~Tuple(void) {
-}
+Tuple::~Tuple(void) {}
 
 std::vector<std::size_t> Tuple::get_rel_pids(void) const {
   std::vector<std::size_t> tmp_return;
@@ -45,7 +39,7 @@ std::vector<std::size_t> Tuple::get_rel_pids(void) const {
   return tmp_return;
 }
 
-bool Tuple::operator < (const Tuple &right) const {
+bool Tuple::operator<(const Tuple &right) const {
   if (this->size() < right.size()) {
     return true;
   }
@@ -62,7 +56,7 @@ bool Tuple::operator < (const Tuple &right) const {
   return false;
 }
 
-bool Tuple::operator == (const Tuple &right) const {
+bool Tuple::operator==(const Tuple &right) const {
   if (this->size() != right.size()) {
     return false;
   }
@@ -74,14 +68,13 @@ bool Tuple::operator == (const Tuple &right) const {
   return true;
 }
 
-void Tuple::Sort(void) {
-  std::sort(this->begin(), this->end());
-}
+void Tuple::Sort(void) { std::sort(this->begin(), this->end()); }
 
 bool Tuple::IsSubAssignmentOf(const Assignment &assignment) const {
   for (std::size_t i = 0; i < this->size(); ++i) {
     PVPair pvpair = (*this)[i];
-    if (!assignment.IsContainParam(pvpair.pid_) || assignment.GetValue(pvpair.pid_) != pvpair.vid_) {
+    if (!assignment.IsContainParam(pvpair.pid_) ||
+        assignment.GetValue(pvpair.pid_) != pvpair.vid_) {
       return false;
     }
   }
@@ -94,7 +87,7 @@ const PVPair *Tuple::Search(std::size_t pid) const {
   }
   std::size_t low = 0;
   std::size_t high = this->size() - 1;
-  while (low+1 < high) {
+  while (low + 1 < high) {
     std::size_t mid = low + (high - low) / 2;
     if ((*this)[mid].pid_ > pid) {
       high = mid;
@@ -117,10 +110,10 @@ bool Tuple::to_the_next_tuple(
     return false;
   }
   this->back().vid_++;
-  for (std::size_t i = this->size()-1; i>0; i--) {
+  for (std::size_t i = this->size() - 1; i > 0; i--) {
     if ((*this)[i].vid_ >= param_specs[(*this)[i].pid_]->get_level()) {
       (*this)[i].vid_ = 0;
-      (*this)[i-1].vid_++;
+      (*this)[i - 1].vid_++;
     } else {
       break;
     }
@@ -138,15 +131,15 @@ bool Tuple::to_the_next_tuple_with_ivld(
     return false;
   }
   this->back().vid_++;
-  for (std::size_t i = this->size()-1; i>0; i--) {
-    if ((*this)[i].vid_ >= param_specs[(*this)[i].pid_]->get_level()+1) {
+  for (std::size_t i = this->size() - 1; i > 0; i--) {
+    if ((*this)[i].vid_ >= param_specs[(*this)[i].pid_]->get_level() + 1) {
       (*this)[i].vid_ = 0;
-      (*this)[i-1].vid_++;
+      (*this)[i - 1].vid_++;
     } else {
       break;
     }
   }
-  if ((*this)[0].vid_ >= param_specs[(*this)[0].pid_]->get_level()+1) {
+  if ((*this)[0].vid_ >= param_specs[(*this)[0].pid_]->get_level() + 1) {
     (*this)[0].vid_ = 0;
     return false;
   }

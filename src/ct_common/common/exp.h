@@ -15,10 +15,11 @@
 
 #include <map>
 #include <string>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/tuple.h>
-#include <ct_common/common/pvpair.h>
-#include <ct_common/common/tree_node.h>
+
+#include "ct_common/base/utils.h"
+#include "ct_common/common/pvpair.h"
+#include "ct_common/common/tree_node.h"
+#include "ct_common/common/tuple.h"
 
 namespace ct {
 namespace common {
@@ -27,13 +28,13 @@ namespace common {
  * non-boolean expressions only
  */
 class DLL_EXPORT Exp : public TreeNode {
-public:
+ public:
   Exp(void);
   Exp(const Exp &from);
-  Exp &operator = (const Exp &right);
+  Exp &operator=(const Exp &right);
   virtual ~Exp(void) = 0;
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
 };

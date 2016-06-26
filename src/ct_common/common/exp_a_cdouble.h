@@ -13,8 +13,8 @@
 #ifndef CT_COMMON_EXP_A_CDOUBLE_H
 #define CT_COMMON_EXP_A_CDOUBLE_H
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/exp_a_atom.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/exp_a_atom.h"
 
 namespace ct {
 namespace common {
@@ -22,18 +22,20 @@ namespace common {
  * The class for constant double arithmetic expressions
  */
 class DLL_EXPORT Exp_A_CDouble : public Exp_A_Atom {
-public:
+ public:
   Exp_A_CDouble(void);
   Exp_A_CDouble(const Exp_A_CDouble &from);
-  Exp_A_CDouble &operator = (const Exp_A_CDouble &right);
+  Exp_A_CDouble &operator=(const Exp_A_CDouble &right);
   virtual ~Exp_A_CDouble(void);
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
-  virtual void dump(std::ostream &os, const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  virtual void dump(
+      std::ostream &os,
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
 
-public:
+ public:
   /** Setting the value */
   virtual void set_value(int value);
   /** Setting the value */
@@ -45,16 +47,18 @@ public:
   /** Getting the string value */
   virtual const std::string &get_str_value(void) const;
 
-private:
-  virtual EvalType_Double EvaluateDouble_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                                      const Assignment &assignment) const;
+ private:
+  virtual EvalType_Double EvaluateDouble_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      const Assignment &assignment) const;
 
-  virtual EvalType_Int EvaluateInt_Impl( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                                const Assignment &assignment) const;
+  virtual EvalType_Int EvaluateInt_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      const Assignment &assignment) const;
 
-private:
+ private:
   double value_;
-  std::string str_value_;  /**< The preserved original string representation */
+  std::string str_value_; /**< The preserved original string representation */
 };
 }  // namespace common
 }  // namespace ct

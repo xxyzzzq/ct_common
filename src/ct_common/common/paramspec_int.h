@@ -13,31 +13,32 @@
 #ifndef CT_COMMON_PARAMSPEC_INT_H_
 #define CT_COMMON_PARAMSPEC_INT_H_
 
-#include <ct_common/common/utils.h>
-#include <ct_common/common/paramspec.h>
+#include "ct_common/base/utils.h"
+#include "ct_common/common/paramspec.h"
 
 namespace ct {
 namespace common {
 /**
  * The class for int parameter specifications
  */
-class DLL_EXPORT ParamSpec_Int : public ParamSpec
-{
-public:
+class DLL_EXPORT ParamSpec_Int : public ParamSpec {
+ public:
   ParamSpec_Int(void);
   ParamSpec_Int(const ParamSpec_Int &from);
-  ParamSpec_Int &operator = (const ParamSpec_Int &right);
+  ParamSpec_Int &operator=(const ParamSpec_Int &right);
   virtual ~ParamSpec_Int(void);
 
   virtual void set_values(const std::vector<std::string> &string_values);
-  const std::vector<int> &get_int_values(void) const { return this->int_values_; }
+  const std::vector<int> &get_int_values(void) const {
+    return this->int_values_;
+  }
 
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
 
-private:
-  std::vector<int> int_values_;   /**< The integer values of the parameter.
-                                   * Should be consistent with string values */
+ private:
+  std::vector<int> int_values_; /**< The integer values of the parameter.
+                                 * Should be consistent with string values */
 };
 }  // namespace common
 }  // namespace ct

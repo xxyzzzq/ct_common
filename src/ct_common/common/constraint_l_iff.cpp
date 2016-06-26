@@ -10,36 +10,30 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/constraint_l_iff.h>
+#include "ct_common/common/constraint_l_iff.h"
 
 using namespace ct::common;
 
-Constraint_L_Iff::Constraint_L_Iff(void)
-  : Constraint_L_Binary() {
-}
+Constraint_L_Iff::Constraint_L_Iff(void) : Constraint_L_Binary() {}
 
 Constraint_L_Iff::Constraint_L_Iff(const Constraint_L_Iff &from)
-  : Constraint_L_Binary(from) {
-}
+    : Constraint_L_Binary(from) {}
 
-Constraint_L_Iff &Constraint_L_Iff::operator = (
-    const Constraint_L_Iff &right) {
+Constraint_L_Iff &Constraint_L_Iff::operator=(const Constraint_L_Iff &right) {
   Constraint_L_Binary::operator=(right);
   return *this;
 }
 
-Constraint_L_Iff::~Constraint_L_Iff(void) {
-}
+Constraint_L_Iff::~Constraint_L_Iff(void) {}
 
 std::string Constraint_L_Iff::get_class_name(void) const {
   return Constraint_L_Iff::class_name();
 }
 
-std::string Constraint_L_Iff::class_name(void) {
-  return "Constraint_L_Iff";
-}
+std::string Constraint_L_Iff::class_name(void) { return "Constraint_L_Iff"; }
 
-EvalType_Bool Constraint_L_Iff::evaluate_func(EvalType_Bool val_l, EvalType_Bool val_r) const {
+EvalType_Bool Constraint_L_Iff::evaluate_func(EvalType_Bool val_l,
+                                              EvalType_Bool val_r) const {
   EvalType_Bool tmp_return;
   tmp_return.is_valid_ = val_l.is_valid_ && val_r.is_valid_;
   if (tmp_return.is_valid_) {
@@ -48,6 +42,4 @@ EvalType_Bool Constraint_L_Iff::evaluate_func(EvalType_Bool val_l, EvalType_Bool
   return tmp_return;
 }
 
-std::string Constraint_L_Iff::get_op_token(void) const {
-  return "<->";
-}
+std::string Constraint_L_Iff::get_op_token(void) const { return "<->"; }

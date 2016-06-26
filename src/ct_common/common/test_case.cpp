@@ -10,25 +10,22 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <ct_common/common/defs.h>
-#include <ct_common/common/test_case.h>
+#include "ct_common/common/test_case.h"
+
+#include "ct_common/base/defs.h"
 
 using namespace ct::common;
 
-TestCase::TestCase(void)
-  : Assignment(), std::vector<std::size_t>() {
-}
+TestCase::TestCase(void) : Assignment(), std::vector<std::size_t>() {}
 
 TestCase::TestCase(const TestCase &from)
-  : Assignment(from), std::vector<std::size_t>(from) {
-}
+    : Assignment(from), std::vector<std::size_t>(from) {}
 
-TestCase::~TestCase(void) {
-}
+TestCase::~TestCase(void) {}
 
-TestCase &TestCase::operator =(const TestCase &right) {
-  Assignment::operator =(right);
-  std::vector<std::size_t>::operator =(right);
+TestCase &TestCase::operator=(const TestCase &right) {
+  Assignment::operator=(right);
+  std::vector<std::size_t>::operator=(right);
   return *this;
 }
 

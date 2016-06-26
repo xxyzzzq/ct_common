@@ -13,12 +13,13 @@
 #ifndef CT_COMMON_EXP_S_H_
 #define CT_COMMON_EXP_S_H_
 
-#include <string>
-#include <ct_common/common/utils.h>
-#include <ct_common/common/exp.h>
-#include <ct_common/common/paramspec.h>
 #include <memory>
-#include <ct_common/common/eval_type_string.h>
+#include <string>
+
+#include "ct_common/base/utils.h"
+#include "ct_common/common/eval_type_string.h"
+#include "ct_common/common/exp.h"
+#include "ct_common/common/paramspec.h"
 
 namespace ct {
 namespace common {
@@ -26,20 +27,21 @@ namespace common {
  * The base class for string expressions
  */
 class DLL_EXPORT Exp_S : public Exp {
-public:
+ public:
   Exp_S(void);
   Exp_S(const Exp_S &from);
-  Exp_S &operator = (const Exp_S &right);
+  Exp_S &operator=(const Exp_S &right);
   virtual ~Exp_S(void) = 0;
 
-public:
+ public:
   virtual std::string get_class_name(void) const;
   static std::string class_name(void);
 
-public:
+ public:
   /** Function for evaluating the expression */
-  virtual EvalType_String Evaluate( const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                                    const Assignment &assignment) const = 0;
+  virtual EvalType_String Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
+      const Assignment &assignment) const = 0;
 };
 }  // namespace common
 }  // namespace ct
