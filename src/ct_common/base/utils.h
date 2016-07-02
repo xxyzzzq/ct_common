@@ -1,17 +1,7 @@
-//===----- ct_common/common/utils.h -----------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains some utility definitions and classes
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_UTILS_H_
-#define CT_COMMON_UTILS_H_
+#ifndef CT_COMMON_BASE_UTILS_H_
+#define CT_COMMON_BASE_UTILS_H_
 
 #ifdef USE_ASSERT
 #include <cassert>
@@ -19,27 +9,28 @@
 #include <exception>
 #include <string>
 
-namespace ct {
-namespace common {
+namespace ct_common {
 /**
  * Exception class for ct_common
  */
 class CT_Exception : public std::exception {
  public:
   CT_Exception(void) throw() : std::exception() {}
+
   CT_Exception(const CT_Exception &from) throw() : std::exception(from) {
     this->what_ = from.what_;
   }
-  CT_Exception(std::string what) throw() { this->what_ = what; }
-  virtual ~CT_Exception(void) throw(){};
+
+  explicit CT_Exception(std::string what) throw() { this->what_ = what; }
+
+  virtual ~CT_Exception(void) throw() = default;
 
   virtual const char *what() const throw() { return this->what_.c_str(); }
 
  private:
   std::string what_;
 };
-}  // namespace common
-}  // namespace ct
+}  // namespace ct_common
 #endif  // USE_ASSERT
 
 // for exporting shared library
@@ -78,4 +69,4 @@ class CT_Exception : public std::exception {
     }                                                               \
   } while (false)
 
-#endif  // CT_COMMON_UTILS_H_
+#endif  // CT_COMMON_BASE_UTILS_H_

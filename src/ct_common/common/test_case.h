@@ -1,17 +1,7 @@
-//===----- ct_common/common/test_case.h -------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for test cases
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_TEST_CASE_H_
-#define CT_COMMON_TEST_CASE_H_
+#ifndef CT_COMMON_COMMON_TEST_CASE_H_
+#define CT_COMMON_COMMON_TEST_CASE_H_
 
 #include <memory>
 #include <vector>
@@ -23,9 +13,7 @@ namespace ct {
 namespace common {
 class ParamSpec;
 
-/**
- * The class for test cases
- */
+// The class for test cases
 class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t> {
  private:
   typedef std::vector<size_t> impl_type;
@@ -57,4 +45,4 @@ class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t> {
 }  // namespace common
 }  // namespace ct
 
-#endif  // CT_COMMON_TEST_CASE_H_
+#endif  // CT_COMMON_COMMON_TEST_CASE_H_

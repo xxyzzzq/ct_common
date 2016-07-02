@@ -1,26 +1,18 @@
-//===----- ct_common/common/exp_a_constraintcast.h --------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for expressions casted from constraints
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_EXP_A_CONSTRAINTCAST_H_
-#define CT_COMMON_EXP_A_CONSTRAINTCAST_H_
+#ifndef CT_COMMON_COMMON_EXP_A_CONSTRAINTCAST_H_
+#define CT_COMMON_COMMON_EXP_A_CONSTRAINTCAST_H_
+
+#include <memory>
+#include <string>
+#include <vector>
 
 #include "ct_common/common/constraint.h"
 #include "ct_common/common/exp_a_atom.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for arithmetic expressions casted from constraints
- */
+namespace ct_common {
+
+// Class for arithmetic expressions casted from constraints
 class DLL_EXPORT Exp_A_ConstraintCast : public Exp_A_Atom {
  public:
   Exp_A_ConstraintCast(void);
@@ -51,7 +43,7 @@ class DLL_EXPORT Exp_A_ConstraintCast : public Exp_A_Atom {
       const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
       const Assignment &assignment) const;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // EXP_A_CONSTRAINTCAST_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_EXP_A_CONSTRAINTCAST_H_

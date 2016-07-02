@@ -1,17 +1,7 @@
-//===----- ct_common/common/tuple.h -----------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for tuples
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_TUPLE_H_
-#define CT_COMMON_TUPLE_H_
+#ifndef CT_COMMON_COMMON_TUPLE_H_
+#define CT_COMMON_COMMON_TUPLE_H_
 
 #include <memory>
 #include <vector>
@@ -20,12 +10,11 @@
 #include "ct_common/common/assignment.h"
 #include "ct_common/common/pvpair.h"
 
-namespace ct {
-namespace common {
+namespace ct_common {
+
 class ParamSpec;
-/**
- * The class for tuples
- */
+
+// The class for tuples.
 class DLL_EXPORT Tuple : public Assignment, private std::vector<PVPair> {
  private:
   typedef std::vector<PVPair> impl_type;
@@ -77,7 +66,7 @@ class DLL_EXPORT Tuple : public Assignment, private std::vector<PVPair> {
   bool operator==(const Tuple &right) const;
   bool operator<(const Tuple &right) const;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_TUPLE_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_TUPLE_H_

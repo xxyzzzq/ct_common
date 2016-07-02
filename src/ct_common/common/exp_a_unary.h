@@ -1,27 +1,18 @@
-//===----- ct_common/common/exp_a_unary.h -=---------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the base class for unary expressions
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_EXP_A_UNARY_H_
-#define CT_COMMON_EXP_A_UNARY_H_
+#ifndef CT_COMMON_COMMON_EXP_A_UNARY_H_
+#define CT_COMMON_COMMON_EXP_A_UNARY_H_
 
 #include <memory>
+#include <string>
+#include <vector>
+
 #include "ct_common/base/utils.h"
 #include "ct_common/common/exp_a.h"
 
-namespace ct {
-namespace common {
-/**
- * The base class for unary expressions
- */
+namespace ct_common {
+
+// The base class for unary expressions.
 class DLL_EXPORT Exp_A_Unary : public Exp_A {
  public:
   Exp_A_Unary(void);
@@ -62,7 +53,7 @@ class DLL_EXPORT Exp_A_Unary : public Exp_A {
   /** Inner function for determing the resulting value */
   virtual int evaluate_int(int val) const = 0;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_EXP_A_UNARY_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_EXP_A_UNARY_H_

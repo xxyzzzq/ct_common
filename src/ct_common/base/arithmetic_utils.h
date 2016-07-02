@@ -1,8 +1,7 @@
 // Copyright 2016 ct_common authors. See LICENSE file for details.
 
-
-#ifndef CT_COMMON_COMMON_ARITHMETIC_UTILS_H_
-#define CT_COMMON_COMMON_ARITHMETIC_UTILS_H_
+#ifndef CT_COMMON_BASE_ARITHMETIC_UTILS_H_
+#define CT_COMMON_BASE_ARITHMETIC_UTILS_H_
 
 #include <algorithm>
 #include <cmath>
@@ -57,4 +56,4 @@ inline std::vector<std::size_t> sort_and_uniquefy(
 
 }  // namespace ct_common
 
-#endif  // CT_COMMON_COMMON_ARITHMETIC_UTILS_H_
+#endif  // CT_COMMON_BASE_ARITHMETIC_UTILS_H_

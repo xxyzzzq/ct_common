@@ -1,26 +1,17 @@
-//===----- ct_common/common/exp_a_cdouble.h ---------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for constant double expressions
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_EXP_A_CDOUBLE_H
-#define CT_COMMON_EXP_A_CDOUBLE_H
+#ifndef CT_COMMON_COMMON_EXP_A_CDOUBLE_H_
+#define CT_COMMON_COMMON_EXP_A_CDOUBLE_H_
+
+#include <vector>
+#include <string>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/exp_a_atom.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for constant double arithmetic expressions
- */
+namespace ct_common {
+
+// Class for constant double arithmetic expressions
 class DLL_EXPORT Exp_A_CDouble : public Exp_A_Atom {
  public:
   Exp_A_CDouble(void);
@@ -60,7 +51,7 @@ class DLL_EXPORT Exp_A_CDouble : public Exp_A_Atom {
   double value_;
   std::string str_value_; /**< The preserved original string representation */
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_EXP_A_CDOUBLE_H
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_EXP_A_CDOUBLE_H_

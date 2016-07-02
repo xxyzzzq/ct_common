@@ -1,23 +1,15 @@
-//===----- ct_common/common/seed_constraint.h -------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for constraint seeds
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_SEED_CONSTRAINT_H_
-#define CT_COMMON_SEED_CONSTRAINT_H_
+#ifndef CT_COMMON_COMMON_SEED_CONSTRAINT_H_
+#define CT_COMMON_COMMON_SEED_CONSTRAINT_H_
+
+#include <vector>
 
 #include "ct_common/common/constraint.h"
 #include "ct_common/common/seed.h"
 
-namespace ct {
-namespace common {
+namespace ct_common {
+
 class DLL_EXPORT Seed_Constraint : public Seed {
  public:
   Seed_Constraint(void);
@@ -39,7 +31,7 @@ class DLL_EXPORT Seed_Constraint : public Seed {
  private:
   std::shared_ptr<Constraint> constraint_; /**< The inner constraint */
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_SEED_CONSTRAINT_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_SEED_CONSTRAINT_H_

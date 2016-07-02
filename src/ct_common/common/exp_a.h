@@ -1,19 +1,12 @@
-//===----- ct_common/common/exp_a.h -----------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the base class for arithmetic expressions
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_EXP_A_H_
-#define CT_COMMON_EXP_A_H_
+#ifndef CT_COMMON_COMMON_EXP_A_H_
+#define CT_COMMON_COMMON_EXP_A_H_
 
 #include <memory>
+#include <string>
+#include <vector>
+
 #include "ct_common/base/utils.h"
 #include "ct_common/common/assignment.h"
 #include "ct_common/common/eval_type_double.h"
@@ -21,20 +14,16 @@
 #include "ct_common/common/exp.h"
 #include "ct_common/common/paramspec.h"
 
-namespace ct {
-namespace common {
-/**
- * Arithmetic expression types
- */
+namespace ct_common {
+
+// Arithmetic expression types
 enum eEXP_A_TYPE {
   EAT_INT,    /**< Integer type */
   EAT_DOUBLE, /**< Floating-point type */
 };
 
-/**
- * Utility macro for getting the resulting value of some arithmetic expression,
- * which is converted into the given type
- */
+// Utility macro for getting the resulting value of some arithmetic expression,
+// which is converted into the given type.
 #define GET_EXP_VAL(type, identifier, exp, param_specs, assignment) \
   type identifier;                                                  \
   switch (exp->get_type()) {                                        \
@@ -92,7 +81,7 @@ class DLL_EXPORT Exp_A : public Exp {
  protected:
   eEXP_A_TYPE type_; /**< whether the expression is int or double */
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_EXP_A_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_EXP_A_H_

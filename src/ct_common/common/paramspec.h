@@ -1,31 +1,21 @@
-//===----- ct_common/common/paramspec.h -------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the base class for parameter specifications
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_PARAMSPEC_H_
-#define CT_COMMON_PARAMSPEC_H_
+#ifndef CT_COMMON_COMMON_PARAMSPEC_H_
+#define CT_COMMON_COMMON_PARAMSPEC_H_
 
 #include <map>
 #include <memory>
 #include <set>
 #include <string>
+#include <utility>
 #include <vector>
+
 #include "ct_common/base/utils.h"
 #include "ct_common/common/tree_node.h"
 
-namespace ct {
-namespace common {
-/**
- * The base class for parameter specifications
- */
+namespace ct_common {
+
+// The base class for parameter specifications
 class DLL_EXPORT ParamSpec {
  public:
   ParamSpec(void);
@@ -90,7 +80,7 @@ class DLL_EXPORT ParamSpec {
 
   /** Get the set of all related parameters */
   void touch_pids(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                  std::set<std::size_t> &pids_to_touch) const;
+                  std::set<std::size_t>* pids_to_touch) const;
 
   /** Setting the aux flag */
   void set_aux(bool flag) { this->is_aux_ = flag; }
@@ -115,33 +105,34 @@ class DLL_EXPORT ParamSpec {
   }
 
  private:
-  /** Inner init function, for copying */
+  // Inner init function, for copying.
   void init(const ParamSpec &from);
 
  private:
-  std::string param_name_;                 /**< The parameter name */
-  std::vector<std::string> string_values_; /**< The preserved string values */
+  // The parameter name.
+  std::string param_name_;
+  // The preserved string values, used for printing generated covering arrays.
+  std::vector<std::string> string_values_;
+  // The map from string values to vids
   std::map<std::string, std::size_t>
-      map_string_values_2_vid_; /** The map from string values to vids */
-  std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > >
-      auto_value_specs_; /**< each element contain a condition and an
-                            expression,
-                                when some condition is true,
-                                the value takes the expresion value */
+      map_string_values_2_vid_;
+  // Each element contain a condition and an expression, when some
+  // condition is true, the value takes the expresion value.
+  std::vector<std::pair<std::shared_ptr<TreeNode>,
+                        std::shared_ptr<TreeNode> > >
+      auto_value_specs_;
 
-  bool is_aux_; /**< Whether the parameter is auxilliary */
-  bool
-      is_auto_; /**< Whether the parameter is automatic. P.S.: auto parameters
-                   should not be recursive */
+  // Whether the parameter is auxilliary.
+  bool is_aux_;
+  // Whether the parameter is automatic. P.S.: auto parameters should not be
+  // circular.
+  bool is_auto_;
 };
 
-/**
- * Utility function for finding parameter id from a vector of paramspecs
- */
+// Utility function for finding parameter id from a vector of paramspecs.
 std::size_t find_param_id(
     const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const std::string &param_name);
-}  // namespace common
-}  // namespace ct
+}  // namespace ct_common
 
-#endif  // CT_COMMON_PARAMSPEC_H_
+#endif  // CT_COMMON_COMMON_PARAMSPEC_H_

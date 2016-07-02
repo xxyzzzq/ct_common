@@ -1,26 +1,17 @@
-//===----- ct_common/common/exp_a_cint.h ------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for constant int expressions
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_EXP_A_CINT_H
-#define CT_COMMON_EXP_A_CINT_H
+#ifndef CT_COMMON_COMMON_EXP_A_CINT_H_
+#define CT_COMMON_COMMON_EXP_A_CINT_H_
+
+#include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/exp_a_atom.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for constant int arithmetic expressions
- */
+namespace ct_common {
+
+// Class for constant int arithmetic expressions
 class DLL_EXPORT Exp_A_CInt : public Exp_A_Atom {
  public:
   Exp_A_CInt(void);
@@ -61,7 +52,7 @@ class DLL_EXPORT Exp_A_CInt : public Exp_A_Atom {
   int value_;
   std::string str_value_; /**< The preserved original string representation */
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_EXP_A_CINT_H
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_EXP_A_CINT_H_

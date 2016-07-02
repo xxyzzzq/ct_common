@@ -1,17 +1,7 @@
-//===----- ct_common/common/constraint.h ------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the base class for constraints
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_CONSTRAINT_H_
-#define CT_COMMON_CONSTRAINT_H_
+#ifndef CT_COMMON_COMMON_CONSTRAINT_H_
+#define CT_COMMON_COMMON_CONSTRAINT_H_
 
 #include <memory>
 #include <string>
@@ -24,15 +14,11 @@
 #include "ct_common/common/pvpair.h"
 #include "ct_common/common/tree_node.h"
 
-namespace ct {
-namespace common {
-/**
- * Base constraint class
- * Only for boolean expressions
- * Actually, a constraint is a boolean-typed expression, but our design
- * seperates
- * constraints from other expressions to eliminate possible ambiguities
- */
+namespace ct_common {
+
+// Base constraint class.  Only for boolean expressions. Actually, a constraint
+// is a boolean-typed expression, but our design seperates constraints from
+// other expressions to eliminate possible ambiguities.
 class DLL_EXPORT Constraint : public TreeNode {
  public:
   Constraint(void);
@@ -51,7 +37,7 @@ class DLL_EXPORT Constraint : public TreeNode {
       const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
       const Assignment &assignment) const = 0;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_CONSTRAINT_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_CONSTRAINT_H_

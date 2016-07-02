@@ -1,32 +1,21 @@
-//===----- ct_common/common/tree_node.h -------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the base class for expressions and constraints
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_TREE_NODE_H_
-#define CT_COMMON_TREE_NODE_H_
+#ifndef CT_COMMON_COMMON_TREE_NODE_H_
+#define CT_COMMON_COMMON_TREE_NODE_H_
 
 #include <iostream>
 #include <memory>
 #include <set>
+#include <string>
 #include <vector>
 
 #include "ct_common/base/utils.h"
 
-namespace ct {
-namespace common {
+namespace ct_common {
+
 class ParamSpec;
 
-/**
- * The base class for all expressions and constraints
- */
+// The base class for all expressions and constraints
 class DLL_EXPORT TreeNode {
  public:
   TreeNode(void);
@@ -48,12 +37,12 @@ class DLL_EXPORT TreeNode {
    * param_specs are used to determine related pids of auto parameters
    */
   void touch_pids(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                  std::set<std::size_t> &pids_to_touch) const;
+                  std::set<std::size_t> *pids_to_touch) const;
 
   /** Inner function to get all related parameters */
   virtual void inner_touch_leaf_pids(
       const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      std::set<std::size_t> &pids_to_touch) const;
+      std::set<std::size_t> *pids_to_touch) const;
 
   /** Get the operands */
   const std::vector<std::shared_ptr<TreeNode> > &get_oprds() const {
@@ -72,7 +61,6 @@ class DLL_EXPORT TreeNode {
  protected:
   std::vector<std::shared_ptr<TreeNode> > oprds_; /**< The operands */
 };
-}  // namespace common
-}  // namespace ct
+}  // namespace ct_common
 
-#endif  // CT_COMMON_TREE_NODE_H_
+#endif  // CT_COMMON_COMMON_TREE_NODE_H_

@@ -1,26 +1,17 @@
-//===----- ct_common/common/exp_a_cast.h ------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for casting expressions
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_EXP_A_CAST_H_
-#define CT_COMMON_EXP_A_CAST_H_
+#ifndef CT_COMMON_COMMON_EXP_A_CAST_H_
+#define CT_COMMON_COMMON_EXP_A_CAST_H_
+
+#include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/exp_a_unary.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for casting between int/double expressions
- */
+namespace ct_common {
+
+// Class for casting between int/double expressions
 class DLL_EXPORT Exp_A_Cast : public Exp_A_Unary {
  public:
   Exp_A_Cast(void);
@@ -40,7 +31,7 @@ class DLL_EXPORT Exp_A_Cast : public Exp_A_Unary {
   virtual double evaluate_double(double val) const;
   virtual int evaluate_int(int val) const;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_EXP_A_CAST_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_EXP_A_CAST_H_

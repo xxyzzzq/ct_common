@@ -1,26 +1,16 @@
-//===----- ct_common/common/exp_s_cstring.h ---------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for constant string expressions
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_EXP_S_CSTRING_H
-#define CT_COMMON_EXP_S_CSTRING_H
+#ifndef CT_COMMON_COMMON_EXP_S_CSTRING_H_
+#define CT_COMMON_COMMON_EXP_S_CSTRING_H_
+
+#include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/exp_s_atom.h"
 
-namespace ct {
-namespace common {
-/**
- * The base class for constant string expressions
- */
+namespace ct_common {
+// Base class for constant string expression.
 class DLL_EXPORT Exp_S_CString : public Exp_S_Atom {
  public:
   Exp_S_CString(void);
@@ -52,7 +42,7 @@ class DLL_EXPORT Exp_S_CString : public Exp_S_Atom {
  private:
   std::string value_;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_EXP_S_CSTRING_H
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_EXP_S_CSTRING_H_

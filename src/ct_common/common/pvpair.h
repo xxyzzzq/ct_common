@@ -1,29 +1,17 @@
-//===----- ct_common/common/pvpair.h ----------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for parameter-value pairs
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_PVPAIR_H_
-#define CT_COMMON_PVPAIR_H_
+#ifndef CT_COMMON_COMMON_PVPAIR_H_
+#define CT_COMMON_COMMON_PVPAIR_H_
 
 #include "ct_common/base/defs.h"
 #include "ct_common/base/utils.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for parameter-value pairs
- */
+namespace ct_common {
+
+// Parameter-value pair, representing an assignment to a parameter
 class DLL_EXPORT PVPair {
  public:
-  PVPair(std::size_t pid = PID_BOUND, std::size_t vid = VID_BOUND);
+  explicit PVPair(std::size_t pid = PID_BOUND, std::size_t vid = VID_BOUND);
   PVPair(const PVPair &);
   PVPair &operator=(const PVPair &right);
   ~PVPair(void);
@@ -36,7 +24,7 @@ class DLL_EXPORT PVPair {
   std::size_t pid_; /**< parameter id */
   std::size_t vid_; /**< value id */
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_PVPAIR_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_PVPAIR_H_

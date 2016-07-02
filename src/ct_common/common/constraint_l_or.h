@@ -1,26 +1,16 @@
-//===----- ct_common/common/constraint_l_or.h -------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for logical constraint "||"
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_CONSTRAINT_L_OR_H_
-#define CT_COMMON_CONSTRAINT_L_OR_H_
+#ifndef CT_COMMON_COMMON_CONSTRAINT_L_OR_H_
+#define CT_COMMON_COMMON_CONSTRAINT_L_OR_H_
+
+#include <string>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/constraint_l_binary.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for logical constraint "||"
- */
+namespace ct_common {
+
+// Class for logical constraint "||"
 class DLL_EXPORT Constraint_L_Or : public Constraint_L_Binary {
  public:
   Constraint_L_Or(void);
@@ -36,7 +26,7 @@ class DLL_EXPORT Constraint_L_Or : public Constraint_L_Binary {
   virtual EvalType_Bool evaluate_func(EvalType_Bool val_l,
                                       EvalType_Bool val_r) const;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_CONSTRAINT_L_OR_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_CONSTRAINT_L_OR_H_

@@ -1,28 +1,18 @@
-//===----- ct_common/common/constraint_l_unary.h ----------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for unary logical constraints
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_CONSTRAINT_L_UNARY_H_
-#define CT_COMMON_CONSTRAINT_L_UNARY_H_
+#ifndef CT_COMMON_COMMON_CONSTRAINT_L_UNARY_H_
+#define CT_COMMON_COMMON_CONSTRAINT_L_UNARY_H_
 
 #include <memory>
+#include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/constraint_l.h"
 
-namespace ct {
-namespace common {
-/**
- * Base class for unary logical constraints
- */
+namespace ct_common {
+
+// Base class for unary logical constraints
 class DLL_EXPORT Constraint_L_Unary : public Constraint_L {
  public:
   Constraint_L_Unary(void);
@@ -53,7 +43,7 @@ class DLL_EXPORT Constraint_L_Unary : public Constraint_L {
   /** Inner function for evaluating the value */
   virtual bool evaluate_func(bool val) const = 0;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_CONSTRAINT_L_UNARY_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_CONSTRAINT_L_UNARY_H_

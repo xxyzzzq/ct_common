@@ -1,41 +1,31 @@
-//===----- ct_common/common/tuplepool.h -------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for tuple pools
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_TUPLEPOOL_H_
-#define CT_COMMON_TUPLEPOOL_H_
+#ifndef CT_COMMON_COMMON_TUPLEPOOL_H_
+#define CT_COMMON_COMMON_TUPLEPOOL_H_
 
+#include <functional>
 #include <unordered_set>
 #include <vector>
+
 #include "ct_common/base/utils.h"
 #include "ct_common/common/tuple.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for a set of tuples
- */
+namespace ct_common {
+
 struct DLL_EXPORT TupleHasher : public std::unary_function<Tuple, std::size_t> {
   std::size_t operator()(const Tuple& tuple) const;
 };
 
+// The class for a set of tuples
 class DLL_EXPORT TuplePool : private std::unordered_set<Tuple, TupleHasher> {
  private:
   typedef std::unordered_set<Tuple, TupleHasher> impl_type;
 
  public:
-  TuplePool(void);
+  TuplePool();
   TuplePool(const TuplePool& from);
   TuplePool& operator=(const TuplePool& right);
-  ~TuplePool(void);
+  ~TuplePool();
 
   using impl_type::begin;
   using impl_type::end;
@@ -48,7 +38,7 @@ class DLL_EXPORT TuplePool : private std::unordered_set<Tuple, TupleHasher> {
   using impl_type::insert;
   using impl_type::erase;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_TUPLEPOOL_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_TUPLEPOOL_H_

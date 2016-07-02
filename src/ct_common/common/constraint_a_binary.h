@@ -1,29 +1,19 @@
-//===----- ct_common/common/constraint_a_binary.h ---------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the base class for binary arithmetic constraints
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_CONSTRAINT_A_BINARY_H_
-#define CT_COMMON_CONSTRAINT_A_BINARY_H_
+#ifndef CT_COMMON_COMMON_CONSTRAINT_A_BINARY_H_
+#define CT_COMMON_COMMON_CONSTRAINT_A_BINARY_H_
 
 #include <memory>
+#include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/constraint_a.h"
 #include "ct_common/common/exp_a.h"
 
-namespace ct {
-namespace common {
-/**
- * Base class for binary arithmetic constraints
- */
+namespace ct_common {
+
+// Base class for binary arithmetic constraints
 class DLL_EXPORT Constraint_A_Binary : public Constraint_A {
  public:
   Constraint_A_Binary(void);
@@ -73,7 +63,7 @@ class DLL_EXPORT Constraint_A_Binary : public Constraint_A {
  protected:
   double precision_; /**< Precision for comparing floating-point operands */
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_CONSTRAINT_A_BINARY_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_CONSTRAINT_A_BINARY_H_

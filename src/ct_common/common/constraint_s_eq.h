@@ -1,26 +1,16 @@
-//===----- ct_common/common/constraint_s_eq.h -------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for string constraint "=="
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_CONSTRAINT_S_EQ_H_
-#define CT_COMMON_CONSTRAINT_S_EQ_H_
+#ifndef CT_COMMON_COMMON_CONSTRAINT_S_EQ_H_
+#define CT_COMMON_COMMON_CONSTRAINT_S_EQ_H_
+
+#include <string>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/constraint_s_binary.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for string constraint "=="
- */
+namespace ct_common {
+
+// Class for string constraint "=="
 class DLL_EXPORT Constraint_S_EQ : public Constraint_S_Binary {
  public:
   Constraint_S_EQ(void);
@@ -36,7 +26,7 @@ class DLL_EXPORT Constraint_S_EQ : public Constraint_S_Binary {
   virtual bool evaluate_func(const std::string &val_1,
                              const std::string &val_2) const;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_CONSTRAINT_S_EQ_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_CONSTRAINT_S_EQ_H_

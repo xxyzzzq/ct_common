@@ -1,28 +1,18 @@
-//===----- ct_common/common/constraint_l_binary.h ---------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the base class for binary logical constraints
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_CONSTRAINT_L_BINARY_H_
-#define CT_COMMON_CONSTRAINT_L_BINARY_H_
+#ifndef CT_COMMON_COMMON_CONSTRAINT_L_BINARY_H_
+#define CT_COMMON_COMMON_CONSTRAINT_L_BINARY_H_
 
 #include <memory>
+#include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/constraint_l.h"
 
-namespace ct {
-namespace common {
-/**
- * Base class for binary logical constraints
- */
+namespace ct_common {
+
+// Base class for binary logical constraints
 class DLL_EXPORT Constraint_L_Binary : public Constraint_L {
  public:
   Constraint_L_Binary(void);
@@ -61,7 +51,7 @@ class DLL_EXPORT Constraint_L_Binary : public Constraint_L {
   virtual EvalType_Bool evaluate_func(EvalType_Bool val_l,
                                       EvalType_Bool val_r) const = 0;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_CONSTRAINT_L_BINARY_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_CONSTRAINT_L_BINARY_H_
