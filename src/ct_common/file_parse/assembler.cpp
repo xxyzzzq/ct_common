@@ -1,14 +1,4 @@
-//===----- ct_common/file_parse/assembler.cpp -------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class Assembler
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include <algorithm>
 #include <cmath>
@@ -16,11 +6,12 @@
 #include <exception>
 #include <sstream>
 
+#include "ct_common/base/class_name_utils.h"
 #include "ct_common/common/seed_constraint.h"
 #include "ct_common/common/seed_tuple.h"
 #include "ct_common/file_parse/assembler.h"
 
-using namespace ct::common;
+namespace ct_common {
 
 Assembler::Assembler(void) { this->default_precision_ = 0; }
 
@@ -204,7 +195,7 @@ void attach_strengths_core(const std::vector<std::size_t> &pid_list,
 
 void Assembler::attach_default_strengths(
     const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-    std::vector<ct::common::Strength> &strengths, std::size_t strength) {
+    std::vector<Strength> &strengths, std::size_t strength) {
   // compute the parameter id list
   std::vector<std::size_t> pid_list;
   for (std::size_t i = 0; i < param_specs.size(); ++i) {
@@ -233,7 +224,7 @@ void Assembler::attach_default_strengths(
 void Assembler::attach_strengths(
     const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
     const std::vector<std::string> &identifiers,
-    std::vector<ct::common::Strength> &strengths, std::size_t strength) {
+    std::vector<Strength> &strengths, std::size_t strength) {
   // compute the parameter id list
   std::vector<std::size_t> pid_list;
   for (std::size_t i = 0; i < identifiers.size(); ++i) {
@@ -451,9 +442,9 @@ Constraint *Assembler::asm_constraint_asb(TreeNode *oprd1, TreeNode *oprd2,
     Constraint *constr2 = dynamic_cast<Constraint *>(oprd2);
     return this->asm_constraint_l(constr1, constr2, op);
   }
-  CT_EXCEPTION((std::string("operands mismatch: ") + oprd1->get_class_name() +
-                " " + oprd2->get_class_name())
-                   .c_str());
+  CT_EXCEPTION((std::string("operands mismatch: ") +
+                ClassNameMap::GetClassName(*oprd1) + " " +
+                ClassNameMap::GetClassName(*oprd2)) .c_str());
   return 0;
 }
 
@@ -635,7 +626,7 @@ Exp_A *Assembler::asm_exp_a_cast(TreeNode *oprd, const std::string &type) {
     return tmp_return;
   }
   CT_EXCEPTION(
-      (std::string("cannot cast from ") + oprd->get_class_name()).c_str());
+      (std::string("cannot cast from ") + ClassNameMap::GetClassName(*oprd)).c_str());
   return 0;
 }
 
@@ -726,7 +717,7 @@ std::vector<std::shared_ptr<Constraint> > Assembler::dump_invalidations(
   return tmp_return;
 }
 
-Seed *Assembler::asm_seed(std::size_t id, const ct::common::Tuple &tuple) {
+Seed *Assembler::asm_seed(std::size_t id, const Tuple &tuple) {
   Seed_Tuple *seed = new Seed_Tuple();
   seed->set_id(id);
   seed->the_tuple() = tuple;
@@ -741,7 +732,7 @@ Seed *Assembler::asm_seed(std::size_t id, Constraint *constr) {
 }
 
 void Assembler::set_option(const std::string &identifier,
-                           const ct::common::TreeNode *value) {
+                           const TreeNode *value) {
   if (identifier == "default_precision") {
     if (dynamic_cast<const Exp_A_CInt *>(value)) {
       this->default_precision_ =
@@ -756,3 +747,5 @@ void Assembler::set_option(const std::string &identifier,
     CT_EXCEPTION("unhandled option");
   }
 }
+
+}  // namespace ct_common

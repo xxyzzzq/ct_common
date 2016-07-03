@@ -14,18 +14,15 @@ namespace ct_common {
 // The class for double parameter specifications
 class DLL_EXPORT ParamSpec_Double : public ParamSpec {
  public:
-  ParamSpec_Double(void);
-  ParamSpec_Double(const ParamSpec_Double &from);
-  ParamSpec_Double &operator=(const ParamSpec_Double &right);
-  virtual ~ParamSpec_Double(void);
+  ParamSpec_Double();
+  ParamSpec_Double(const ParamSpec_Double& from);
+  ParamSpec_Double& operator=(const ParamSpec_Double& right);
+  ~ParamSpec_Double() override;
 
-  virtual void set_values(const std::vector<std::string> &values);
-  const std::vector<double> &get_double_values(void) const {
-    return this->double_values_;
+  void set_values(const std::vector<std::string>& values) override;
+  const std::vector<double>& get_double_values() const {
+    return double_values_;
   }
-
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
 
  private:
   // The double values of the parameter. Should be consistent with

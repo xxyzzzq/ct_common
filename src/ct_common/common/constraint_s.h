@@ -14,13 +14,11 @@ namespace ct_common {
 // operands
 class DLL_EXPORT Constraint_S : public Constraint {
  public:
-  Constraint_S(void);
-  Constraint_S(const Constraint_S &from);
-  Constraint_S &operator=(const Constraint_S &right);
-  virtual ~Constraint_S(void);
+  Constraint_S();
+  ~Constraint_S() override;
 
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
+ private:
+  DISALLOW_COPY_AND_ASSIGN(Constraint_S);
 };
 
 }  // namespace ct_common

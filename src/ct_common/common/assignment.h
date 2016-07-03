@@ -13,17 +13,17 @@ namespace ct_common {
 // Base class for parameter assignments
 class DLL_EXPORT Assignment {
  public:
-  Assignment(void);
-  Assignment(const Assignment &from);
-  Assignment &operator=(const Assignment &right);
-  virtual ~Assignment(void) = 0;
+  Assignment();
+  Assignment(const Assignment& from);
+  Assignment& operator=(const Assignment& right);
+  virtual ~Assignment() = 0;
 
   /** whether the assignment contains a parameter */
   virtual bool IsContainParam(std::size_t pid) const = 0;
   /** return the value for the given pid */
   virtual std::size_t GetValue(std::size_t pid) const = 0;
   /** check the assignment is a sub-assignment of another one */
-  virtual bool IsSubAssignmentOf(const Assignment &assignment) const = 0;
+  virtual bool IsSubAssignmentOf(const Assignment& assignment) const = 0;
 };
 
 }  // namespace ct_common

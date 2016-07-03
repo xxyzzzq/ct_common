@@ -13,13 +13,11 @@ namespace ct_common {
 // Base class for arithmetic constraints
 class DLL_EXPORT Constraint_A : public Constraint {
  public:
-  Constraint_A(void);
-  Constraint_A(const Constraint_A &from);
-  Constraint_A &operator=(const Constraint_A &right);
-  virtual ~Constraint_A(void);
+  Constraint_A();
+  ~Constraint_A() override;
 
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
+ private:
+  DISALLOW_COPY_AND_ASSIGN(Constraint_A);
 };
 
 }  // namespace ct_common

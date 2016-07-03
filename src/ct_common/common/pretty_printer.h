@@ -13,9 +13,9 @@ class TestCase;
 
 }  // namespace ct_common
 
-std::ostream &operator<<(std::ostream &os, const ct::common::PVPair &pvpair);
-std::ostream &operator<<(std::ostream &os, const ct::common::Tuple &tuple);
-std::ostream &operator<<(std::ostream &os,
-                         const ct::common::TestCase &test_case);
+std::ostream& operator<<(std::ostream& os, const ct_common::PVPair& pvpair);
+std::ostream& operator<<(std::ostream& os, const ct_common::Tuple& tuple);
+std::ostream& operator<<(std::ostream& os,
+                         const ct_common::TestCase& test_case);
 
 #endif  // CT_COMMON_COMMON_PRETTY_PRINTER_H_

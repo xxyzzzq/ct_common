@@ -15,43 +15,40 @@ namespace ct_common {
 // The base class for unary expressions.
 class DLL_EXPORT Exp_A_Unary : public Exp_A {
  public:
-  Exp_A_Unary(void);
-  Exp_A_Unary(const Exp_A_Unary &from);
-  Exp_A_Unary &operator=(const Exp_A_Unary &right);
-  virtual ~Exp_A_Unary(void) = 0;
+  Exp_A_Unary();
+  ~Exp_A_Unary() override;
 
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
+  std::shared_ptr<const Exp_A> get_oprd() const {
+    return std::dynamic_pointer_cast<Exp_A>(oprds_[0]);
+  }
+
+  void set_oprd(const std::shared_ptr<TreeNode>& oprd) {
+    oprds_[0] = oprd;
+  }
+
+ private:
+  optional<double> EvaluateDouble_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
+
+  optional<int> EvaluateInt_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
+
   /** Get the corresponding string token */
-  virtual std::string get_op_token(void) const = 0;
-
- public:
-  std::shared_ptr<const Exp_A> get_oprd(void) const {
-    return std::dynamic_pointer_cast<Exp_A>(this->oprds_[0]);
-  }
-
-  void set_oprd(const std::shared_ptr<TreeNode> &oprd) {
-    this->oprds_[0] = oprd;
-  }
-
- private:
-  virtual EvalType_Double EvaluateDouble_Impl(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
-
-  virtual EvalType_Int EvaluateInt_Impl(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
-
- private:
+  virtual std::string get_op_token() const = 0;
   /** Inner function for determing the resulting value */
-  virtual double evaluate_double(double val) const = 0;
+  virtual optional<double> evaluate_double(
+      const optional<double>& val) const = 0;
   /** Inner function for determing the resulting value */
-  virtual int evaluate_int(int val) const = 0;
+  virtual optional<int> evaluate_int(
+      const optional<int>& val) const = 0;
+
+  DISALLOW_COPY_AND_ASSIGN(Exp_A_Unary);
 };
 
 }  // namespace ct_common

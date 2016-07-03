@@ -1,33 +1,18 @@
-//===----- ct_common/common/paramspec_string.cpp ----------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class ParamSpec_String
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/paramspec_string.h"
 
-using namespace ct::common;
+namespace ct_common {
 
-ParamSpec_String::ParamSpec_String(void) : ParamSpec() {}
+REGISTER_CLASS_NAME(ParamSpec_String)
 
-ParamSpec_String::ParamSpec_String(const ParamSpec_String &from)
-    : ParamSpec(from) {}
+ParamSpec_String::ParamSpec_String() = default;
 
-ParamSpec_String &ParamSpec_String::operator=(const ParamSpec_String &right) {
-  ParamSpec::operator=(right);
-  return *this;
-}
+ParamSpec_String::ParamSpec_String(const ParamSpec_String& from) = default;
 
-ParamSpec_String::~ParamSpec_String(void) {}
+ParamSpec_String& ParamSpec_String::operator=(
+    const ParamSpec_String& right) = default;
 
-std::string ParamSpec_String::get_class_name(void) const {
-  return ParamSpec_String::class_name();
-}
+ParamSpec_String::~ParamSpec_String() = default;
 
-std::string ParamSpec_String::class_name(void) { return "ParamSpec_String"; }
+}  // namespace ct_common

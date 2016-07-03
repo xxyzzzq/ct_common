@@ -7,39 +7,36 @@
 #include <string>
 #include <vector>
 
-#include "ct_common/common/constraint_l_atom.h"
+#include "ct_common/common/constraint_l_atomic.h"
 
 namespace ct_common {
 
 // Class for parameter logical constraints, which is atomic
-class Constraint_L_Param : public Constraint_L_Atom {
+class Constraint_L_Param : public Constraint_L_Atomic {
  public:
-  Constraint_L_Param(void);
-  Constraint_L_Param(const Constraint_L_Param &from);
-  virtual ~Constraint_L_Param(void);
-  Constraint_L_Param &operator=(const Constraint_L_Param &right);
+  Constraint_L_Param();
+  ~Constraint_L_Param() override;
 
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
 
-  void set_pid(std::size_t pid) { this->pid_ = pid; }
-  std::size_t get_pid(void) const { return this->pid_; }
+  void set_pid(std::size_t pid) { pid_ = pid; }
+  std::size_t get_pid() const { return pid_; }
 
-  virtual void inner_touch_leaf_pids(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      std::set<std::size_t>* pids_to_touch) const;
-
- public:
-  virtual EvalType_Bool Evaluate(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
+  optional<bool> Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
 
  private:
+  void inner_touch_leaf_pids(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      std::set<std::size_t>* pids_to_touch) const override;
+
   std::size_t pid_; /**< parameter id */
+
+  DISALLOW_COPY_AND_ASSIGN(Constraint_L_Param);
 };
 
 }  // namespace ct_common

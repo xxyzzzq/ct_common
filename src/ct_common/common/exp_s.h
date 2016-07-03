@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 
+#include "ct_common/base/optional.h"
 #include "ct_common/base/utils.h"
-#include "ct_common/common/eval_type_string.h"
 #include "ct_common/common/exp.h"
 #include "ct_common/common/paramspec.h"
 
@@ -17,20 +17,17 @@ namespace ct_common {
 // The base class for string expressions.
 class DLL_EXPORT Exp_S : public Exp {
  public:
-  Exp_S(void);
-  Exp_S(const Exp_S &from);
-  Exp_S &operator=(const Exp_S &right);
-  virtual ~Exp_S(void) = 0;
-
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
+  Exp_S();
+  ~Exp_S() override;
 
  public:
   // Function for evaluating the expression.
-  virtual EvalType_String Evaluate(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const = 0;
+  virtual optional<std::string> Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const = 0;
+
+ private:
+  DISALLOW_COPY_AND_ASSIGN(Exp_S);
 };
 
 }  // namespace ct_common

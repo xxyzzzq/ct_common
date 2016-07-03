@@ -15,41 +15,40 @@ namespace ct_common {
 // Base class for binary logical constraints
 class DLL_EXPORT Constraint_L_Binary : public Constraint_L {
  public:
-  Constraint_L_Binary(void);
-  Constraint_L_Binary(const Constraint_L_Binary &from);
-  Constraint_L_Binary &operator=(const Constraint_L_Binary &right);
-  virtual ~Constraint_L_Binary(void);
+  Constraint_L_Binary();
+  ~Constraint_L_Binary() override;
 
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
-  /** Get the corresponding string token */
-  virtual std::string get_op_token(void) const = 0;
-
-  std::shared_ptr<const Constraint> get_loprd(void) const {
-    return std::dynamic_pointer_cast<Constraint>(this->oprds_[0]);
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
+  std::shared_ptr<const Constraint> get_loprd() const {
+    return std::dynamic_pointer_cast<Constraint>(oprds_[0]);
   }
-  std::shared_ptr<const Constraint> get_roprd(void) const {
-    return std::dynamic_pointer_cast<Constraint>(this->oprds_[1]);
+  std::shared_ptr<const Constraint> get_roprd() const {
+    return std::dynamic_pointer_cast<Constraint>(oprds_[1]);
   }
 
-  void set_loprd(const std::shared_ptr<TreeNode> &loprd) {
-    this->oprds_[0] = loprd;
+  void set_loprd(const std::shared_ptr<TreeNode>& loprd) {
+    oprds_[0] = loprd;
   }
-  void set_roprd(const std::shared_ptr<TreeNode> &roprd) {
-    this->oprds_[1] = roprd;
+  void set_roprd(const std::shared_ptr<TreeNode>& roprd) {
+    oprds_[1] = roprd;
   }
 
-  virtual EvalType_Bool Evaluate(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
+  optional<bool> Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
 
  private:
+  /** Get the corresponding string token */
+  virtual std::string GetOpToken() const = 0;
+
   /** Inner evaluation function */
-  virtual EvalType_Bool evaluate_func(EvalType_Bool val_l,
-                                      EvalType_Bool val_r) const = 0;
+  virtual optional<bool> EvaluateInternal(
+      const optional<bool>& val_l, const optional<bool>& val_r) const = 0;
+
+  DISALLOW_COPY_AND_ASSIGN(Constraint_L_Binary);
 };
 
 }  // namespace ct_common

@@ -14,22 +14,22 @@ namespace ct_common {
 // Class for casting between int/double expressions
 class DLL_EXPORT Exp_A_Cast : public Exp_A_Unary {
  public:
-  Exp_A_Cast(void);
-  Exp_A_Cast(const Exp_A_Cast &from);
-  Exp_A_Cast &operator=(const Exp_A_Cast &right);
-  virtual ~Exp_A_Cast(void);
+  Exp_A_Cast();
+  ~Exp_A_Cast() override;
 
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
-  virtual std::string get_op_token(void) const;
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
+  std::string get_op_token() const override;
 
  private:
-  virtual double evaluate_double(double val) const;
-  virtual int evaluate_int(int val) const;
+  optional<double> evaluate_double(
+      const optional<double>& val) const override;
+  optional<int> evaluate_int(
+      const optional<int>& val) const override;
+
+  DISALLOW_COPY_AND_ASSIGN(Exp_A_Cast);
 };
 
 }  // namespace ct_common

@@ -15,7 +15,7 @@ using RawStrength = std::vector<std::size_t>;
 using Strength = std::pair<std::vector<std::size_t>, std::size_t>;
 
 /** Decomposing strengths to raw strengths */
-void attach_2_raw_strength(const Strength &strength,
+void attach_2_raw_strength(const Strength& strength,
                            std::vector<RawStrength>* raw_strengths);
 
 }  // namespace ct_common

@@ -16,14 +16,11 @@ namespace ct_common {
 // Base class for expression non-boolean expressions only
 class DLL_EXPORT Exp : public TreeNode {
  public:
-  Exp(void);
-  Exp(const Exp &from);
-  Exp &operator=(const Exp &right);
-  virtual ~Exp(void) = 0;
+  Exp();
+  ~Exp() override;
 
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
+ private:
+  DISALLOW_COPY_AND_ASSIGN(Exp);
 };
 
 }  // namespace ct_common

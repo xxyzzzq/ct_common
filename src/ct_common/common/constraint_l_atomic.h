@@ -14,16 +14,13 @@ namespace ct_common {
 
 // Base class for atomic constraints (i.e. no sub-constraints or
 // sub-expressions)
-class DLL_EXPORT Constraint_L_Atom : public Constraint_L {
+class DLL_EXPORT Constraint_L_Atomic : public Constraint_L {
  public:
-  Constraint_L_Atom(void);
-  Constraint_L_Atom(const Constraint_L_Atom &from);
-  Constraint_L_Atom &operator=(const Constraint_L_Atom &right);
-  virtual ~Constraint_L_Atom(void) = 0;
+  Constraint_L_Atomic();
+  ~Constraint_L_Atomic() override;
 
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
+ private:
+  DISALLOW_COPY_AND_ASSIGN(Constraint_L_Atomic);
 };
 
 }  // namespace ct_common

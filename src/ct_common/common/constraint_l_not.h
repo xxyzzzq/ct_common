@@ -13,17 +13,15 @@ namespace ct_common {
 // Class for logical constraint "!"
 class DLL_EXPORT Constraint_L_Not : public Constraint_L_Unary {
  public:
-  Constraint_L_Not(void);
-  Constraint_L_Not(const Constraint_L_Not &from);
-  Constraint_L_Not &operator=(const Constraint_L_Not &right);
-  virtual ~Constraint_L_Not(void);
-
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual std::string get_op_token(void) const;
+  Constraint_L_Not();
+  ~Constraint_L_Not() override;
 
  private:
-  virtual bool evaluate_func(bool val) const;
+  std::string GetOpToken() const override;
+
+  optional<bool> EvaluateInternal(const optional<bool>& val) const override;
+
+  DISALLOW_COPY_AND_ASSIGN(Constraint_L_Not);
 };
 
 }  // namespace ct_common

@@ -14,19 +14,16 @@ namespace ct_common {
 // The class for Boolean parameter specifications
 class DLL_EXPORT ParamSpec_Bool : public ParamSpec {
  public:
-  ParamSpec_Bool(void);
-  ParamSpec_Bool(const ParamSpec_Bool &from);
-  ParamSpec_Bool &operator=(const ParamSpec_Bool &right);
-  virtual ~ParamSpec_Bool(void);
+  ParamSpec_Bool();
+  ParamSpec_Bool(const ParamSpec_Bool& from);
+  ParamSpec_Bool& operator=(const ParamSpec_Bool& right);
+  ~ParamSpec_Bool() override;
 
   // The string values is neglected.  Setting values as "false", "true", "#".
-  virtual void set_values(const std::vector<std::string> &string_values);
-  const std::vector<bool> &get_bool_values(void) const {
-    return this->bool_values_;
+  void set_values(const std::vector<std::string>& string_values) override;
+  const std::vector<bool>& get_bool_values() const {
+    return bool_values_;
   }
-
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
 
  private:
   // The bool values of the parameter: 0 for false, 1 for true, 2 for invalid.

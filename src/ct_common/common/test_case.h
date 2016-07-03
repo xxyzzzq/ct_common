@@ -9,8 +9,8 @@
 #include "ct_common/base/utils.h"
 #include "ct_common/common/assignment.h"
 
-namespace ct {
-namespace common {
+namespace ct_common {
+
 class ParamSpec;
 
 // The class for test cases
@@ -19,14 +19,14 @@ class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t> {
   typedef std::vector<size_t> impl_type;
 
  public:
-  TestCase(void);
-  TestCase(const TestCase &from);
-  TestCase &operator=(const TestCase &right);
-  virtual ~TestCase(void);
+  TestCase();
+  TestCase(const TestCase& from);
+  TestCase& operator=(const TestCase& right);
+  ~TestCase() override;
 
-  virtual bool IsContainParam(std::size_t pid) const;
-  virtual std::size_t GetValue(std::size_t pid) const;
-  virtual bool IsSubAssignmentOf(const Assignment &assignment) const;
+  bool IsContainParam(std::size_t pid) const override;
+  std::size_t GetValue(std::size_t pid) const override;
+  bool IsSubAssignmentOf(const Assignment& assignment) const override;
 
   using impl_type::iterator;
   using impl_type::const_iterator;
@@ -42,7 +42,7 @@ class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t> {
   using impl_type::empty;
   using impl_type::operator[];
 };
-}  // namespace common
-}  // namespace ct
+
+}  // namespace ct_common
 
 #endif  // CT_COMMON_COMMON_TEST_CASE_H_

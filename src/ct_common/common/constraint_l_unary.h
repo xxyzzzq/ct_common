@@ -15,33 +15,33 @@ namespace ct_common {
 // Base class for unary logical constraints
 class DLL_EXPORT Constraint_L_Unary : public Constraint_L {
  public:
-  Constraint_L_Unary(void);
-  Constraint_L_Unary(const Constraint_L_Unary &from);
-  Constraint_L_Unary &operator=(const Constraint_L_Unary &right);
-  virtual ~Constraint_L_Unary(void);
+  Constraint_L_Unary();
+  ~Constraint_L_Unary() override;
 
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
-  /** Get the corresponding string token */
-  virtual std::string get_op_token(void) const = 0;
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
 
-  std::shared_ptr<const Constraint> get_oprd(void) const {
-    return std::dynamic_pointer_cast<Constraint>(this->oprds_[0]);
-  }
-  void set_oprd(const std::shared_ptr<TreeNode> &oprd) {
-    this->oprds_[0] = oprd;
+  std::shared_ptr<const Constraint> get_oprd() const {
+    return std::dynamic_pointer_cast<Constraint>(oprds_[0]);
   }
 
-  virtual EvalType_Bool Evaluate(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
+  void set_oprd(const std::shared_ptr<TreeNode>& oprd) {
+    oprds_[0] = oprd;
+  }
+
+  optional<bool> Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
 
  private:
+  /** Get the corresponding string token */
+  virtual std::string GetOpToken() const = 0;
   /** Inner function for evaluating the value */
-  virtual bool evaluate_func(bool val) const = 0;
+  virtual optional<bool> EvaluateInternal(const optional<bool>& val) const = 0;
+
+  DISALLOW_COPY_AND_ASSIGN(Constraint_L_Unary);
 };
 
 }  // namespace ct_common

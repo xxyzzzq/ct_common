@@ -12,21 +12,21 @@ namespace ct_common {
 
 class DLL_EXPORT Seed_Constraint : public Seed {
  public:
-  Seed_Constraint(void);
-  Seed_Constraint(const Seed_Constraint &);
-  Seed_Constraint &operator=(const Seed_Constraint &right);
-  virtual ~Seed_Constraint(void);
+  Seed_Constraint();
+  Seed_Constraint(const Seed_Constraint& );
+  Seed_Constraint& operator=(const Seed_Constraint& right);
+  ~Seed_Constraint() override;
 
  public:
-  const std::shared_ptr<Constraint> &get_constraint(void) const {
-    return this->constraint_;
+  const std::shared_ptr<Constraint>& get_constraint() const {
+    return constraint_;
   }
-  std::shared_ptr<Constraint> &the_constraint(void) {
-    return this->constraint_;
+  std::shared_ptr<Constraint>& the_constraint() {
+    return constraint_;
   }
-  virtual EvalType_Bool IsMatch(
-      const Assignment &assignment,
-      const std::vector<std::shared_ptr<ParamSpec> > &paramspecs);
+  optional<bool> IsMatch(
+      const Assignment& assignment,
+      const std::vector<std::shared_ptr<ParamSpec> >& paramspecs) override;
 
  private:
   std::shared_ptr<Constraint> constraint_; /**< The inner constraint */

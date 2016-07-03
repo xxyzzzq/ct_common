@@ -17,15 +17,15 @@ class CT_Exception : public std::exception {
  public:
   CT_Exception(void) throw() : std::exception() {}
 
-  CT_Exception(const CT_Exception &from) throw() : std::exception(from) {
-    this->what_ = from.what_;
+  CT_Exception(const CT_Exception& from) throw() : std::exception(from) {
+    what_ = from.what_;
   }
 
-  explicit CT_Exception(std::string what) throw() { this->what_ = what; }
+  explicit CT_Exception(std::string what) throw() { what_ = what; }
 
   virtual ~CT_Exception(void) throw() = default;
 
-  virtual const char *what() const throw() { return this->what_.c_str(); }
+  virtual const char* what() const throw() { return what_.c_str(); }
 
  private:
   std::string what_;
@@ -57,7 +57,7 @@ class CT_Exception : public std::exception {
 #else  // USE_ASSERT
 #define CT_EXCEPTION(x)                 \
   do {                                  \
-    throw(ct::common::CT_Exception(x)); \
+    throw(ct_common::CT_Exception(x)); \
   } while (false)
 #endif  // USE_ASSERT
 
@@ -68,5 +68,13 @@ class CT_Exception : public std::exception {
       CT_EXCEPTION(std::string("the object is not of type ") + #T); \
     }                                                               \
   } while (false)
+
+#if !defined(DISALLOW_COPY_AND_ASSIGN)
+
+#define DISALLOW_COPY_AND_ASSIGN(TypeName) \
+  TypeName(const TypeName&) = delete;      \
+  void operator=(const TypeName&) = delete
+
+#endif  // !defined(DISALLOW_COPY_AND_ASSIGN)
 
 #endif  // CT_COMMON_BASE_UTILS_H_

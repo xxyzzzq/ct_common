@@ -7,40 +7,37 @@
 #include <vector>
 
 #include "ct_common/base/utils.h"
-#include "ct_common/common/exp_s_atom.h"
+#include "ct_common/common/exp_s_atomic.h"
 
 namespace ct_common {
 // Base class for constant string expression.
-class DLL_EXPORT Exp_S_CString : public Exp_S_Atom {
+class DLL_EXPORT Exp_S_CString : public Exp_S_Atomic {
  public:
-  Exp_S_CString(void);
-  Exp_S_CString(const Exp_S_CString &from);
-  Exp_S_CString &operator=(const Exp_S_CString &right);
-  virtual ~Exp_S_CString(void);
+  Exp_S_CString();
+  ~Exp_S_CString() override;
 
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
 
- public:
   /** Setting the value */
-  void set_value(const std::string &value) { this->value_ = value; }
+  void set_value(const std::string& value) { value_ = value; }
   /** Setting the value */
-  void set_value(const char *value) { this->value_ = value; }
+  void set_value(const char* value) { value_ = value; }
 
   /** Getting the value */
-  const std::string &get_value(void) const { return this->value_; }
-  virtual const std::string &get_str_value(void) const;
+  const std::string& get_value() const { return value_; }
+  const std::string& get_str_value() const override;
 
-  virtual EvalType_String Evaluate(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
+  optional<std::string> Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
 
  private:
   std::string value_;
+
+  DISALLOW_COPY_AND_ASSIGN(Exp_S_CString);
 };
 
 }  // namespace ct_common

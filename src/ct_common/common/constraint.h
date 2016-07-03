@@ -8,8 +8,8 @@
 #include <vector>
 
 #include "ct_common/base/utils.h"
+#include "ct_common/base/optional.h"
 #include "ct_common/common/assignment.h"
-#include "ct_common/common/eval_type_bool.h"
 #include "ct_common/common/paramspec.h"
 #include "ct_common/common/pvpair.h"
 #include "ct_common/common/tree_node.h"
@@ -21,21 +21,16 @@ namespace ct_common {
 // other expressions to eliminate possible ambiguities.
 class DLL_EXPORT Constraint : public TreeNode {
  public:
-  Constraint(void);
-  // This class is not supposed to be copied and assigned
-  // only the reference is copied
-  Constraint(const Constraint &from);
-  Constraint &operator=(const Constraint &right);
-  virtual ~Constraint(void) = 0;
+  Constraint();
+  ~Constraint() override;
 
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-
- public:
   /** Whether the constraint is satisfied */
-  virtual EvalType_Bool Evaluate(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const = 0;
+  virtual optional<bool> Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const = 0;
+
+ private:
+  DISALLOW_COPY_AND_ASSIGN(Constraint);
 };
 
 }  // namespace ct_common

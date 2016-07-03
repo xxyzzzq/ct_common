@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "ct_common/base/utils.h"
+#include "ct_common/base/class_name_utils.h"
 
 namespace ct_common {
 
@@ -18,48 +19,43 @@ class ParamSpec;
 // The base class for all expressions and constraints
 class DLL_EXPORT TreeNode {
  public:
-  TreeNode(void);
-  /** Only shallow copy here */
-  TreeNode(const TreeNode &from);
-  /** Only shallow copy here */
-  TreeNode &operator=(const TreeNode &right);
-  virtual ~TreeNode(void) = 0;
+  TreeNode();
+  virtual ~TreeNode() = 0;
 
-  /** TODO: replace by typeid */
-  virtual std::string get_class_name(void) const;
-  /** TODO: replace by typeid */
-  static std::string class_name(void);
   /** Whether the node is a leaf node */
-  bool is_leaf(void) const { return this->oprds_.empty(); }
+  bool is_leaf() const { return oprds_.empty(); }
 
   /**
    * Get all related parameters EXCEPT for auto parameters
    * param_specs are used to determine related pids of auto parameters
    */
-  void touch_pids(const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-                  std::set<std::size_t> *pids_to_touch) const;
-
-  /** Inner function to get all related parameters */
-  virtual void inner_touch_leaf_pids(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      std::set<std::size_t> *pids_to_touch) const;
+  void touch_pids(const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+                  std::set<std::size_t>* pids_to_touch) const;
 
   /** Get the operands */
-  const std::vector<std::shared_ptr<TreeNode> > &get_oprds() const {
-    return this->oprds_;
+  const std::vector<std::shared_ptr<TreeNode> >& get_oprds() const {
+    return oprds_;
   }
 
-  /** Setting the string value (preserve a copy of the original string
+  /** getting the string value (preserved copy of the original string
    * representation) */
-  virtual const std::string &get_str_value(void) const;
+  virtual const std::string& get_str_value() const;
 
   /** Print the tree node to a given output stream */
   virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const = 0;
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const = 0;
 
  protected:
   std::vector<std::shared_ptr<TreeNode> > oprds_; /**< The operands */
+
+ private:
+  /** Inner function to get all related parameters */
+  virtual void inner_touch_leaf_pids(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      std::set<std::size_t>* pids_to_touch) const;
+
+  DISALLOW_COPY_AND_ASSIGN(TreeNode);
 };
 }  // namespace ct_common
 

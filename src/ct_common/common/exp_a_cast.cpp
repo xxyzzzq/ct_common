@@ -1,42 +1,29 @@
-//===----- ct_common/common/exp_a_cast.cpp ----------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class Exp_A_Cast
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/exp_a_cast.h"
 
-using namespace ct::common;
+#include "ct_common/base/class_name_utils.h"
 
-Exp_A_Cast::Exp_A_Cast(void) : Exp_A_Unary() {}
+namespace ct_common {
 
-Exp_A_Cast::Exp_A_Cast(const Exp_A_Cast &from) : Exp_A_Unary(from) {}
+REGISTER_CLASS_NAME(Exp_A_Cast)
 
-Exp_A_Cast &Exp_A_Cast::operator=(const Exp_A_Cast &right) {
-  Exp_A_Unary::operator=(right);
-  return *this;
+Exp_A_Cast::Exp_A_Cast() = default;
+
+Exp_A_Cast::~Exp_A_Cast() = default;
+
+optional<double> Exp_A_Cast::evaluate_double(
+    const optional<double>& val) const {
+  return val;
 }
 
-Exp_A_Cast::~Exp_A_Cast(void) {}
-
-std::string Exp_A_Cast::get_class_name(void) const {
-  return Exp_A_Cast::class_name();
+optional<int> Exp_A_Cast::evaluate_int(
+    const optional<int>& val) const {
+  return val;
 }
 
-std::string Exp_A_Cast::class_name(void) { return "Exp_A_Cast"; }
-
-double Exp_A_Cast::evaluate_double(double val) const { return val; }
-
-int Exp_A_Cast::evaluate_int(int val) const { return val; }
-
-std::string Exp_A_Cast::get_op_token(void) const {
-  switch (this->type_) {
+std::string Exp_A_Cast::get_op_token() const {
+  switch (type_) {
     case EAT_INT:
       return "int";
       break;
@@ -51,10 +38,12 @@ std::string Exp_A_Cast::get_op_token(void) const {
 }
 
 void Exp_A_Cast::dump(
-    std::ostream &os,
-    const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
-  os << this->get_op_token();
+    std::ostream& os,
+    const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
+  os << get_op_token();
   os << "(";
-  this->get_oprd()->dump(os, param_specs);
+  get_oprd()->dump(os, param_specs);
   os << ")";
 }
+
+}  // namespace ct_common

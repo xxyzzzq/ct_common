@@ -1,39 +1,22 @@
-//===----- ct_common/common/constraint.cpp ----------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class Constraint
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/constraint.h"
 
-using namespace ct::common;
+#include "ct_common/base/class_name_utils.h"
 
-Constraint::Constraint(void) : TreeNode() {}
+namespace ct_common {
 
-Constraint::Constraint(const Constraint &from) : TreeNode(from) {}
+REGISTER_CLASS_NAME(Constraint)
 
-Constraint &Constraint::operator=(const Constraint &right) {
-  TreeNode::operator=(right);
-  return *this;
-}
+Constraint::Constraint() = default;
 
-Constraint::~Constraint(void) {}
+Constraint::~Constraint() = default;
 
-std::string Constraint::get_class_name(void) const {
-  return Constraint::class_name();
-}
-
-std::string Constraint::class_name(void) { return "Constraint"; }
-
-EvalType_Bool Constraint::Evaluate(
-    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-    const Assignment &assignment) const {
+optional<bool> Constraint::Evaluate(
+    const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+    const Assignment& assignment) const {
   // never called
-  return EvalType_Bool(false, false);
+  return nullopt;
 }
+
+}  // namespace ct_common

@@ -13,19 +13,18 @@ namespace ct_common {
 // class for arithemetic expression "-" (unary).
 class DLL_EXPORT Exp_A_Neg : public Exp_A_Unary {
  public:
-  Exp_A_Neg(void);
-  Exp_A_Neg(const Exp_A_Neg &from);
-  Exp_A_Neg &operator=(const Exp_A_Neg &right);
-  virtual ~Exp_A_Neg(void);
-
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual std::string get_op_token(void) const;
+  Exp_A_Neg();
+  ~Exp_A_Neg() override;
 
  private:
-  virtual double evaluate_double(double val) const;
-  virtual int evaluate_int(int val) const;
+  std::string get_op_token() const override;
+
+  optional<double> evaluate_double(
+      const optional<double>& val) const override;
+  optional<int> evaluate_int(
+      const optional<int>& val) const override;
+
+  DISALLOW_COPY_AND_ASSIGN(Exp_A_Neg);
 };
 
 }  // namespace ct_common

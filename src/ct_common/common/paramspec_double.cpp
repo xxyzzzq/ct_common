@@ -1,45 +1,30 @@
-//===----- ct_common/common/paramspec_double.cpp ----------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class ParamSpec_Double
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/paramspec_double.h"
+
 #include <cstdlib>
 
-using namespace ct::common;
+namespace ct_common {
 
-ParamSpec_Double::ParamSpec_Double(void) : ParamSpec(), double_values_() {}
+REGISTER_CLASS_NAME(ParamSpec_Double)
 
-ParamSpec_Double::ParamSpec_Double(const ParamSpec_Double &from)
-    : ParamSpec(from), double_values_(from.double_values_) {}
+ParamSpec_Double::ParamSpec_Double() = default;
 
-ParamSpec_Double &ParamSpec_Double::operator=(const ParamSpec_Double &right) {
-  ParamSpec::operator=(right);
-  this->double_values_ = right.double_values_;
-  return *this;
-}
+ParamSpec_Double::ParamSpec_Double(const ParamSpec_Double& from) = default;
 
-ParamSpec_Double::~ParamSpec_Double(void) {}
+ParamSpec_Double& ParamSpec_Double::operator=(
+    const ParamSpec_Double& right) = default;
 
-std::string ParamSpec_Double::get_class_name(void) const {
-  return ParamSpec_Double::class_name();
-}
-
-std::string ParamSpec_Double::class_name(void) { return "ParamSpec_Double"; }
+ParamSpec_Double::~ParamSpec_Double() = default;
 
 void ParamSpec_Double::set_values(
-    const std::vector<std::string> &string_values) {
+    const std::vector<std::string>& string_values) {
   ParamSpec::set_values(string_values);
   for (std::size_t i = 0; i < string_values.size(); ++i) {
-    this->double_values_.push_back(atof(string_values[i].c_str()));
+    double_values_.push_back(atof(string_values[i].c_str()));
   }
   // now push back the invalid value
-  this->double_values_.push_back(0);
+  double_values_.push_back(0);
 }
+
+}  // namespace ct_common

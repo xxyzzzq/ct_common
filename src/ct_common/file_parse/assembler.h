@@ -1,14 +1,4 @@
-//===----- ct_common/file_parse/assembler.h ---------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for assembling elements of the SUT model
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #ifndef ASSEMBLER_H_
 #define ASSEMBLER_H_
@@ -25,8 +15,8 @@
 #include "ct_common/common/strength.h"
 #include "ct_common/file_parse/err_logger.h"
 
-namespace ct {
-namespace common {
+namespace ct_common {
+
 /**
  * Operators in constraints and expressions
  */
@@ -151,13 +141,13 @@ class Assembler {
       const std::vector<std::shared_ptr<ParamSpec> > &param_specs);
 
   /** Assemble a tuple seed */
-  ct::common::Seed *asm_seed(std::size_t id, const ct::common::Tuple &tuple);
+  Seed *asm_seed(std::size_t id, const Tuple &tuple);
   /** Assemble a constraint seed */
-  ct::common::Seed *asm_seed(std::size_t id, ct::common::Constraint *constr);
+  Seed *asm_seed(std::size_t id, Constraint *constr);
 
   /** Setting an option */
   void set_option(const std::string &identifier,
-                  const ct::common::TreeNode *value);
+                  const TreeNode *value);
 
  private:
   /** Geting the conjunction of a set of constraints */
@@ -170,7 +160,7 @@ class Assembler {
       stored_invalidations_; /**< Stored parameter invalidation constraint */
   double default_precision_; /**< The default floating-point precision */
 };
-}  // namepsace common
-}  // namespace ct
+
+}  // namespace ct_common
 
 #endif  // ASSEMBLER_H_

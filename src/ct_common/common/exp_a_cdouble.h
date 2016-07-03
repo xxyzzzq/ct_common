@@ -7,49 +7,45 @@
 #include <string>
 
 #include "ct_common/base/utils.h"
-#include "ct_common/common/exp_a_atom.h"
+#include "ct_common/common/exp_a_atomic.h"
 
 namespace ct_common {
 
 // Class for constant double arithmetic expressions
-class DLL_EXPORT Exp_A_CDouble : public Exp_A_Atom {
+class DLL_EXPORT Exp_A_CDouble : public Exp_A_Atomic {
  public:
-  Exp_A_CDouble(void);
-  Exp_A_CDouble(const Exp_A_CDouble &from);
-  Exp_A_CDouble &operator=(const Exp_A_CDouble &right);
-  virtual ~Exp_A_CDouble(void);
+  Exp_A_CDouble();
+  ~Exp_A_CDouble() override;
 
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
 
- public:
   /** Setting the value */
-  virtual void set_value(int value);
+  void set_value(int value);
   /** Setting the value */
-  virtual void set_value(double value);
-  void set_str_value(const std::string &str_value);
+  void set_value(double value);
+  void set_str_value(const std::string& str_value);
 
   /** Getting the value */
-  double get_value(void) const { return this->value_; }
+  double get_value() const { return value_; }
   /** Getting the string value */
-  virtual const std::string &get_str_value(void) const;
+  const std::string& get_str_value() const override;
 
  private:
-  virtual EvalType_Double EvaluateDouble_Impl(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
+  optional<double> EvaluateDouble_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
 
-  virtual EvalType_Int EvaluateInt_Impl(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
+  optional<int> EvaluateInt_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
 
- private:
   double value_;
   std::string str_value_; /**< The preserved original string representation */
+
+  DISALLOW_COPY_AND_ASSIGN(Exp_A_CDouble);
 };
 
 }  // namespace ct_common

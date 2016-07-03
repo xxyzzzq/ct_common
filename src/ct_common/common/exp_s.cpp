@@ -1,30 +1,15 @@
-//===----- ct_common/common/exp_s.cpp ---------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class Exp_S
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/exp_s.h"
 
-using namespace ct::common;
+#include "ct_common/base/class_name_utils.h"
 
-Exp_S::Exp_S(void) : Exp() {}
+namespace ct_common {
 
-Exp_S::Exp_S(const Exp_S &from) : Exp(from) {}
+REGISTER_CLASS_NAME(Exp_S)
 
-Exp_S &Exp_S::operator=(const Exp_S &right) {
-  Exp::operator=(right);
-  return *this;
-}
+Exp_S::Exp_S() = default;
 
-Exp_S::~Exp_S(void) {}
+Exp_S::~Exp_S() = default;
 
-std::string Exp_S::get_class_name(void) const { return Exp_S::class_name(); }
-
-std::string Exp_S::class_name(void) { return "Exp_S"; }
+}  // namespace ct_common

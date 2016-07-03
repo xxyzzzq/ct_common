@@ -13,13 +13,11 @@ namespace ct_common {
 // Base class for logical constraints
 class DLL_EXPORT Constraint_L : public Constraint {
  public:
-  Constraint_L(void);
-  Constraint_L(const Constraint_L &from);
-  Constraint_L &operator=(const Constraint_L &right);
-  virtual ~Constraint_L(void);
+  Constraint_L();
+  ~Constraint_L() override;
 
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
+ private:
+  DISALLOW_COPY_AND_ASSIGN(Constraint_L);
 };
 
 }  // namespace ct_common
