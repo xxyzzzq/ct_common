@@ -42,11 +42,11 @@ class DLL_EXPORT Tuple : public Assignment, private std::vector<PVPair> {
   const PVPair* Search(std::size_t pid) const;
 
   /** For iterating tuples. Go to the next tuple, returns false if overflows */
-  bool to_the_next_tuple(
+  bool ToTheNextTuple(
       std::vector<std::shared_ptr<ParamSpec> > param_specs);
   /** For iterating tuples. Go to the next tuple (considering invalid values),
    * returns false if overflows */
-  bool to_the_next_tuple_with_ivld(
+  bool ToTheNextTupleWithIvld(
       std::vector<std::shared_ptr<ParamSpec> > param_specs);
 
   using impl_type::iterator;

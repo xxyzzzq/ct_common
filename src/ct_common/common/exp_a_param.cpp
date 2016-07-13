@@ -76,7 +76,7 @@ optional<double> Exp_A_Param::EvaluateDouble_Impl(
     return EvaluateAutoValue<double>(param_specs, assignment, pid_);
   }
   std::size_t vid = assignment.GetValue(pid_);
-  if (param_specs[pid_]->is_vid_invalid(vid))
+  if (param_specs[pid_]->IsVidInvalid(vid))
     return nullopt;
 
   if (TYPE_CHECK(param_specs[pid_].get(), ParamSpec_Int*)) {
@@ -100,7 +100,7 @@ optional<int> Exp_A_Param::EvaluateInt_Impl(
     return EvaluateAutoValue<int>(param_specs, assignment, pid_);
   }
   std::size_t vid = assignment.GetValue(pid_);
-  if (param_specs[pid_]->is_vid_invalid(vid))
+  if (param_specs[pid_]->IsVidInvalid(vid))
     return nullopt;
 
   if (TYPE_CHECK(param_specs[pid_].get(), ParamSpec_Int*)) {
@@ -125,7 +125,7 @@ void Exp_A_Param::inner_touch_leaf_pids(
     return;
   }
   if (param_specs[pid_]->is_auto()) {
-    param_specs[pid_]->touch_pids(param_specs, pids_to_touch);
+    param_specs[pid_]->TouchPids(param_specs, pids_to_touch);
   } else {
     pids_to_touch->insert(pid_);
   }

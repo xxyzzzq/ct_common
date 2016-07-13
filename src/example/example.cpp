@@ -2,7 +2,7 @@
 #include <iostream>
 #include <map>
 
-#include "ct_common/common/sutmodel.h"
+#include "ct_common/common/sut_model.h"
 #include "ct_common/common/tuplepool.h"
 #include "ct_common/file_parse/assembler.h"
 #include "ct_common/file_parse/ct_common_lexer.hpp"
@@ -38,9 +38,8 @@ int main(int argc, char *argv[]) {
   Assembler assembler;
   try {
     ct_common::lexer lexer(&infile);
-    assembler.setErrLogger(std::shared_ptr<ErrLogger>(new ErrLogger_Cerr()));
-    ct_common::parser parser(lexer, sut_model.param_specs_, sut_model.strengths_,
-                         sut_model.seeds_, sut_model.constraints_, assembler);
+    assembler.SetErrLogger(std::shared_ptr<ErrLogger>(new ErrLogger_Cerr()));
+    ct_common::parser parser(&lexer, &sut_model, &assembler);
     parser.parse();
   } catch (std::runtime_error e) {
     std::cerr << e.what() << std::endl;
@@ -49,21 +48,21 @@ int main(int argc, char *argv[]) {
     std::cerr << "exiting" << std::endl;
     return 1;
   }
-  if (assembler.numErrs() > 0) {
-    std::cerr << assembler.numErrs() << " errors in the input file, exiting"
+  if (assembler.NumErrs() > 0) {
+    std::cerr << assembler.NumErrs() << " errors in the input file, exiting"
               << std::endl;
     return 2;
   }
   std::cout << "successfully parsed the input file" << std::endl;
-  std::cout << "# parameters:  " << sut_model.param_specs_.size() << std::endl;
-  std::cout << "# strengths:   " << sut_model.strengths_.size() << std::endl;
-  std::cout << "# seeds:       " << sut_model.seeds_.size() << std::endl;
-  std::cout << "# constraints: " << sut_model.constraints_.size() << std::endl;
+  std::cout << "# parameters:  " << sut_model.param_specs.size() << std::endl;
+  std::cout << "# strengths:   " << sut_model.strengths.size() << std::endl;
+  std::cout << "# seeds:       " << sut_model.seeds.size() << std::endl;
+  std::cout << "# constraints: " << sut_model.constraints.size() << std::endl;
 
   std::vector<RawStrength> raw_strengths;
   TuplePool tuple_pool;
-  for (std::size_t i = 0; i < sut_model.strengths_.size(); ++i) {
-    attach_2_raw_strength(sut_model.strengths_[i], &raw_strengths);
+  for (std::size_t i = 0; i < sut_model.strengths.size(); ++i) {
+    AttachToRawStrength(sut_model.strengths[i], &raw_strengths);
   }
   for (std::size_t i = 0; i < raw_strengths.size(); ++i) {
     Tuple tuple;
@@ -75,14 +74,14 @@ int main(int argc, char *argv[]) {
     }
     do {
       tuple_pool.insert(tuple);
-    } while (tuple.to_the_next_tuple(sut_model.param_specs_));
+    } while (tuple.ToTheNextTuple(sut_model.param_specs));
   }
   std::cout << "# target combinations: " << tuple_pool.size() << std::endl;
 
   TuplePool forbidden_tuple_pool;
-  for (std::size_t i = 0; i < sut_model.constraints_.size(); ++i) {
+  for (std::size_t i = 0; i < sut_model.constraints.size(); ++i) {
     std::set<std::size_t> rel_pids;
-    sut_model.constraints_[i]->touch_pids(sut_model.param_specs_, &rel_pids);
+    sut_model.constraints[i]->touch_pids(sut_model.param_specs, &rel_pids);
     Tuple tuple;
     for (std::set<std::size_t>::const_iterator iter = rel_pids.begin();
          iter != rel_pids.end(); iter++) {
@@ -90,11 +89,11 @@ int main(int argc, char *argv[]) {
     }
     do {
       optional<bool> result =
-          sut_model.constraints_[i]->Evaluate(sut_model.param_specs_, tuple);
+          sut_model.constraints[i]->Evaluate(sut_model.param_specs, tuple);
       if (result || !result.value()) {
         forbidden_tuple_pool.insert(tuple);
       }
-    } while (tuple.to_the_next_tuple_with_ivld(sut_model.param_specs_));
+    } while (tuple.ToTheNextTupleWithIvld(sut_model.param_specs));
   }
   std::cout << "# forbidden combinations: " << forbidden_tuple_pool.size()
             << std::endl;

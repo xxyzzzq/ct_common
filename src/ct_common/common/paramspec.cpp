@@ -39,7 +39,7 @@ void ParamSpec::set_values(const std::vector<std::string>& values) {
   }
 }
 
-std::size_t ParamSpec::query_value_id(const std::string& str) const {
+std::size_t ParamSpec::QueryValueId(const std::string& str) const {
   std::map<std::string, std::size_t>::const_iterator iter =
       map_string_values_2_vid_.find(str);
   if (iter != map_string_values_2_vid_.end()) {
@@ -58,18 +58,7 @@ std::size_t ParamSpec::get_width() const {
   return std::max(width + 2, std::size_t(5));
 }
 
-std::size_t find_param_id(
-    const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
-    const std::string& param_name) {
-  for (std::size_t i = 0; i < param_specs.size(); ++i) {
-    if (param_specs[i]->get_param_name() == param_name) {
-      return i;
-    }
-  }
-  return PID_BOUND;
-}
-
-void ParamSpec::touch_pids(
+void ParamSpec::TouchPids(
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
     std::set<std::size_t>* pids_to_touch) const {
   for (std::size_t i = 0; i < auto_value_specs_.size(); ++i) {
@@ -84,6 +73,17 @@ void ParamSpec::touch_pids(
     auto_value_specs_[i].first->touch_pids(param_specs, pids_to_touch);
     auto_value_specs_[i].second->touch_pids(param_specs, pids_to_touch);
   }
+}
+
+std::size_t FindParamId(
+    const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+    const std::string& param_name) {
+  for (std::size_t i = 0; i < param_specs.size(); ++i) {
+    if (param_specs[i]->get_param_name() == param_name) {
+      return i;
+    }
+  }
+  return PID_BOUND;
 }
 
 }  // namespace ct_common

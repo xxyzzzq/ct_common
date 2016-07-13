@@ -27,7 +27,7 @@ optional<bool> Constraint_L_IVLD::Evaluate(
     CT_EXCEPTION("Error: auto value cannot be invalidated");
     return nullopt;
   }
-  return param_specs[pid_]->is_vid_invalid(
+  return param_specs[pid_]->IsVidInvalid(
       assignment.GetValue(pid_));
 }
 

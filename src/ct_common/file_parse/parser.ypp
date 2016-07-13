@@ -5,60 +5,62 @@
 %debug
 %error-verbose
 %skeleton "lalr1.cc"
-%define api.namespace "ct_common"
-%define parser_class_name "parser"
-%lex-param {ct_common::lexer  &qlex}
-%parse-param {ct_common::lexer  &qlex}
-%parse-param {std::vector<std::shared_ptr<ct_common::ParamSpec> > &param_specs}
-%parse-param {std::vector<ct_common::Strength> &strengths}
-%parse-param {std::vector<std::shared_ptr<ct_common::Seed> > &seeds}
-%parse-param {std::vector<std::shared_ptr<ct_common::Constraint> > &constraints}
-%parse-param {ct_common::Assembler &assembler}
+%define api.namespace {ct_common}
+%define parser_class_name {parser}
+%lex-param {ct_common::lexer* qlex}
+%parse-param {ct_common::lexer* qlex}
+%parse-param {ct_common::SUTModel* model}
+%parse-param {ct_common::Assembler* assembler}
 
 %code top {
+#include <cstdlib>
 #include <string>
 #include <sstream>
 #include <vector>
-#include <cstdlib>
 #include "ct_common/file_parse/ct_common_lexer.hpp"
-using namespace ct_common;
+  using namespace ct_common;
 }
 
 %code requires {
-#include "ct_common/common/constraints.h"
-#include "ct_common/common/exps.h"
-#include "ct_common/common/paramspecs.h"
-#include "ct_common/common/seed.h"
-#include "ct_common/common/tuple.h"
+#include <utility>
+
+#include "ct_common/common/sut_model.h"
 #include "ct_common/file_parse/assembler.h"
+
+  using AutoValueCase =
+      std::pair<std::shared_ptr<ct_common::TreeNode>,
+                std::shared_ptr<ct_common::TreeNode> >;
 }
 
 %union {
-  ct_common::TreeNode *tree_node;
-  std::string *str;
-  std::vector<std::shared_ptr<ct_common::ParamSpec> > *vec_param_spec;
-  std::vector<std::string> *vec_str;
-  std::vector<std::shared_ptr<ct_common::TreeNode> > *vec_exp;
-  std::vector<std::pair<std::shared_ptr<ct_common::TreeNode>, std::shared_ptr<ct_common::TreeNode> > > *vec_auto_value_cases;
-  std::pair<std::shared_ptr<ct_common::TreeNode>, std::shared_ptr<ct_common::TreeNode> > *auto_value_case;
-  ct_common::PVPair *pvpair;
-  ct_common::Tuple *tuple;
+  ct_common::TreeNode* tree_node;
+  std::string* str;
+  std::vector<std::shared_ptr<ct_common::ParamSpec> >* vec_param_spec;
+  std::vector<std::string>* vec_str;
+  std::vector<std::shared_ptr<ct_common::TreeNode> >* vec_exp;
+  std::vector<AutoValueCase>* vec_auto_value_cases;
+  AutoValueCase* auto_value_case;
+  ct_common::PVPair* pvpair;
+  ct_common::Tuple* tuple;
 }
 
 %code {
-#define TRY_BEGIN try {
-#define TRY_END(loc) } catch (std::exception &e) { error(loc, e.what()); }
+#define TRY_BEGIN try
+#define TRY_END(loc) catch (std::exception& e) { error(loc, e.what()); } 0
 
-static ct_common::parser::token_type
-  yylex(ct_common::parser::semantic_type* yylval,
-        ct_common::parser::location_type* loc,
-        ct_common::lexer &qlex);
+  static ct_common::parser::token_type
+      yylex(ct_common::parser::semantic_type* yylval,
+            ct_common::parser::location_type* loc,
+            ct_common::lexer* qlex);
 
-static std::string gen_loc_str(const ct_common::parser::location_type &loc, const std::string &s) {
-  std::stringstream ss;
-  ss << loc.begin.line << ":" << loc.begin.column << "-" << loc.end.line << ":" << loc.end.column << ": " << s;
-  return ss.str();
-}
+  static std::string gen_loc_str(
+      const ct_common::parser::location_type& loc,
+      const std::string& s) {
+    std::stringstream ss;
+    ss << loc.begin.line << ":" << loc.begin.column
+       << "-" << loc.end.line << ":" << loc.end.column << ": " << s;
+    return ss.str();
+  }
 }
 
 %token TKN_PARAMETERS_START     "[PARAMETERS]"
@@ -130,207 +132,232 @@ static std::string gen_loc_str(const ct_common::parser::location_type &loc, cons
 %% /* Grammar rules and actions follow. */
 
 input: sections {
-  std::vector<std::shared_ptr<Constraint> > ivld_constrs = assembler.dump_invalidations(param_specs);
-  constraints.insert(constraints.end(), ivld_constrs.begin(), ivld_constrs.end());
-};
+  std::vector<std::shared_ptr<Constraint> > ivld_constrs =
+      assembler->DumpInvalidations(model->param_specs);
+  model->constraints.insert(
+      model->constraints.end(),
+      ivld_constrs.begin(),
+      ivld_constrs.end());
+ };
 
 sections: section
-  | sections section;
+| sections section;
 
 section: parameters_section
-  | strengths_section
-  | seeds_section
-  | constraints_section
-  | options_section;
+| strengths_section
+| seeds_section
+| constraints_section
+| options_section;
 
 parameters_section: TKN_PARAMETERS_START
-  | parameters_section parameters_line {
-    param_specs.insert(param_specs.end(), $2->begin(), $2->end());
-    delete $2;
-  };
+| parameters_section parameters_line {
+  model->param_specs.insert(model->param_specs.end(), $2->begin(), $2->end());
+  delete $2;
+};
 
 // no null-pointer checking
 parameters_line:
-  TKN_TYPE param_list TKN_SEMICOLON
-  {
-    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
-    for (std::size_t i = 0; i < $2->size(); ++i) {
-      TRY_BEGIN
-      if (find_param_id(param_specs, (*$2)[i]) != PID_BOUND) {
-        assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$2)[i]).c_str()));
+TKN_TYPE param_list TKN_SEMICOLON {
+  $$ = new std::vector<std::shared_ptr<ParamSpec> >();
+  for (std::size_t i = 0; i < $2->size(); ++i) {
+    TRY_BEGIN {
+      if (FindParamId(model->param_specs, (*$2)[i]) != PID_BOUND) {
+        assembler->ReportWarning(gen_loc_str(
+            @$, std::string("parameter redefinition of ") + (*$2)[i]));
         continue;
       }
-      ParamSpec *param_spec = assembler.asm_paramspec(*$1, (*$2)[i], std::vector<std::shared_ptr<TreeNode> >());
+      ParamSpec* param_spec =
+          assembler->AsmParamSpec(
+              *$1, (*$2)[i], std::vector<std::shared_ptr<TreeNode> >());
       if (param_spec == 0) {
-        assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$2)[i]).c_str()));
+        assembler->ReportWarning(gen_loc_str(
+            @$, std::string("cannot assemble parameter ") + (*$2)[i]));
         continue;
       }
       $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
-      TRY_END(@$)
-    }
-    delete $1; delete $2;
+    } TRY_END(@$);
   }
-  | TKN_TYPE param_list TKN_COLON ps_set TKN_SEMICOLON
-  {
-    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
-    for (std::size_t i = 0; i < $2->size(); ++i) {
-      TRY_BEGIN
-      if (find_param_id(param_specs, (*$2)[i]) != PID_BOUND) {
-        assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$2)[i]).c_str()));
+  delete $1; delete $2;
+}
+| TKN_TYPE param_list TKN_COLON ps_set TKN_SEMICOLON {
+  $$ = new std::vector<std::shared_ptr<ParamSpec> >();
+  for (std::size_t i = 0; i < $2->size(); ++i) {
+    TRY_BEGIN {
+      if (FindParamId(model->param_specs, (*$2)[i]) != PID_BOUND) {
+        assembler->ReportWarning(gen_loc_str(
+            @$, std::string("parameter redefinition of ") + (*$2)[i]));
         continue;
       }
-      ParamSpec *param_spec = assembler.asm_paramspec(*$1, (*$2)[i], *$4);
+      ParamSpec* param_spec = assembler->AsmParamSpec(*$1, (*$2)[i], *$4);
       if (param_spec == 0) {
-        assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$2)[i]).c_str()));
+        assembler->ReportWarning(gen_loc_str(
+            @$, std::string("cannot assemble parameter ") + (*$2)[i]));
         continue;
       }
       $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
-      TRY_END(@$)
-    }
-    delete $1; delete $2; delete $4;
+    } TRY_END(@$);
   }
-  | TKN_PARAM_AUX TKN_TYPE param_list TKN_SEMICOLON
-  {
-    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
-    for (std::size_t i = 0; i < $3->size(); ++i) {
-      TRY_BEGIN
-      if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
-        assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$3)[i]).c_str()));
+  delete $1; delete $2; delete $4;
+}
+| TKN_PARAM_AUX TKN_TYPE param_list TKN_SEMICOLON {
+  $$ = new std::vector<std::shared_ptr<ParamSpec> >();
+  for (std::size_t i = 0; i < $3->size(); ++i) {
+    TRY_BEGIN {
+      if (FindParamId(model->param_specs, (*$3)[i]) != PID_BOUND) {
+        assembler->ReportWarning(gen_loc_str(
+            @$, std::string("parameter redefinition of ") + (*$3)[i]));
         continue;
       }
-      ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], std::vector<std::shared_ptr<TreeNode> >());
+      ParamSpec* param_spec =
+          assembler->AsmParamSpec(
+              *$2, (*$3)[i], std::vector<std::shared_ptr<TreeNode> >());
       if (param_spec == 0) {
-        assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$3)[i]).c_str()));
+        assembler->ReportWarning(gen_loc_str(
+            @$, std::string("cannot assemble parameter ") + (*$3)[i]));
         continue;
       }
       $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
-      TRY_END(@$)
-    }
-    delete $2; delete $3;
+    } TRY_END(@$);
   }
-  | TKN_PARAM_AUX TKN_TYPE param_list TKN_COLON ps_set TKN_SEMICOLON
-  {
-    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
-    for (std::size_t i = 0; i < $3->size(); ++i) {
-      TRY_BEGIN
-      if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
-        assembler.reportWarning(gen_loc_str(@$, (std::string("parameter redefinition of ") + (*$3)[i]).c_str()));
+  delete $2; delete $3;
+}
+| TKN_PARAM_AUX TKN_TYPE param_list TKN_COLON ps_set TKN_SEMICOLON {
+  $$ = new std::vector<std::shared_ptr<ParamSpec> >();
+  for (std::size_t i = 0; i < $3->size(); ++i) {
+    TRY_BEGIN {
+      if (FindParamId(model->param_specs, (*$3)[i]) != PID_BOUND) {
+        assembler->ReportWarning(gen_loc_str(
+            @$, std::string("parameter redefinition of ") + (*$3)[i]));
         continue;
       }
-      ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], *$5);
+      ParamSpec* param_spec = assembler->AsmParamSpec(*$2, (*$3)[i], *$5);
       if (param_spec == 0) {
-        assembler.reportWarning(gen_loc_str(@$, (std::string("cannot assemble parameter ") + (*$3)[i]).c_str()));
+        assembler->ReportWarning(gen_loc_str(
+            @$, std::string("cannot assemble parameter ") + (*$3)[i]));
         continue;
       }
       param_spec->set_aux(true);
       $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
-      TRY_END(@$)
-    }
-    delete $2; delete $3; delete $5;
+    } TRY_END(@$);
   }
-  | TKN_PARAM_AUTO TKN_TYPE param_list TKN_COLON tree_obj TKN_SEMICOLON
-  {
-    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
-    TRY_BEGIN
-    std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > > auto_value_cases;
-    Constraint_L_CBool *ctrue = new Constraint_L_CBool();
+  delete $2; delete $3; delete $5;
+}
+| TKN_PARAM_AUTO TKN_TYPE param_list TKN_COLON tree_obj TKN_SEMICOLON {
+  $$ = new std::vector<std::shared_ptr<ParamSpec> >();
+  TRY_BEGIN {
+    std::vector<std::pair<std::shared_ptr<TreeNode>,
+                          std::shared_ptr<TreeNode> > > auto_value_cases;
+    Constraint_L_CBool* ctrue = new Constraint_L_CBool();
     ctrue->set_value(true);
-    auto_value_cases.push_back(std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> >(std::shared_ptr<TreeNode>(ctrue), std::shared_ptr<TreeNode>($5)));
+    auto_value_cases.push_back(AutoValueCase(
+        std::shared_ptr<TreeNode>(ctrue), std::shared_ptr<TreeNode>($5)));
     for (std::size_t i = 0; i < $3->size(); ++i) {
-      TRY_BEGIN
-      if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
-        CT_EXCEPTION((std::string("parameter redefinition of ") + (*$3)[i]).c_str());
-      }
-      ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], auto_value_cases);
-      $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
-      TRY_END(@$)
+      TRY_BEGIN {
+        if (FindParamId(model->param_specs, (*$3)[i]) != PID_BOUND) {
+          CT_EXCEPTION(std::string("parameter redefinition of ") + (*$3)[i]);
+        }
+        ParamSpec* param_spec = assembler->AsmParamSpec(
+            *$2, (*$3)[i], auto_value_cases);
+        $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
+      } TRY_END(@$);
     }
-    TRY_END(@$)
-    delete $2; delete $3;
-  }
-  | TKN_PARAM_AUTO TKN_TYPE param_list TKN_COLON TKN_CURLY_BRACKET_O auto_value_cases TKN_CURLY_BRACKET_C TKN_SEMICOLON
-  {
-    $$ = new std::vector<std::shared_ptr<ParamSpec> >();
-    TRY_BEGIN
+  } TRY_END(@$);
+  delete $2; delete $3;
+}
+| TKN_PARAM_AUTO TKN_TYPE param_list TKN_COLON
+TKN_CURLY_BRACKET_O auto_value_cases TKN_CURLY_BRACKET_C TKN_SEMICOLON {
+  $$ = new std::vector<std::shared_ptr<ParamSpec> >();
+  TRY_BEGIN {
     for (std::size_t i = 0; i < $3->size(); ++i) {
-      TRY_BEGIN
-      if (find_param_id(param_specs, (*$3)[i]) != PID_BOUND) {
-        CT_EXCEPTION((std::string("parameter redefinition of ") + (*$3)[i]).c_str());
-      }
-      ParamSpec *param_spec = assembler.asm_paramspec(*$2, (*$3)[i], *$6);
-      $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
-      TRY_END(@$)
+      TRY_BEGIN {
+        if (FindParamId(model->param_specs, (*$3)[i]) != PID_BOUND) {
+          CT_EXCEPTION(std::string("parameter redefinition of ") + (*$3)[i]);
+        }
+        ParamSpec* param_spec = assembler->AsmParamSpec(*$2, (*$3)[i], *$6);
+        $$->push_back(std::shared_ptr<ParamSpec>(param_spec));
+      } TRY_END(@$);
     }
-    TRY_END(@$)
-    delete $2; delete $3; delete $6;
-  };
+  } TRY_END(@$);
+  delete $2; delete $3; delete $6;
+};
 
-auto_value_cases: auto_value_case
-  {
-    $$ = new std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > >();
-    if ($1) {
-      $$->push_back(*$1);
-    }
-    delete $1;
+auto_value_cases: auto_value_case {
+  $$ = new std::vector<
+    std::pair<std::shared_ptr<TreeNode>,
+              std::shared_ptr<TreeNode> > >();
+  if ($1) {
+    $$->push_back(*$1);
   }
-  | auto_value_cases TKN_COMMA auto_value_case
-  {
-    $$ = $1;
-    if ($1) {
-      $$->push_back(*$3);
-    }
-    delete $3;
-  };
+  delete $1;
+}
+| auto_value_cases TKN_COMMA auto_value_case {
+  $$ = $1;
+  if ($1) {
+    $$->push_back(*$3);
+  }
+  delete $3;
+};
 
 auto_value_case: tree_obj TKN_COLON tree_obj {
-    $$ = 0;
-    TRY_BEGIN
+  $$ = 0;
+  TRY_BEGIN {
     // no type check, the second tree_obj can be Exp or Constraint
-    $$ = new std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> >(std::shared_ptr<TreeNode>($1), std::shared_ptr<TreeNode>($3));
-    TRY_END(@$)
-  }
-  | TKN_DEFAULT TKN_COLON tree_obj {
-    TRY_BEGIN
+    $$ = new AutoValueCase(
+        std::shared_ptr<TreeNode>($1), std::shared_ptr<TreeNode>($3));
+  } TRY_END(@$);
+}
+| TKN_DEFAULT TKN_COLON tree_obj {
+  TRY_BEGIN {
     std::shared_ptr<Constraint_L_CBool> c_true(new Constraint_L_CBool());
     c_true->set_value(true);
-    $$ = new std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> >(c_true, std::shared_ptr<TreeNode>($3));
-    TRY_END(@$)
-  }
-;
+    $$ = new AutoValueCase(c_true, std::shared_ptr<TreeNode>($3));
+  } TRY_END(@$);
+};
 
 // no null-pointer checking
 ps_set: ps_values { $$ = $1; }
-  | ps_set TKN_COMMA ps_values { $$ = $1; if ($3) { $$->insert($$->end(), $3->begin(), $3->end()); delete $3; } };
+| ps_set TKN_COMMA ps_values {
+  $$ = $1;
+  if ($3) {
+    $$->insert($$->end(), $3->begin(), $3->end());
+    delete $3;
+  }
+};
 
 ps_values: range { $$ = $1; }
-  | ps_value { $$ = new std::vector<std::shared_ptr<TreeNode> >(); if ($1) { $$->push_back(std::shared_ptr<TreeNode>($1)); } };
+| ps_value {
+  $$ = new std::vector<std::shared_ptr<TreeNode> >();
+  if ($1) {
+    $$->push_back(std::shared_ptr<TreeNode>($1));
+  }
+};
 
 ps_value: value_s { $$ = $1; }
-  | value_i { $$ = $1; }
-  | value_d { $$ = $1; }
-  | value_b { $$ = $1; }
-  | neg_value_i { $$ = $1; }
-  | neg_value_d { $$ = $1; };
+| value_i { $$ = $1; }
+| value_d { $$ = $1; }
+| value_b { $$ = $1; }
+| neg_value_i { $$ = $1; }
+| neg_value_d { $$ = $1; };
 
 neg_value_i: TKN_SUB value_i {
-    TYPE_ASSERT($2, Exp_A_CInt*);
-    Exp_A_CInt *exp = dynamic_cast<Exp_A_CInt *>($2);
-    exp->set_value(-exp->get_value());
-    exp->set_str_value(std::string("-")+exp->get_str_value());
-    $$ = exp;
-  };
+  TYPE_ASSERT($2, Exp_A_CInt*);
+  Exp_A_CInt* exp = dynamic_cast<Exp_A_CInt*>($2);
+  exp->set_value(-exp->get_value());
+  exp->set_str_value(std::string("-")+exp->get_str_value());
+  $$ = exp;
+};
 
 neg_value_d: TKN_SUB value_d {
-      TYPE_ASSERT($2, Exp_A_CDouble*);
-    Exp_A_CDouble *exp = dynamic_cast<Exp_A_CDouble *>($2);
-    exp->set_value(-exp->get_value());
-    exp->set_str_value(std::string("-")+exp->get_str_value());
-    $$ = exp;
-  };
+  TYPE_ASSERT($2, Exp_A_CDouble*);
+  Exp_A_CDouble* exp = dynamic_cast<Exp_A_CDouble*>($2);
+  exp->set_value(-exp->get_value());
+  exp->set_str_value(std::string("-")+exp->get_str_value());
+  $$ = exp;
+};
 
-range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRACKET_C
-  {
-    TRY_BEGIN
+range: TKN_CORNER_BRACKET_O range_int_val
+TKN_COLON range_int_val TKN_CORNER_BRACKET_C {
+  TRY_BEGIN {
     TYPE_ASSERT($2, Exp_A_CInt*);
     TYPE_ASSERT($4, Exp_A_CInt*);
     int val_begin = dynamic_cast<Exp_A_CInt*>($2)->get_value();
@@ -338,7 +365,7 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
     int step = (val_begin <= val_end) ? 1 : -1;
     $$ = new std::vector<std::shared_ptr<TreeNode> >();
     for (int val = val_begin; val <= val_end; val += step) {
-      Exp_A_CInt *exp = new Exp_A_CInt();
+      Exp_A_CInt* exp = new Exp_A_CInt();
       exp->set_value(val);
       std::stringstream ss;
       ss << val;
@@ -346,13 +373,13 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
       exp->set_type(EAT_INT);
       $$->push_back(std::shared_ptr<TreeNode>(exp));
     }
-    TRY_END(@$)
-    delete $2;
-    delete $4;
-  }
-  | TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_COLON range_int_val TKN_CORNER_BRACKET_C
-  {
-    TRY_BEGIN
+  } TRY_END(@$);
+  delete $2;
+  delete $4;
+}
+| TKN_CORNER_BRACKET_O range_int_val
+TKN_COLON range_int_val TKN_COLON range_int_val TKN_CORNER_BRACKET_C {
+  TRY_BEGIN {
     TYPE_ASSERT($2, Exp_A_CInt*);
     TYPE_ASSERT($4, Exp_A_CInt*);
     TYPE_ASSERT($6, Exp_A_CInt*);
@@ -362,7 +389,7 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
     $$ = new std::vector<std::shared_ptr<TreeNode> >();
     int sign = (step > 0) ? 1 : -1;
     for (int val = val_begin; sign * (val - val_end) <= 0; val += step) {
-      Exp_A_CInt *exp = new Exp_A_CInt();
+      Exp_A_CInt* exp = new Exp_A_CInt();
       exp->set_value(val);
       std::stringstream ss;
       ss << val;
@@ -370,183 +397,350 @@ range: TKN_CORNER_BRACKET_O range_int_val TKN_COLON range_int_val TKN_CORNER_BRA
       exp->set_type(EAT_INT);
       $$->push_back(std::shared_ptr<TreeNode>(exp));
     }
-    TRY_END(@$)
-    delete $2;
-    delete $4;
-    delete $6;
-  };
+  } TRY_END(@$);
+  delete $2;
+  delete $4;
+  delete $6;
+};
 range_int_val: value_i { $$ = $1; }
-  | neg_value_i { $$ = $1; }
+| neg_value_i { $$ = $1; }
 
 value: value_s { $$ = $1; }
-  | value_i { $$ = $1; }
-  | value_d { $$ = $1; };
-  | value_b { $$ = $1; }
+| value_i { $$ = $1; }
+| value_d { $$ = $1; };
+| value_b { $$ = $1; }
 
 // no null-pointer checking
 value_s: TKN_VAL_STRING {
-    Exp_S_CString *exp = new Exp_S_CString();
-    exp->set_value(*$1);
-    $$ = exp;
-    delete $1;
-  };
+  Exp_S_CString* exp = new Exp_S_CString();
+  exp->set_value(*$1);
+  $$ = exp;
+  delete $1;
+};
 
 // no null-pointer checking
 value_d: TKN_VAL_DOUBLE {
-    Exp_A_CDouble *tmp = new Exp_A_CDouble();
-    tmp->set_value(atof($1->c_str()));
-    tmp->set_str_value(*$1);
-    tmp->set_type(EAT_DOUBLE);
-    $$ = tmp;
-    delete $1;
-  };
+  Exp_A_CDouble* tmp = new Exp_A_CDouble();
+  tmp->set_value(atof($1->c_str()));
+  tmp->set_str_value(*$1);
+  tmp->set_type(EAT_DOUBLE);
+  $$ = tmp;
+  delete $1;
+};
 
 // no null-pointer checking
 value_i: TKN_VAL_INTEGER {
-    Exp_A_CInt *tmp = new Exp_A_CInt();
-    tmp->set_value(atoi($1->c_str()));
-    tmp->set_str_value(*$1);
-    tmp->set_type(EAT_INT);
-    $$ = tmp;
-    delete $1;
-  };
+  Exp_A_CInt* tmp = new Exp_A_CInt();
+  tmp->set_value(atoi($1->c_str()));
+  tmp->set_str_value(*$1);
+  tmp->set_type(EAT_INT);
+  $$ = tmp;
+  delete $1;
+};
 
 value_b: TKN_VAL_BOOL {
-    TRY_BEGIN
-    $$ = assembler.asm_constraint_l_cbool(*$1);
-    TRY_END(@$)
-    delete $1;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_L_CBool(*$1);
+  } TRY_END(@$);
+  delete $1;
 };
 
 strengths_section: TKN_STRENGTHS_START
-  | strengths_section strengths_line;
+| strengths_section strengths_line;
 
 // no null-pointer checking
-strengths_line: param_list TKN_COLON TKN_VAL_INTEGER TKN_SEMICOLON
-  {
-    TRY_BEGIN assembler.attach_strengths(param_specs, *$1, strengths, atoi($3->c_str())); TRY_END(@$)
-    delete $1; delete $3;
-  }
-  | TKN_DEFAULT TKN_COLON TKN_VAL_INTEGER TKN_SEMICOLON {
-    TRY_BEGIN assembler.attach_default_strengths(param_specs, strengths, atoi($3->c_str())); TRY_END(@$)
-    delete $3;
-  };
+strengths_line: param_list TKN_COLON TKN_VAL_INTEGER TKN_SEMICOLON {
+  TRY_BEGIN {
+    assembler->AttachStrengths(
+        model->param_specs,
+        *$1,
+        &model->strengths,
+        atoi($3->c_str()));
+  } TRY_END(@$);
+  delete $1; delete $3;
+}
+| TKN_DEFAULT TKN_COLON TKN_VAL_INTEGER TKN_SEMICOLON {
+  TRY_BEGIN {
+    assembler->AttachDefaultStrengths(
+        model->param_specs,
+        &model->strengths,
+        atoi($3->c_str()));
+  } TRY_END(@$);
+  delete $3;
+};
 
 // no null-pointer checking
 param_list: param_list_item { $$ = $1; }
-  | param_list TKN_COMMA param_list_item { $$ = $1; $$->insert($$->end(), $3->begin(), $3->end()); delete $3; };
+| param_list TKN_COMMA param_list_item {
+  $$ = $1;
+  $$->insert($$->end(), $3->begin(), $3->end());
+  delete $3;
+};
 
 // no null-pointer checking
-param_list_item: TKN_IDENTIFIER { $$ = new std::vector<std::string>(); $$->push_back(*$1); delete $1; }
-  | TKN_IDENTIFIER TKN_CURLY_BRACKET_O TKN_VAL_INTEGER TKN_SUB TKN_VAL_INTEGER TKN_CURLY_BRACKET_C {
-    // only positive integers are allowed in the subscript
-    $$ = new std::vector<std::string>();
-    for (int i = atoi($3->c_str()); i <= atoi($5->c_str()); ++i) {
-      std::ostringstream ss;
-      ss << *$1 << i;
-      $$->push_back(ss.str());
-    }
-  };
+param_list_item: TKN_IDENTIFIER {
+  $$ = new std::vector<std::string>();
+  $$->push_back(*$1);
+  delete $1;
+}
+| TKN_IDENTIFIER TKN_CURLY_BRACKET_O TKN_VAL_INTEGER
+TKN_SUB TKN_VAL_INTEGER TKN_CURLY_BRACKET_C {
+  // only positive integers are allowed in the subscript
+  $$ = new std::vector<std::string>();
+  for (int i = atoi($3->c_str()); i <= atoi($5->c_str()); ++i) {
+    std::ostringstream ss;
+    ss << *$1 << i;
+    $$->push_back(ss.str());
+  }
+};
 
 seeds_section: TKN_SEEDS_START
-  | seeds_section seeds_line;
+| seeds_section seeds_line;
 
 // no null-pointer checking
 seeds_line: tuple TKN_SEMICOLON {
-    Seed *seed = assembler.asm_seed(seeds.size(), *$1);
-    seeds.push_back(std::shared_ptr<Seed>(seed));
-    delete $1; }
-  | TKN_SEED_STARTER tuple TKN_SEMICOLON {
-    Seed *seed = assembler.asm_seed(seeds.size(), *$2);
-    seed->set_is_starter(true);
-    seeds.push_back(std::shared_ptr<Seed>(seed));
-    delete $2; }
-  | tree_obj TKN_SEMICOLON {
-    TRY_BEGIN
+  Seed* seed = assembler->AsmSeed(model->seeds.size(), *$1);
+  model->seeds.push_back(std::shared_ptr<Seed>(seed));
+  delete $1;
+}
+| TKN_SEED_STARTER tuple TKN_SEMICOLON {
+  Seed* seed = assembler->AsmSeed(model->seeds.size(), *$2);
+  seed->set_is_starter(true);
+  model->seeds.push_back(std::shared_ptr<Seed>(seed));
+  delete $2;
+}
+| tree_obj TKN_SEMICOLON {
+  TRY_BEGIN {
     TYPE_ASSERT($1, Constraint*);
-    Seed *seed = assembler.asm_seed(seeds.size(), (Constraint*)$1);  // $1 is stored in the seed, don't delete!!
-    seeds.push_back(std::shared_ptr<Seed>(seed));
-    TRY_END(@$) }
-  | TKN_SEED_STARTER tree_obj TKN_SEMICOLON {
-    TRY_BEGIN
+    // $1 is stored in the seed, don't delete!!
+    Seed* seed = assembler->AsmSeed(model->seeds.size(), (Constraint*)$1);
+    model->seeds.push_back(std::shared_ptr<Seed>(seed));
+  } TRY_END(@$);
+}
+| TKN_SEED_STARTER tree_obj TKN_SEMICOLON {
+  TRY_BEGIN {
     TYPE_ASSERT($2, Constraint*);
-    Seed *seed = assembler.asm_seed(seeds.size(), (Constraint*)$2);  // $2 is stored in the seed, don't delete!!
+    // $2 is stored in the seed, don't delete!!
+    Seed* seed = assembler->AsmSeed(model->seeds.size(), (Constraint*)$2);
     seed->set_is_starter(true);
-    seeds.push_back(std::shared_ptr<Seed>(seed));
-    TRY_END(@$) };
+    model->seeds.push_back(std::shared_ptr<Seed>(seed));
+  } TRY_END(@$);
+};
 
 tuple: tuple_item {
-    $$ = new Tuple();
-    if ($1) {
-      $$->push_back(*$1);
-      delete $1;
-    } else {
-      assembler.reportWarning(gen_loc_str(@$, "neglected bad pvpair"));
-    }
+  $$ = new Tuple();
+  if ($1) {
+    $$->push_back(*$1);
+    delete $1;
+  } else {
+    assembler->ReportWarning(gen_loc_str(@$, "neglected bad pvpair"));
   }
-  | tuple TKN_COMMA tuple_item {
-    $$ = $1;
-    if ($3) {
-      $$->push_back(*$3);
-      delete $3;
-    } else {
-      assembler.reportWarning(gen_loc_str(@$, "neglected null pvpair"));
-    }
-  };
+}
+| tuple TKN_COMMA tuple_item {
+  $$ = $1;
+  if ($3) {
+    $$->push_back(*$3);
+    delete $3;
+  } else {
+    assembler->ReportWarning(gen_loc_str(@$, "neglected null pvpair"));
+  }
+};
 
-tuple_item: TKN_IDENTIFIER TKN_COLON ps_value { $$ = 0; TRY_BEGIN $$ = assembler.asm_pvpair(param_specs, *$1, $3); TRY_END(@$) delete $1; delete $3; };
+tuple_item: TKN_IDENTIFIER TKN_COLON ps_value {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmPVPair(model->param_specs, *$1, $3);
+  } TRY_END(@$);
+  delete $1; delete $3;
+};
 
 constraints_section: TKN_CONSTRAINTS_START
-  | constraints_section constraints_line;
+| constraints_section constraints_line;
 
-constraints_line: tree_obj TKN_SEMICOLON { TRY_BEGIN TYPE_ASSERT($1, Constraint*); Constraint *tmp = dynamic_cast<Constraint *>($1); constraints.push_back(std::shared_ptr<Constraint>(tmp)); TRY_END(@$) }
-  | tree_obj TKN_INVALIDATION TKN_BRACKET_O param_list TKN_BRACKET_C TKN_SEMICOLON { TRY_BEGIN assembler.store_invalidation(param_specs, *$4, std::shared_ptr<TreeNode>($1)); TRY_END(@$) } ;
+constraints_line: tree_obj TKN_SEMICOLON {
+  TRY_BEGIN {
+    TYPE_ASSERT($1, Constraint*);
+    Constraint* tmp = dynamic_cast<Constraint*>($1);
+    model->constraints.push_back(std::shared_ptr<Constraint>(tmp));
+  } TRY_END(@$);
+}
+| tree_obj TKN_INVALIDATION
+TKN_BRACKET_O param_list TKN_BRACKET_C TKN_SEMICOLON {
+  TRY_BEGIN { assembler->StoreInvalidation(
+      model->param_specs, *$4, std::shared_ptr<TreeNode>($1));
+  } TRY_END(@$);
+};
 
 tree_obj:
-  // arithmetic & string & boolean relations
-    tree_obj TKN_EQ tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_EQ, *$2); TRY_END(@$) delete $2; }
-  | tree_obj TKN_NE tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_NE, *$2); TRY_END(@$) delete $2; }
-  | tree_obj TKN_GT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_GT, *$2); TRY_END(@$) delete $2; }
-  | tree_obj TKN_GE tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_GE, *$2); TRY_END(@$) delete $2; }
-  | tree_obj TKN_LT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_LT, *$2); TRY_END(@$) delete $2; }
-  | tree_obj TKN_LE tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_asb($1, $3, OP_LE, *$2); TRY_END(@$) delete $2; }
-  // logical relations
-  | tree_obj TKN_AND tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_AND); TRY_END(@$) }
-  | tree_obj TKN_OR tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_OR); TRY_END(@$) }
-  | tree_obj TKN_IMPLY tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_IMPLY); TRY_END(@$) }
-  | tree_obj TKN_IFF tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_IFF); TRY_END(@$) }
-  | tree_obj TKN_XOR tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($1, $3, OP_XOR); TRY_END(@$) }
-  | TKN_NOT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_l($2, OP_NOT); TRY_END(@$) }
-  // arithmetic & string operators
-  | tree_obj TKN_ADD tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_ADD); TRY_END(@$) }
-  | tree_obj TKN_SUB tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_SUB); TRY_END(@$) }
-  | tree_obj TKN_MULT tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_MULT); TRY_END(@$) }
-  | tree_obj TKN_DIV tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_DIV); TRY_END(@$) }
-  | tree_obj TKN_MOD tree_obj { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($1, $3, OP_MOD); TRY_END(@$) }
-  | TKN_SUB tree_obj %prec TKN_NEG { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($2, OP_NEG); TRY_END(@$) }
-  | TKN_ADD tree_obj %prec TKN_UPLUS { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a($2, OP_UPLUS); TRY_END(@$) }
-  // other rules
-  | TKN_IDENTIFIER { $$ = 0; TRY_BEGIN $$ = assembler.asm_param(param_specs, *$1); delete $1; TRY_END(@$) }
-  | value { $$ = $1; }
-  | TKN_TYPE TKN_BRACKET_O tree_obj TKN_BRACKET_C { $$ = 0; TRY_BEGIN $$ = assembler.asm_exp_a_cast($3, *$1); TRY_END(@$) delete $1; }
-  | TKN_BRACKET_O tree_obj TKN_BRACKET_C { $$ = $2; }
-  | TKN_INVALID TKN_BRACKET_O TKN_IDENTIFIER TKN_BRACKET_C { $$ = 0; TRY_BEGIN $$ = assembler.asm_constraint_invalid(param_specs, *$3); TRY_END(@$) };
+// arithmetic & string & boolean relations
+tree_obj TKN_EQ tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_ASB($1, $3, OP_EQ, *$2);
+  } TRY_END(@$);
+  delete $2;
+}
+| tree_obj TKN_NE tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_ASB($1, $3, OP_NE, *$2);
+  } TRY_END(@$);
+  delete $2;
+}
+| tree_obj TKN_GT tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_ASB($1, $3, OP_GT, *$2);
+  } TRY_END(@$);
+  delete $2;
+}
+| tree_obj TKN_GE tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_ASB($1, $3, OP_GE, *$2);
+  } TRY_END(@$);
+  delete $2;
+}
+| tree_obj TKN_LT tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_ASB($1, $3, OP_LT, *$2); }
+  TRY_END(@$);
+  delete $2;
+}
+| tree_obj TKN_LE tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_ASB($1, $3, OP_LE, *$2);
+  } TRY_END(@$);
+  delete $2;
+}
+// logical relations
+| tree_obj TKN_AND tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_L($1, $3, OP_AND);
+  } TRY_END(@$);
+}
+| tree_obj TKN_OR tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_L($1, $3, OP_OR);
+  } TRY_END(@$);
+}
+| tree_obj TKN_IMPLY tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_L($1, $3, OP_IMPLY);
+  } TRY_END(@$);
+}
+| tree_obj TKN_IFF tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_L($1, $3, OP_IFF);
+  } TRY_END(@$);
+}
+| tree_obj TKN_XOR tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_L($1, $3, OP_XOR);
+  } TRY_END(@$);
+}
+| TKN_NOT tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_L($2, OP_NOT);
+  } TRY_END(@$);
+}
+// arithmetic & string operators
+| tree_obj TKN_ADD tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmExp_A($1, $3, OP_ADD);
+  } TRY_END(@$);
+}
+| tree_obj TKN_SUB tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmExp_A($1, $3, OP_SUB);
+  } TRY_END(@$);
+}
+| tree_obj TKN_MULT tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmExp_A($1, $3, OP_MULT);
+  } TRY_END(@$);
+}
+| tree_obj TKN_DIV tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmExp_A($1, $3, OP_DIV);
+  } TRY_END(@$);
+}
+| tree_obj TKN_MOD tree_obj {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmExp_A($1, $3, OP_MOD);
+  } TRY_END(@$);
+}
+| TKN_SUB tree_obj %prec TKN_NEG {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmExp_A($2, OP_NEG);
+  } TRY_END(@$);
+}
+| TKN_ADD tree_obj %prec TKN_UPLUS {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmExp_A($2, OP_UPLUS);
+  } TRY_END(@$);
+}
+// other rules
+| TKN_IDENTIFIER {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmParam(model->param_specs, *$1);
+    delete $1; }
+  TRY_END(@$);
+}
+| value { $$ = $1; }
+| TKN_TYPE TKN_BRACKET_O tree_obj TKN_BRACKET_C {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmExp_A_Cast($3, *$1);
+  } TRY_END(@$);
+  delete $1;
+}
+| TKN_BRACKET_O tree_obj TKN_BRACKET_C { $$ = $2; }
+| TKN_INVALID TKN_BRACKET_O TKN_IDENTIFIER TKN_BRACKET_C {
+  $$ = 0;
+  TRY_BEGIN {
+    $$ = assembler->AsmConstraint_L_IVLD(model->param_specs, *$3);
+  } TRY_END(@$);
+};
 
 options_section: TKN_OPTIONS_START
-  | options_section options_line;
+| options_section options_line;
 
-options_line: TKN_IDENTIFIER TKN_COLON value TKN_SEMICOLON { TRY_BEGIN assembler.set_option(*$1,$3); TRY_END(@$) delete $1; delete $3; };
+options_line: TKN_IDENTIFIER TKN_COLON value TKN_SEMICOLON {
+  TRY_BEGIN {
+    assembler->SetOption(*$1,$3);
+  } TRY_END(@$);
+  delete $1; delete $3;
+};
 
 %%
 
 #include <iostream>
 ct_common::parser::token_type
-yylex(ct_common::parser::semantic_type *yylval, ct_common::parser::location_type *loc, ct_common::lexer &qlex) {
+yylex(ct_common::parser::semantic_type* yylval,
+      ct_common::parser::location_type* loc,
+      ct_common::lexer* qlex) {
   ct_common::lexer_Token* token;
-  qlex.receive(&token);
+  qlex->receive(&token);
   if (token->get_text().length()>0)
   {
-    yylval->str = new std::string((char *)token->get_text().c_str());
+    yylval->str = new std::string((char*)token->get_text().c_str());
     loc->step();
     loc->end.line = token->line_number();
     loc->end.column = token->column_number()+token->get_text().length();
@@ -554,8 +748,10 @@ yylex(ct_common::parser::semantic_type *yylval, ct_common::parser::location_type
   return (ct_common::parser::token_type)token->type_id();
 }
 
-void ct_common::parser::error(const ct_common::parser::location_type &loc, const std::string &s) {
+void ct_common::parser::error(
+    const ct_common::parser::location_type& loc, const std::string& s) {
   std::stringstream ss;
-  ss << loc.begin.line << ":" << loc.begin.column << "-" << loc.end.line << ":" << loc.end.column << ": " << s;
-  assembler.reportError(ss.str());
+  ss << loc.begin.line << ":" << loc.begin.column << "-" << loc.end.line
+     << ":" << loc.end.column << ": " << s;
+  assembler->ReportError(ss.str());
 }

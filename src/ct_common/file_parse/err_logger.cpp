@@ -8,14 +8,14 @@ ErrLogger::ErrLogger(void) : num_errs_(0), num_warnings_(0) {}
 
 ErrLogger::~ErrLogger(void) {}
 
-void ErrLogger::reportError(const std::string &str) {
+void ErrLogger::ReportError(const std::string &str) {
   this->num_errs_++;
-  this->innerReportError(str);
+  this->InnerReportError(str);
 }
 
-void ErrLogger::reportWarning(const std::string &str) {
+void ErrLogger::ReportWarning(const std::string &str) {
   this->num_warnings_++;
-  this->innerReportWarning(str);
+  this->InnerReportWarning(str);
 }
 
 }  // namespace ct_common

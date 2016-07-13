@@ -13,7 +13,7 @@ namespace ct_common {
 class DLL_EXPORT Seed_Tuple : public Seed {
  public:
   Seed_Tuple();
-  Seed_Tuple(const Seed_Tuple& );
+  Seed_Tuple(const Seed_Tuple& from);
   Seed_Tuple& operator=(const Seed_Tuple& right);
   ~Seed_Tuple() override;
 

@@ -9,11 +9,11 @@
 namespace ct_common {
 
 std::ostream& operator<<(std::ostream& os, const PVPair& pvpair) {
-  os << "<" << pvpair.pid_ << ",";
-  if (pvpair.vid_ == VID_BOUND) {
+  os << "<" << pvpair.pid << ",";
+  if (pvpair.vid == VID_BOUND) {
     os << "-";
   } else {
-    os << pvpair.vid_;
+    os << pvpair.vid;
   }
   os << ">";
   return os;

@@ -12,7 +12,8 @@ ClassNameMap& ClassNameMap::GetInstance() {
   return sInstance;
 }
 
-const std::string& ClassNameMap::GetClassNameInternal(const std::type_index& idx) const {
+const std::string& ClassNameMap::GetClassNameInternal(
+    const std::type_index& idx) const {
   static std::string empty_string;
   if (!name_map_.count(idx))
     return empty_string;

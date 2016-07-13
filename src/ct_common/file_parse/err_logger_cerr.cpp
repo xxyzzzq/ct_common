@@ -10,11 +10,11 @@ ErrLogger_Cerr::ErrLogger_Cerr(void) : ErrLogger() {}
 
 ErrLogger_Cerr::~ErrLogger_Cerr(void) {}
 
-void ErrLogger_Cerr::innerReportError(const std::string &str) {
+void ErrLogger_Cerr::InnerReportError(const std::string &str) {
   std::cerr << str << std::endl;
 }
 
-void ErrLogger_Cerr::innerReportWarning(const std::string &str) {
+void ErrLogger_Cerr::InnerReportWarning(const std::string &str) {
   std::cerr << str << std::endl;
 }
 

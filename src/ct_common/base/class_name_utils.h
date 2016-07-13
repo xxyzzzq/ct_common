@@ -46,10 +46,11 @@ class GlobalInitializer {
 
 }  // namespace ct_common
 
-#define REGISTER_CLASS_NAME(name)                                               \
-  namespace {                                                                   \
-  const ct_common::GlobalInitializer sClassNameRegisterer##name(                \
-      std::bind(ClassNameMap::Register, std::type_index(typeid(name)), #name)); \
+#define REGISTER_CLASS_NAME(name)                                       \
+  namespace {                                                           \
+  const ct_common::GlobalInitializer sClassNameRegisterer##name(        \
+      std::bind(ClassNameMap::Register,                                 \
+                std::type_index(typeid(name)), #name));                 \
   }
 
 #endif  // CT_COMMON_BASE_CLASS_NAME_UTILS_H_

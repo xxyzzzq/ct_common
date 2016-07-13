@@ -33,7 +33,7 @@ class DLL_EXPORT Seed {
   /** Setting the seed id */
   void set_id(std::size_t id) { id_ = id; }
   /** Whether the seed is a starter seed */
-  bool get_is_starter() const { return is_starter_; }
+  bool is_starter() const { return is_starter_; }
   /** Setting the starter flag */
   void set_is_starter(bool is_starter) { is_starter_ = is_starter; }
 

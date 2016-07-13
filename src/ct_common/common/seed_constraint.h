@@ -13,7 +13,7 @@ namespace ct_common {
 class DLL_EXPORT Seed_Constraint : public Seed {
  public:
   Seed_Constraint();
-  Seed_Constraint(const Seed_Constraint& );
+  Seed_Constraint(const Seed_Constraint& from);
   Seed_Constraint& operator=(const Seed_Constraint& right);
   ~Seed_Constraint() override;
 

@@ -4,7 +4,8 @@
 
 namespace ct_common {
 
-PVPair::PVPair(std::size_t pid, std::size_t vid) : pid_(pid), vid_(vid) {}
+PVPair::PVPair(std::size_t pid, std::size_t vid)
+    : pid(pid), vid(vid) {}
 
 PVPair::PVPair(const PVPair& from) = default;
 
@@ -13,12 +14,12 @@ PVPair& PVPair::operator=(const PVPair& right) = default;
 PVPair::~PVPair() = default;
 
 bool PVPair::operator<(const PVPair& right) const {
-  return (pid_ < right.pid_ ||
-          (pid_ == right.pid_ && vid_ < right.vid_));
+  return (pid < right.pid ||
+          (pid == right.pid && vid < right.vid));
 }
 
 bool PVPair::operator==(const PVPair& right) const {
-  return (pid_ == right.pid_ && vid_ == right.vid_);
+  return (pid == right.pid && vid == right.vid);
 }
 
 bool PVPair::operator!=(const PVPair& right) const {

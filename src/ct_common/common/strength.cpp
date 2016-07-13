@@ -10,10 +10,10 @@ namespace ct_common {
 
 namespace {
 
-void gen_strengths_core(const std::vector<std::size_t>& pid_list,
-                        std::vector<RawStrength>* raw_strengths,
-                        std::vector<std::size_t>* stack,
-                        std::size_t strength, std::size_t depth) {
+void GenStrengthsCore(const std::vector<std::size_t>& pid_list,
+                      std::vector<RawStrength>* raw_strengths,
+                      std::vector<std::size_t>* stack,
+                      std::size_t strength, std::size_t depth) {
   if (depth == strength) {
     std::vector<std::size_t> new_strength;
     for (std::size_t i = 0; i < stack->size(); ++i) {
@@ -28,13 +28,13 @@ void gen_strengths_core(const std::vector<std::size_t>& pid_list,
   }
   for (std::size_t i = start_point; i < pid_list.size(); ++i) {
     (*stack)[depth] = i;
-    gen_strengths_core(pid_list, raw_strengths, stack, strength, depth + 1);
+    GenStrengthsCore(pid_list, raw_strengths, stack, strength, depth + 1);
   }
 }
 
 }  // anonymous namespace
 
-void attach_2_raw_strength(
+void AttachToRawStrength(
     const Strength& strength, std::vector<RawStrength>* raw_strengths) {
   std::vector<std::size_t> pid_list = strength.first;
   std::sort(pid_list.begin(), pid_list.end());
@@ -56,7 +56,7 @@ void attach_2_raw_strength(
     return;
   }
   std::vector<std::size_t> stack(strength.second, 0);
-  gen_strengths_core(
+  GenStrengthsCore(
       unique_pid_list, raw_strengths, &stack, strength.second, 0);
 }
 

@@ -59,10 +59,11 @@ class DLL_EXPORT ParamSpec {
    * Query the value id by looking up the preserved string copies.
    * Value ids start from zero.
    */
-  std::size_t query_value_id(const std::string& str) const;
+  std::size_t QueryValueId(const std::string& str) const;
 
   /** The specification for auto parameters */
-  std::vector<std::pair<std::shared_ptr<TreeNode>, std::shared_ptr<TreeNode> > >&
+  std::vector<std::pair<std::shared_ptr<TreeNode>,
+                        std::shared_ptr<TreeNode> > >&
      auto_value_specs() {
     return auto_value_specs_;
   }
@@ -74,7 +75,7 @@ class DLL_EXPORT ParamSpec {
   }
 
   /** Get the set of all related parameters */
-  void touch_pids(const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+  void TouchPids(const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
                   std::set<std::size_t>* pids_to_touch) const;
 
   /** Setting the aux flag */
@@ -95,13 +96,13 @@ class DLL_EXPORT ParamSpec {
     return map_string_values_2_vid_.size();
   }
   /** Check whether the given vid is invalid (>=level) */
-  bool is_vid_invalid(std::size_t vid) const {
+  bool IsVidInvalid(std::size_t vid) const {
     return (vid >= get_num_values());
   }
 
  private:
   // Inner init function, for copying.
-  void init(const ParamSpec& from);
+  void Init(const ParamSpec& from);
 
  private:
   // The parameter name.
@@ -125,7 +126,7 @@ class DLL_EXPORT ParamSpec {
 };
 
 // Utility function for finding parameter id from a vector of paramspecs.
-std::size_t find_param_id(
+std::size_t FindParamId(
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
     const std::string& param_name);
 }  // namespace ct_common

@@ -54,7 +54,7 @@ optional<bool> Constraint_L_Param::Evaluate(
     return nullopt;  // no conditions match
   }
   std::size_t vid = assignment.GetValue(pid_);
-  if (!ptr->is_vid_invalid(vid)) {
+  if (!ptr->IsVidInvalid(vid)) {
     return ptr->get_bool_values()[vid];
   }
   return nullopt;
@@ -68,7 +68,7 @@ void Constraint_L_Param::inner_touch_leaf_pids(
     return;
   }
   if (param_specs[pid_]->is_auto()) {
-    param_specs[pid_]->touch_pids(param_specs, pids_to_touch);
+    param_specs[pid_]->TouchPids(param_specs, pids_to_touch);
   } else {
     pids_to_touch->insert(pid_);
   }

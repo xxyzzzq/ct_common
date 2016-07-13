@@ -23,7 +23,7 @@ Tuple::~Tuple() = default;
 std::vector<std::size_t> Tuple::get_rel_pids() const {
   std::vector<std::size_t> tmp_return;
   for (std::size_t i = 0; i < size(); ++i) {
-    tmp_return.push_back((*this)[i].pid_);
+    tmp_return.push_back((*this)[i].pid);
   }
   return tmp_return;
 }
@@ -62,8 +62,8 @@ void Tuple::Sort() { std::sort(begin(), end()); }
 bool Tuple::IsSubAssignmentOf(const Assignment& assignment) const {
   for (std::size_t i = 0; i < size(); ++i) {
     PVPair pvpair = (*this)[i];
-    if (!assignment.IsContainParam(pvpair.pid_) ||
-        assignment.GetValue(pvpair.pid_) != pvpair.vid_) {
+    if (!assignment.IsContainParam(pvpair.pid) ||
+        assignment.GetValue(pvpair.pid) != pvpair.vid) {
       return false;
     }
   }
@@ -78,58 +78,58 @@ const PVPair* Tuple::Search(std::size_t pid) const {
   std::size_t high = size() - 1;
   while (low + 1 < high) {
     std::size_t mid = low + (high - low) / 2;
-    if ((*this)[mid].pid_ > pid) {
+    if ((*this)[mid].pid > pid) {
       high = mid;
     } else {
       low = mid;
     }
   }
-  if ((*this)[low].pid_ == pid) {
+  if ((*this)[low].pid == pid) {
     return &(*this)[low];
   }
-  if ((*this)[high].pid_ == pid) {
+  if ((*this)[high].pid == pid) {
     return &(*this)[high];
   }
   return 0;
 }
 
-bool Tuple::to_the_next_tuple(
+bool Tuple::ToTheNextTuple(
     std::vector<std::shared_ptr<ParamSpec> > param_specs) {
   if (size() == 0) {
     return false;
   }
-  back().vid_++;
+  back().vid++;
   for (std::size_t i = size() - 1; i > 0; i--) {
-    if ((*this)[i].vid_ >= param_specs[(*this)[i].pid_]->get_level()) {
-      (*this)[i].vid_ = 0;
-      (*this)[i - 1].vid_++;
+    if ((*this)[i].vid >= param_specs[(*this)[i].pid]->get_level()) {
+      (*this)[i].vid = 0;
+      (*this)[i - 1].vid++;
     } else {
       break;
     }
   }
-  if ((*this)[0].vid_ >= param_specs[(*this)[0].pid_]->get_level()) {
-    (*this)[0].vid_ = 0;
+  if ((*this)[0].vid >= param_specs[(*this)[0].pid]->get_level()) {
+    (*this)[0].vid = 0;
     return false;
   }
   return true;
 }
 
-bool Tuple::to_the_next_tuple_with_ivld(
+bool Tuple::ToTheNextTupleWithIvld(
     std::vector<std::shared_ptr<ParamSpec> > param_specs) {
   if (size() == 0) {
     return false;
   }
-  back().vid_++;
+  back().vid++;
   for (std::size_t i = size() - 1; i > 0; i--) {
-    if ((*this)[i].vid_ >= param_specs[(*this)[i].pid_]->get_level() + 1) {
-      (*this)[i].vid_ = 0;
-      (*this)[i - 1].vid_++;
+    if ((*this)[i].vid >= param_specs[(*this)[i].pid]->get_level() + 1) {
+      (*this)[i].vid = 0;
+      (*this)[i - 1].vid++;
     } else {
       break;
     }
   }
-  if ((*this)[0].vid_ >= param_specs[(*this)[0].pid_]->get_level() + 1) {
-    (*this)[0].vid_ = 0;
+  if ((*this)[0].vid >= param_specs[(*this)[0].pid]->get_level() + 1) {
+    (*this)[0].vid = 0;
     return false;
   }
   return true;
@@ -142,7 +142,7 @@ bool Tuple::IsContainParam(std::size_t pid) const {
 std::size_t Tuple::GetValue(std::size_t pid) const {
   const PVPair* pvpair = Search(pid);
   if (pvpair != 0) {
-    return pvpair->vid_;
+    return pvpair->vid;
   }
   return VID_BOUND;
 }

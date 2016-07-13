@@ -25,8 +25,8 @@ TuplePool::~TuplePool() = default;
 std::size_t TupleHasher::operator()(const Tuple& tuple) const {
   std::size_t result = 0;
   for (const PVPair& pv : tuple) {
-    hash_combine(result, pv.pid_);
-    hash_combine(result, pv.vid_);
+    hash_combine(result, pv.pid);
+    hash_combine(result, pv.vid);
   }
   return result;
 }

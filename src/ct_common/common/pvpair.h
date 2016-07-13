@@ -12,7 +12,7 @@ namespace ct_common {
 class DLL_EXPORT PVPair final {
  public:
   explicit PVPair(std::size_t pid = PID_BOUND, std::size_t vid = VID_BOUND);
-  PVPair(const PVPair& );
+  PVPair(const PVPair& from);
   PVPair& operator=(const PVPair& right);
   ~PVPair();
 
@@ -21,8 +21,8 @@ class DLL_EXPORT PVPair final {
   bool operator!=(const PVPair& right) const;
 
  public:
-  std::size_t pid_; /**< parameter id */
-  std::size_t vid_; /**< value id */
+  std::size_t pid; /**< parameter id */
+  std::size_t vid; /**< value id */
 };
 
 }  // namespace ct_common
