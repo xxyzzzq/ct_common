@@ -8,4 +8,4 @@ add_executable(ct_common_example
   )
 
 target_link_libraries(ct_common_example
-  ct_file_parse ct_common)
+  ct_common_parser ct_common)

@@ -30,7 +30,7 @@ add_custom_command(
   )
 
 add_library(
-  ct_file_parse
+  ct_common_parser
   ${SOURCE_FILES}
   ${LEXER_GENERATED_FILES}
   ${PARSER_GENERATED_FILES}
