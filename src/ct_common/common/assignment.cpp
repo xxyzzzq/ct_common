@@ -1,23 +1,15 @@
-//===----- ct_common/common/assignment.cpp ----------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class Assignment
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/assignment.h"
 
-using namespace ct::common;
+namespace ct_common {
 
-Assignment::Assignment(void) = default;
+Assignment::Assignment() = default;
 
-Assignment::Assignment(const Assignment &from) = default;
+Assignment::Assignment(const Assignment& from) = default;
 
-Assignment::~Assignment(void) = default;
+Assignment::~Assignment() = default;
 
-Assignment &Assignment::operator=(const Assignment &right) { return *this; }
+Assignment& Assignment::operator=(const Assignment& right) { return *this; }
+
+}  // namespace ct_common

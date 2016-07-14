@@ -1,40 +1,29 @@
-//===----- ct_common/common/pvpair.cpp --------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class PVPair
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/pvpair.h"
 
-using namespace ct::common;
+namespace ct_common {
 
-PVPair::PVPair(std::size_t pid, std::size_t vid) : pid_(pid), vid_(vid) {}
+PVPair::PVPair(std::size_t pid, std::size_t vid)
+    : pid(pid), vid(vid) {}
 
-PVPair::PVPair(const PVPair &from) : pid_(from.pid_), vid_(from.vid_) {}
+PVPair::PVPair(const PVPair& from) = default;
 
-PVPair &PVPair::operator=(const PVPair &right) {
-  this->pid_ = right.pid_;
-  this->vid_ = right.vid_;
-  return *this;
+PVPair& PVPair::operator=(const PVPair& right) = default;
+
+PVPair::~PVPair() = default;
+
+bool PVPair::operator<(const PVPair& right) const {
+  return (pid < right.pid ||
+          (pid == right.pid && vid < right.vid));
 }
 
-PVPair::~PVPair(void) {}
-
-bool PVPair::operator<(const PVPair &right) const {
-  return (this->pid_ < right.pid_ ||
-          (this->pid_ == right.pid_ && this->vid_ < right.vid_));
+bool PVPair::operator==(const PVPair& right) const {
+  return (pid == right.pid && vid == right.vid);
 }
 
-bool PVPair::operator==(const PVPair &right) const {
-  return (this->pid_ == right.pid_ && this->vid_ == right.vid_);
+bool PVPair::operator!=(const PVPair& right) const {
+  return !operator==(right);
 }
 
-bool PVPair::operator!=(const PVPair &right) const {
-  return !this->operator==(right);
-}
+}  // namespace ct_common

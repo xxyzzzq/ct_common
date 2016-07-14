@@ -1,31 +1,32 @@
-set(SOURCE_FILES
-  assembler.cpp
-  err_logger.cpp
-  err_logger_cerr.cpp)
+file(
+  GLOB_RECURSE
+  SOURCE_FILES
+  *.cpp
+  *.h)
 
 set(PARSER_GENERATED_FILES
-  ct_parser.tab.cpp)
+  parser.tab.hpp parser.tab.cpp location.hh position.hh stack.hh)
 
 set(LEXER_GENERATED_FILES
-  ct_lexer.cpp)
+  ct_common_lexer.cpp ct_common_lexer.hpp ct_common_lexer-token.hpp ct_common_lexer-configuration.hpp)
 
 set_source_files_properties(
-  ct_parser.tab.cpp
-  ct_lexer.cpp
+  ${PARSER_GENERATED_FILES}
+  ${LEXER_GENERATED_FILES}
   PROPERTIES GENERATED TRUE)
 
 add_custom_command(
-  OUTPUT ct_lexer.cpp ct_lexer.hpp ct_lexer-token.hpp ct_lexer-configuration.hpp
+  OUTPUT ${LEXER_GENERATED_FILES}
   COMMAND
-  ${QUEX} -i ${CMAKE_CURRENT_SOURCE_DIR}/ct_lexer.qx -o ct::lexer --token-class ct::lexer_Token --foreign-token-id-file ${CMAKE_CURRENT_SOURCE_DIR}/ct_lexer-token_ids.h --source-package . --file-extension-scheme pp --suppress 0
-  DEPENDS ct_lexer.qx ct_parser.tab.hpp
+  ${QUEX} -i ${CMAKE_CURRENT_SOURCE_DIR}/ct_common_lexer.qx -o ct_common::lexer --token-class ct_common::lexer_Token --foreign-token-id-file ${CMAKE_CURRENT_SOURCE_DIR}/ct_common_lexer-token_ids.h --source-package . --file-extension-scheme pp --suppress 0
+  DEPENDS ct_common_lexer.qx parser.tab.hpp
   )
 
 add_custom_command(
-  OUTPUT ct_parser.tab.hpp ct_parser.tab.cpp location.hh position.hh stack.hh
+  OUTPUT ${PARSER_GENERATED_FILES}
   COMMAND
-  bison -d ${CMAKE_CURRENT_SOURCE_DIR}/ct_parser.ypp
-  DEPENDS ct_parser.ypp
+  bison -d ${CMAKE_CURRENT_SOURCE_DIR}/parser.ypp
+  DEPENDS parser.ypp
   )
 
 add_library(

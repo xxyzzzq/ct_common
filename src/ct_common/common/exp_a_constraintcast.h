@@ -1,57 +1,48 @@
-//===----- ct_common/common/exp_a_constraintcast.h --------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for expressions casted from constraints
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_EXP_A_CONSTRAINTCAST_H_
-#define CT_COMMON_EXP_A_CONSTRAINTCAST_H_
+#ifndef CT_COMMON_COMMON_EXP_A_CONSTRAINTCAST_H_
+#define CT_COMMON_COMMON_EXP_A_CONSTRAINTCAST_H_
+
+#include <memory>
+#include <string>
+#include <vector>
 
 #include "ct_common/common/constraint.h"
-#include "ct_common/common/exp_a_atom.h"
+#include "ct_common/common/exp_a_atomic.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for arithmetic expressions casted from constraints
- */
-class DLL_EXPORT Exp_A_ConstraintCast : public Exp_A_Atom {
+namespace ct_common {
+
+// Class for arithmetic expressions casted from constraints
+class DLL_EXPORT Exp_A_ConstraintCast : public Exp_A_Atomic {
  public:
-  Exp_A_ConstraintCast(void);
-  Exp_A_ConstraintCast(const Exp_A_ConstraintCast &from);
-  Exp_A_ConstraintCast &operator=(const Exp_A_ConstraintCast &right);
-  virtual ~Exp_A_ConstraintCast(void);
+  Exp_A_ConstraintCast();
+  ~Exp_A_ConstraintCast() override;
 
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
 
-  std::shared_ptr<Constraint> get_oprd(void) const {
-    return std::dynamic_pointer_cast<Constraint>(this->oprds_[0]);
+  std::shared_ptr<Constraint> get_oprd() const {
+    return std::dynamic_pointer_cast<Constraint>(oprds_[0]);
   }
-  void set_oprd(const std::shared_ptr<TreeNode> &oprd) {
-    this->oprds_[0] = oprd;
+
+  void set_oprd(const std::shared_ptr<TreeNode>& oprd) {
+    oprds_[0] = oprd;
   }
 
  private:
-  virtual EvalType_Double EvaluateDouble_Impl(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
+  optional<double> EvaluateDouble_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
 
-  virtual EvalType_Int EvaluateInt_Impl(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
+  optional<int> EvaluateInt_Impl(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
+
+  DISALLOW_COPY_AND_ASSIGN(Exp_A_ConstraintCast);
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // EXP_A_CONSTRAINTCAST_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_EXP_A_CONSTRAINTCAST_H_

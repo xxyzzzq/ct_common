@@ -1,44 +1,28 @@
-//===----- ct_common/common/paramspec_int.cpp -------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class ParamSpec_Int
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/paramspec_int.h"
+
 #include <cstdlib>
 
-using namespace ct::common;
+namespace ct_common {
 
-ParamSpec_Int::ParamSpec_Int(void) : ParamSpec() {}
+REGISTER_CLASS_NAME(ParamSpec_Int)
 
-ParamSpec_Int::ParamSpec_Int(const ParamSpec_Int &from)
-    : ParamSpec(from), int_values_(from.int_values_) {}
+ParamSpec_Int::ParamSpec_Int() = default;
 
-ParamSpec_Int &ParamSpec_Int::operator=(const ParamSpec_Int &right) {
-  ParamSpec::operator=(right);
-  this->int_values_ = right.int_values_;
-  return (*this);
-}
+ParamSpec_Int::ParamSpec_Int(const ParamSpec_Int& from) = default;
 
-ParamSpec_Int::~ParamSpec_Int(void) {}
+ParamSpec_Int& ParamSpec_Int::operator=(const ParamSpec_Int& right) = default;
 
-std::string ParamSpec_Int::get_class_name(void) const {
-  return ParamSpec_Int::class_name();
-}
+ParamSpec_Int::~ParamSpec_Int() = default;
 
-std::string ParamSpec_Int::class_name(void) { return "ParamSpec_Int"; }
-
-void ParamSpec_Int::set_values(const std::vector<std::string> &string_values) {
+void ParamSpec_Int::set_values(const std::vector<std::string>& string_values) {
   ParamSpec::set_values(string_values);
   for (std::size_t i = 0; i < string_values.size(); ++i) {
-    this->int_values_.push_back(atoi(string_values[i].c_str()));
+    int_values_.push_back(atoi(string_values[i].c_str()));
   }
   // now push back the invalid value
-  this->int_values_.push_back(0);
+  int_values_.push_back(0);
 }
+
+}  // namespace ct_common

@@ -2,7 +2,7 @@
 
 mkdir -p third_party
 
-function sync_third_party() {
+function sync_git() {
     local name=$1
     local origin=$2
     local version=$3
@@ -21,6 +21,28 @@ function sync_third_party() {
     if [ "$4" == "recursive_bootstrap" ]; then
         cd third_party/$name && ./bootstrap
         cd ../..
+    fi
+}
+
+function sync_file() {
+    local name=$1
+    local local_file_name=$2
+    local url=$3
+
+    echo "syncing $name"
+    mkdir -p third_party/$name
+    curl -o third_party/$name/$local_file_name $url
+}
+
+function sync_third_party() {
+    local type=$1
+    local other_args=${@:2}
+    if [[ $type == "git" ]]; then
+        sync_git $other_args
+    elif [[ $type == "file" ]]; then
+        sync_file $other_args
+    else
+        echo "ERROR: unrecognized third-party type: $type"
     fi
 }
 

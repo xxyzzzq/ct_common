@@ -1,17 +1,7 @@
-//===----- ct_common/common/tuple.h -----------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for tuples
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_TUPLE_H_
-#define CT_COMMON_TUPLE_H_
+#ifndef CT_COMMON_COMMON_TUPLE_H_
+#define CT_COMMON_COMMON_TUPLE_H_
 
 #include <memory>
 #include <vector>
@@ -20,45 +10,44 @@
 #include "ct_common/common/assignment.h"
 #include "ct_common/common/pvpair.h"
 
-namespace ct {
-namespace common {
+namespace ct_common {
+
 class ParamSpec;
-/**
- * The class for tuples
- */
+
+// The class for tuples.
 class DLL_EXPORT Tuple : public Assignment, private std::vector<PVPair> {
  private:
   typedef std::vector<PVPair> impl_type;
 
  public:
-  Tuple(void);
-  Tuple(const Tuple &from);
-  explicit Tuple(const std::vector<PVPair> &from);
-  Tuple &operator=(const Tuple &right);
-  ~Tuple(void);
+  Tuple();
+  Tuple(const Tuple& from);
+  explicit Tuple(const std::vector<PVPair>& from);
+  Tuple& operator=(const Tuple& right);
+  ~Tuple() override;
 
-  virtual bool IsContainParam(std::size_t pid) const;
-  virtual std::size_t GetValue(std::size_t pid) const;
-  virtual bool IsSubAssignmentOf(const Assignment &asignment) const;
+  bool IsContainParam(std::size_t pid) const override;
+  std::size_t GetValue(std::size_t pid) const override;
+  bool IsSubAssignmentOf(const Assignment& asignment) const override;
 
   /** Get the set of related pids */
-  std::vector<std::size_t> get_rel_pids(void) const;
+  std::vector<std::size_t> get_rel_pids() const;
 
   /** Sort the pvpairs */
-  void Sort(void);
+  void Sort();
 
   /** Search for the PVPair for a given pid. The tuple need to be sorted in
    * advance.
    * The returned pointer is weak and should not be deleted. */
-  const PVPair *Search(std::size_t pid) const;
+  const PVPair* Search(std::size_t pid) const;
 
   /** For iterating tuples. Go to the next tuple, returns false if overflows */
-  bool to_the_next_tuple(
-      std::vector<std::shared_ptr<ct::common::ParamSpec> > param_specs);
+  bool ToTheNextTuple(
+      std::vector<std::shared_ptr<ParamSpec> > param_specs);
   /** For iterating tuples. Go to the next tuple (considering invalid values),
    * returns false if overflows */
-  bool to_the_next_tuple_with_ivld(
-      std::vector<std::shared_ptr<ct::common::ParamSpec> > param_specs);
+  bool ToTheNextTupleWithIvld(
+      std::vector<std::shared_ptr<ParamSpec> > param_specs);
 
   using impl_type::iterator;
   using impl_type::const_iterator;
@@ -74,10 +63,10 @@ class DLL_EXPORT Tuple : public Assignment, private std::vector<PVPair> {
   using impl_type::size;
   using impl_type::empty;
   using impl_type::operator[];
-  bool operator==(const Tuple &right) const;
-  bool operator<(const Tuple &right) const;
+  bool operator==(const Tuple& right) const;
+  bool operator<(const Tuple& right) const;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_TUPLE_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_TUPLE_H_

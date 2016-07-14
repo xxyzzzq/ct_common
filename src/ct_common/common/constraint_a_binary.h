@@ -1,79 +1,68 @@
-//===----- ct_common/common/constraint_a_binary.h ---------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the base class for binary arithmetic constraints
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_CONSTRAINT_A_BINARY_H_
-#define CT_COMMON_CONSTRAINT_A_BINARY_H_
+#ifndef CT_COMMON_COMMON_CONSTRAINT_A_BINARY_H_
+#define CT_COMMON_COMMON_CONSTRAINT_A_BINARY_H_
 
 #include <memory>
+#include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/constraint_a.h"
 #include "ct_common/common/exp_a.h"
 
-namespace ct {
-namespace common {
-/**
- * Base class for binary arithmetic constraints
- */
+namespace ct_common {
+
+// Base class for binary arithmetic constraints
 class DLL_EXPORT Constraint_A_Binary : public Constraint_A {
  public:
-  Constraint_A_Binary(void);
-  Constraint_A_Binary(const Constraint_A_Binary &from);
-  Constraint_A_Binary &operator=(const Constraint_A_Binary &right);
-  virtual ~Constraint_A_Binary(void);
+  Constraint_A_Binary();
+  ~Constraint_A_Binary() override;
 
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
-  /** get the string token of the current constraint type */
-  virtual std::string get_op_token(void) const = 0;
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
 
-  std::shared_ptr<const Exp_A> get_loprd(void) const {
-    return std::dynamic_pointer_cast<Exp_A>(this->oprds_[0]);
+  std::shared_ptr<const Exp_A> get_loprd() const {
+    return std::dynamic_pointer_cast<Exp_A>(oprds_[0]);
   }
-  std::shared_ptr<const Exp_A> get_roprd(void) const {
-    return std::dynamic_pointer_cast<Exp_A>(this->oprds_[1]);
+  std::shared_ptr<const Exp_A> get_roprd() const {
+    return std::dynamic_pointer_cast<Exp_A>(oprds_[1]);
   }
 
-  void set_loprd(const std::shared_ptr<TreeNode> &loprd) {
-    this->oprds_[0] = loprd;
+  void set_loprd(const std::shared_ptr<TreeNode>& loprd) {
+    oprds_[0] = loprd;
   }
-  void set_roprd(const std::shared_ptr<TreeNode> &roprd) {
-    this->oprds_[1] = roprd;
+  void set_roprd(const std::shared_ptr<TreeNode>& roprd) {
+    oprds_[1] = roprd;
   }
 
   /** Set the floating-point precision (for comparison) */
   void set_precision(double precision) {
-    this->precision_ = (precision >= 0) ? precision : -precision;
+    precision_ = (precision >= 0) ? precision : -precision;
   }  // absolute value
   /** Get the floating-point precision */
-  double get_precision(void) const { return this->precision_; }
+  double get_precision() const { return precision_; }
 
-  virtual EvalType_Bool Evaluate(
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-      const Assignment &assignment) const;
-
- private:
-  /** Inner check function for int values */
-  virtual bool evaluate_func_int(int val_1, int val_2) const = 0;
-  /** Inner check function for double values */
-  virtual bool evaluate_func_double(double val_1, double val_2) const = 0;
+  optional<bool> Evaluate(
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+      const Assignment& assignment) const override;
 
  protected:
   double precision_; /**< Precision for comparing floating-point operands */
-};
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_CONSTRAINT_A_BINARY_H_
+ private:
+  /** get the string token of the current constraint type */
+  virtual std::string GetOpToken() const = 0;
+  /** Inner check function for int values */
+  virtual bool EvaluateIntInternal(int val_1, int val_2) const = 0;
+  /** Inner check function for double values */
+  virtual bool EvaluateDoubleInternal(double val_1, double val_2) const = 0;
+
+  DISALLOW_COPY_AND_ASSIGN(Constraint_A_Binary);
+};
+
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_CONSTRAINT_A_BINARY_H_

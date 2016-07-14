@@ -1,78 +1,53 @@
-//===----- ct_common/common/constraint_a_binary.cpp -------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class Constraint_A_Binary
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/constraint_a_binary.h"
 
 #include "ct_common/base/arithmetic_utils.h"
+#include "ct_common/base/class_name_utils.h"
 
-using namespace ct::common;
+namespace ct_common {
 
-Constraint_A_Binary::Constraint_A_Binary(void) : Constraint_A(), precision_(0) {
-  this->oprds_.resize(2);
+REGISTER_CLASS_NAME(Constraint_A_Binary)
+
+Constraint_A_Binary::Constraint_A_Binary()
+    : Constraint_A(), precision_(0) {
+  oprds_.resize(2);
 }
 
-Constraint_A_Binary::Constraint_A_Binary(const Constraint_A_Binary &from)
-    : Constraint_A(from), precision_(from.precision_) {}
+Constraint_A_Binary::~Constraint_A_Binary() = default;
 
-Constraint_A_Binary &Constraint_A_Binary::operator=(
-    const Constraint_A_Binary &right) {
-  Constraint_A::operator=(right);
-  this->precision_ = right.precision_;
-  return *this;
-}
-
-Constraint_A_Binary::~Constraint_A_Binary(void) {}
-
-std::string Constraint_A_Binary::get_class_name(void) const {
-  return Constraint_A_Binary::class_name();
-}
-
-std::string Constraint_A_Binary::class_name(void) {
-  return "Constraint_A_Binary";
-}
-
-EvalType_Bool Constraint_A_Binary::Evaluate(
-    const std::vector<std::shared_ptr<ParamSpec> > &param_specs,
-    const Assignment &assignment) const {
-  EvalType_Bool tmp_return;
-  if (this->get_loprd()->get_type() == EAT_INT &&
-      this->get_roprd()->get_type() == EAT_INT) {
-    GET_EXP_VAL(EvalType_Int, val_l, this->get_loprd(), param_specs,
+optional<bool> Constraint_A_Binary::Evaluate(
+    const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+    const Assignment& assignment) const {
+  if (get_loprd()->get_type() == EAT_INT &&
+      get_roprd()->get_type() == EAT_INT) {
+    GET_EXP_VAL(int, val_l, get_loprd(), param_specs,
                 assignment);
-    GET_EXP_VAL(EvalType_Int, val_r, this->get_roprd(), param_specs,
+    GET_EXP_VAL(int, val_r, get_roprd(), param_specs,
                 assignment);
-    tmp_return.is_valid_ = val_l.is_valid_ && val_r.is_valid_;
-    if (tmp_return.is_valid_) {
-      tmp_return.value_ = this->evaluate_func_int(val_l.value_, val_r.value_);
+    if (val_l && val_r) {
+      return EvaluateIntInternal(val_l.value(), val_r.value());
     }
   } else {
-    GET_EXP_VAL(EvalType_Int, val_l, this->get_loprd(), param_specs,
+    GET_EXP_VAL(double, val_l, get_loprd(), param_specs,
                 assignment);
-    GET_EXP_VAL(EvalType_Int, val_r, this->get_roprd(), param_specs,
+    GET_EXP_VAL(double, val_r, get_roprd(), param_specs,
                 assignment);
-    tmp_return.is_valid_ = val_l.is_valid_ && val_r.is_valid_;
-    if (tmp_return.is_valid_) {
-      tmp_return.value_ = this->evaluate_func_int(val_l.value_, val_r.value_);
+    if (val_l && val_r) {
+      return EvaluateDoubleInternal(val_l.value(), val_r.value());
     }
   }
-  return tmp_return;
+  return nullopt;
 }
 
 void Constraint_A_Binary::dump(
-    std::ostream &os,
-    const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const {
+    std::ostream& os,
+    const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << "(";
-  this->get_loprd()->dump(os, param_specs);
-  os << this->get_op_token();
-  this->get_roprd()->dump(os, param_specs);
+  get_loprd()->dump(os, param_specs);
+  os << GetOpToken();
+  get_roprd()->dump(os, param_specs);
   os << ")";
 }
+
+}  // namespace ct_common

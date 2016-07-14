@@ -1,30 +1,15 @@
-//===----- ct_common/common/exp.cpp -----------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class Exp
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/exp.h"
 
-using namespace ct::common;
+#include "ct_common/base/class_name_utils.h"
 
-Exp::Exp(void) : TreeNode() {}
+namespace ct_common {
 
-Exp::Exp(const Exp &from) : TreeNode(from) {}
+REGISTER_CLASS_NAME(Exp)
 
-Exp &Exp::operator=(const Exp &right) {
-  TreeNode::operator=(right);
-  return *this;
-}
+Exp::Exp() = default;
 
-Exp::~Exp(void) {}
+Exp::~Exp() = default;
 
-std::string Exp::get_class_name(void) const { return Exp::class_name(); }
-
-std::string Exp::class_name(void) { return "Exp"; }
+}  // namespace ct_common

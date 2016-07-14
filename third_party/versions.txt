@@ -1,2 +1,3 @@
-quex http://github.com/xxyzzzq/quex.git quex-0.65.11
-markdown2 https://github.com/trentm/python-markdown2.git 2.3.1
+git quex http://github.com/xxyzzzq/quex.git quex-0.65.11
+git markdown2 https://github.com/trentm/python-markdown2.git 2.3.1
+file cpplint cpplint.py https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py

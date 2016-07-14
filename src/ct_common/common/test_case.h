@@ -1,17 +1,7 @@
-//===----- ct_common/common/test_case.h -------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for test cases
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_TEST_CASE_H_
-#define CT_COMMON_TEST_CASE_H_
+#ifndef CT_COMMON_COMMON_TEST_CASE_H_
+#define CT_COMMON_COMMON_TEST_CASE_H_
 
 #include <memory>
 #include <vector>
@@ -19,26 +9,24 @@
 #include "ct_common/base/utils.h"
 #include "ct_common/common/assignment.h"
 
-namespace ct {
-namespace common {
+namespace ct_common {
+
 class ParamSpec;
 
-/**
- * The class for test cases
- */
+// The class for test cases
 class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t> {
  private:
   typedef std::vector<size_t> impl_type;
 
  public:
-  TestCase(void);
-  TestCase(const TestCase &from);
-  TestCase &operator=(const TestCase &right);
-  virtual ~TestCase(void);
+  TestCase();
+  TestCase(const TestCase& from);
+  TestCase& operator=(const TestCase& right);
+  ~TestCase() override;
 
-  virtual bool IsContainParam(std::size_t pid) const;
-  virtual std::size_t GetValue(std::size_t pid) const;
-  virtual bool IsSubAssignmentOf(const Assignment &assignment) const;
+  bool IsContainParam(std::size_t pid) const override;
+  std::size_t GetValue(std::size_t pid) const override;
+  bool IsSubAssignmentOf(const Assignment& assignment) const override;
 
   using impl_type::iterator;
   using impl_type::const_iterator;
@@ -54,7 +42,7 @@ class DLL_EXPORT TestCase : public Assignment, private std::vector<size_t> {
   using impl_type::empty;
   using impl_type::operator[];
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_TEST_CASE_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_TEST_CASE_H_

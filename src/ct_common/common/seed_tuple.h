@@ -1,41 +1,33 @@
-//===----- ct_common/common/seed_tuple.h ------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for tuple seeds
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_SEED_TUPLE_H_
-#define CT_COMMON_SEED_TUPLE_H_
+#ifndef CT_COMMON_COMMON_SEED_TUPLE_H_
+#define CT_COMMON_COMMON_SEED_TUPLE_H_
+
+#include <vector>
 
 #include "ct_common/common/seed.h"
 #include "ct_common/common/tuple.h"
 
-namespace ct {
-namespace common {
+namespace ct_common {
+
 class DLL_EXPORT Seed_Tuple : public Seed {
  public:
-  Seed_Tuple(void);
-  Seed_Tuple(const Seed_Tuple &);
-  Seed_Tuple &operator=(const Seed_Tuple &right);
-  virtual ~Seed_Tuple(void);
+  Seed_Tuple();
+  Seed_Tuple(const Seed_Tuple& from);
+  Seed_Tuple& operator=(const Seed_Tuple& right);
+  ~Seed_Tuple() override;
 
  public:
-  const Tuple &get_tuple(void) const { return this->tuple_; }
-  Tuple &the_tuple(void) { return this->tuple_; }
-  virtual EvalType_Bool IsMatch(
-      const Assignment &assignment,
-      const std::vector<std::shared_ptr<ParamSpec> > &paramspecs);
+  const Tuple& get_tuple() const { return tuple_; }
+  Tuple& the_tuple() { return tuple_; }
+  optional<bool> IsMatch(
+      const Assignment& assignment,
+      const std::vector<std::shared_ptr<ParamSpec> >& paramspecs) override;
 
  private:
   Tuple tuple_; /**< The inner tuple */
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_SEED_TUPLE_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_SEED_TUPLE_H_

@@ -1,46 +1,35 @@
-//===----- ct_common/common/paramspec_int.h ---------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for int parameter specifications
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_PARAMSPEC_INT_H_
-#define CT_COMMON_PARAMSPEC_INT_H_
+#ifndef CT_COMMON_COMMON_PARAMSPEC_INT_H_
+#define CT_COMMON_COMMON_PARAMSPEC_INT_H_
+
+#include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/paramspec.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for int parameter specifications
- */
+namespace ct_common {
+
+// Integer parameter specifications.
 class DLL_EXPORT ParamSpec_Int : public ParamSpec {
  public:
-  ParamSpec_Int(void);
-  ParamSpec_Int(const ParamSpec_Int &from);
-  ParamSpec_Int &operator=(const ParamSpec_Int &right);
-  virtual ~ParamSpec_Int(void);
+  ParamSpec_Int();
+  ParamSpec_Int(const ParamSpec_Int& from);
+  ParamSpec_Int& operator=(const ParamSpec_Int& right);
+  ~ParamSpec_Int() override;
 
-  virtual void set_values(const std::vector<std::string> &string_values);
-  const std::vector<int> &get_int_values(void) const {
-    return this->int_values_;
+  void set_values(const std::vector<std::string>& string_values) override;
+  const std::vector<int>& get_int_values() const {
+    return int_values_;
   }
 
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-
  private:
-  std::vector<int> int_values_; /**< The integer values of the parameter.
-                                 * Should be consistent with string values */
+  // The integer values of the parameter. Should be consistent with
+  // string values.
+  std::vector<int> int_values_;
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_PARAMSPEC_INT_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_PARAMSPEC_INT_H_

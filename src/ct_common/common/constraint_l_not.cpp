@@ -1,37 +1,23 @@
-//===----- ct_common/common/constraint_l_not.cpp ----------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This file contains the function definitions of class Constraint_L_Not
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
 #include "ct_common/common/constraint_l_not.h"
 
-using namespace ct::common;
+namespace ct_common {
 
-Constraint_L_Not::Constraint_L_Not(void) : Constraint_L_Unary() {}
+REGISTER_CLASS_NAME(Constraint_L_Not)
 
-Constraint_L_Not::Constraint_L_Not(const Constraint_L_Not &from)
-    : Constraint_L_Unary(from) {}
+Constraint_L_Not::Constraint_L_Not() = default;
 
-Constraint_L_Not &Constraint_L_Not::operator=(const Constraint_L_Not &right) {
-  Constraint_L_Unary::operator=(right);
-  return *this;
+Constraint_L_Not::~Constraint_L_Not() = default;
+
+
+optional<bool> Constraint_L_Not::EvaluateInternal(
+    const optional<bool>& val) const {
+  if (!val)
+    return nullopt;
+  return !val.value();
 }
 
-Constraint_L_Not::~Constraint_L_Not(void) {}
+std::string Constraint_L_Not::GetOpToken() const { return "!"; }
 
-std::string Constraint_L_Not::get_class_name(void) const {
-  return Constraint_L_Not::class_name();
-}
-
-std::string Constraint_L_Not::class_name(void) { return "Constraint_L_Not"; }
-
-bool Constraint_L_Not::evaluate_func(bool val) const { return !val; }
-
-std::string Constraint_L_Not::get_op_token(void) const { return "!"; }
+}  // namespace ct_common

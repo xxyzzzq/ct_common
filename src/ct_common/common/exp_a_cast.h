@@ -1,46 +1,37 @@
-//===----- ct_common/common/exp_a_cast.h ------------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the class for casting expressions
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_EXP_A_CAST_H_
-#define CT_COMMON_EXP_A_CAST_H_
+#ifndef CT_COMMON_COMMON_EXP_A_CAST_H_
+#define CT_COMMON_COMMON_EXP_A_CAST_H_
+
+#include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/exp_a_unary.h"
 
-namespace ct {
-namespace common {
-/**
- * The class for casting between int/double expressions
- */
+namespace ct_common {
+
+// Class for casting between int/double expressions
 class DLL_EXPORT Exp_A_Cast : public Exp_A_Unary {
  public:
-  Exp_A_Cast(void);
-  Exp_A_Cast(const Exp_A_Cast &from);
-  Exp_A_Cast &operator=(const Exp_A_Cast &right);
-  virtual ~Exp_A_Cast(void);
+  Exp_A_Cast();
+  ~Exp_A_Cast() override;
 
- public:
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
-  virtual void dump(
-      std::ostream &os,
-      const std::vector<std::shared_ptr<ParamSpec> > &param_specs) const;
-  virtual std::string get_op_token(void) const;
+  void dump(
+      std::ostream& os,
+      const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
+      const override;
+  std::string get_op_token() const override;
 
  private:
-  virtual double evaluate_double(double val) const;
-  virtual int evaluate_int(int val) const;
-};
-}  // namespace common
-}  // namespace ct
+  optional<double> evaluate_double(
+      const optional<double>& val) const override;
+  optional<int> evaluate_int(
+      const optional<int>& val) const override;
 
-#endif  // CT_COMMON_EXP_A_CAST_H_
+  DISALLOW_COPY_AND_ASSIGN(Exp_A_Cast);
+};
+
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_EXP_A_CAST_H_

@@ -1,22 +1,24 @@
-#ifndef ERR_LOGGER_CERR_H_
-#define ERR_LOGGER_CERR_H_
+// Copyright 2016 ct_common authors. See LICENSE file for details.
+
+#ifndef CT_COMMON_FILE_PARSE_ERR_LOGGER_CERR_H_
+#define CT_COMMON_FILE_PARSE_ERR_LOGGER_CERR_H_
+
+#include <string>
 
 #include "ct_common/file_parse/err_logger.h"
 
-namespace ct {
-namespace common {
+namespace ct_common {
+
 class ErrLogger_Cerr : public ErrLogger {
  public:
   ErrLogger_Cerr(void);
-  ErrLogger_Cerr(const ErrLogger_Cerr &from);
   virtual ~ErrLogger_Cerr(void);
-  const ErrLogger_Cerr &operator=(const ErrLogger_Cerr &right);
 
- public:
-  virtual void innerReportError(const std::string &str);
-  virtual void innerReportWarning(const std::string &str);
+ private:
+  virtual void InnerReportError(const std::string &str);
+  virtual void InnerReportWarning(const std::string &str);
 };
-}  // common
-}  // ct
 
-#endif  // ERR_LOGGER_CERR_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_FILE_PARSE_ERR_LOGGER_CERR_H_

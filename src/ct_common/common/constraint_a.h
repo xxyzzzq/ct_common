@@ -1,37 +1,25 @@
-//===----- ct_common/common/constraint_a.h ----------------------*- C++ -*-===//
-//
-//                      The ct_common Library
-//
-// This file is distributed under the MIT license. See LICENSE for details.
-//
-//===----------------------------------------------------------------------===//
-//
-// This header file contains the base class for arithmetic constraints
-//
-//===----------------------------------------------------------------------===//
+// Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_CONSTRAINT_A_H_
-#define CT_COMMON_CONSTRAINT_A_H_
+#ifndef CT_COMMON_COMMON_CONSTRAINT_A_H_
+#define CT_COMMON_COMMON_CONSTRAINT_A_H_
+
+#include <string>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/constraint.h"
 
-namespace ct {
-namespace common {
-/**
- * Base class for arithmetic constraints
- */
+namespace ct_common {
+
+// Base class for arithmetic constraints
 class DLL_EXPORT Constraint_A : public Constraint {
  public:
-  Constraint_A(void);
-  Constraint_A(const Constraint_A &from);
-  Constraint_A &operator=(const Constraint_A &right);
-  virtual ~Constraint_A(void);
+  Constraint_A();
+  ~Constraint_A() override;
 
-  virtual std::string get_class_name(void) const;
-  static std::string class_name(void);
+ private:
+  DISALLOW_COPY_AND_ASSIGN(Constraint_A);
 };
-}  // namespace common
-}  // namespace ct
 
-#endif  // CT_COMMON_CONSTRAINT_A_H_
+}  // namespace ct_common
+
+#endif  // CT_COMMON_COMMON_CONSTRAINT_A_H_
