@@ -18,7 +18,7 @@ processing.
 `ct_common` has two sub-libraries:
 
 * `libct_common`: contains many basic classes for CT.
-* `libct_file_parse`: the parser interface.
+* `libct_common_parser`: the parser interface.
 
 ## Building `ct_common`
 
@@ -69,11 +69,11 @@ definitions to your project (otherwise there will be warning messages from the
 
 ## Design Overview
 
-All the classes of `ct_common` are included in namespace `ct::`.
+All the classes of `ct_common` are included in namespace `ct_common::`.
 
 ### Sub-library `libct_common`
 
-The classes of `libct_common` are included in namespace `ct::common::`.
+The classes of `libct_common` are included in namespace `ct_common::`.
 Some important high-level classes are:
 
 * `ParamSpec`: base class for parameter information;
@@ -90,19 +90,21 @@ Some low-level classes are:
 * `PVPair`: parameter-value pair;
 * `Tuple`: a parameter combination;
 * `TuplePool`: a pool of parameter combinations;
-* `EvalType`: the results of evaluating Boolean, numeric and string expressions;
+* `optional<T>`: the results of evaluating Boolean, numeric and string
+  expressions;
 * `RawStrength`: low-level representation for covering strength.
 
-### Sub-library `libct_file_parse`
+### Sub-library `libct_common_parser`
 
-`file_parse` depend on `common`. All the classes are included in namespace `ct::`.
+`libct_common_parser` depend on `lib_ct_common`. All the classes are included in
+namespace `ct_common::`.
 
 Some important high-level classes are:
 
 * `lexer`: the lexer converting input streams into tokens;
 * `parser`: the parser converting tokens into data structures of {\tt common};
-* `common::assembler`: the assembler classes which directly assembles data
-  structures of `common`.
+* `assembler`: the assembler classes which directly assembles data
+  structures of `lib_ct_common`.
 
 ## A Simple Example
 Here's an example to show how to use the parser.
@@ -133,7 +135,7 @@ source package):
 #include "ct_common/file_parse/err_logger_cerr.h"
 
 using namespace ct;
-using namespace ct::common;
+using namespace ct_common;
 
 int main(int argc, char* argv[]) {
   std::string file_name;
