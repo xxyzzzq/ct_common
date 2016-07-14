@@ -21,11 +21,11 @@ optional<bool> Constraint_L_Unary::Evaluate(
       get_oprd()->Evaluate(param_specs, assignment));
 }
 
-void Constraint_L_Unary::dump(
+void Constraint_L_Unary::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << GetOpToken();
-  get_oprd()->dump(os, param_specs);
+  get_oprd()->Dump(os, param_specs);
 }
 
 }  // namespace ct_common

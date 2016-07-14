@@ -24,13 +24,13 @@ optional<bool> Constraint_S_Binary::Evaluate(
   return EvaluateInternal(val_l, val_r);
 }
 
-void Constraint_S_Binary::dump(
+void Constraint_S_Binary::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << "(";
-  get_loprd()->dump(os, param_specs);
+  get_loprd()->Dump(os, param_specs);
   os << GetOpToken();
-  get_roprd()->dump(os, param_specs);
+  get_roprd()->Dump(os, param_specs);
   os << ")";
 }
 

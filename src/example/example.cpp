@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
   TuplePool forbidden_tuple_pool;
   for (std::size_t i = 0; i < sut_model.constraints.size(); ++i) {
     std::set<std::size_t> rel_pids;
-    sut_model.constraints[i]->touch_pids(sut_model.param_specs, &rel_pids);
+    sut_model.constraints[i]->TouchPids(sut_model.param_specs, &rel_pids);
     Tuple tuple;
     for (std::set<std::size_t>::const_iterator iter = rel_pids.begin();
          iter != rel_pids.end(); iter++) {

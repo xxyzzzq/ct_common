@@ -117,7 +117,7 @@ optional<int> Exp_A_Param::EvaluateInt_Impl(
   }
 }
 
-void Exp_A_Param::inner_touch_leaf_pids(
+void Exp_A_Param::InnerTouchLeafPids(
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
     std::set<std::size_t>* pids_to_touch) const {
   if (!param_specs[pid_]) {
@@ -131,7 +131,7 @@ void Exp_A_Param::inner_touch_leaf_pids(
   }
 }
 
-void Exp_A_Param::dump(
+void Exp_A_Param::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << param_specs[pid_]->get_param_name();

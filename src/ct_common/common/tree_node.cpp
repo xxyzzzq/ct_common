@@ -21,7 +21,7 @@ const std::string& TreeNode::get_str_value() const {
   return empty_string;
 }
 
-void TreeNode::touch_pids(
+void TreeNode::TouchPids(
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
     std::set<std::size_t>* pids_to_touch) const {
   std::stack<std::pair<const TreeNode*, std::size_t> > s;
@@ -33,7 +33,7 @@ void TreeNode::touch_pids(
       ++s.top().second;
     }
     if (s.top().second >= s.top().first->oprds_.size()) {
-      s.top().first->inner_touch_leaf_pids(param_specs, pids_to_touch);
+      s.top().first->InnerTouchLeafPids(param_specs, pids_to_touch);
       s.pop();
       if (!s.empty()) {
         ++s.top().second;
@@ -45,7 +45,7 @@ void TreeNode::touch_pids(
   }
 }
 
-void TreeNode::inner_touch_leaf_pids(
+void TreeNode::InnerTouchLeafPids(
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
     std::set<std::size_t>* pids_to_touch) const {}
 

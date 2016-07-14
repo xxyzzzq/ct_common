@@ -18,7 +18,7 @@ class DLL_EXPORT Exp_A_Binary : public Exp_A {
   Exp_A_Binary();
   ~Exp_A_Binary();
 
-  void dump(
+  void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
       const override;

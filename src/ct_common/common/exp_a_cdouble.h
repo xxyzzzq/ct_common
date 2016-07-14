@@ -17,7 +17,7 @@ class DLL_EXPORT Exp_A_CDouble : public Exp_A_Atomic {
   Exp_A_CDouble();
   ~Exp_A_CDouble() override;
 
-  void dump(
+  void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
       const override;

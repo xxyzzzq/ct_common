@@ -54,13 +54,13 @@ optional<int> Exp_A_Binary::EvaluateInt_Impl(
       param_specs, assignment, *this);
 }
 
-void Exp_A_Binary::dump(
+void Exp_A_Binary::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << "(";
-  get_loprd()->dump(os, param_specs);
+  get_loprd()->Dump(os, param_specs);
   os << GetOpToken();
-  get_roprd()->dump(os, param_specs);
+  get_roprd()->Dump(os, param_specs);
   os << ")";
 }
 

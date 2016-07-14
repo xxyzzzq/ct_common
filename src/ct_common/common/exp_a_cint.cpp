@@ -38,7 +38,7 @@ const std::string& Exp_A_CInt::get_str_value() const {
   return str_value_;
 }
 
-void Exp_A_CInt::dump(
+void Exp_A_CInt::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << get_str_value();

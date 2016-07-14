@@ -60,7 +60,7 @@ optional<bool> Constraint_L_Param::Evaluate(
   return nullopt;
 }
 
-void Constraint_L_Param::inner_touch_leaf_pids(
+void Constraint_L_Param::InnerTouchLeafPids(
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
     std::set<std::size_t>* pids_to_touch) const {
   if (!param_specs[pid_]) {
@@ -74,7 +74,7 @@ void Constraint_L_Param::inner_touch_leaf_pids(
   }
 }
 
-void Constraint_L_Param::dump(
+void Constraint_L_Param::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << param_specs[pid_]->get_param_name();

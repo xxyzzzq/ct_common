@@ -37,12 +37,12 @@ std::string Exp_A_Cast::get_op_token() const {
   return "";
 }
 
-void Exp_A_Cast::dump(
+void Exp_A_Cast::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << get_op_token();
   os << "(";
-  get_oprd()->dump(os, param_specs);
+  get_oprd()->Dump(os, param_specs);
   os << ")";
 }
 

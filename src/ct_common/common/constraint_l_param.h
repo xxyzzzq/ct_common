@@ -17,7 +17,7 @@ class Constraint_L_Param : public Constraint_L_Atomic {
   Constraint_L_Param();
   ~Constraint_L_Param() override;
 
-  void dump(
+  void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
       const override;
@@ -30,7 +30,7 @@ class Constraint_L_Param : public Constraint_L_Atomic {
       const Assignment& assignment) const override;
 
  private:
-  void inner_touch_leaf_pids(
+  void InnerTouchLeafPids(
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
       std::set<std::size_t>* pids_to_touch) const override;
 

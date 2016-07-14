@@ -34,7 +34,7 @@ const std::string& Exp_A_CDouble::get_str_value() const {
   return str_value_;
 }
 
-void Exp_A_CDouble::dump(
+void Exp_A_CDouble::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << get_str_value();

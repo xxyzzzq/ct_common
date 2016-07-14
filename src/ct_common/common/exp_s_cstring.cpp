@@ -20,7 +20,7 @@ optional<std::string> Exp_S_CString::Evaluate(
   return value_;
 }
 
-void Exp_S_CString::dump(
+void Exp_S_CString::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << get_str_value();

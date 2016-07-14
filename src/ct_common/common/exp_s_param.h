@@ -17,12 +17,12 @@ class DLL_EXPORT Exp_S_Param : public Exp_S_Atomic {
   Exp_S_Param();
   ~Exp_S_Param() override;
 
-  void dump(
+  void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
       const override;
 
-  void inner_touch_leaf_pids(
+  void InnerTouchLeafPids(
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
       std::set<std::size_t>* pids_to_touch) const override;
 

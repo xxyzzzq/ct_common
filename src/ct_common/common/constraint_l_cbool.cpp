@@ -26,7 +26,7 @@ optional<bool> Constraint_L_CBool::Evaluate(
   return value_;
 }
 
-void Constraint_L_CBool::dump(
+void Constraint_L_CBool::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << get_str_value();

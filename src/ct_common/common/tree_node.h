@@ -23,14 +23,14 @@ class DLL_EXPORT TreeNode {
   virtual ~TreeNode() = 0;
 
   /** Whether the node is a leaf node */
-  bool is_leaf() const { return oprds_.empty(); }
+  bool IsLeaf() const { return oprds_.empty(); }
 
   /**
    * Get all related parameters EXCEPT for auto parameters
    * param_specs are used to determine related pids of auto parameters
    */
-  void touch_pids(const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
-                  std::set<std::size_t>* pids_to_touch) const;
+  void TouchPids(const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
+                 std::set<std::size_t>* pids_to_touch) const;
 
   /** Get the operands */
   const std::vector<std::shared_ptr<TreeNode> >& get_oprds() const {
@@ -42,7 +42,7 @@ class DLL_EXPORT TreeNode {
   virtual const std::string& get_str_value() const;
 
   /** Print the tree node to a given output stream */
-  virtual void dump(
+  virtual void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const = 0;
 
@@ -51,7 +51,7 @@ class DLL_EXPORT TreeNode {
 
  private:
   /** Inner function to get all related parameters */
-  virtual void inner_touch_leaf_pids(
+  virtual void InnerTouchLeafPids(
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
       std::set<std::size_t>* pids_to_touch) const;
 

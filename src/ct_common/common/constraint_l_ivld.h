@@ -18,12 +18,12 @@ class DLL_EXPORT Constraint_L_IVLD : public Constraint_L_Atomic {
   Constraint_L_IVLD();
   ~Constraint_L_IVLD() override;
 
-  void dump(
+  void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
       const override;
 
-  void inner_touch_leaf_pids(
+  void InnerTouchLeafPids(
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
       std::set<std::size_t>* pids_to_touch) const override;
 

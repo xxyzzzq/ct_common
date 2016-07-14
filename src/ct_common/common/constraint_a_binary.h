@@ -19,7 +19,7 @@ class DLL_EXPORT Constraint_A_Binary : public Constraint_A {
   Constraint_A_Binary();
   ~Constraint_A_Binary() override;
 
-  void dump(
+  void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
       const override;

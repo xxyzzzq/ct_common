@@ -31,14 +31,14 @@ optional<bool> Constraint_L_IVLD::Evaluate(
       assignment.GetValue(pid_));
 }
 
-void Constraint_L_IVLD::inner_touch_leaf_pids(
+void Constraint_L_IVLD::InnerTouchLeafPids(
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
     std::set<std::size_t>* pids_to_touch) const {
   // auto and aux parameters cannot be invalidated, so no need to check
   pids_to_touch->insert(pid_);
 }
 
-void Constraint_L_IVLD::dump(
+void Constraint_L_IVLD::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << "#";

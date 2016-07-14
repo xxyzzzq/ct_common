@@ -40,13 +40,13 @@ optional<bool> Constraint_A_Binary::Evaluate(
   return nullopt;
 }
 
-void Constraint_A_Binary::dump(
+void Constraint_A_Binary::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << "(";
-  get_loprd()->dump(os, param_specs);
+  get_loprd()->Dump(os, param_specs);
   os << GetOpToken();
-  get_roprd()->dump(os, param_specs);
+  get_roprd()->Dump(os, param_specs);
   os << ")";
 }
 

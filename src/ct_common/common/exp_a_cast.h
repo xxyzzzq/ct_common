@@ -17,7 +17,7 @@ class DLL_EXPORT Exp_A_Cast : public Exp_A_Unary {
   Exp_A_Cast();
   ~Exp_A_Cast() override;
 
-  void dump(
+  void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
       const override;

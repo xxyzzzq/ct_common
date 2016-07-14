@@ -33,7 +33,7 @@ optional<int> Exp_A_ConstraintCast::EvaluateInt_Impl(
     return val.value() ? 1 : 0;
 }
 
-void Exp_A_ConstraintCast::dump(
+void Exp_A_ConstraintCast::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   switch (type_) {
@@ -47,7 +47,7 @@ void Exp_A_ConstraintCast::dump(
       CT_EXCEPTION("unknown cast type");
       break;
   }
-  get_oprd()->dump(os, param_specs);
+  get_oprd()->Dump(os, param_specs);
 }
 
 }  // namespace ct_common

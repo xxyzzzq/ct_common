@@ -59,7 +59,7 @@ optional<std::string> Exp_S_Param::Evaluate(
       ->get_string_values()[vid];
 }
 
-void Exp_S_Param::inner_touch_leaf_pids(
+void Exp_S_Param::InnerTouchLeafPids(
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs,
     std::set<std::size_t>* pids_to_touch) const {
   if (!param_specs[pid_]) {
@@ -73,7 +73,7 @@ void Exp_S_Param::inner_touch_leaf_pids(
   }
 }
 
-void Exp_S_Param::dump(
+void Exp_S_Param::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << param_specs[pid_]->get_param_name();

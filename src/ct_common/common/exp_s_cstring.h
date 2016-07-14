@@ -16,7 +16,7 @@ class DLL_EXPORT Exp_S_CString : public Exp_S_Atomic {
   Exp_S_CString();
   ~Exp_S_CString() override;
 
-  void dump(
+  void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
       const override;

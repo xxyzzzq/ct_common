@@ -70,8 +70,8 @@ void ParamSpec::TouchPids(
       CT_EXCEPTION("encountered invalid auto value expression");
       return;
     }
-    auto_value_specs_[i].first->touch_pids(param_specs, pids_to_touch);
-    auto_value_specs_[i].second->touch_pids(param_specs, pids_to_touch);
+    auto_value_specs_[i].first->TouchPids(param_specs, pids_to_touch);
+    auto_value_specs_[i].second->TouchPids(param_specs, pids_to_touch);
   }
 }
 

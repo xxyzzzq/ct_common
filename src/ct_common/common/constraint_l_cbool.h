@@ -21,7 +21,7 @@ class Constraint_L_CBool : public Constraint_L_Atomic {
 
   /** get the string value: true/false */
   const std::string& get_str_value() const override;
-  void dump(
+  void Dump(
       std::ostream& os,
       const std::vector<std::shared_ptr<ParamSpec> >& param_specs)
       const override;

@@ -28,11 +28,11 @@ optional<int> Exp_A_Unary::EvaluateInt_Impl(
   return evaluate_int(oprd_val);
 }
 
-void Exp_A_Unary::dump(
+void Exp_A_Unary::Dump(
     std::ostream& os,
     const std::vector<std::shared_ptr<ParamSpec> >& param_specs) const {
   os << get_op_token();
-  get_oprd()->dump(os, param_specs);
+  get_oprd()->Dump(os, param_specs);
 }
 
 }  // namespace ct_common
