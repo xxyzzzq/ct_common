@@ -15,7 +15,7 @@
 #include "ct_common/common/pvpair.h"
 #include "ct_common/common/seed.h"
 #include "ct_common/common/strength.h"
-#include "ct_common/file_parse/err_logger.h"
+#include "ct_common/parser/err_logger.h"
 
 namespace ct_common {
 

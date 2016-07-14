@@ -11,4 +11,4 @@ add_library(ct_common
   ${CT_COMMON_SOURCE_FILES}
   )
 
-add_subdirectory(file_parse)
+add_subdirectory(parser)

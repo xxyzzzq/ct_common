@@ -1,6 +1,6 @@
 // Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#include "ct_common/file_parse/err_logger_cerr.h"
+#include "ct_common/parser/err_logger_cerr.h"
 
 #include <iostream>
 

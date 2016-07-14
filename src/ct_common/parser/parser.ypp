@@ -17,7 +17,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include "ct_common/file_parse/ct_common_lexer.hpp"
+#include "ct_common/parser/ct_common_lexer.hpp"
   using namespace ct_common;
 }
 
@@ -25,7 +25,7 @@
 #include <utility>
 
 #include "ct_common/common/sut_model.h"
-#include "ct_common/file_parse/assembler.h"
+#include "ct_common/parser/assembler.h"
 
   using AutoValueCase =
       std::pair<std::shared_ptr<ct_common::TreeNode>,

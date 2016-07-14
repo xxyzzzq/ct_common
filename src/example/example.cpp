@@ -4,10 +4,10 @@
 
 #include "ct_common/common/sut_model.h"
 #include "ct_common/common/tuplepool.h"
-#include "ct_common/file_parse/assembler.h"
-#include "ct_common/file_parse/ct_common_lexer.hpp"
-#include "ct_common/file_parse/parser.tab.hpp"
-#include "ct_common/file_parse/err_logger_cerr.h"
+#include "ct_common/parser/assembler.h"
+#include "ct_common/parser/ct_common_lexer.hpp"
+#include "ct_common/parser/parser.tab.hpp"
+#include "ct_common/parser/err_logger_cerr.h"
 
 using namespace ct_common;
 

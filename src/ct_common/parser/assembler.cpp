@@ -9,7 +9,7 @@
 #include "ct_common/base/class_name_utils.h"
 #include "ct_common/common/seed_constraint.h"
 #include "ct_common/common/seed_tuple.h"
-#include "ct_common/file_parse/assembler.h"
+#include "ct_common/parser/assembler.h"
 
 namespace ct_common {
 

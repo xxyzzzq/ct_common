@@ -2,7 +2,7 @@
 
 header {
 #include "ct_common/base/utils.h"
-#include "ct_common/file_parse/parser.tab.hpp"
+#include "ct_common/parser/parser.tab.hpp"
 
 QUEX_NAMESPACE_MAIN_OPEN
 class DLL_EXPORT ct_common_lexer;
