@@ -1,41 +1,36 @@
-# Programming Guide for `ct_common` Library
-
-## Authors
-
-Zhiqiang Zhang, zqzhang@ios.ac.cn
+# Programming Guide for ct_common Library
 
 ## Introduction
 
-`ct_common` is a utility library for developing tools for combinatorial testing
+ct_common is a utility library for developing tools for combinatorial testing
 (CT), which is used in [Cascade](http://castar.iscas.ac.cn/ctportal/), a
 combinatorial test generation tool.  It provides many useful classes for
 describing software under test (SUT) models, and a parser which can parse
-\emph{Cascade} model files into data structures for further processing. {\tt
-ct\_common} contains both high-level classes, which helps describing complex SUT
-models more easily, and low-level classes which are more suitable for computer
-processing.
+*Cascade model files* into data structures for further processing.  ct_common
+contains both high-level classes, which helps describing complex SUT models more
+easily, and low-level classes which are more suitable for computer processing.
 
-`ct_common` has two sub-libraries:
+ct_common has two sub-libraries:
 
 * `libct_common`: contains many basic classes for CT.
 * `libct_common_parser`: the parser interface.
 
-## Building `ct_common`
+## Building ct_common
 
-Here is how to integrate `ct_common` into your project. The library now uses
+Here is how to integrate ct_common into your project. The library now uses
 C++11, so make sure your compiler supports C++11 (`-std=c++11` for `gcc` and
 `clang`, or use MSVC 2015). C++11 is very popular now so there's no
 reason not to embrass it.
 
-`ct_common` uses the `CMake` build system, so you need to install it.
+ct_common uses the [CMake](http://cmake.org/) build system, so you need to install it.
 
 If you want to use `libct_file_parse`, you need to install `python` and `bison`,
 and make sure they are in your system `PATH` variable.
 
-All other prerequisites for building `ct_common` can be fetched by running the
-`bootstrap.sh` script located at the `ct_common` root directory.
+All other prerequisites for building ct_common can be fetched by running the
+`bootstrap` script located at the ct_common root directory.
 
-### Building `ct_common` standalone
+### Building ct_common as a standalone library
 
 We don't recommend in-source build, so please make a directory for the files
 generated during build.
@@ -47,17 +42,17 @@ generated during build.
     cmake .. (Windows: cmake -G "Visual Studio 14 2015" ..)
     make
 
-### Using `ct_common` in your project
+### Using ct_common in your project
 
-It's a prefered way to put `ct_common` in a subdirectory of your project, and
+It's a prefered way to put ct_common in a subdirectory of your project, and
 your project use the `CMake` build system. In this case, you just need to use
-`add_subdirectory()` in your `CMakeLists.txt` to include `ct_common`, and use
-`include_directories()` to add proper include directory from `ct_common`, then
-you are good to go. Just feel free to include the headers from `ct_common`, and
+`add_subdirectory()` in your `CMakeLists.txt` to include ct_common, and use
+`include_directories()` to add proper include directory from ct_common, then
+you are good to go. Just feel free to include the headers from ct_common, and
 use `target_link_library(ct_common|ct_file_parse)` to link the libraries.
 
-If you are not using `CMake`, it is still doable to use `ct_common`. You need to
-build `ct_common` standalone, then add the include directories and library
+If you are not using `CMake`, it is still doable to use ct_common. You need to
+build ct_common standalone, then add the include directories and library
 linkage into your own building system.
 
 Note that if you use {\tt file\_parse}, you need to add additional preprocessor
@@ -69,9 +64,9 @@ definitions to your project (otherwise there will be warning messages from the
 
 ## Design Overview
 
-All the classes of `ct_common` are included in namespace `ct_common::`.
+All the classes of ct_common are included in namespace `ct_common::`.
 
-### Sub-library `libct_common`
+### Sub-library libct_common
 
 The classes of `libct_common` are included in namespace `ct_common::`.
 Some important high-level classes are:
@@ -94,7 +89,7 @@ Some low-level classes are:
   expressions;
 * `RawStrength`: low-level representation for covering strength.
 
-### Sub-library `libct_common_parser`
+### Sub-library libct_common_parser
 
 `libct_common_parser` depend on `lib_ct_common`. All the classes are included in
 namespace `ct_common::`.
@@ -102,7 +97,7 @@ namespace `ct_common::`.
 Some important high-level classes are:
 
 * `lexer`: the lexer converting input streams into tokens;
-* `parser`: the parser converting tokens into data structures of {\tt common};
+* `parser`: the parser converting tokens into data structures of ct_common;
 * `assembler`: the assembler classes which directly assembles data
   structures of `lib_ct_common`.
 
@@ -122,19 +117,24 @@ and print the following information about the model:
 A program to achieve these goals is as follows (the example is included in the
 source package):
 
-```c++
+```cpp
+// Copyright 2016 ct_common authors. See LICENSE file for details.
+
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <set>
+#include <string>
+#include <vector>
 
 #include "ct_common/common/sut_model.h"
 #include "ct_common/common/tuplepool.h"
 #include "ct_common/parser/assembler.h"
 #include "ct_common/parser/ct_common_lexer.hpp"
-#include "ct_common/parser/parser.tab.hpp"
 #include "ct_common/parser/err_logger_cerr.h"
+#include "ct_common/parser/parser.tab.hpp"
 
-using namespace ct_common;
+namespace ct_common {
 
 int main(int argc, char *argv[]) {
   std::string file_name;
@@ -224,23 +224,28 @@ int main(int argc, char *argv[]) {
             << std::endl;
   return 0;
 }
+
+}  // namespace ct_common
+
+int main(int argc, char* argv[]) {
+  ct_common::main(argc, argv);
+}
 ```
 
 ## Useful Contents
 
 ### Cascade
 
-`ct_common` is initiated from the
-[Cascade combinatorial test generator](http://castar.iscas.ac.cn/ctportal/).  The
-features in this library are designed for general purpose, but the interfaces
-are specially customized for Cascade. So many high-level features are not
-compatible with some existing methods or algorithms, but they can be easily
+ct_common is initiated from the
+[Cascade combinatorial test generator](http://castar.iscas.ac.cn/ctportal/).
+The features in this library are designed for general purpose, but the
+interfaces are specially customized for Cascade. So many high-level features are
+not compatible with some existing methods or algorithms, but they can be easily
 translated into corresponding low-level representations, which are compatible
 with most existing methods or algorithms.  Due to time limit, we don't have
-enough time to write the detailed documentation for classes in {\tt
-ct\_common}. Thus we strongly recommend you to read the Cascade user manual
-before using our library. You can find the according words for most features of
-{\tt ct\_common} in the
+enough time to write the detailed documentation for classes in ct_common. Thus
+we strongly recommend you to read the Cascade user manual before using our
+library. You can find the according words for most features of ct_common in the
 [Cascade manual](http://castar.iscas.ac.cn/ctportal/download/cascade_manual_1.1.pdf).
 
 ### Quex
@@ -253,3 +258,7 @@ lexer (`ct_lexer.qx`).
 If you want to add more functions to the parser, you may need to modify the
 parser (`ct_parser.ypp`) The materials can be found at
 [here](https://www.gnu.org/software/bison/).
+
+## Authors
+
+**Zhiqiang Zhang**, zqzhang@ios.ac.cn
