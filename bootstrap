@@ -15,7 +15,7 @@ function sync_git() {
         cd ../..
     fi
 
-    cd third_party/$name && git fetch -q --tags origin && git checkout -q $version && git clean -xdf
+    cd third_party/$name && git fetch -q --tags origin && git checkout -q $version && git checkout -q . && git clean -xdf
     cd ../..
 
     if [ "$4" == "recursive_bootstrap" ]; then
