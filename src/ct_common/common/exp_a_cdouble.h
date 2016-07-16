@@ -3,8 +3,8 @@
 #ifndef CT_COMMON_COMMON_EXP_A_CDOUBLE_H_
 #define CT_COMMON_COMMON_EXP_A_CDOUBLE_H_
 
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/exp_a_atomic.h"

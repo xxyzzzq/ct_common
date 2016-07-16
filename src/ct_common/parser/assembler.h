@@ -1,13 +1,13 @@
 // Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_FILE_PARSE_ASSEMBLER_H_
-#define CT_COMMON_FILE_PARSE_ASSEMBLER_H_
+#ifndef CT_COMMON_PARSER_ASSEMBLER_H_
+#define CT_COMMON_PARSER_ASSEMBLER_H_
 
 #include <cstdlib>
 #include <map>
 #include <string>
-#include <vector>
 #include <utility>
+#include <vector>
 
 #include "ct_common/common/constraints.h"
 #include "ct_common/common/exps.h"
@@ -164,4 +164,4 @@ class Assembler {
 
 }  // namespace ct_common
 
-#endif  // CT_COMMON_FILE_PARSE_ASSEMBLER_H_
+#endif  // CT_COMMON_PARSER_ASSEMBLER_H_

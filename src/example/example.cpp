@@ -1,15 +1,20 @@
+// Copyright 2016 ct_common authors. See LICENSE file for details.
+
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <set>
+#include <string>
+#include <vector>
 
 #include "ct_common/common/sut_model.h"
 #include "ct_common/common/tuplepool.h"
 #include "ct_common/parser/assembler.h"
 #include "ct_common/parser/ct_common_lexer.hpp"
-#include "ct_common/parser/parser.tab.hpp"
 #include "ct_common/parser/err_logger_cerr.h"
+#include "ct_common/parser/parser.tab.hpp"
 
-using namespace ct_common;
+namespace ct_common {
 
 int main(int argc, char *argv[]) {
   std::string file_name;
@@ -98,4 +103,10 @@ int main(int argc, char *argv[]) {
   std::cout << "# forbidden combinations: " << forbidden_tuple_pool.size()
             << std::endl;
   return 0;
+}
+
+}  // namespace ct_common
+
+int main(int argc, char* argv[]) {
+  ct_common::main(argc, argv);
 }

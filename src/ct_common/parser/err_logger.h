@@ -1,7 +1,7 @@
 // Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_FILE_PARSE_ERR_LOGGER_H_
-#define CT_COMMON_FILE_PARSE_ERR_LOGGER_H_
+#ifndef CT_COMMON_PARSER_ERR_LOGGER_H_
+#define CT_COMMON_PARSER_ERR_LOGGER_H_
 
 #include <string>
 #include "ct_common/base/utils.h"
@@ -31,4 +31,4 @@ class ErrLogger {
 
 }  // namespace ct_common
 
-#endif  // CT_COMMON_FILE_PARSE_ERR_LOGGER_H_
+#endif  // CT_COMMON_PARSER_ERR_LOGGER_H_

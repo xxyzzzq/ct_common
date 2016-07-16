@@ -1,7 +1,7 @@
 // Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_FILE_PARSE_CT_COMMON_LEXER_TOKEN_IDS_H_
-#define CT_COMMON_FILE_PARSE_CT_COMMON_LEXER_TOKEN_IDS_H_
+#ifndef CT_COMMON_PARSER_CT_COMMON_LEXER_TOKEN_IDS_H_
+#define CT_COMMON_PARSER_CT_COMMON_LEXER_TOKEN_IDS_H_
 
 #include "ct_common/parser/parser.tab.hpp"
 
@@ -12,4 +12,4 @@ const int QUEX_TKN_UNKNOWN = 2;
 const int QUEX_TKN_FAILURE = 3;
 }
 
-#endif  // CT_COMMON_FILE_PARSE_CT_COMMON_LEXER_TOKEN_IDS_H_
+#endif  // CT_COMMON_PARSER_CT_COMMON_LEXER_TOKEN_IDS_H_

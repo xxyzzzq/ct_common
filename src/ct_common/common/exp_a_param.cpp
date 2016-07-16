@@ -2,8 +2,8 @@
 
 #include "ct_common/common/exp_a_param.h"
 
-#include <type_traits>
 #include <exception>
+#include <type_traits>
 
 #include "ct_common/base/utils.h"
 #include "ct_common/common/constraint.h"

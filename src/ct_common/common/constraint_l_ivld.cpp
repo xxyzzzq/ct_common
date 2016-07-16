@@ -3,7 +3,6 @@
 #include "ct_common/common/constraint_l_ivld.h"
 
 #include "ct_common/base/class_name_utils.h"
-
 #include "ct_common/common/exp_a.h"
 #include "ct_common/common/exp_s.h"
 
@@ -77,7 +76,7 @@ optional<bool> Constraint_L_IVLD::Evaluate(
     // CT_EXCEPTION(std::string(
     //     "Error: encountering unhandled auto value condition for parameter ")+
     //     ptr->get_param_name());
-    return true; // no conditions match
+    return true;  // no conditions match
   }
   return param_specs[pid_]->IsVidInvalid(assignment.GetValue(pid_));
 }

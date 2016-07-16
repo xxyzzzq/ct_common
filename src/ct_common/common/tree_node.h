@@ -9,8 +9,8 @@
 #include <string>
 #include <vector>
 
-#include "ct_common/base/utils.h"
 #include "ct_common/base/class_name_utils.h"
+#include "ct_common/base/utils.h"
 
 namespace ct_common {
 

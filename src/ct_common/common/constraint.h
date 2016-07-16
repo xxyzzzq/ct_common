@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 
-#include "ct_common/base/utils.h"
 #include "ct_common/base/optional.h"
+#include "ct_common/base/utils.h"
 #include "ct_common/common/assignment.h"
 #include "ct_common/common/paramspec.h"
 #include "ct_common/common/pvpair.h"

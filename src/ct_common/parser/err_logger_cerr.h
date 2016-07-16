@@ -1,7 +1,7 @@
 // Copyright 2016 ct_common authors. See LICENSE file for details.
 
-#ifndef CT_COMMON_FILE_PARSE_ERR_LOGGER_CERR_H_
-#define CT_COMMON_FILE_PARSE_ERR_LOGGER_CERR_H_
+#ifndef CT_COMMON_PARSER_ERR_LOGGER_CERR_H_
+#define CT_COMMON_PARSER_ERR_LOGGER_CERR_H_
 
 #include <string>
 
@@ -21,4 +21,4 @@ class ErrLogger_Cerr : public ErrLogger {
 
 }  // namespace ct_common
 
-#endif  // CT_COMMON_FILE_PARSE_ERR_LOGGER_CERR_H_
+#endif  // CT_COMMON_PARSER_ERR_LOGGER_CERR_H_
