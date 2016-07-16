@@ -6,3 +6,4 @@ cd gh_out
 cmake ..
 make ct_common_docs
 cp -r bin/programming_guide.html bin/style ../out/
+cd ..
