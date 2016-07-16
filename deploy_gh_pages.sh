@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -v
+git --version
+
 SOURCE_BRANCH="master"
 TARGET_BRANCH="gh-pages"
 
