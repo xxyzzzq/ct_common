@@ -251,12 +251,12 @@ library. You can find the according words for most features of ct_common in the
 ### Quex
 
 If you want to add more functions to the parser, you may want to modify the
-lexer (`ct_lexer.qx`).
+lexer (`ct_common_lexer.qx`).
 
 ### Bison
 
 If you want to add more functions to the parser, you may need to modify the
-parser (`ct_parser.ypp`) The materials can be found at
+parser (`parser.ypp`) The materials can be found at
 [here](https://www.gnu.org/software/bison/).
 
 ## Authors
