@@ -55,6 +55,8 @@ class DLL_EXPORT Tuple : public Assignment, private std::vector<PVPair> {
   using impl_type::rbegin;
   using impl_type::end;
   using impl_type::rend;
+  using impl_type::front;
+  using impl_type::back;
   using impl_type::assign;
   using impl_type::push_back;
   using impl_type::pop_back;
