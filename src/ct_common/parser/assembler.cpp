@@ -652,10 +652,10 @@ std::vector<std::shared_ptr<Constraint> > Assembler::DumpInvalidations(
   for (std::size_t i = 0; i < param_specs.size(); ++i) {
     std::size_t pid = i;
     // FIXME: the semantics for invalidating auto parameters are not defined
-    // if (param_specs[pid]->is_auto()) {
-    //  // cannot proceed with auto parameters
-    //  continue;
-    //}
+     if (param_specs[pid]->is_auto()) {
+      // cannot proceed with auto parameters
+      continue;
+    }
     const std::vector<std::shared_ptr<TreeNode> >& constrs =
         this->stored_invalidations_[pid];
     std::shared_ptr<Constraint_L_IVLD> constr_ivld(new Constraint_L_IVLD());
