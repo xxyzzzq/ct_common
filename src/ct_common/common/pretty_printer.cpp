@@ -6,11 +6,9 @@
 #include "ct_common/common/test_case.h"
 #include "ct_common/common/tuple.h"
 
-namespace ct_common {
-
-std::ostream& operator<<(std::ostream& os, const PVPair& pvpair) {
+std::ostream& operator<<(std::ostream& os, const ct_common::PVPair& pvpair) {
   os << "<" << pvpair.pid << ",";
-  if (pvpair.vid == VID_BOUND) {
+  if (pvpair.vid == ct_common::VID_BOUND) {
     os << "-";
   } else {
     os << pvpair.vid;
@@ -19,7 +17,7 @@ std::ostream& operator<<(std::ostream& os, const PVPair& pvpair) {
   return os;
 }
 
-std::ostream& operator<<(std::ostream& os, const Tuple& tuple) {
+std::ostream& operator<<(std::ostream& os, const ct_common::Tuple& tuple) {
   os << "(";
   for (std::size_t i = 0; i < tuple.size(); ++i) {
     os << tuple[i];
@@ -28,13 +26,13 @@ std::ostream& operator<<(std::ostream& os, const Tuple& tuple) {
   return os;
 }
 
-std::ostream& operator<<(std::ostream& os, const TestCase& test_case) {
+std::ostream& operator<<(std::ostream& os, const ct_common::TestCase& test_case) {
   os << "(";
   for (std::size_t i = 0; i < test_case.size(); ++i) {
     if (i != 0) {
       os << ",";
     }
-    if (test_case[i] == VID_BOUND) {
+    if (test_case[i] == ct_common::VID_BOUND) {
       os << "-";
     } else {
       os << test_case[i];
@@ -43,5 +41,3 @@ std::ostream& operator<<(std::ostream& os, const TestCase& test_case) {
   os << ")";
   return os;
 }
-
-}  // namespace ct_common
