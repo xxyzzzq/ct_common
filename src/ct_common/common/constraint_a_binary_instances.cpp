@@ -15,7 +15,7 @@ namespace ct_common {
                                                                         \
   bool CLASS_NAME::EvaluateIntInternal(                                 \
       int loprd_val, int roprd_val) const {                             \
-    return EVAL_FUNC(loprd_val, roprd_val, precision_);                 \
+    return EVAL_FUNC(loprd_val, roprd_val);                             \
   }                                                                     \
                                                                         \
   bool CLASS_NAME::EvaluateDoubleInternal(                              \
