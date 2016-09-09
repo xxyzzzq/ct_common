@@ -17,8 +17,6 @@ include_directories(third_party/quex)
 
 set(QUEX
   python ${CMAKE_CURRENT_SOURCE_DIR}/tools/quex_wrapper.py)
-set(BUILDDOC
-  python ${CMAKE_CURRENT_SOURCE_DIR}/tools/build_doc.py)
 
 add_subdirectory(src)
 add_subdirectory(doc)
