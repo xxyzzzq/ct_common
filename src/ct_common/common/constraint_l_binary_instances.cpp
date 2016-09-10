@@ -26,6 +26,8 @@ auto kFuncImply = [](const optional<bool>& a, const optional<bool>& b)
     return true;
   if (b && b.value())
     return true;
+  if (a && b && a.value() && !b.value())
+    return false;
   return nullopt;
 };
 auto kFuncOr = [](const optional<bool>& a, const optional<bool>& b)
