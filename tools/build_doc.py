@@ -6,8 +6,11 @@ import sys
 import argparse
 
 SKELETON=("<!DOCTYPE html>\n"
-          "<html>\n"
+          "<head>\n"
+          "<meta charset=\"UTF-8\">\n"
           "<title>{title}</title>\n"
+          "</head>\n"
+          "<html>\n"
           "<textarea theme=\"united\" style=\"display:none;\">\n"
           "{body}\n"
           "</textarea>\n"
