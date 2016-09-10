@@ -12,6 +12,10 @@ SKELETON=("<!DOCTYPE html>\n"
           "{body}\n"
           "</textarea>\n"
           "<script src=\"style/strapdown.js\"></script>\n"
+          "<script>\n"
+          "document.body.innerHTML =\n"
+          "    document.body.innerHTML.replace(/__PIPE__/g, '|');\n"
+          "</script>\n"
           "</html>\n")
 
 def wrap_content(title, body):
