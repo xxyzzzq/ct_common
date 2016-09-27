@@ -31,7 +31,7 @@ reason not to embrass it.
 
 ct_common uses the [CMake](http://cmake.org/) build system, so you need to install it.
 
-If you want to use `libct_file_parse`, you need to install `python` and `bison`,
+If you want to use `libct_common_parser`, you need to install `python` and `bison`,
 and make sure they are in your system `PATH` variable.
 
 All other prerequisites for building ct_common can be fetched by running the
@@ -56,13 +56,13 @@ your project use the `CMake` build system. In this case, you just need to use
 `add_subdirectory()` in your `CMakeLists.txt` to include ct_common, and use
 `include_directories()` to add proper include directory from ct_common, then
 you are good to go. Just feel free to include the headers from ct_common, and
-use `target_link_library(ct_common|ct_file_parse)` to link the libraries.
+use `target_link_library(ct_common|ct_common_parser)` to link the libraries.
 
 If you are not using `CMake`, it is still doable to use ct_common. You need to
 build ct_common standalone, then add the include directories and library
 linkage into your own building system.
 
-Note that if you use {\tt file\_parse}, you need to add additional preprocessor
+Note that if you use `libct_common_parser`, you need to add additional preprocessor
 definitions to your project (otherwise there will be warning messages from the
 `Quex` lexer):
 
