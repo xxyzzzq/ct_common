@@ -23,7 +23,19 @@ endfunction(apply_doc_rule)
 
 
 add_custom_target(ct_common_docs ALL
+  DEPENDS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/modeling_language.html
   DEPENDS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/programming_guide.html
+  ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/explicit_cast.png
   )
 
 apply_doc_rule(programming_guide.html)
+apply_doc_rule(modeling_language.html)
+
+add_custom_command(
+  OUTPUT
+  ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/explicit_cast.png
+  COMMAND
+  ${CMAKE_COMMAND} -E copy_if_different
+  ${CMAKE_CURRENT_SOURCE_DIR}/explicit_cast.png
+  ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/explicit_cast.png
+  )
