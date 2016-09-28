@@ -20,8 +20,8 @@ easily, and low-level classes which are more suitable for computer processing.
 ct_common has two sub-libraries:
 
 * `libct_common`: contains many basic classes for CT.
-* `libct_common_parser`: the parser interface. The modeling language can be
-  found [here](https://xxyzzzq.github.io/ct_common/modeling_language.html).
+* `libct_common_parser`: the parser interface. **The modeling language can be
+  found [here](https://xxyzzzq.github.io/ct_common/modeling_language.html).**
 
 ## Building ct_common
 
@@ -30,10 +30,11 @@ C++11, so make sure your compiler supports C++11 (`-std=c++11` for `gcc` and
 `clang`, or use MSVC 2015). C++11 is very popular now so there's no
 reason not to embrass it.
 
-ct_common uses the [CMake](http://cmake.org/) build system, so you need to install it.
+ct_common uses the [CMake](http://cmake.org/) build system, so you need to
+install it.
 
-If you want to use `libct_common_parser`, you need to install `python` and `bison`,
-and make sure they are in your system `PATH` variable.
+If you want to use `libct_common_parser`, you need to install `python` and
+`bison`, and make sure they are in your system `PATH` variable.
 
 All other prerequisites for building ct_common can be fetched by running the
 `bootstrap` script located at the ct_common root directory.
@@ -63,9 +64,9 @@ If you are not using `CMake`, it is still doable to use ct_common. You need to
 build ct_common standalone, then add the include directories and library
 linkage into your own building system.
 
-Note that if you use `libct_common_parser`, you need to add additional preprocessor
-definitions to your project (otherwise there will be warning messages from the
-`Quex` lexer):
+Note that if you use `libct_common_parser`, you need to add additional
+preprocessor definitions to your project (otherwise there will be warning
+messages from the `Quex` lexer):
 
     QUEX_OPTION_STRANGE_ISTREAM_IMPLEMENTATION
     QUEX_OPTION_ASSERTS_WARNING_MESSAGE_DISABLED
@@ -244,6 +245,10 @@ int main(int argc, char* argv[]) {
 
 ### Opting-out parameter invalidation constraints.
 
+Use `ct_common::Tuple::ToTheNextTuple()` instead of
+`ct_common::Tuple::ToTheNextTupleWithIvld`. Also, remove all constraints related
+to parameter invalidation constraints.
+
 ## Useful Contents
 
 ### Cascade
@@ -254,11 +259,7 @@ The features in this library are designed for general purpose, but the
 interfaces are specially customized for Cascade. So many high-level features are
 not compatible with some existing methods or algorithms, but they can be easily
 translated into corresponding low-level representations, which are compatible
-with most existing methods or algorithms.  Due to time limit, we don't have
-enough time to write the detailed documentation for classes in ct_common. Thus
-we strongly recommend you to read the Cascade user manual before using our
-library. You can find the according words for most features of ct_common in the
-[Cascade manual](http://castar.iscas.ac.cn/ctportal/download/cascade_manual_1.1.pdf).
+with most existing methods or algorithms.
 
 ### Quex
 
