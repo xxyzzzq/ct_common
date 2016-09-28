@@ -1,4 +1,4 @@
-# `libct_common_parser` Modeling Language
+# libct_common_parser Modeling Language
 
 ## Getting Started
 
